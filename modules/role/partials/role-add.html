@@ -1,0 +1,71 @@
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+                    <div class="card">
+                          <div class="card-header">
+                            <ul class="breadcrumb-title pull-right">
+                                <li class="breadcrumb-item">
+                                    <a href="#/"> <i class="fa fa-home"></i> </a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="#/">User</a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="#">Add Roles</a>
+                                </li>
+                            </ul>
+                            <h3>Add New Roles</h3>
+                            <hr>
+                          </div>
+                          <div class="card-block">
+                            <div class="form-group row">
+                                <div class="col-lg-6">
+                                  <div class="form-group">
+                                    <label>Role Name</label>
+                                    <input type="text"
+                                          id="rm_role_name"
+                                          ng-model="role.rm_role_name"
+                                          typeahead="obj as obj.emp_name for obj in getSearchEmp($viewValue)"
+                                          typeahead-loading="loadingEmpList"
+                                          typeahead-no-results="noEmpListResults"
+                                          class="form-control">
+                                  </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Role Discription</label>
+                                        <textarea type="text" id="cm_name" class="form-control" ng-model="role.role_discription"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <table class="table table-hover">
+                              <thead>
+                                <tr>
+                                  <td class="col-sm-4" style="border: 1px solid #ccc; text-align: center;">Modules</td>
+                                  <td class="col-sm-6" style="border: 1px solid #ccc; text-align: center;">Permission</td>
+                                </tr>
+                              </thead>
+                              <tfoot>
+                                <tr>
+                                  <td>User Management</td>
+                                 <td class="table-responsive"><input type="checkbox" name="add"> Add <input type="checkbox" name="update"> Update <input type="checkbox" name="delete"> Delete <input type="checkbox" name="list">List</td>
+                                </tr>
+                              </tfoot>
+                            </table>
+                            <br>
+                              <div class="row">
+                                  <div class="col-sm-6 col-offset-sm-2">
+                                      <button type="button" class="btn btn-danger" onclick="window.location = '#/role'" id="btncancel">Back</button>
+                                      <button type="submit" class="btn btn-success" id="btnsave" ng-click="addRole()">SAVE</button>
+                                  </div>
+                              </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
