@@ -10,7 +10,7 @@
                                     <a href="#/"> <i class="fa fa-home"></i> </a>
                                 </li>
                                 <li class="breadcrumb-item">
-                                    <a href="#/">User</a>
+                                    <a href="#/">User Management</a>
                                 </li>
                                 <li class="breadcrumb-item">
                                     <a href="#">Add Roles</a>
@@ -25,8 +25,8 @@
                                   <div class="form-group">
                                     <label>Role Name</label>
                                     <input type="text"
-                                          id="rm_role_name"
-                                          ng-model="role.rm_role_name"
+                                          id="rm_name"
+                                          ng-model="role.rm_name"
                                           typeahead="obj as obj.emp_name for obj in getSearchEmp($viewValue)"
                                           typeahead-loading="loadingEmpList"
                                           typeahead-no-results="noEmpListResults"
@@ -35,8 +35,8 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label>Role Discription</label>
-                                        <textarea type="text" id="cm_name" class="form-control" ng-model="role.role_discription"></textarea>
+                                        <label>Role Description</label>
+                                        <textarea type="text" id="rm_description" class="form-control" ng-model="role.rm_description"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -56,9 +56,9 @@
                             </table>
                             <br>
                               <div class="row">
-                                  <div class="col-sm-6 col-offset-sm-2">
-                                      <button type="button" class="btn btn-danger" onclick="window.location = '#/role'" id="btncancel">Back</button>
-                                      <button type="submit" class="btn btn-success" id="btnsave" ng-click="addRole()">SAVE</button>
+                                  <div class="col-sm-4">
+                                      <button type="button" class="btn btn-grd-danger" onclick="window.location = '#/role'" id="btncancel">Back</button>
+                                      <button type="submit" class="btn btn-grd-success" id="btnsave" ng-click="addRole()">SAVE</button>
                                   </div>
                               </div>
                           </div>

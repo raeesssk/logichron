@@ -1,21 +1,6 @@
 // import admin
 angular.module('role').controller('roleEditCtrl', function ($rootScope, $http, $scope, $location, $routeParams, $route) {
 
-  $('#dashboardindex').removeClass("active");
-  $('#customeraddindex').removeClass("active");
-  $('#productindex').removeClass("active");
-  $('#productaddindex').removeClass("active");
-  $('#productlsitindex').removeClass("active");
-  $('#invoiceindex').removeClass("active");
-  $('#invoiceaddindex').removeClass("active");
-  $('#invoicelistindex').removeClass("active");
-  $('#cashbookindex').removeClass("active");
-  $('#cashbookaddindex').removeClass("active");
-  $('#cashbooklistindex').removeClass("active");
-  $('#reportindex').removeClass("active");
-  $('#reportinvoiceindex').removeClass("active");
-  $('#customerindex').addClass("active");
-  $('#customerlsitindex').addClass("active");
   
 	$scope.customerId = $routeParams.userId;
   $scope.apiURL = $rootScope.baseURL+'/customer/edit/'+$scope.customerId;
@@ -52,9 +37,9 @@ angular.module('role').controller('roleEditCtrl', function ($rootScope, $http, $
   		var nameRegex = /^\d+$/;
   		var emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	    
-	    if($('#cm_name').val() == undefined || $('#cm_name').val() == ""){
+	    if($('#rm_name').val() == undefined || $('#rm_name').val() == ""){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter name.</p>',
+            message: '<p class="text-center">please enter Roll Name.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
@@ -62,59 +47,9 @@ angular.module('role').controller('roleEditCtrl', function ($rootScope, $http, $
                 dialog.modal('hide'); 
             }, 1500);
         }
-        else if($('#cm_mobile').val() == undefined || $('#cm_mobile').val() == ""){
+        else if($('#rm_description').val() == undefined || $('#rm_description').val() == ""){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter Mobile no.</p>',
-                closeButton: false
-            });
-            dialog.find('.modal-body').addClass("btn-danger");
-            setTimeout(function(){
-                dialog.modal('hide'); 
-            }, 1500);
-        }
-        // else if(!nameRegex.test($('#cm_mobile').val())){
-        //  var dialog = bootbox.dialog({
-     //        message: '<p class="text-center">please enter Mobile no. in digits</p>',
-     //            closeButton: false
-     //        });
-     //        dialog.find('.modal-body').addClass("btn-danger");
-     //        setTimeout(function(){
-     //            dialog.modal('hide'); 
-     //        }, 1500);
-        // }
-        // else if($('#cm_mobile').val().length < 10){
-        //     var dialog = bootbox.dialog({
-        //     message: '<p class="text-center">please enter a valid Mobile no.</p>',
-        //         closeButton: false
-        //     });
-        //     dialog.find('.modal-body').addClass("btn-danger");
-        //     setTimeout(function(){
-        //         dialog.modal('hide'); 
-        //     }, 1500);
-        // }
-      else if($('#cm_email').val() == undefined || $('#cm_email').val() == ""){
-        var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter email id.</p>',
-                closeButton: false
-            });
-            dialog.find('.modal-body').addClass("btn-danger");
-            setTimeout(function(){
-                dialog.modal('hide'); 
-            }, 1500);
-      }
-        else if($('#cm_address').val() == undefined || $('#cm_address').val() == ""){
-            var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter address.</p>',
-                closeButton: false
-            });
-            dialog.find('.modal-body').addClass("btn-danger");
-            setTimeout(function(){
-                dialog.modal('hide'); 
-            }, 1500);
-        }
-        else if($('#cm_gst').val() == undefined || $('#cm_gst').val() == ""){
-            var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter GSTIN.</p>',
+            message: '<p class="text-center">please enter Description.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");

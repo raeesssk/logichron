@@ -13,6 +13,10 @@ angular.module('logichron',
         'admin',
         'user',
         'role',
+        'employee',
+        'dataentry',
+        'telecaller',
+        'manager',
     // ]).config(cityMotorRouter);
 
 ]).config(function($routeProvider, IdleProvider, KeepaliveProvider, $controllerProvider) {

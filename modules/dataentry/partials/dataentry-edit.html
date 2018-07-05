@@ -1,0 +1,130 @@
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+                    <div class="card">
+                        <div class="card-header">
+                            <ul class="breadcrumb-title pull-right">
+                                <li class="breadcrumb-item">
+                                    <a href="#/"> <i class="fa fa-home"></i> </a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="#/">Data-Entry</a>
+                                </li>
+                                <li class="active breadcrumb-item">
+                                    <a href="#/employee/add" class="active">Edit Job</a>
+                                </li>
+                            </ul>
+                            <h3>Edit Job</h3>
+                            <hr>
+                        </div>
+                        <div class="card-block">
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                        <label>First Name</label>
+                                        <input type="text" id="dm_fname" class="form-control" ng-model="dataentry.dm_fname" />
+                                </div>
+                                <div class="col-sm-6">
+                                        <label>Last Name</label>
+                                        <input type="text" id="dm_lname" class="form-control" ng-model="dataentry.dm_lname" />
+                                        <br>
+                                </div>
+
+                                <div class="col-sm-6">
+                                        <label>Job Title</label>
+                                        <input type="text" id="dm_jtitle" class="form-control" ng-model="dataentry.dm_jtitle" />
+                                        
+                                </div>
+                                <div class="col-sm-6">
+                                        <label>Job Level</label>
+                                        <input type="text" id="dm_jlevel" class="form-control" ng-model="dataentry.dm_jlevel" />
+                                        <br>
+                                </div>
+
+                                <div class="col-sm-6">
+                                        <label>Department</label>
+                                        <input type="text" id="dm_dept" class="form-control" ng-model="dataentry.dm_dept" />
+                                        
+                                </div>
+                                <div class="col-sm-6">
+                                        <label>Email-Id</label>
+                                        <input type="email" id="dm_emailId" class="form-control" ng-model="dataentry.dm_emailId" />
+                                        <br>
+                                </div>
+                                
+                                <div class="col-sm-6">
+                                        <label>Mobile Number</label>
+                                        <input type="text" id="dm_mobile" class="form-control" ng-model="dataentry.dm_mobile" />
+                                </div>
+                                <div class="col-sm-6">
+                                        <label>Company Name</label>
+                                        <textarea id="dm_compname" class="form-control" ng-model="dataentry.dm_compname" rows="1"></textarea>
+                                <br>
+                                </div>
+
+                                <div class="col-sm-6">
+                                        <label>Address</label>
+                                        <textarea id="dm_address" class="form-control" ng-model="dataentry.dm_address" rows="1"></textarea>
+                                </div>
+                                <div class="col-sm-6">
+                                        <label>City</label>
+                                        <select id="dm_city" class="form-control" ng-model="dataentry.dm_city"><option>N/A</option></select>
+                                <br>
+                                </div>
+
+                                <div class="col-lg-6">
+                                        <label>State</label>
+                                        <select id="dm_state" class="form-control" ng-model="dataentry.dm_state"><option>N/A</option></select>
+                                
+                                </div>
+                                <div class="col-sm-6">
+                                        <label>Postal Code</label>
+                                        <input type="text" id="dm_pcode" class="form-control" ng-model="dataentry.dm_pcode" />
+                                <br>
+                                </div>
+                                <div class="col-sm-6">
+                                        <label>Country</label>
+                                        <input type="text" id="dm_country" class="form-control" ng-model="dataentry.dm_country" />
+                                        
+                                </div>
+                                <div class="col-sm-6">
+                                        <label>Industry</label>
+                                        <select id="dm_industry" class="form-control" ng-model="dataentry.dm_industry"><option>N/A</option></select>
+                                <br>
+                                </div>
+                                <div class="col-sm-6">
+                                        <label>Company Size</label>
+                                        <select id="dm_csize" class="form-control" ng-model="dataentry.dm_csize"><option>N/A</option></select>
+                                        
+                                </div>
+                                <div class="col-sm-6">
+                                        <label>Revenue</label>
+                                        <input type="text" id="dm_revenue" class="form-control" ng-model="dataentry.dm_revenue" />
+                                <br>
+                                </div>
+                                <div class="col-sm-6">
+                                        <label>Asset</label>
+                                        <input type="text" id="dm_asset" class="form-control" ng-model="dataentry.dm_asset" />
+                                        
+                                </div>
+                                <div class="col-sm-6">
+                                        <label>Domain</label>
+                                        <input type="text" id="dm_domain" class="form-control" ng-model="dataentry.dm_domain" />
+                                <br>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <br>
+                                <div class="col-sm-12">
+                                    <button type="button" class="btn btn-grd-danger" onclick="window.location = '#/employee'" id="btncancel">Back</button>
+                                    <button type="submit" class="btn btn-grd-success" id="btnsave" ng-click="updateEntry()">SAVE</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

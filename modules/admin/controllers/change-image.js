@@ -4,6 +4,7 @@ angular.module('admin').controller('changeImageCtrl', function ($rootScope, $htt
 
 	$scope.first_name = $rootScope.firstname;
 
+  	$scope.displayImages = "resources/images/avatar-4.png";
 	$scope.fileupload = {};
 	$scope.getUserImage = function (){
 
@@ -11,7 +12,8 @@ angular.module('admin').controller('changeImageCtrl', function ($rootScope, $htt
 			$scope.displayImages = $rootScope.iconimage;
 		}
 		else{
-			$scope.displayImages = "resources/images/default.png";
+			
+  		$scope.displayImages = "resources/images/avatar-4.png";
 		}
     }
     $scope.getUserImage();

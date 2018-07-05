@@ -1,17 +1,20 @@
 // import admin
-angular.module('role').controller('roleAddCtrl', function ($rootScope, $http, $scope, $location, $routeParams, $route) {
+angular.module('manager').controller('managerAssignCtrl', function ($rootScope, $http, $scope, $location, $routeParams, $route) {
 
-    $scope.role = {};
-
+    $scope.user = {};
+    $scope.user.cm_address = "N/A";
+    $scope.user.cm_email = "N/A";
+    $scope.user.cm_gst = "N/A";
 
 	$scope.apiURL = $rootScope.baseURL+'/user/add';
-    $scope.addRole = function () {
+    $scope.addUser = function () {
+      $scope.user='';
 		var nameRegex = /^\d+$/;
   		var emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	    
-        if($('#rm_name').val() == undefined || $('#rm_name').val() == ""){
+        if($('#um_emp_id').val() == undefined || $('#um_emp_id').val() == ""){
 	    	var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter Role Name.</p>',
+            message: '<p class="text-center">Please Enter Employee Name.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
@@ -19,9 +22,9 @@ angular.module('role').controller('roleAddCtrl', function ($rootScope, $http, $s
                 dialog.modal('hide'); 
             }, 1500);
 	    }
-	    else if($('#rm_description').val() == undefined || $('#rm_description').val() == ""){
+	    else if($('#username').val() == undefined || $('#username').val() == ""){
 	    	var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter Role Discription.</p>',
+            message: '<p class="text-center">please enter Username.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
@@ -29,6 +32,36 @@ angular.module('role').controller('roleAddCtrl', function ($rootScope, $http, $s
                 dialog.modal('hide'); 
             }, 1500);
 	    }
+      else if($('#password').val() == undefined || $('#password').val() == ""){
+        var dialog = bootbox.dialog({
+            message: '<p class="text-center">please enter Password.</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide'); 
+            }, 1500);
+      }
+        else if($('#confirm_password').val() == undefined || $('#confirm_password').val() == ""){
+            var dialog = bootbox.dialog({
+            message: '<p class="text-center">please enter confirm_password.</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide'); 
+            }, 1500);
+        }
+        else if($('#assign_role').val() == undefined || $('#assign_role').val() == ""){
+            var dialog = bootbox.dialog({
+            message: '<p class="text-center">please enter Assign_role.</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide'); 
+            }, 1500);
+        }
 	    else{
 
                 $('#btnsave').attr('disabled','true');

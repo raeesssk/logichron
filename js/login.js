@@ -8,22 +8,24 @@ function LoginCtrl($scope, $location, $http, $routeParams, $rootScope) {
   
   	$scope.login = function() {
   		if($scope.username == undefined || $scope.username == ""){
-  			toastr.error('please enter username.', 'Error', {
-		        closeButton: true,
-		        progressBar: true,
-			  	positionClass: "toast-top-center",
-			  	timeOut: "500",
-			  	extendedTimeOut: "500",
-		    });
+  			var dialog = bootbox.dialog({
+            message: '<p class="text-center">Please Enter Username.</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide'); 
+            }, 1500);
   		}
   		else if($scope.password == undefined || $scope.password == ""){
-  			toastr.error('please enter password.', 'Error', {
-		        closeButton: true,
-		        progressBar: true,
-			  	positionClass: "toast-top-center",
-			  	timeOut: "500",
-			  	extendedTimeOut: "500",
-		    });
+  			var dialog = bootbox.dialog({
+            message: '<p class="text-center">Please Enter Password.</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide'); 
+            }, 1500);
   		}
   		else{
                 $('#login').attr('disabled','true');
@@ -64,13 +66,14 @@ function LoginCtrl($scope, $location, $http, $routeParams, $rootScope) {
 			        })
 			        .error(function(data) 
 			        {   
-			            toastr.error('Oops, Something Went Wrong.', 'Error', {
-			              closeButton: true,
-			              progressBar: true,
-			              positionClass: "toast-top-center",
-			              timeOut: "500",
-			              extendedTimeOut: "500",
+			            var dialog = bootbox.dialog({
+			            message: '<p class="text-center">Oops!!! Something Went Wrong</p>',
+			                closeButton: false
 			            });
+			            dialog.find('.modal-body').addClass("btn-danger");
+			            setTimeout(function(){
+			                dialog.modal('hide'); 
+			            }, 1500);
 		                $('#login').text("Login");
 		                $('#login').removeAttr('disabled');
 			        });
@@ -101,13 +104,14 @@ function LoginCtrl($scope, $location, $http, $routeParams, $rootScope) {
 		  	 })
 		  	 .error(function(data, status, headers, config)
 		  	 {
-		  	 	toastr.error('Invalid Username or Password.', 'Error', {
-	              closeButton: true,
-	              progressBar: true,
-	              positionClass: "toast-top-center",
-	              timeOut: "500",
-	              extendedTimeOut: "500",
+		  	 	var dialog = bootbox.dialog({
+	            message: '<p class="text-center">Invalid Username or Password.</p>',
+	                closeButton: false
 	            });
+	            dialog.find('.modal-body').addClass("btn-danger");
+	            setTimeout(function(){
+	                dialog.modal('hide'); 
+	            }, 1500);
                 $('#login').text("Login");
                 $('#login').removeAttr('disabled');
 		     });

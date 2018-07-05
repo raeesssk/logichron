@@ -1,20 +1,24 @@
 // import admin
-angular.module('user').controller('userAddCtrl', function ($rootScope, $http, $scope, $location, $routeParams, $route) {
+angular.module('employee').controller('employeeAddCtrl', function ($rootScope, $http, $scope, $location, $routeParams, $route) {
 
-    $scope.user = {};
-    $scope.user.cm_address = "N/A";
-    $scope.user.cm_email = "N/A";
-    $scope.user.cm_gst = "N/A";
+  
+    $scope.employee = {};
 
-	$scope.apiURL = $rootScope.baseURL+'/user/add';
-    $scope.addUser = function () {
-      $scope.user='';
+  $scope.displayImages = "resources/images/default-image.png";
+
+    $scope.employee.cm_mobile = "N/A";
+    $scope.employee.cm_address = "N/A";
+    $scope.employee.cm_email = "N/A";
+    $scope.employee.cm_gst = "N/A";
+
+	$scope.apiURL = $rootScope.baseURL+'/employee/add';
+    $scope.addEmployee = function () {
 		var nameRegex = /^\d+$/;
   		var emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	    
-        if($('#um_emp_id').val() == undefined || $('#um_emp_id').val() == ""){
+        if($('#em_name').val() == undefined || $('#em_name').val() == ""){
 	    	var dialog = bootbox.dialog({
-            message: '<p class="text-center">Please Enter Employee Name.</p>',
+            message: '<p class="text-center">please enter Employee name.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
@@ -22,9 +26,9 @@ angular.module('user').controller('userAddCtrl', function ($rootScope, $http, $s
                 dialog.modal('hide'); 
             }, 1500);
 	    }
-	    else if($('#username').val() == undefined || $('#username').val() == ""){
+	    else if($('#em_mobile').val() == undefined || $('#em_mobile').val() == ""){
 	    	var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter Username.</p>',
+            message: '<p class="text-center">please enter Mobile no.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
@@ -32,9 +36,9 @@ angular.module('user').controller('userAddCtrl', function ($rootScope, $http, $s
                 dialog.modal('hide'); 
             }, 1500);
 	    }
-      else if($('#password').val() == undefined || $('#password').val() == ""){
+      else if($('#em_address').val() == undefined || $('#em_address').val() == ""){
         var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter Password.</p>',
+            message: '<p class="text-center">please enter Residential Address.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
@@ -42,9 +46,9 @@ angular.module('user').controller('userAddCtrl', function ($rootScope, $http, $s
                 dialog.modal('hide'); 
             }, 1500);
       }
-        else if($('#confirm_password').val() == undefined || $('#confirm_password').val() == ""){
+        else if($('#em_crraddress').val() == undefined || $('#em_crraddress').val() == ""){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter confirm_password.</p>',
+            message: '<p class="text-center">please enter Correspondence Address.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
@@ -52,9 +56,9 @@ angular.module('user').controller('userAddCtrl', function ($rootScope, $http, $s
                 dialog.modal('hide'); 
             }, 1500);
         }
-        else if($('#assign_role').val() == undefined || $('#assign_role').val() == ""){
+        else if($('#em_aadharno').val() == undefined || $('#em_aadharno').val() == ""){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter Assign_role.</p>',
+            message: '<p class="text-center">please enter Adhaar No.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
@@ -62,6 +66,66 @@ angular.module('user').controller('userAddCtrl', function ($rootScope, $http, $s
                 dialog.modal('hide'); 
             }, 1500);
         }
+        else if($('#em_panCard').val() == undefined || $('#em_panCard').val() == ""){
+            var dialog = bootbox.dialog({
+            message: '<p class="text-center">please enter PanCard No.</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide'); 
+            }, 1500);
+        }
+        else if($('#em_designation').val() == undefined || $('#em_designation').val() == ""){
+            var dialog = bootbox.dialog({
+            message: '<p class="text-center">please enter Designation.</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide'); 
+            }, 1500);
+        }
+        else if($('#em_id').val() == undefined || $('#em_id').val() == ""){
+            var dialog = bootbox.dialog({
+            message: '<p class="text-center">please enter Employee Id.</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide'); 
+            }, 1500);
+        }
+        else if($('#em_emailId').val() == undefined || $('#em_emailId').val() == ""){
+            var dialog = bootbox.dialog({
+            message: '<p class="text-center">please enter Email-Address.</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide'); 
+            }, 1500);
+        }
+        else if($('#em_qualification').val() == undefined || $('#em_qualification').val() == ""){
+            var dialog = bootbox.dialog({
+            message: '<p class="text-center">please enter Qualification.</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide'); 
+            }, 1500);
+        }/*
+        else if($('#em_photo').val() == undefined || $('#em_photo').val() == ""){
+            var dialem_photoog = bootbox.dialog({
+            message: '<p class="text-center">please Add Image.</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide'); 
+            }, 1500);
+        }*/
 	    else{
 
                 $('#btnsave').attr('disabled','true');

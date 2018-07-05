@@ -1,0 +1,92 @@
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+                    <div class="card">
+                        <div class="card-header">
+                            <ul class="breadcrumb-title pull-right">
+                                <li class="breadcrumb-item">
+                                    <a href="#/"> <i class="fa fa-home"></i> </a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="#/">Employee Management</a>
+                                </li>
+                                <li class="active breadcrumb-item">
+                                    <a href="#/employee/add" class="active">Add Employee</a>
+                                </li>
+                            </ul>
+                            <h3>Add New Employee Details</h3>
+                            <hr>
+                        </div>
+                        <div class="card-block">
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                        <label>Employee Name</label>
+                                        <input type="text" id="em_name" class="form-control" ng-model="employee.em_name" />
+                                </div>
+                                
+                                <div class="col-sm-6">
+                                        <label>Mobile Number</label>
+                                        <input type="text" id="em_mobile" class="form-control" ng-model="employee.em_mobile" />
+                                <br>
+                                </div>
+                                <div class="col-sm-6">
+                                        <label>Residential Address</label>
+                                        <textarea id="em_address" class="form-control" ng-model="employee.em_address" rows="1"></textarea>
+                                <br>
+                                </div>
+
+                                <div class="col-sm-6">
+                                        <label>Correspondence Address</label>
+                                        <textarea id="em_crraddress" class="form-control" ng-model="employee.em_corraddress" rows="1"></textarea>
+                                </div>
+
+                                <div class="col-sm-6">
+                                        <label>Aadhar No</label>
+                                        <input type="text" id="em_aadharno" class="form-control" ng-model="employee.em_aadharPerson" />
+                                </div>
+
+                                <div class="col-lg-6">
+                                        <label>Pan Card</label>
+                                        <input type="text" id="em_panCard" class="form-control" ng-model="employee.em_panCard" />
+                                <br>
+                                </div>
+
+                                <div class="col-sm-6">
+                                        <label>Designation</label>
+                                        <input type="text" id="em_designation" class="form-control" ng-model="employee.em_designation" />
+                                </div>
+                                <div class="col-sm-6">
+                                        <label>Emp-Id</label>
+                                        <input type="text" id="em_id" class="form-control" ng-model="employee.em_empId" />
+                                        <br>
+                                </div>
+                                <div class="col-sm-6">
+                                        <label>Email-Id</label>
+                                        <input type="email" id="em_emailId" class="form-control" ng-model="employee.em_emailId" />
+                                </div>
+                                <div class="col-sm-6">
+                                        <label>Qualification</label>
+                                        <input type="text" id="em_qualification" class="form-control" ng-model="employee.em_qualification" />
+                                <br>
+                                </div>
+                                <div class="col-sm-6">
+                                        <img ng-src="{{displayImages}}" onclick="document.getElementById('img-path').click(); return false; " id="app-file-btn" title="Click to add Photo" height="100" width="100">
+                                        <input  type="file" 3d="img-path" name="file" id="profilePhotoFileUpload em_photo" placeholder="" ng-file-select="onFileSelect($files)" accept="" ng-model="employee.em_photo" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <br>
+                                <div class="col-sm-12">
+                                    <button type="button" class="btn btn-grd-danger" onclick="window.location = '#/employee'" id="btncancel">Back</button>
+                                    <button type="submit" class="btn btn-grd-success" id="btnsave" ng-click="addEmployee()">SAVE</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
