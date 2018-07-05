@@ -13,57 +13,26 @@
                                     <a href="#/">Manager</a>
                                 </li>
                                 <li class="breadcrumb-item">
-                                    <a href="#/user/add">Add User</a>
+                                    <a href="#/user/add">Job Assign</a>
                                 </li>
                             </ul>
-                            <h3>Add New User Details</h3>
+                            <h3>Assign New Job</h3>
                             <hr>
                         </div>
                         <div class="card-block">
                             <div class="form-group row">
-                                <div class="col-lg-6">
-                                  <label>Employee Name</label>
-                                  <input type="text"
-                                        id="um_emp_id"
-                                        ng-model="user.um_emp_id"
-                                        typeahead="obj as obj.emp_name for obj in getSearchEmp($viewValue)"
-                                        typeahead-loading="loadingEmpList"
-                                        typeahead-no-results="noEmpListResults"
-                                        class="form-control">
-                                  <i ng-show="loadingEmpList" class="glyphicon glyphicon-refresh"></i>
-                                  <div ng-show="noEmpListResults">
-                                    <i class="glyphicon glyphicon-remove"></i> No Results Found
-                                  </div>
-                                </div>
-                                  <div class="col-lg-6">
-                                    <div class="form-group">
-                                      <label>Username</label>
-                                      <input type="text" id="username" class="form-control" ng-model="user.um_username" />
-                                    </div>
-                                  </div>
+                              <div class="col-md-2">
+                                <label>Job Count:</label>
                               </div>
-                              <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label>Password</label>
-                                        <input type="text" id="password" class="form-control" ng-model="user.um_password"  />
-                                    </div>
+                                <div class="col-md-3">
+                                    <input type="checkbox" id="username" class="" ng-model="assignAll">Assign to all Employees
                                 </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label>Confirm Password</label>
-                                        <input type="text" id="confirm_password" class="form-control" ng-model="user.um_confirm_password" />
-                                    </div>
+                                <div class="col-md-3">
+                                    <input type="checkbox" id="username" class="" ng-model="assignSingle">Assign to Single Employee
                                 </div>
-                              </div>
-                              <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label>Assign Roles</label>
-                                        <select id="um_assign_role" class="form-control" ng-model="user.um_assign_role"><option>N/A</option></select>
-                                    </div>
-                                </div>
-                              </div>
+                            </div>
+                            <button type="submit" class="btn btn-grd-success" id="btnsave" ng-click="AssignAllEmp()" ng-show="assignAll">Assign</button>
+                            <button type="submit" class="btn btn-grd-success" id="btnsave" ng-click="AssignSingleEmp()" ng-show="assignSingle">Assign</button>
                             <br>
                             <div class="row">
                                 <div class="col-sm-4">
