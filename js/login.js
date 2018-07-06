@@ -4,7 +4,7 @@
  //  angular.module('orientfurniture', []).controller('loginCtrl', function($scope, $http) {
 function LoginCtrl($scope, $location, $http, $routeParams, $rootScope) {
     
-	$scope.apiURL = 'http://localhost:3000';
+	$scope.apiURL = 'http://localhost:3001';
   
   	$scope.login = function() {
   		if($scope.username == undefined || $scope.username == ""){

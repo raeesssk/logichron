@@ -33,5 +33,18 @@ angular.module('manager', [])
                     }
                 })
 
+            .when('/manager/create',
+                {
+                    templateUrl: 'modules/manager/partials/manager-create.html',
+                    controller: 'managerCreateCtrl',
+                    resolve: {
+                        lazy: ['$ocLazyLoad',"$q", "$location","$rootScope", function ($ocLazyLoad, $q, $location, $rootScope) {
+                            return $ocLazyLoad.load([{
+                                name: 'myApp',
+                                files: ['modules/manager/controllers/manager-create.js']
+                            }]);
+                        }]
+                    }
+                })
 				
         }]);
