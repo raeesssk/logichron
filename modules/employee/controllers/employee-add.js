@@ -16,7 +16,7 @@ angular.module('employee').controller('employeeAddCtrl', function ($rootScope, $
 		var nameRegex = /^\d+$/;
   		var emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	    
-        if($('#em_name').val() == undefined || $('#em_name').val() == ""){
+        if($('#emp_name').val() == undefined || $('#emp_name').val() == ""){
 	    	var dialog = bootbox.dialog({
             message: '<p class="text-center">please enter Employee name.</p>',
                 closeButton: false
@@ -26,7 +26,7 @@ angular.module('employee').controller('employeeAddCtrl', function ($rootScope, $
                 dialog.modal('hide'); 
             }, 1500);
 	    }
-	    else if($('#em_mobile').val() == undefined || $('#em_mobile').val() == ""){
+	    else if($('#emp_mobile').val() == undefined || $('#emp_mobile').val() == ""){
 	    	var dialog = bootbox.dialog({
             message: '<p class="text-center">please enter Mobile no.</p>',
                 closeButton: false
@@ -36,7 +36,7 @@ angular.module('employee').controller('employeeAddCtrl', function ($rootScope, $
                 dialog.modal('hide'); 
             }, 1500);
 	    }
-      else if($('#em_address').val() == undefined || $('#em_address').val() == ""){
+      else if($('#emp_address').val() == undefined || $('#emp_address').val() == ""){
         var dialog = bootbox.dialog({
             message: '<p class="text-center">please enter Residential Address.</p>',
                 closeButton: false
@@ -46,7 +46,7 @@ angular.module('employee').controller('employeeAddCtrl', function ($rootScope, $
                 dialog.modal('hide'); 
             }, 1500);
       }
-        else if($('#em_crraddress').val() == undefined || $('#em_crraddress').val() == ""){
+        else if($('#emp_correspondence_address').val() == undefined || $('#emp_correspondence_address').val() == ""){
             var dialog = bootbox.dialog({
             message: '<p class="text-center">please enter Correspondence Address.</p>',
                 closeButton: false
@@ -56,7 +56,7 @@ angular.module('employee').controller('employeeAddCtrl', function ($rootScope, $
                 dialog.modal('hide'); 
             }, 1500);
         }
-        else if($('#em_aadharno').val() == undefined || $('#em_aadharno').val() == ""){
+        else if($('#emp_aadhar_no').val() == undefined || $('#emp_aadhar_no').val() == ""){
             var dialog = bootbox.dialog({
             message: '<p class="text-center">please enter Adhaar No.</p>',
                 closeButton: false
@@ -66,9 +66,9 @@ angular.module('employee').controller('employeeAddCtrl', function ($rootScope, $
                 dialog.modal('hide'); 
             }, 1500);
         }
-        else if($('#em_panCard').val() == undefined || $('#em_panCard').val() == ""){
+        else if($('#emp_pancard_no').val() == undefined || $('#emp_pancard_no').val() == ""){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter PanCard No.</p>',
+            message: '<p class="text-center">please enter Pancard No.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
@@ -76,7 +76,7 @@ angular.module('employee').controller('employeeAddCtrl', function ($rootScope, $
                 dialog.modal('hide'); 
             }, 1500);
         }
-        else if($('#em_designation').val() == undefined || $('#em_designation').val() == ""){
+        else if($('#emp_designation').val() == undefined || $('#emp_designation').val() == ""){
             var dialog = bootbox.dialog({
             message: '<p class="text-center">please enter Designation.</p>',
                 closeButton: false
@@ -86,7 +86,7 @@ angular.module('employee').controller('employeeAddCtrl', function ($rootScope, $
                 dialog.modal('hide'); 
             }, 1500);
         }
-        else if($('#em_id').val() == undefined || $('#em_id').val() == ""){
+        else if($('#emp_no').val() == undefined || $('#emp_no').val() == ""){
             var dialog = bootbox.dialog({
             message: '<p class="text-center">please enter Employee Id.</p>',
                 closeButton: false
@@ -96,7 +96,7 @@ angular.module('employee').controller('employeeAddCtrl', function ($rootScope, $
                 dialog.modal('hide'); 
             }, 1500);
         }
-        else if($('#em_emailId').val() == undefined || $('#em_emailId').val() == ""){
+        else if($('#emp_email_id').val() == undefined || $('#emp_email_id').val() == ""){
             var dialog = bootbox.dialog({
             message: '<p class="text-center">please enter Email-Address.</p>',
                 closeButton: false
@@ -106,7 +106,7 @@ angular.module('employee').controller('employeeAddCtrl', function ($rootScope, $
                 dialog.modal('hide'); 
             }, 1500);
         }
-        else if($('#em_qualification').val() == undefined || $('#em_qualification').val() == ""){
+        else if($('#emp_qualification').val() == undefined || $('#emp_qualification').val() == ""){
             var dialog = bootbox.dialog({
             message: '<p class="text-center">please enter Qualification.</p>',
                 closeButton: false

@@ -9,7 +9,7 @@ angular.module('dataentry').controller('dataentryAddCtrl', function ($rootScope,
 		var nameRegex = /^\d+$/;
   		var emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	    
-        if($('#dm_fname').val() == undefined || $('#dm_fname').val() == ""){
+        if($('#dm_first_name').val() == undefined || $('#dm_first_name').val() == ""){
 	    	var dialog = bootbox.dialog({
             message: '<p class="text-center">please enter first name.</p>',
                 closeButton: false
@@ -19,7 +19,7 @@ angular.module('dataentry').controller('dataentryAddCtrl', function ($rootScope,
                 dialog.modal('hide'); 
             }, 1500);
 	    }
-	    else if($('#dm_lname').val() == undefined || $('#dm_lname').val() == ""){
+	    else if($('#dm_last_name').val() == undefined || $('#dm_last_name').val() == ""){
 	    	var dialog = bootbox.dialog({
             message: '<p class="text-center">please enter last name.</p>',
                 closeButton: false
@@ -29,7 +29,7 @@ angular.module('dataentry').controller('dataentryAddCtrl', function ($rootScope,
                 dialog.modal('hide'); 
             }, 1500);
 	    }
-      else if($('#dm_jtitle').val() == undefined || $('#dm_jtitle').val() == ""){
+      else if($('#dm_job_title').val() == undefined || $('#dm_job_title').val() == ""){
         var dialog = bootbox.dialog({
             message: '<p class="text-center">please enter job title.</p>',
                 closeButton: false
@@ -39,7 +39,7 @@ angular.module('dataentry').controller('dataentryAddCtrl', function ($rootScope,
                 dialog.modal('hide'); 
             }, 1500);
       }
-        else if($('#dm_jlevel').val() == undefined || $('#dm_jlevel').val() == ""){
+        else if($('#dm_job_level').val() == undefined || $('#dm_job_level').val() == ""){
             var dialog = bootbox.dialog({
             message: '<p class="text-center">please enter job level.</p>',
                 closeButton: false
@@ -59,7 +59,7 @@ angular.module('dataentry').controller('dataentryAddCtrl', function ($rootScope,
                 dialog.modal('hide'); 
             }, 1500);
         }
-        else if($('#dm_emailId').val() == undefined || $('#dm_emailId').val() == ""){
+        else if($('#dm_email_id').val() == undefined || $('#dm_email_id').val() == ""){
             var dialog = bootbox.dialog({
             message: '<p class="text-center">please enter Email-Address.</p>',
                 closeButton: false
@@ -79,7 +79,7 @@ angular.module('dataentry').controller('dataentryAddCtrl', function ($rootScope,
                 dialog.modal('hide'); 
             }, 1500);
         }
-        else if($('#dm_compname').val() == undefined || $('#dm_compname').val() == ""){
+        else if($('#dm_company_name').val() == undefined || $('#dm_company_name').val() == ""){
             var dialog = bootbox.dialog({
             message: '<p class="text-center">please enter Company name.</p>',
                 closeButton: false
@@ -119,7 +119,7 @@ angular.module('dataentry').controller('dataentryAddCtrl', function ($rootScope,
                 dialog.modal('hide'); 
             }, 1500);
         }
-        else if($('#dm_pcode').val() == undefined || $('#dm_pcode').val() == ""){
+        else if($('#dm_postal_code').val() == undefined || $('#dm_postal_code').val() == ""){
             var dialog = bootbox.dialog({
             message: '<p class="text-center">please enter postal code.</p>',
                 closeButton: false
@@ -149,7 +149,7 @@ angular.module('dataentry').controller('dataentryAddCtrl', function ($rootScope,
                 dialog.modal('hide'); 
             }, 1500);
         }
-        else if($('#dm_csize').val() == undefined || $('#dm_csize').val() == ""){
+        else if($('#dm_company_size').val() == undefined || $('#dm_company_size').val() == ""){
             var dialog = bootbox.dialog({
             message: '<p class="text-center">please enter company size.</p>',
                 closeButton: false

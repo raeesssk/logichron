@@ -28,7 +28,7 @@
                                 
                                 <div class="col-sm-6">
                                         <label>Mobile Number</label>
-                                        <input type="text" id="em_mobile" class="form-control" ng-model="employee.emp_mobile" />
+                                        <input type="text" id="emp_mobile" class="form-control" ng-model="employee.emp_mobile" />
                                 <br>
                                 </div>
                                 <div class="col-sm-6">
@@ -39,17 +39,17 @@
 
                                 <div class="col-sm-6">
                                         <label>Correspondence Address</label>
-                                        <textarea id="emp_crraddress" class="form-control" ng-model="employee.emp_corraddress" rows="1"></textarea>
+                                        <textarea id="emp_correspondence_address" class="form-control" ng-model="employee.emp_correspondence_address" rows="1"></textarea>
                                 </div>
 
                                 <div class="col-sm-6">
                                         <label>Aadhar No</label>
-                                        <input type="text" id="emp_aadharno" class="form-control" ng-model="employee.emp_aadharno" />
+                                        <input type="text" id="emp_aadhar_no" class="form-control" ng-model="employee.emp_aadhar_no" />
                                 </div>
 
                                 <div class="col-lg-6">
                                         <label>Pan Card</label>
-                                        <input type="text" id="emp_panCard" class="form-control" ng-model="employee.emp_panCard" />
+                                        <input type="text" id="emp_pancard_no" class="form-control" ng-model="employee.emp_pancard_no" />
                                 <br>
                                 </div>
 
@@ -59,12 +59,12 @@
                                 </div>
                                 <div class="col-sm-6">
                                         <label>Emp-Id</label>
-                                        <input type="text" id="emp_empId" class="form-control" ng-model="employee.emp_empId" />
+                                        <input type="text" id="emp_emp_no" class="form-control" ng-model="employee.emp_emp_no" />
                                         <br>
                                 </div>
                                 <div class="col-sm-6">
                                         <label>Email-Id</label>
-                                        <input type="email" id="emp_emailId" class="form-control" ng-model="employee.emp_emailId" />
+                                        <input type="email" id="emp_email_id" class="form-control" ng-model="employee.emp_emailId" />
                                 </div>
                                 <div class="col-sm-6">
                                         <label>Qualification</label>
@@ -73,7 +73,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                         <img ng-src="{{displayImages}}" onclick="document.getElementById('img-path').click(); return false; " id="app-file-btn" title="Click to add Photo" height="100" width="100">
-                                        <input  type="file" 3d="img-path" name="file" id="profilePhotoFileUpload emp_photo" placeholder="" ng-file-select="onFileSelect($files)" accept="" ng-model="employee.emp_photo" />
+                                        <input  type="file" 3d="img-path" name="file" id="profilePhotoFileUpload emp_image" placeholder="" ng-file-select="onFileSelect($files)" accept="" ng-model="employee.emp_image" />
                                 </div>
                             </div>
                             <div class="form-group row">
