@@ -3,8 +3,8 @@ angular.module('dataentry').controller('dataentryAddCtrl', function ($rootScope,
 
   
     $scope.dataentry = {};
-
-	$scope.apiURL = $rootScope.baseURL+'/employee/add';
+    $('#dm_first_name').focus();
+	$scope.apiURL = $rootScope.baseURL+'/dataentry/add';
     $scope.addEntry = function () {
 		var nameRegex = /^\d+$/;
   		var emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -205,47 +205,18 @@ angular.module('dataentry').controller('dataentryAddCtrl', function ($rootScope,
                 $('#btnsave').text("please wait...");
 
                 $http({
-                  method: 'GET',
-                  url: $rootScope.baseURL+'/customer/code/no',
-                  //data: $scope.data,
-                  headers: {'Content-Type': 'application/json',
-                          'Authorization' :'Bearer '+localStorage.getItem("unitech_admin_access_token")}
-                })
-                .success(function(orderno)
-                {
-                    if(orderno.length >0)
-                        $scope.customer.cm_code = parseInt(orderno[0].cm_code) + 1;
-                    else
-                        $scope.customer.cm_code = 1;
-
-                    $scope.customer.cm_debit = 0;
-                    $scope.customer.cm_balance = 0;
-                    $http({
                       method: 'POST',
                       url: $scope.apiURL,
-                      data: $scope.customer,
+                      data: $scope.dataentry,
                       headers: {'Content-Type': 'application/json',
-                              'Authorization' :'Bearer '+localStorage.getItem("unitech_admin_access_token")}
+                              'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
                     })
                     .success(function(login)
                     {
                         $('#btnsave').text("SAVE");
                         $('#btnsave').removeAttr('disabled');
-                       window.location.href = '#/customer';  
+                       window.location.href = '#/dataentry/joblist';  
                     })
-                    .error(function(data) 
-                    {   
-                      var dialog = bootbox.dialog({
-                        message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
-                            closeButton: false
-                        });
-                        setTimeout(function(){
-                        $('#btnsave').text("SAVE");
-                        $('#btnsave').removeAttr('disabled');
-                            dialog.modal('hide'); 
-                        }, 1500);            
-                    });
-                })
                 .error(function(data) 
                 {   
                     var dialog = bootbox.dialog({

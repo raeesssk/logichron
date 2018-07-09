@@ -3,15 +3,26 @@ angular.module('employee').controller('employeeAddCtrl', function ($rootScope, $
 
   
     $scope.employee = {};
-
+    $('#emp_name').focus();
   $scope.displayImages = "resources/images/default-image.png";
 
-    $scope.employee.cm_mobile = "N/A";
-    $scope.employee.cm_address = "N/A";
-    $scope.employee.cm_email = "N/A";
-    $scope.employee.cm_gst = "N/A";
 
 	$scope.apiURL = $rootScope.baseURL+'/employee/add';
+
+     /*$scope.onFileSelect = function ($files) {
+        $scope.speakerIcon.photo = $files[0];
+        $scope.fileName = $scope.speakerIcon.photo.name;
+        var reader = new FileReader();
+        reader.readAsDataURL($files[0]);
+
+        reader.onloadend = function () {
+            var img_data = reader.result;
+            var spl_dt = img_data.split(',');
+            $scope.displayImages = 'data:image/png;base64, ' + spl_dt[1];
+            $scope.displayImagesdb = spl_dt[1];
+            $scope.$apply();
+        };
+    };*/
     $scope.addEmployee = function () {
 		var nameRegex = /^\d+$/;
   		var emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -86,7 +97,7 @@ angular.module('employee').controller('employeeAddCtrl', function ($rootScope, $
                 dialog.modal('hide'); 
             }, 1500);
         }
-        else if($('#emp_no').val() == undefined || $('#emp_no').val() == ""){
+        else if($('#emp_emp_no').val() == undefined || $('#emp_emp_no').val() == ""){
             var dialog = bootbox.dialog({
             message: '<p class="text-center">please enter Employee Id.</p>',
                 closeButton: false
@@ -127,52 +138,28 @@ angular.module('employee').controller('employeeAddCtrl', function ($rootScope, $
             }, 1500);
         }*/
 	    else{
+                $scope.formEntry = {
+                image : $scope.displayImages,
+                employee : $scope.employee
+                }
 
                 $('#btnsave').attr('disabled','true');
                 $('#btnsave').text("please wait...");
 
-                $http({
-                  method: 'GET',
-                  url: $rootScope.baseURL+'/customer/code/no',
-                  //data: $scope.data,
-                  headers: {'Content-Type': 'application/json',
-                          'Authorization' :'Bearer '+localStorage.getItem("unitech_admin_access_token")}
-                })
-                .success(function(orderno)
-                {
-                    if(orderno.length >0)
-                        $scope.customer.cm_code = parseInt(orderno[0].cm_code) + 1;
-                    else
-                        $scope.customer.cm_code = 1;
-
-                    $scope.customer.cm_debit = 0;
-                    $scope.customer.cm_balance = 0;
+               
                     $http({
                       method: 'POST',
                       url: $scope.apiURL,
-                      data: $scope.customer,
+                      data: $scope.formEntry,
                       headers: {'Content-Type': 'application/json',
-                              'Authorization' :'Bearer '+localStorage.getItem("unitech_admin_access_token")}
+                              'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
                     })
-                    .success(function(login)
+                    .success(function(employees)
                     {
                         $('#btnsave').text("SAVE");
                         $('#btnsave').removeAttr('disabled');
-                       window.location.href = '#/customer';  
+                       window.location.href = '#/employee';  
                     })
-                    .error(function(data) 
-                    {   
-                      var dialog = bootbox.dialog({
-                        message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
-                            closeButton: false
-                        });
-                        setTimeout(function(){
-                        $('#btnsave').text("SAVE");
-                        $('#btnsave').removeAttr('disabled');
-                            dialog.modal('hide'); 
-                        }, 1500);            
-                    });
-                })
                 .error(function(data) 
                 {   
                     var dialog = bootbox.dialog({

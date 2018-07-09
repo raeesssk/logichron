@@ -1,9 +1,9 @@
-<div class="pcoded-content">
+<div class="pcoded-content" ng-init="getAll();">
     <div class="pcoded-inner-content">
         <div class="main-body">
             <div class="page-wrapper">
                 <div class="page-body">
-                    <div class="card">
+                    <div class="card" ng-show='loading1==1'>
                       	<div class="card-header">
                             <ul class="breadcrumb-title pull-right">
                                 <li class="breadcrumb-item">
@@ -20,6 +20,14 @@
                             <hr>
                       	</div>
                       	<div class="card-block">
+                            <div class="row">
+                              <div class="col-lg-11">
+                                <input type="text" class="form-control" id="searchtext" ng-model="searchtext" onkeyup="angular.element(this).scope().getSearch();" placeholder = "Search Here..."/><br>
+                              </div>
+                              <div class="col-lg-1">
+                                <a class="btn btn-outline btn-info" href="#/dataentry/createjob">Add</a>
+                              </div>
+                            </div>
                             <div class="form-group row">
                                 <table class="table table-responsive">
                       		        <thead>
@@ -47,24 +55,24 @@
                     	            </thead>
                     	            <tbody>
                   	                <tr ng-repeat="dataentry in filteredTodos | filter : employee">
-                          						<td>{{dataentry.em_name}}</td>
-                          						<td>{{dataentry.em_mobile}}</td>
-                          						<td>{{dataentry.em_address}}</td>
-                          						<td>{{dataentry.em_role}}</td>
-                                      <td>{{dataentry.em_role}}</td>
-                                      <td>{{dataentry.em_role}}</td>
-                                      <td>{{dataentry.em_role}}</td>
-                                      <td>{{dataentry.em_role}}</td>
-                                      <td>{{dataentry.em_role}}</td>
-                                      <td>{{dataentry.em_role}}</td>
-                                      <td>{{dataentry.em_role}}</td>
-                                      <td>{{dataentry.em_role}}</td>
-                                      <td>{{dataentry.em_role}}</td>
-                                      <td>{{dataentry.em_role}}</td>
-                                      <td>{{dataentry.em_role}}</td>
-                                      <td>{{dataentry.em_role}}</td>
-                                      <td>{{dataentry.em_role}}</td>
-                                      <td>{{dataentry.em_role}}</td>
+                          						<td>{{dataentry.dm_first_name}}</td>
+                          						<td>{{dataentry.dm_last_name}}</td>
+                          						<td>{{dataentry.dm_job_title}}</td>
+                          						<td>{{dataentry.dm_job_level}}</td>
+                                      <td>{{dataentry.dm_dept}}</td>
+                                      <td>{{dataentry.dm_email_id}}</td>
+                                      <td>{{dataentry.dm_mobile}}</td>
+                                      <td>{{dataentry.dm_company_name}}</td>
+                                      <td>{{dataentry.dm_address}}</td>
+                                      <td>{{dataentry.dm_city}}</td>
+                                      <td>{{dataentry.dm_state}}</td>
+                                      <td>{{dataentry.dm_postal_code}}</td>
+                                      <td>{{dataentry.dm_country}}</td>
+                                      <td>{{dataentry.dm_industry}}</td>
+                                      <td>{{dataentry.dm_company_size}}</td>
+                                      <td>{{dataentry.dm_revenue}}</td>
+                                      <td>{{dataentry.dm_asset}}</td>
+                                      <td>{{dataentry.dm_domain}}</td>
                           						<td>
                           							<i class="fa fa-info-circle" data-toggle="modal" data-target="#view-details" ng-click="viewEmployeeDetails1($index)"></i>
                           							<a href="#/employee/edit/{{employee.em_id}}"><i class="fa fa-pencil"></i></a>
@@ -74,12 +82,12 @@
                     	            </tbody>
                       		      </table>
                       		      <br>
-                      	            <span id="pagination_detail" ng-show="filteredTodos.length > 0" class="pagination_ds">Showing {{ filterUserend }} to {{filterUser}} of {{customerList.length}} Customer's</span>
+                      	            <span id="pagination_detail" ng-show="filteredTodos.length > 0" class="pagination_ds">Showing {{ filterUserend }} to {{filterUser}} of {{dataentryListcount}} Customer's</span>
                       			    <span id="pagination_div" align="right" ng-show="filteredTodos.length > 0"
-                      			          style="float: right;margin-top: -27px;">
+                      			          style="float: right;margin-left: 60%;">
                       			      <pagination
                       			              ng-model="currentPage"
-                      			              total-items="customerList.length"
+                      			              total-items="dataentryListcount"
                       			              max-size="maxSize"
                       			              boundary-links="true" data-num-pages="noOfPages"
                       			              items-per-page="numPerPage">

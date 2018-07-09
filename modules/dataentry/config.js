@@ -30,7 +30,7 @@ angular.module('dataentry', [])
                     }
                 })
 
-			.when('/dataentry/createJob',
+			.when('/dataentry/createjob',
                 {
                     templateUrl: 'modules/dataentry/partials/dataentry-create.html',
                     controller: 'dataentryAddCtrl',

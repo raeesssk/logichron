@@ -2,13 +2,28 @@
 angular.module('user').controller('userAddCtrl', function ($rootScope, $http, $scope, $location, $routeParams, $route) {
 
     $scope.user = {};
-    $scope.user.cm_address = "N/A";
-    $scope.user.cm_email = "N/A";
-    $scope.user.cm_gst = "N/A";
+    $('#um_emp_id').focus();
+	$scope.apiURL = $rootScope.baseURL+'/user_m/add';
 
-	$scope.apiURL = $rootScope.baseURL+'/user/add';
+
+    $scope.getSearch = function(vals) {
+
+      var searchTerms = {search: vals};
+      
+        const httpOptions = {
+          headers: {
+            'Content-Type':  'application/json',
+            'Authorization': 'Bearer '+localStorage.getItem("logichron_admin_access_token")
+          }
+        };
+        return $http.post($rootScope.baseURL+'/employee/typeahead/search', searchTerms, httpOptions).then((result) => {
+          
+          return result.data;
+      });
+  };
+
     $scope.addUser = function () {
-      $scope.user='';
+
 		var nameRegex = /^\d+$/;
   		var emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	    
@@ -22,7 +37,7 @@ angular.module('user').controller('userAddCtrl', function ($rootScope, $http, $s
                 dialog.modal('hide'); 
             }, 1500);
 	    }
-	    else if($('#username').val() == undefined || $('#username').val() == ""){
+	    else if($('#um_username').val() == undefined || $('#um_username').val() == ""){
 	    	var dialog = bootbox.dialog({
             message: '<p class="text-center">please enter Username.</p>',
                 closeButton: false
@@ -32,7 +47,7 @@ angular.module('user').controller('userAddCtrl', function ($rootScope, $http, $s
                 dialog.modal('hide'); 
             }, 1500);
 	    }
-      else if($('#password').val() == undefined || $('#password').val() == ""){
+      else if($('#um_password').val() == undefined || $('#um_password').val() == ""){
         var dialog = bootbox.dialog({
             message: '<p class="text-center">please enter Password.</p>',
                 closeButton: false
@@ -42,7 +57,7 @@ angular.module('user').controller('userAddCtrl', function ($rootScope, $http, $s
                 dialog.modal('hide'); 
             }, 1500);
       }
-        else if($('#confirm_password').val() == undefined || $('#confirm_password').val() == ""){
+        else if($('#um_confirm_password').val() == undefined || $('#um_confirm_password').val() == ""){
             var dialog = bootbox.dialog({
             message: '<p class="text-center">please enter confirm_password.</p>',
                 closeButton: false
@@ -52,7 +67,7 @@ angular.module('user').controller('userAddCtrl', function ($rootScope, $http, $s
                 dialog.modal('hide'); 
             }, 1500);
         }
-        else if($('#assign_role').val() == undefined || $('#assign_role').val() == ""){
+        else if($('#um_assign_role').val() == undefined || $('#um_assign_role').val() == ""){
             var dialog = bootbox.dialog({
             message: '<p class="text-center">please enter Assign_role.</p>',
                 closeButton: false
@@ -66,35 +81,18 @@ angular.module('user').controller('userAddCtrl', function ($rootScope, $http, $s
 
                 $('#btnsave').attr('disabled','true');
                 $('#btnsave').text("please wait...");
-
-                $http({
-                  method: 'GET',
-                  url: $rootScope.baseURL+'/customer/code/no',
-                  //data: $scope.data,
-                  headers: {'Content-Type': 'application/json',
-                          'Authorization' :'Bearer '+localStorage.getItem("unitech_admin_access_token")}
-                })
-                .success(function(orderno)
-                {
-                    if(orderno.length >0)
-                        $scope.customer.cm_code = parseInt(orderno[0].cm_code) + 1;
-                    else
-                        $scope.customer.cm_code = 1;
-
-                    $scope.customer.cm_debit = 0;
-                    $scope.customer.cm_balance = 0;
                     $http({
                       method: 'POST',
                       url: $scope.apiURL,
-                      data: $scope.customer,
+                      data: $scope.user,
                       headers: {'Content-Type': 'application/json',
-                              'Authorization' :'Bearer '+localStorage.getItem("unitech_admin_access_token")}
+                              'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
                     })
                     .success(function(login)
                     {
                         $('#btnsave').text("SAVE");
                         $('#btnsave').removeAttr('disabled');
-                       window.location.href = '#/customer';  
+                       window.location.href = '#/user';  
                     })
                     .error(function(data) 
                     {   
@@ -108,20 +106,7 @@ angular.module('user').controller('userAddCtrl', function ($rootScope, $http, $s
                             dialog.modal('hide'); 
                         }, 1500);            
                     });
-                })
-                .error(function(data) 
-                {   
-                    var dialog = bootbox.dialog({
-                    message: '<p class="text-center">Oops, Something Went Wrong!</p>',
-                        closeButton: false
-                    });
-                    setTimeout(function(){
-                        $('#btnsave').text("SAVE");
-                        $('#btnsave').removeAttr('disabled');
-                        dialog.modal('hide');  
-                    }, 1500);
-                });
-		}
-	};
+            }
+    };
 
 });

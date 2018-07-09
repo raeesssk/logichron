@@ -1,6 +1,6 @@
 // import admin
 angular.module('employee').controller('employeeListCtrl', function ($rootScope, $http, $scope, $location, $routeParams, $route, $filter) {
-
+/*
   $('#dashboardindex').removeClass("active");
   $('#customeraddindex').removeClass("active");
   $('#productindex').removeClass("active");
@@ -95,12 +95,12 @@ $scope.filter = function()
       $('#filter-user-btn').attr('disabled','true');
       $('#filter-user-btn').text("please wait...");
       $('#view-details').modal('show');
-    $scope.viewCustomerDetails($scope.ind);
+    $scope.viewCustomerDetails($scope.ind);*/
       // $scope.getUser();
 
       // $scope.draw();
 
-  };
+  //};
 
   // Date.prototype.setFromDate = function() {
   //  var yyyy = this.getFullYear().toString();
@@ -121,96 +121,112 @@ $scope.filter = function()
   // d.setFromDate();
   // d.setToDate();
 
-  $scope.reset = function()
-  {
-    $scope.toDate = "";
-    $scope.fromDate = "";
-    $('#user-datepicker-from').val("");
-    $('#user-datepicker-to').val("");
-    $scope.dateFilter = "";
-      $('#reset-user-btn').attr('disabled','true');
-      $('#reset-user-btn').text("please wait...");
-      $('#view-details').modal('show');
-    $scope.viewCustomerDetails($scope.ind);
-  };
+  $scope.filteredTodos = [];
+    $scope.currentPage = 1;
+    $scope.maxSize = 5;
+    $scope.entryLimit = 5;
+    $scope.filterUser = 0;
+    $scope.filterUserend = 1;
+    $scope.numPerPage = 10;
+    $scope.obj_Main = [];
+    $scope.employeeList = [];
+    $scope.employeeListcount=0;
+    $scope.loading1 = 0;
+    $scope.limit={};
 
-    $scope.apiURL = $rootScope.baseURL+'/customer';
+$scope.apiURL = $rootScope.baseURL+'/employee/employee/total';
    $scope.getAll = function () {
-        
+        if ($('#searchtext').val() == undefined || $('#searchtext').val() == "") {
+        $scope.limit.search = "";
+      }
+      else{
+        $scope.limit.search = $scope.searchtext;
+      }
       $http({
-	      method: 'GET',
-	      url: $scope.apiURL,
-	      headers: {'Content-Type': 'application/json',
-                  'Authorization' :'Bearer '+localStorage.getItem("unitech_admin_access_token")}
-	    })
-	    .success(function(customer)
-	    {
-	      customer.forEach(function (value, key) {
-                  $scope.customerList.push(value);
+        method: 'POST',
+        url: $scope.apiURL,
+        data:$scope.limit,
+        headers: {'Content-Type': 'application/json',
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+      })
+      .success(function(product)
+      {
+        product.forEach(function (value, key) {
+                  $scope.employeeListcount=value.total;
               });
+
               $scope.$watch("currentPage + numPerPage",
                   function () {
-                      var begin = (($scope.currentPage - 1) * $scope.numPerPage);
-                      var end = begin + $scope.numPerPage;
-                      $scope.filterUserend = begin + 1;
-                      $scope.filterUser = end;
-                      if ($scope.filterUser >= $scope.customerList.length)
-                          $scope.filterUser = $scope.customerList.length;
-                      $scope.filteredTodos = $scope.customerList.slice(begin, end);
+                    $scope.resetpagination();
                   });
-
-              $scope.obj_Main = $scope.customerList;
-              $scope.loading1 = 1;
               // $scope.$apply(); 
-	    })
-	    .error(function(data) 
-	    {   
+      })
+      .error(function(data) 
+      {   
               $scope.loading1 = 1;
-	          var dialog = bootbox.dialog({
-            message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
-                closeButton: false
-            });
-            setTimeout(function(){
-                dialog.modal('hide'); 
-            }, 1500);             
-	    });
+        toastr.error('Oops, Something Went Wrong.', 'Error', {
+              closeButton: true,
+              progressBar: true,
+            positionClass: "toast-top-center",
+            timeOut: "500",
+            extendedTimeOut: "500",
+          });              
+      });
     };
 
-    //Pagination Function
-    $scope.resetpagination = function () {
+   //Pagination Function
+  
+      $scope.resetpagination = function () {
         var begin = (($scope.currentPage - 1) * $scope.numPerPage);
         var end = begin + $scope.numPerPage;
         $scope.filterUserend = begin + 1;
         $scope.filterUser = end;
-        if ($scope.filterUser >= $scope.customerList.length)
-            $scope.filterUser = $scope.customerList.length;
-        $scope.filteredTodos = $scope.customerList.slice(begin, end);
+        if ($scope.filterUser >= $scope.employeeListcount)
+            $scope.filterUser = $scope.employeeListcount;
+
+              $scope.filteredTodos = [];
+              $scope.limit.number = $scope.numPerPage;
+              $scope.limit.begin = begin;
+              $scope.limit.end = end;
+              $http({
+                method: 'POST',
+                url: $rootScope.baseURL+'/employee/employee/limit',
+                data: $scope.limit,
+                headers: {'Content-Type': 'application/json',
+                          'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+              })
+              .success(function(user)
+              {
+                $scope.filteredTodos = [];
+                if (user.length > 0) {
+                 
+                  user.forEach(function (value, key) {
+                    $scope.filteredTodos.push(value);
+                  });
+                }
+                else{
+                  
+                }
+                
+                      // $scope.obj_Main = $scope.vendorList;
+                      $scope.loading1 = 1;
+                      // $scope.$apply(); 
+              })
+              .error(function(data) 
+              {   
+                  $scope.loading1 = 1;
+                    var dialog = bootbox.dialog({
+                    message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                        closeButton: false
+                    });
+                    setTimeout(function(){
+                        dialog.modal('hide'); 
+                    }, 3001);             
+              });
     };
     //search Data
     $scope.getSearch = function () {
-        $scope.searchtext = $("#searchtext").val();
-        $scope.customerList = [];
-        if ($scope.searchtext !== "") {
-            for (var i = 0; i < $scope.obj_Main.length; i++) {
-                if (String($scope.obj_Main[i].cm_name).toLowerCase().includes($scope.searchtext.toLowerCase())
-                    || String($scope.obj_Main[i].cm_code).toLowerCase().includes($scope.searchtext.toLowerCase())
-                    || String($scope.obj_Main[i].cm_mobile).toLowerCase().includes($scope.searchtext.toLowerCase())
-                    || String($scope.obj_Main[i].cm_email).toLowerCase().includes($scope.searchtext.toLowerCase())
-                    || String($scope.obj_Main[i].cm_address).toLowerCase().includes($scope.searchtext.toLowerCase())
-                    || String($scope.obj_Main[i].cm_gst).toLowerCase().includes($scope.searchtext.toLowerCase())
-                    || String($scope.obj_Main[i].cm_balance).toLowerCase().includes($scope.searchtext.toLowerCase())
-                    || String($scope.obj_Main[i].cm_debit).toLowerCase().includes($scope.searchtext.toLowerCase())
-                ) {
-                    $scope.customerList.push($scope.obj_Main[i]);
-                }
-            }
-        }
-        else {
-            $scope.customerList = [];
-            $scope.customerList = $scope.obj_Main;
-        }
-        $scope.resetpagination();
-        $scope.$apply();
+       $scope.getAll();
     };
 
     $scope.deleteEmployee = function (cm_id) {

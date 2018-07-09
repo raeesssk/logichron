@@ -69,13 +69,13 @@ a<div class="pcoded-content">
                                 </div>
                                 <div class="col-sm-6">
                                         <label>City</label>
-                                        <select id="dm_city" class="form-control" ng-model="dataentry.dm_city"><option>N/A</option></select>
+                                        <input type="text" id="dm_city" class="form-control" ng-model="dataentry.dm_city">
                                 <br>
                                 </div>
 
                                 <div class="col-lg-6">
                                         <label>State</label>
-                                        <select id="dm_state" class="form-control" ng-model="dataentry.dm_state"><option>N/A</option></select>
+                                        <input type="text" id="dm_state" class="form-control" ng-model="dataentry.dm_state">
                                 
                                 </div>
                                 <div class="col-sm-6">
@@ -90,12 +90,18 @@ a<div class="pcoded-content">
                                 </div>
                                 <div class="col-sm-6">
                                         <label>Industry</label>
-                                        <select id="dm_industry" class="form-control" ng-model="dataentry.dm_industry"><option>N/A</option></select>
+                                        <input type="text" id="dm_industry" class="form-control" ng-model="dataentry.dm_industry">
                                 <br>
                                 </div>
                                 <div class="col-sm-6">
                                         <label>Company Size</label>
-                                        <select id="dm_country_size" class="form-control" ng-model="dataentry.dm_country_size"><option>N/A</option></select>
+                                        <select id="dm_company_size" class="form-control" ng-model="dataentry.dm_company_size">
+                                            <option>N/A</option>
+                                            <option>0-100</option>
+                                            <option>101-500</option>
+                                            <option>501-1000</option>
+                                            <option>1000-10000</option>
+                                        </select>
                                         
                                 </div>
                                 <div class="col-sm-6">
