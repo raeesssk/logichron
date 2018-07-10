@@ -1,4 +1,4 @@
-<div class="pcoded-content">
+<div class="pcoded-content" ng-init="getPermission();">
     <div class="pcoded-inner-content">
         <div class="main-body">
             <div class="page-wrapper">
@@ -27,9 +27,6 @@
                                     <input type="text"
                                           id="rm_name"
                                           ng-model="role.rm_name"
-                                          typeahead="obj as obj.emp_name for obj in getSearchEmp($viewValue)"
-                                          typeahead-loading="loadingEmpList"
-                                          typeahead-no-results="noEmpListResults"
                                           class="form-control">
                                   </div>
                                 </div>
@@ -47,12 +44,12 @@
                                   <td class="col-sm-6" style="border: 1px solid #ccc; text-align: center;">Permission</td>
                                 </tr>
                               </thead>
-                              <tfoot>
-                                <tr>
-                                  <td>User Management</td>
-                                 <td class="table-responsive"><input type="checkbox" name="add"> Add <input type="checkbox" name="update"> Update <input type="checkbox" name="delete"> Delete <input type="checkbox" name="list">List</td>
+                              <tbody>
+                                <tr ng-repeat="permission in permissionList">
+                                  <td>{{permission.pm_name}}</td>
+                                 <td class="table-responsive"><input type="checkbox" name="add" ng-model='permission.pm_add' ng-if='permission.pm_add==true' ng-init='permission.pm_add=1'> Add <input type="checkbox" name="update" ng-model='permission.pm_edit'> Update <input type="checkbox" name="delete" ng-model='permission.pm_delete'> Delete <input type="checkbox" name="list" ng-model='permission.pm_list'>List</td>
                                 </tr>
-                              </tfoot>
+                              </tbody>
                             </table>
                             <br>
                               <div class="row">

@@ -2,10 +2,11 @@
 angular.module('user').controller('userAddCtrl', function ($rootScope, $http, $scope, $location, $routeParams, $route) {
 
     $scope.user = {};
+    $scope.roleList=[];
     $('#um_emp_id').focus();
-	$scope.apiURL = $rootScope.baseURL+'/user_m/add';
+	$scope.apiURL = $rootScope.baseURL+'/userm/add';
 
-
+  
     $scope.getSearch = function(vals) {
 
       var searchTerms = {search: vals};
@@ -21,6 +22,23 @@ angular.module('user').controller('userAddCtrl', function ($rootScope, $http, $s
           return result.data;
       });
   };
+
+  $scope.getrole = function(vals) {
+
+      var searchTerms = {search: vals};
+      
+        const httpOptions = {
+          headers: {
+            'Content-Type':  'application/json',
+            'Authorization': 'Bearer '+localStorage.getItem("logichron_admin_access_token")
+          }
+        };
+        return $http.post($rootScope.baseURL+'/role/typeahead/search', searchTerms, httpOptions).then((result) => {
+          
+          return result.data;
+      });
+  };
+
 
     $scope.addUser = function () {
 

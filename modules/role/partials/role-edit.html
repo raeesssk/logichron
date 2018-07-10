@@ -25,18 +25,15 @@
                                   <div class="form-group">
                                     <label>Role Name</label>
                                     <input type="text"
-                                          id="rm_role_name"
-                                          ng-model="role.rm_role_name"
-                                          typeahead="obj as obj.emp_name for obj in getSearchEmp($viewValue)"
-                                          typeahead-loading="loadingEmpList"
-                                          typeahead-no-results="noEmpListResults"
+                                          id="rm_name"
+                                          ng-model="role.rm_name"
                                           class="form-control">
                                   </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Role Discription</label>
-                                        <textarea type="text" id="cm_name" class="form-control" ng-model="role.role_discription"></textarea>
+                                        <textarea type="text" id="rm_description" class="form-control" ng-model="role.rm_description"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -58,7 +55,7 @@
                               <div class="row">
                                   <div class="col-sm-4">
                                       <button type="button" class="btn btn-grd-danger" onclick="window.location = '#/role'" id="btncancel">Back</button>
-                                      <button type="submit" class="btn btn-grd-success" id="btnsave" ng-click="addRole()">SAVE</button>
+                                      <button type="submit" class="btn btn-grd-success" id="btnsave" ng-click="updateRole()">SAVE</button>
                                   </div>
                               </div>
                           </div>

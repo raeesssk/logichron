@@ -28,14 +28,56 @@ angular.module('employee').controller('employeeAddCtrl', function ($rootScope, $
   		var emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	    
         if($('#emp_name').val() == undefined || $('#emp_name').val() == ""){
-	    	var dialog = bootbox.dialog({
+	    	/*var dialog = bootbox.dialog({
             message: '<p class="text-center">please enter Employee name.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
             setTimeout(function(){
                 dialog.modal('hide'); 
-            }, 1500);
+            }, 1500);*/
+         /*    function notify(from, align, icon, type, animIn, animOut){
+        $.growl({
+            icon: icon,
+            title: '',
+            message: 'please enter Employee',
+            url: ''
+        },{
+            element: 'body',
+            type: danger,
+            allow_dismiss: true,
+            placement: {
+                from: from,
+                align: align
+            },
+            offset: {
+                x: 30,
+                y: 30
+            },
+            spacing: 10,
+            z_index: 999999,
+            delay: 2500,
+            timer: 1000,
+            url_target: '_blank',
+            mouse_over: false,
+            animate: {
+                enter: animIn,
+                exit: animOut
+            },
+            icon_type: 'class',
+            template: '<div data-growl="container" class="alert" role="alert">' +
+            '<button type="button" class="close" data-growl="dismiss">' +
+            '<span aria-hidden="true">&times;</span>' +
+            '<span class="sr-only">Close</span>' +
+            '</button>' +
+            '<span data-growl="icon"></span>' +
+            '<span data-growl="title"></span>' +
+            '<span data-growl="message"></span>' +
+            '<a href="#" data-growl="url"></a>' +
+            '</div>'
+        });
+    };*/
+
 	    }
 	    else if($('#emp_mobile').val() == undefined || $('#emp_mobile').val() == ""){
 	    	var dialog = bootbox.dialog({
@@ -66,6 +108,7 @@ angular.module('employee').controller('employeeAddCtrl', function ($rootScope, $
             setTimeout(function(){
                 dialog.modal('hide'); 
             }, 1500);
+
         }
         else if($('#emp_aadhar_no').val() == undefined || $('#emp_aadhar_no').val() == ""){
             var dialog = bootbox.dialog({

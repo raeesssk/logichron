@@ -228,8 +228,8 @@ $scope.apiURL = $rootScope.baseURL+'/role/role/total';
        $scope.getAll();
     };
 
-    $scope.deleteUser = function (cm_id) {
-      $scope.cm_id=cm_id;
+    $scope.deleteRole = function (rm_id) {
+      $scope.rm_id=rm_id;
     }  
 
     $scope.deleteConfirm = function () {
@@ -237,15 +237,15 @@ $scope.apiURL = $rootScope.baseURL+'/role/role/total';
                 $('#del').text("please wait...");
 	     $http({
 	      method: 'POST',
-	      url: $rootScope.baseURL+'/customer/delete/'+$scope.cm_id,
+	      url: $rootScope.baseURL+'/role/delete/'+$scope.rm_id,
 	      headers: {'Content-Type': 'application/json',
-                  'Authorization' :'Bearer '+localStorage.getItem("unitech_admin_access_token")}
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
 	    })
-	    .success(function(customerObj)
+	    .success(function(roleObj)
 	    {
                 $('#del').text("Delete");
                 $('#del').removeAttr('disabled');
-                $scope.customerList = [];
+                $scope.roleList = [];
                 $scope.getAll();
                 $('#confirm-delete').modal('hide');
       		  

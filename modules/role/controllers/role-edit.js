@@ -1,23 +1,22 @@
 // import admin
 angular.module('role').controller('roleEditCtrl', function ($rootScope, $http, $scope, $location, $routeParams, $route) {
 
-  
-	$scope.customerId = $routeParams.userId;
-  $scope.apiURL = $rootScope.baseURL+'/customer/edit/'+$scope.customerId;
+  	$scope.role={};
+	$scope.roleId = $routeParams.roleId;
+  $scope.apiURL = $rootScope.baseURL+'/role/edit/'+$scope.roleId;
 
-  $scope.getCustomer = function () {
+  $scope.getrole = function () {
 	     $http({
 	      method: 'GET',
-	      url: $rootScope.baseURL+'/customer/'+$scope.customerId,
+	      url: $rootScope.baseURL+'/role/'+$scope.roleId,
 	      headers: {'Content-Type': 'application/json',
-                  'Authorization' :'Bearer '+localStorage.getItem("unitech_admin_access_token")}
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
 	    })
-	    .success(function(customerObj)
+	    .success(function(roleobj)
 	    {
-	    	customerObj.forEach(function (value, key) {
-	      		$scope.customer = value;
-              });
-      		  
+	    	roleobj.forEach(function (value, key) {
+	    		$scope.role = value;
+              });  
 	    })
 	    .error(function(data) 
 	    {   
@@ -30,9 +29,10 @@ angular.module('role').controller('roleEditCtrl', function ($rootScope, $http, $
             }, 1500);            
 	    });
 	};
+	$scope.getrole();
 
 
-  $scope.updateCustomer = function () {
+  $scope.updateRole = function () {
 
   		var nameRegex = /^\d+$/;
   		var emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -63,15 +63,15 @@ angular.module('role').controller('roleEditCtrl', function ($rootScope, $http, $
 		    $http({
 		      method: 'POST',
 		      url: $scope.apiURL,
-		      data: $scope.customer,
+		      data: $scope.role,
 		      headers: {'Content-Type': 'application/json',
-	                  'Authorization' :'Bearer '+localStorage.getItem("unitech_admin_access_token")}
+	                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
 		    })
 		    .success(function(login)
 		    {
                 $('#btnsave').text("SAVE");
                 $('#btnsave').removeAttr('disabled');
-		       window.location.href = '#/customer';  
+		       window.location.href = '#/role';  
 		    })
 		    .error(function(data) 
 		    {   

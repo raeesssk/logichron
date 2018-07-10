@@ -2,10 +2,42 @@
 angular.module('role').controller('roleAddCtrl', function ($rootScope, $http, $scope, $location, $routeParams, $route) {
 
     $scope.role = {};
-
+    $scope.permissionList=[];
 
 	$scope.apiURL = $rootScope.baseURL+'/role/add';
-    $scope.addRole = function () {
+
+    $scope.getPermission = function(){
+        $http({
+          method: 'GET',
+          url: $rootScope.baseURL+'/role',
+          //data: $scope.data,
+          headers: {'Content-Type': 'application/json',
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+        })
+        .success(function(obj)
+        {
+
+                obj.forEach(function(value, key){
+                    $scope.permissionList.push(value);
+                });
+
+
+        })
+        .error(function(data) 
+        {   
+            toastr.error('Oops, Something Went Wrong.', 'Error', {
+                closeButton: true,
+                progressBar: true,
+                positionClass: "toast-top-center",
+                timeOut: "500",
+                extendedTimeOut: "500",
+            });  
+        });
+    };
+    
+
+    $scope.addRole = function () {/*
+        console.log($scope.permissionList);*/
 		var nameRegex = /^\d+$/;
   		var emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	    
@@ -30,6 +62,11 @@ angular.module('role').controller('roleAddCtrl', function ($rootScope, $http, $s
             }, 1500);
 	    }
 	    else{
+                
+                $scope.obj={
+                    role:$scope.role,
+                    permission:$scope.permissionList
+                }
 
                 $('#btnsave').attr('disabled','true');
                 $('#btnsave').text("please wait...");
@@ -37,16 +74,16 @@ angular.module('role').controller('roleAddCtrl', function ($rootScope, $http, $s
                 $http({
                   method: 'POST',
                   url: $scope.apiURL,
-                  data: $scope.role,
+                  data: $scope.obj,
                   headers: {'Content-Type': 'application/json',
                           'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
                 })
                 .success(function(roles)
                 {
-                    
+                        console.log(roles);
                         $('#btnsave').text("SAVE");
                         $('#btnsave').removeAttr('disabled');
-                       window.location.href = '#/role';  
+                      // window.location.href = '#/role';  
                     
                 })
                 .error(function(data) 

@@ -4,7 +4,7 @@ angular.module('dataentry').controller('dataentryAddCtrl', function ($rootScope,
   
     $scope.dataentry = {};
     $('#dm_first_name').focus();
-	$scope.apiURL = $rootScope.baseURL+'/dataentry/add';
+	$scope.apiURL = $rootScope.baseURL+'/job/add';
     $scope.addEntry = function () {
 		var nameRegex = /^\d+$/;
   		var emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

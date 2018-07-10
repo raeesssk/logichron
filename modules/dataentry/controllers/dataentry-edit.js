@@ -1,21 +1,21 @@
 // import admin
 angular.module('dataentry').controller('dataentryEditCtrl', function ($rootScope, $http, $scope, $location, $routeParams, $route) {
 
-  
-	$scope.customerId = $routeParams.customerId;
-  $scope.apiURL = $rootScope.baseURL+'/employee/edit/'+$scope.customerId;
+    $scope.dataentry={};
+	$scope.jobId = $routeParams.jobId;
+  $scope.apiURL = $rootScope.baseURL+'/job/edit/'+$scope.jobId;
 
   $scope.getEntry = function () {
 	     $http({
 	      method: 'GET',
-	      url: $rootScope.baseURL+'/employee/'+$scope.customerId,
+	      url: $rootScope.baseURL+'/job/'+$scope.jobId,
 	      headers: {'Content-Type': 'application/json',
-                  'Authorization' :'Bearer '+localStorage.getItem("unitech_admin_access_token")}
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
 	    })
-	    .success(function(customerObj)
+	    .success(function(dataentryObj)
 	    {
-	    	customerObj.forEach(function (value, key) {
-	      		$scope.customer = value;
+	    	dataentryObj.forEach(function (value, key) {
+	      		$scope.dataentry = value;
               });
       		  
 	    })
@@ -223,15 +223,15 @@ angular.module('dataentry').controller('dataentryEditCtrl', function ($rootScope
 		    $http({
 		      method: 'POST',
 		      url: $scope.apiURL,
-		      data: $scope.customer,
+		      data: $scope.dataentry,
 		      headers: {'Content-Type': 'application/json',
-	                  'Authorization' :'Bearer '+localStorage.getItem("unitech_admin_access_token")}
+	                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
 		    })
 		    .success(function(login)
 		    {
                 $('#btnsave').text("SAVE");
                 $('#btnsave').removeAttr('disabled');
-		       window.location.href = '#/customer';  
+		       window.location.href = '#/dataentry/joblist';  
 		    })
 		    .error(function(data) 
 		    {   

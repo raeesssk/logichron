@@ -28,10 +28,6 @@
                                         ng-model="user.um_emp_id"
                                         typeahead="obj as obj.emp_name for obj in getSearch($viewValue)"
                                         class="form-control">
-                                  <i ng-show="loadingEmpList" class="glyphicon glyphicon-refresh"></i>
-                                  <div ng-show="noEmpListResults">
-                                    <i class="glyphicon glyphicon-remove"></i> No Results Found
-                                  </div>
                                 </div>
                                   <div class="col-lg-6">
                                     <div class="form-group">
@@ -58,7 +54,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Assign Roles</label>
-                                        <input type="text" id="um_assign_role" class="form-control" ng-model="user.um_assign_role"/>
+                                        <input type="text" id="um_assign_role" class="form-control" ng-model="user.um_assign_role"  typeahead="state as state.rm_name for state in getrole($viewValue)"/>
                                     </div>
                                 </div>
                                 <br>  

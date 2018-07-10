@@ -133,7 +133,7 @@ $scope.filter = function()
     $scope.loading1 = 0;
     $scope.limit={};
 
-$scope.apiURL = $rootScope.baseURL+'/dataentry/dataentry/total';
+$scope.apiURL = $rootScope.baseURL+'/job/job/total';
    $scope.getAll = function () {
         if ($('#searchtext').val() == undefined || $('#searchtext').val() == "") {
         $scope.limit.search = "";
@@ -189,7 +189,7 @@ $scope.apiURL = $rootScope.baseURL+'/dataentry/dataentry/total';
               $scope.limit.end = end;
               $http({
                 method: 'POST',
-                url: $rootScope.baseURL+'/dataentry/dataentry/limit',
+                url: $rootScope.baseURL+'/job/job/limit',
                 data: $scope.limit,
                 headers: {'Content-Type': 'application/json',
                           'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
@@ -228,8 +228,8 @@ $scope.apiURL = $rootScope.baseURL+'/dataentry/dataentry/total';
        $scope.getAll();
     };
 
-    $scope.deleteEmployee = function (cm_id) {
-      $scope.cm_id=cm_id;
+    $scope.deleteEntry = function (dm_id) {
+      $scope.dm_id=dm_id;
     }  
 
     $scope.deleteConfirm = function () {
@@ -237,15 +237,15 @@ $scope.apiURL = $rootScope.baseURL+'/dataentry/dataentry/total';
                 $('#del').text("please wait...");
 	     $http({
 	      method: 'POST',
-	      url: $rootScope.baseURL+'/customer/delete/'+$scope.cm_id,
+	      url: $rootScope.baseURL+'/job/delete/'+$scope.dm_id,
 	      headers: {'Content-Type': 'application/json',
-                  'Authorization' :'Bearer '+localStorage.getItem("unitech_admin_access_token")}
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
 	    })
-	    .success(function(customerObj)
+	    .success(function(dataentryObj)
 	    {
                 $('#del').text("Delete");
                 $('#del').removeAttr('disabled');
-                $scope.customerList = [];
+                $scope.dataentryList = [];
                 $scope.getAll();
                 $('#confirm-delete').modal('hide');
       		  

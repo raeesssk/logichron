@@ -1,4 +1,4 @@
-<div class="pcoded-content">
+<div class="pcoded-content" ng-init='getUser();'>
     <div class="pcoded-inner-content">
         <div class="main-body">
             <div class="page-wrapper">
@@ -26,19 +26,13 @@
                                   <input type="text"
                                         id="um_emp_id"
                                         ng-model="user.um_emp_id"
-                                        typeahead="obj as obj.emp_name for obj in getSearchEmp($viewValue)"
-                                        typeahead-loading="loadingEmpList"
-                                        typeahead-no-results="noEmpListResults"
+                                        typeahead="obj as obj.emp_name for obj in getSearch($viewValue)"
                                         class="form-control">
-                                  <i ng-show="loadingEmpList" class="glyphicon glyphicon-refresh"></i>
-                                  <div ng-show="noEmpListResults">
-                                    <i class="glyphicon glyphicon-remove"></i> No Results Found
-                                  </div>
                                 </div>
                                   <div class="col-lg-6">
                                     <div class="form-group">
                                       <label>Username</label>
-                                      <input type="text" id="username" class="form-control" ng-model="user.username" />
+                                      <input type="text" id="um_username" class="form-control" ng-model="user.um_username" />
                                     </div>
                                   </div>
                               </div>
@@ -46,13 +40,13 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Password</label>
-                                        <input type="text" id="password" class="form-control" ng-model="user.password"  />
+                                        <input type="password" id="um_password" class="form-control" ng-model="user.um_password"  />
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Confirm Password</label>
-                                        <input type="text" id="confirm_password" class="form-control" ng-model="user.confirm_password" />
+                                        <input type="password" id="um_confirm_password" class="form-control" ng-model="user.um_confirm_password" />
                                     </div>
                                 </div>
                               </div>
@@ -60,9 +54,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Assign Roles</label>
-                                        <select id="assign_role" class="form-control" ng-model="user.assign_role">
-                                          <option>N/A</option>
-                                        </select>
+                                        <input type="text" id="um_assign_role" class="form-control" ng-model="user.um_assign_role"/>
                                     </div>
                                 </div>
                               </div>

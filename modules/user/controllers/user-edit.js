@@ -1,38 +1,23 @@
 // import admin
 angular.module('user').controller('userEditCtrl', function ($rootScope, $http, $scope, $location, $routeParams, $route) {
 
-  $('#dashboardindex').removeClass("active");
-  $('#customeraddindex').removeClass("active");
-  $('#productindex').removeClass("active");
-  $('#productaddindex').removeClass("active");
-  $('#productlsitindex').removeClass("active");
-  $('#invoiceindex').removeClass("active");
-  $('#invoiceaddindex').removeClass("active");
-  $('#invoicelistindex').removeClass("active");
-  $('#cashbookindex').removeClass("active");
-  $('#cashbookaddindex').removeClass("active");
-  $('#cashbooklistindex').removeClass("active");
-  $('#reportindex').removeClass("active");
-  $('#reportinvoiceindex').removeClass("active");
-  $('#customerindex').addClass("active");
-  $('#customerlsitindex').addClass("active");
   
-	$scope.customerId = $routeParams.userId;
-  $scope.apiURL = $rootScope.baseURL+'/customer/edit/'+$scope.customerId;
+  $scope.user={};
+	$scope.usermId = $routeParams.usermId;
+  $scope.apiURL = $rootScope.baseURL+'/userm/edit/'+$scope.usermId;
 
-  $scope.getCustomer = function () {
+  $scope.getUser = function () {
 	     $http({
 	      method: 'GET',
-	      url: $rootScope.baseURL+'/customer/'+$scope.customerId,
+	      url: $rootScope.baseURL+'/userm/'+$scope.usermId,
 	      headers: {'Content-Type': 'application/json',
-                  'Authorization' :'Bearer '+localStorage.getItem("unitech_admin_access_token")}
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
 	    })
-	    .success(function(customerObj)
+	    .success(function(userobj)
 	    {
-	    	customerObj.forEach(function (value, key) {
-	      		$scope.customer = value;
+	    	userobj.forEach(function (value, key) {
+	      		$scope.user = value;
               });
-      		  
 	    })
 	    .error(function(data) 
 	    {   
@@ -52,9 +37,9 @@ angular.module('user').controller('userEditCtrl', function ($rootScope, $http, $
   		var nameRegex = /^\d+$/;
   		var emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	    
-	    if($('#cm_name').val() == undefined || $('#cm_name').val() == ""){
+	    if($('#um_emp_id').val() == undefined || $('#um_emp_id').val() == ""){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter name.</p>',
+            message: '<p class="text-center">please enter employee name.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
@@ -62,9 +47,9 @@ angular.module('user').controller('userEditCtrl', function ($rootScope, $http, $
                 dialog.modal('hide'); 
             }, 1500);
         }
-        else if($('#cm_mobile').val() == undefined || $('#cm_mobile').val() == ""){
+        else if($('#um_username').val() == undefined || $('#um_username').val() == ""){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter Mobile no.</p>',
+            message: '<p class="text-center">please enter username.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
@@ -72,29 +57,9 @@ angular.module('user').controller('userEditCtrl', function ($rootScope, $http, $
                 dialog.modal('hide'); 
             }, 1500);
         }
-        // else if(!nameRegex.test($('#cm_mobile').val())){
-        //  var dialog = bootbox.dialog({
-     //        message: '<p class="text-center">please enter Mobile no. in digits</p>',
-     //            closeButton: false
-     //        });
-     //        dialog.find('.modal-body').addClass("btn-danger");
-     //        setTimeout(function(){
-     //            dialog.modal('hide'); 
-     //        }, 1500);
-        // }
-        // else if($('#cm_mobile').val().length < 10){
-        //     var dialog = bootbox.dialog({
-        //     message: '<p class="text-center">please enter a valid Mobile no.</p>',
-        //         closeButton: false
-        //     });
-        //     dialog.find('.modal-body').addClass("btn-danger");
-        //     setTimeout(function(){
-        //         dialog.modal('hide'); 
-        //     }, 1500);
-        // }
-      else if($('#cm_email').val() == undefined || $('#cm_email').val() == ""){
+      else if($('#um_password').val() == undefined || $('#um_password').val() == ""){
         var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter email id.</p>',
+            message: '<p class="text-center">please enter password.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
@@ -102,9 +67,9 @@ angular.module('user').controller('userEditCtrl', function ($rootScope, $http, $
                 dialog.modal('hide'); 
             }, 1500);
       }
-        else if($('#cm_address').val() == undefined || $('#cm_address').val() == ""){
+        else if($('#um_confirm_password').val() == undefined || $('#um_confirm_password').val() == ""){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter address.</p>',
+            message: '<p class="text-center">please confirm password.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
@@ -112,9 +77,9 @@ angular.module('user').controller('userEditCtrl', function ($rootScope, $http, $
                 dialog.modal('hide'); 
             }, 1500);
         }
-        else if($('#cm_gst').val() == undefined || $('#cm_gst').val() == ""){
+        else if($('#um_assign_role').val() == undefined || $('#um_assign_role').val() == ""){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter GSTIN.</p>',
+            message: '<p class="text-center">please assign role</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
@@ -128,15 +93,15 @@ angular.module('user').controller('userEditCtrl', function ($rootScope, $http, $
 		    $http({
 		      method: 'POST',
 		      url: $scope.apiURL,
-		      data: $scope.customer,
+		      data: $scope.user,
 		      headers: {'Content-Type': 'application/json',
-	                  'Authorization' :'Bearer '+localStorage.getItem("unitech_admin_access_token")}
+	                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
 		    })
 		    .success(function(login)
 		    {
                 $('#btnsave').text("SAVE");
                 $('#btnsave').removeAttr('disabled');
-		       window.location.href = '#/customer';  
+		       window.location.href = '#/user';  
 		    })
 		    .error(function(data) 
 		    {   

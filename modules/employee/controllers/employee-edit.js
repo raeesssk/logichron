@@ -1,21 +1,21 @@
 // import admin
 angular.module('employee').controller('employeeEditCtrl', function ($rootScope, $http, $scope, $location, $routeParams, $route) {
 
-  
-	$scope.customerId = $routeParams.customerId;
-  $scope.apiURL = $rootScope.baseURL+'/employee/edit/'+$scope.customerId;
+    $scope.employee={};
+	$scope.employeeId = $routeParams.employeeId;
+  $scope.apiURL = $rootScope.baseURL+'/employee/edit/'+$scope.employeeId;
 
   $scope.getEmployee = function () {
 	     $http({
 	      method: 'GET',
-	      url: $rootScope.baseURL+'/employee/'+$scope.customerId,
+	      url: $rootScope.baseURL+'/employee/'+$scope.employeeId,
 	      headers: {'Content-Type': 'application/json',
-                  'Authorization' :'Bearer '+localStorage.getItem("unitech_admin_access_token")}
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
 	    })
-	    .success(function(customerObj)
+	    .success(function(employeeObj)
 	    {
-	    	customerObj.forEach(function (value, key) {
-	      		$scope.customer = value;
+	    	employeeObj.forEach(function (value, key) {
+	      		$scope.employee = value;
               });
       		  
 	    })
@@ -107,7 +107,7 @@ angular.module('employee').controller('employeeEditCtrl', function ($rootScope, 
                 dialog.modal('hide'); 
             }, 1500);
         }
-        else if($('#emp_no').val() == undefined || $('#emp_no').val() == ""){
+        else if($('#emp_emp_no').val() == undefined || $('#emp_emp_no').val() == ""){
             var dialog = bootbox.dialog({
             message: '<p class="text-center">please enter Employee Id.</p>',
                 closeButton: false
@@ -143,15 +143,15 @@ angular.module('employee').controller('employeeEditCtrl', function ($rootScope, 
 		    $http({
 		      method: 'POST',
 		      url: $scope.apiURL,
-		      data: $scope.customer,
+		      data: $scope.employee,
 		      headers: {'Content-Type': 'application/json',
-	                  'Authorization' :'Bearer '+localStorage.getItem("unitech_admin_access_token")}
+	                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
 		    })
 		    .success(function(login)
 		    {
                 $('#btnsave').text("SAVE");
                 $('#btnsave').removeAttr('disabled');
-		       window.location.href = '#/customer';  
+		       window.location.href = '#/employee';  
 		    })
 		    .error(function(data) 
 		    {   

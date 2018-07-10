@@ -93,7 +93,7 @@ $scope.filter = function()
     $scope.loading1 = 0;
     $scope.limit={};
 
-$scope.apiURL = $rootScope.baseURL+'/user_m/user/total';
+$scope.apiURL = $rootScope.baseURL+'/userm/user/total';
    $scope.getAll = function () {
         if ($('#searchtext').val() == undefined || $('#searchtext').val() == "") {
         $scope.limit.search = "";
@@ -149,7 +149,7 @@ $scope.apiURL = $rootScope.baseURL+'/user_m/user/total';
               $scope.limit.end = end;
               $http({
                 method: 'POST',
-                url: $rootScope.baseURL+'/user_m/user/limit',
+                url: $rootScope.baseURL+'/userm/user/limit',
                 data: $scope.limit,
                 headers: {'Content-Type': 'application/json',
                           'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
@@ -188,8 +188,8 @@ $scope.apiURL = $rootScope.baseURL+'/user_m/user/total';
        $scope.getAll();
     };
 
-    $scope.deleteCustomer = function (cm_id) {
-      $scope.cm_id=cm_id;
+    $scope.deleteCustomer = function (um_id) {
+      $scope.um_id=um_id;
     }  
 
     $scope.deleteConfirm = function () {
@@ -197,9 +197,9 @@ $scope.apiURL = $rootScope.baseURL+'/user_m/user/total';
                 $('#del').text("please wait...");
 	     $http({
 	      method: 'POST',
-	      url: $rootScope.baseURL+'/user/delete/'+$scope.cm_id,
+	      url: $rootScope.baseURL+'/userm/delete/'+$scope.um_id,
 	      headers: {'Content-Type': 'application/json',
-                  'Authorization' :'Bearer '+localStorage.getItem("unitech_admin_access_token")}
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
 	    })
 	    .success(function(customerObj)
 	    {
