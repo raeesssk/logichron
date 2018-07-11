@@ -45,7 +45,7 @@ angular.module('user').controller('userAddCtrl', function ($rootScope, $http, $s
 		var nameRegex = /^\d+$/;
   		var emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	    
-        if($('#um_emp_id').val() == undefined || $('#um_emp_id').val() == ""){
+        if($('#um_emp_id').val() == undefined || $('#um_emp_id').val() == "" || $scope.user.um_emp_id.emp_id == undefined){
 	    	var dialog = bootbox.dialog({
             message: '<p class="text-center">Please Enter Employee Name.</p>',
                 closeButton: false
@@ -55,7 +55,7 @@ angular.module('user').controller('userAddCtrl', function ($rootScope, $http, $s
                 dialog.modal('hide'); 
             }, 1500);
 	    }
-	    else if($('#um_username').val() == undefined || $('#um_username').val() == ""){
+	    else if($('#um_user_name').val() == undefined || $('#um_user_name').val() == ""){
 	    	var dialog = bootbox.dialog({
             message: '<p class="text-center">please enter Username.</p>',
                 closeButton: false
@@ -65,7 +65,7 @@ angular.module('user').controller('userAddCtrl', function ($rootScope, $http, $s
                 dialog.modal('hide'); 
             }, 1500);
 	    }
-      else if($('#um_password').val() == undefined || $('#um_password').val() == ""){
+      else if($('#um_user_password').val() == undefined || $('#um_user_password').val() == ""){
         var dialog = bootbox.dialog({
             message: '<p class="text-center">please enter Password.</p>',
                 closeButton: false
@@ -75,17 +75,18 @@ angular.module('user').controller('userAddCtrl', function ($rootScope, $http, $s
                 dialog.modal('hide'); 
             }, 1500);
       }
-        else if($('#um_confirm_password').val() == undefined || $('#um_confirm_password').val() == ""){
-            var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter confirm_password.</p>',
+
+      else if($('#um_confirm_password').val() == undefined || $('#um_confirm_password').val() == ""){
+        var dialog = bootbox.dialog({
+            message: '<p class="text-center">please Confirm Password.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
             setTimeout(function(){
                 dialog.modal('hide'); 
             }, 1500);
-        }
-        else if($('#um_assign_role').val() == undefined || $('#um_assign_role').val() == ""){
+      }
+        else if($('#um_rm_id').val() == undefined || $('#um_rm_id').val() == ""){
             var dialog = bootbox.dialog({
             message: '<p class="text-center">please enter Assign_role.</p>',
                 closeButton: false
@@ -96,7 +97,7 @@ angular.module('user').controller('userAddCtrl', function ($rootScope, $http, $s
             }, 1500);
         }
 	    else{
-
+               
                 $('#btnsave').attr('disabled','true');
                 $('#btnsave').text("please wait...");
                     $http({

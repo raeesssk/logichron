@@ -32,7 +32,7 @@
                                   <div class="col-lg-6">
                                     <div class="form-group">
                                       <label>Username</label>
-                                      <input type="text" id="um_username" class="form-control" ng-model="user.um_username" />
+                                      <input type="text" id="um_user_name" class="form-control" ng-model="user.um_user_name" />
                                     </div>
                                   </div>
                               </div>
@@ -40,7 +40,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Password</label>
-                                        <input type="password" id="um_password" class="form-control" ng-model="user.um_password"  />
+                                        <input type="password" id="um_user_password" class="form-control" ng-model="user.um_user_password"  />
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
@@ -54,12 +54,11 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Assign Roles</label>
-                                        <input type="text" id="um_assign_role" class="form-control" ng-model="user.um_assign_role"  typeahead="state as state.rm_name for state in getrole($viewValue)"/>
+                                        <input type="text" id="um_rm_id" class="form-control" ng-model="user.um_rm_id"  typeahead="state as state.rm_name for state in getrole($viewValue)"/>
                                     </div>
                                 </div>
                                 <br>  
                               </div>
-                            
                             <div class="row">
                                 <div class="col-sm-4">
                                   <button type="button" class="btn btn-grd-danger" onclick="window.location = '#/user'" id="btncancel">Back</button>

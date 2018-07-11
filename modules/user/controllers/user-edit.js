@@ -16,6 +16,11 @@ angular.module('user').controller('userEditCtrl', function ($rootScope, $http, $
 	    .success(function(userobj)
 	    {
 	    	userobj.forEach(function (value, key) {
+                value.um_emp_id=value.emp_name;
+                value.um_user_name=value.username;
+                value.um_user_password=value.password;
+
+                value.um_rm_id=value.rm_name;
 	      		$scope.user = value;
               });
 	    })
@@ -32,7 +37,7 @@ angular.module('user').controller('userEditCtrl', function ($rootScope, $http, $
 	};
 
 
-  $scope.updateCustomer = function () {
+  $scope.updateUser = function () {
 
   		var nameRegex = /^\d+$/;
   		var emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -47,7 +52,7 @@ angular.module('user').controller('userEditCtrl', function ($rootScope, $http, $
                 dialog.modal('hide'); 
             }, 1500);
         }
-        else if($('#um_username').val() == undefined || $('#um_username').val() == ""){
+        else if($('#um_user_name').val() == undefined || $('#um_user_name').val() == ""){
             var dialog = bootbox.dialog({
             message: '<p class="text-center">please enter username.</p>',
                 closeButton: false
@@ -57,7 +62,7 @@ angular.module('user').controller('userEditCtrl', function ($rootScope, $http, $
                 dialog.modal('hide'); 
             }, 1500);
         }
-      else if($('#um_password').val() == undefined || $('#um_password').val() == ""){
+      else if($('#um_user_password').val() == undefined || $('#um_user_password').val() == ""){
         var dialog = bootbox.dialog({
             message: '<p class="text-center">please enter password.</p>',
                 closeButton: false
@@ -77,7 +82,7 @@ angular.module('user').controller('userEditCtrl', function ($rootScope, $http, $
                 dialog.modal('hide'); 
             }, 1500);
         }
-        else if($('#um_assign_role').val() == undefined || $('#um_assign_role').val() == ""){
+        else if($('#um_rm_id').val() == undefined || $('#um_rm_id').val() == ""){
             var dialog = bootbox.dialog({
             message: '<p class="text-center">please assign role</p>',
                 closeButton: false
@@ -99,6 +104,7 @@ angular.module('user').controller('userEditCtrl', function ($rootScope, $http, $
 		    })
 		    .success(function(login)
 		    {
+                console.log(login);
                 $('#btnsave').text("SAVE");
                 $('#btnsave').removeAttr('disabled');
 		       window.location.href = '#/user';  

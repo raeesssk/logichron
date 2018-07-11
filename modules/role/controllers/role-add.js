@@ -18,9 +18,9 @@ angular.module('role').controller('roleAddCtrl', function ($rootScope, $http, $s
         {
 
                 obj.forEach(function(value, key){
+                    
                     $scope.permissionList.push(value);
                 });
-
 
         })
         .error(function(data) 
@@ -34,10 +34,39 @@ angular.module('role').controller('roleAddCtrl', function ($rootScope, $http, $s
             });  
         });
     };
+
+    $scope.checkstatus = function() {
+        $scope.permissionList.forEach(function(value, key){
+            if (value.pm_add == true){
+                value.pm_add1=1;
+            }
+            else{
+                value.pm_add1=0;
+            }
+            if (value.pm_edit == true){
+                value.pm_edit1=1;
+            }
+            else{
+                value.pm_edit1=0;
+            }
+
+            if (value.pm_delete == true){
+                value.pm_delete1=1;
+            }
+            else{
+                value.pm_delete1=0;
+            }
+            if (value.pm_list == true){
+                value.pm_list1=1;
+            }
+            else{
+                value.pm_list1=0;
+            }
+        });
+    };
     
 
-    $scope.addRole = function () {/*
-        console.log($scope.permissionList);*/
+    $scope.addRole = function () {
 		var nameRegex = /^\d+$/;
   		var emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	    
@@ -63,6 +92,7 @@ angular.module('role').controller('roleAddCtrl', function ($rootScope, $http, $s
 	    }
 	    else{
                 
+                
                 $scope.obj={
                     role:$scope.role,
                     permission:$scope.permissionList
@@ -80,10 +110,10 @@ angular.module('role').controller('roleAddCtrl', function ($rootScope, $http, $s
                 })
                 .success(function(roles)
                 {
-                        console.log(roles);
+                        
                         $('#btnsave').text("SAVE");
                         $('#btnsave').removeAttr('disabled');
-                      // window.location.href = '#/role';  
+                        window.location.href = '#/role';  
                     
                 })
                 .error(function(data) 
