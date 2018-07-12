@@ -17,8 +17,7 @@ angular.module('role').controller('roleEditCtrl', function ($rootScope, $http, $
 	    {
 	    	roleobj.forEach(function (value, key) {
 	    		$scope.role=value;
-              });  
-            console.log($scope.role);
+              });
 	    })
 	    .error(function(data) 
 	    {   

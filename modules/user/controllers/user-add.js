@@ -86,6 +86,16 @@ angular.module('user').controller('userAddCtrl', function ($rootScope, $http, $s
                 dialog.modal('hide'); 
             }, 1500);
       }
+        else if($('#um_confirm_password').val() != $('#um_user_password').val()){
+            var dialog = bootbox.dialog({
+            message: '<p class="text-center">Password Does Not Match..!!!</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide'); 
+            }, 1500);
+        }
         else if($('#um_rm_id').val() == undefined || $('#um_rm_id').val() == ""){
             var dialog = bootbox.dialog({
             message: '<p class="text-center">please enter Assign_role.</p>',

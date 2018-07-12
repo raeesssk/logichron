@@ -18,7 +18,7 @@
     <link rel="stylesheet" type="text/css" href="resources/css/style.css">
 </head>
 
-<body  ng-controller="LoginCtrl">
+<body  ng-controller="forgetpassCtrl">
         <!-- Pre-loader start -->
     <div class="theme-loader">
         <div class="loader-track">
@@ -41,26 +41,17 @@
                             <div class="auth-box">
                                 <div class="row m-b-20">
                                     <div class="col-md-12">
-                                        <h3 class="text-left txt-primary">Sign In</h3>
+                                        <h3 class="text-left txt-primary">Forget Password</h3>
                                     </div>
                                 </div>
                                 <hr/>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Username" ng-model="username">
+                                    <input type="email" class="form-control" placeholder="Enter Email" ng-model="emp.email">
                                     <span class="md-line"></span>
-                                </div>
-                                <div class="input-group">
-                                    <input type="password" class="form-control" placeholder="Password" ng-model="password">
-                                    <span class="md-line"></span>
-                                </div>
-                                <div class="row m-t-25 text-left">
-                                    <div class="col-sm-12  forgot-phone">
-                                        <a href="forget.html" class="text-right f-w-600 text-inverse"> Forgot Your Password?</a>
-                                    </div>
                                 </div>
                                 <div class="row m-t-30">
                                     <div class="col-md-12">
-                                        <button type="submit" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20" id="login" ng-click="login()">LOGIN</button>
+                                        <button type="submit" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20" id="login" ng-click="forgot()">submit</button>
                                     </div>
                                 </div>
                                 <div class="row m-t-30">
@@ -111,6 +102,7 @@
     <script type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript" src="js/login.js"></script>
     <script type="text/javascript" src="js/globalController.js"></script>
+    <script type="text/javascript" src="js/forget.js"></script>
 
     
     <!-- admin -->

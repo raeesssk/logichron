@@ -39,8 +39,7 @@ function LoginCtrl($scope, $location, $http, $routeParams, $rootScope) {
 			 })
 		  	 .success(function(data, status, headers, config)
 		  	 {
-		  	 	if($scope.username == 'admin'){
-
+		  	 	
 			        $http({
 			          method: 'POST',
 			          url: $scope.apiURL+'/login/isonline',
@@ -77,30 +76,6 @@ function LoginCtrl($scope, $location, $http, $routeParams, $rootScope) {
 		                $('#login').text("Login");
 		                $('#login').removeAttr('disabled');
 			        });
-
-		  	 		
-		  	 	}
-		  	 	else{
-			  	 	$scope.username = undefined;
-		  	 		$scope.password = undefined;
-		  	 		localStorage.removeItem('logichron_admin_access_token');
-			        localStorage.removeItem('logichron_admin_expires_in');
-			        localStorage.removeItem('logichron_admin_refresh_token');
-			        localStorage.removeItem('logichron_admin_token_type');
-			  	 	localStorage.removeItem('logichron_admin_username');
-			  	 	localStorage.removeItem('logichron_admin_firstname');
-			  	 	localStorage.removeItem('logichron_admin_iconimage');
-			        localStorage.clear();
-			        var dialog = bootbox.dialog({
-		            message: '<p class="text-center">You Are Not Right User To Login!</p>',
-		                closeButton: false
-		            });
-		            setTimeout(function(){
-                $('#login').text("Login");
-                $('#login').removeAttr('disabled');
-		                dialog.modal('hide'); 
-		            }, 2000); 
-		  	 	}
 		  	 })
 		  	 .error(function(data, status, headers, config)
 		  	 {

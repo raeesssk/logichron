@@ -162,7 +162,6 @@ $scope.apiURL = $rootScope.baseURL+'/userm/user/total';
                   user.forEach(function (value, key) {
                     $scope.filteredTodos.push(value);
                   });
-                  console.log($scope.filteredTodos);
                 }
                 else{
                   
