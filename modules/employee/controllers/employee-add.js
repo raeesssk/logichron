@@ -9,9 +9,9 @@ angular.module('employee').controller('employeeAddCtrl', function ($rootScope, $
 
 	$scope.apiURL = $rootScope.baseURL+'/employee/add';
 
-     /*$scope.onFileSelect = function ($files) {
-        $scope.speakerIcon.photo = $files[0];
-        $scope.fileName = $scope.speakerIcon.photo.name;
+     $scope.onFileSelect = function ($files) {
+        $scope.speakerIcon = $files[0];
+        $scope.fileName = $scope.speakerIcon.name;
         var reader = new FileReader();
         reader.readAsDataURL($files[0]);
 
@@ -22,63 +22,21 @@ angular.module('employee').controller('employeeAddCtrl', function ($rootScope, $
             $scope.displayImagesdb = spl_dt[1];
             $scope.$apply();
         };
-    };*/
+    };
     $scope.addEmployee = function () {
 		var nameRegex = /^\d+$/;
   		var emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	    
         if($('#emp_name').val() == undefined || $('#emp_name').val() == ""){
-	    	/*var dialog = bootbox.dialog({
+	    	var dialog = bootbox.dialog({
             message: '<p class="text-center">please enter Employee name.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
             setTimeout(function(){
                 dialog.modal('hide'); 
-            }, 1500);*/
-         /*    function notify(from, align, icon, type, animIn, animOut){
-        $.growl({
-            icon: icon,
-            title: '',
-            message: 'please enter Employee',
-            url: ''
-        },{
-            element: 'body',
-            type: danger,
-            allow_dismiss: true,
-            placement: {
-                from: from,
-                align: align
-            },
-            offset: {
-                x: 30,
-                y: 30
-            },
-            spacing: 10,
-            z_index: 999999,
-            delay: 2500,
-            timer: 1000,
-            url_target: '_blank',
-            mouse_over: false,
-            animate: {
-                enter: animIn,
-                exit: animOut
-            },
-            icon_type: 'class',
-            template: '<div data-growl="container" class="alert" role="alert">' +
-            '<button type="button" class="close" data-growl="dismiss">' +
-            '<span aria-hidden="true">&times;</span>' +
-            '<span class="sr-only">Close</span>' +
-            '</button>' +
-            '<span data-growl="icon"></span>' +
-            '<span data-growl="title"></span>' +
-            '<span data-growl="message"></span>' +
-            '<a href="#" data-growl="url"></a>' +
-            '</div>'
-        });
-    };*/
-
-	    }
+            }, 1500);
+        }
 	    else if($('#emp_mobile').val() == undefined || $('#emp_mobile').val() == ""){
 	    	var dialog = bootbox.dialog({
             message: '<p class="text-center">please enter Mobile no.</p>',
@@ -170,7 +128,7 @@ angular.module('employee').controller('employeeAddCtrl', function ($rootScope, $
                 dialog.modal('hide'); 
             }, 1500);
         }/*
-        else if($('#em_photo').val() == undefined || $('#em_photo').val() == ""){
+        else if($('#emp_image').val() == undefined || $('#emp_image').val() == ""){
             var dialem_photoog = bootbox.dialog({
             message: '<p class="text-center">please Add Image.</p>',
                 closeButton: false
@@ -181,20 +139,27 @@ angular.module('employee').controller('employeeAddCtrl', function ($rootScope, $
             }, 1500);
         }*/
 	    else{
-                $scope.formEntry = {
-                image : $scope.displayImages,
-                employee : $scope.employee
-                }
 
+                var fd = new FormData();
+                fd.append('imgUploader', $scope.displayImagesdb);
+                fd.append('emp_name', $scope.employee.emp_name);
+                fd.append('emp_mobile', $scope.employee.emp_mobile);
+                fd.append('emp_address',$scope.employee.emp_address);
+                fd.append('emp_correspondence_address',$scope.employee.emp_correspondence_address);
+                fd.append('emp_aadhar_no',$scope.employee.emp_aadhar_no);
+                fd.append('emp_pancard_no',$scope.employee.emp_pancard_no);
+                fd.append('emp_designation',$scope.employee.emp_designation);
+                fd.append('emp_emp_no',$scope.employee.emp_emp_no);
+                fd.append('emp_email_id',$scope.employee.emp_email_id);
+                fd.append('emp_qualification',$scope.employee.emp_qualification);
                 $('#btnsave').attr('disabled','true');
                 $('#btnsave').text("please wait...");
-
-               
+                    
                     $http({
                       method: 'POST',
                       url: $scope.apiURL,
-                      data: $scope.formEntry,
-                      headers: {'Content-Type': 'application/json',
+                      data: fd,
+                      headers: {'Content-Type': undefined,
                               'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
                     })
                     .success(function(employees)
@@ -203,18 +168,18 @@ angular.module('employee').controller('employeeAddCtrl', function ($rootScope, $
                         $('#btnsave').removeAttr('disabled');
                        window.location.href = '#/employee';  
                     })
-                .error(function(data) 
-                {   
-                    var dialog = bootbox.dialog({
-                    message: '<p class="text-center">Oops, Something Went Wrong!</p>',
-                        closeButton: false
+                    .error(function(data) 
+                    {   
+                        var dialog = bootbox.dialog({
+                        message: '<p class="text-center">Oops, Something Went Wrong!</p>',
+                            closeButton: false
+                        });
+                        setTimeout(function(){
+                            $('#btnsave').text("SAVE");
+                            $('#btnsave').removeAttr('disabled');
+                            dialog.modal('hide');  
+                        }, 1500);
                     });
-                    setTimeout(function(){
-                        $('#btnsave').text("SAVE");
-                        $('#btnsave').removeAttr('disabled');
-                        dialog.modal('hide');  
-                    }, 1500);
-                });
 		}
 	};
 

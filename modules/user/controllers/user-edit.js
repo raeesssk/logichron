@@ -6,6 +6,15 @@ angular.module('user').controller('userEditCtrl', function ($rootScope, $http, $
 	$scope.usermId = $routeParams.usermId;
   $scope.apiURL = $rootScope.baseURL+'/userm/edit/'+$scope.usermId;
 
+  $scope.preventPaste= function() {
+ $('#um_user_password').bind('cut copy paste', function (e) {
+        e.preventDefault();
+    });
+  $('#um_confirm_password').bind('cut copy paste', function (e) {
+        e.preventDefault();
+    });
+}
+
   $scope.getUser = function () {
 	     $http({
 	      method: 'GET',
@@ -18,7 +27,7 @@ angular.module('user').controller('userEditCtrl', function ($rootScope, $http, $
 	    	userobj.forEach(function (value, key) {
                 value.um_emp_id=value.emp_name;
                 value.um_user_name=value.username;
-                value.um_user_password=value.password;
+                value.um_user_password=value.pass;
 
                 value.um_rm_id=value.rm_name;
 	      		$scope.user = value;
@@ -114,7 +123,6 @@ angular.module('user').controller('userEditCtrl', function ($rootScope, $http, $
 		    })
 		    .success(function(login)
 		    {
-                console.log(login);
                 $('#btnsave').text("SAVE");
                 $('#btnsave').removeAttr('disabled');
 		       window.location.href = '#/user';  

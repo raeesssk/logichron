@@ -188,7 +188,8 @@ $scope.apiURL = $rootScope.baseURL+'/userm/user/total';
        $scope.getAll();
     };
 
-    $scope.deleteCustomer = function (um_id) {
+    $scope.deleteUser = function (um_id) {
+      console.log(um_id);
       $scope.um_id=um_id;
     }  
 
@@ -205,7 +206,7 @@ $scope.apiURL = $rootScope.baseURL+'/userm/user/total';
 	    {
                 $('#del').text("Delete");
                 $('#del').removeAttr('disabled');
-                $scope.customerList = [];
+                $scope.userList = [];
                 $scope.getAll();
                 $('#confirm-delete').modal('hide');
       		  

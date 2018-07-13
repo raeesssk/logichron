@@ -112,16 +112,74 @@ angular.module('user').controller('userAddCtrl', function ($rootScope, $http, $s
                 $('#btnsave').text("please wait...");
                     $http({
                       method: 'POST',
-                      url: $scope.apiURL,
+                      url: $rootScope.baseURL+'/userm/check/user',
                       data: $scope.user,
                       headers: {'Content-Type': 'application/json',
                               'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
                     })
                     .success(function(login)
                     {
-                        $('#btnsave').text("SAVE");
-                        $('#btnsave').removeAttr('disabled');
-                       window.location.href = '#/user';  
+                      console.log(login);
+                      if(login.length > 0)
+                      {
+                        var dialog = bootbox.dialog({
+                          message: '<p class="text-center">User Already exists.</p>',
+                              closeButton: false
+                          });
+                          dialog.find('.modal-body').addClass("btn-danger");
+                          $('#btnsave').removeAttr('disabled');
+                          $('#btnsave').text("SAVE");
+                          setTimeout(function(){
+                            dialog.modal('hide');
+                          $('#um_user_name').focus();
+                          }, 1500);
+
+
+                      }
+                      else
+                      {
+                        $http({
+                              method: 'POST',
+                              url: $scope.apiURL,
+                              data: $scope.user,
+                              headers: {'Content-Type': 'application/json',
+                                      'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+                            })
+                            .success(function(login)
+                            {
+                                $('#btnsave').text("SAVE");
+                                $('#btnsave').removeAttr('disabled');
+                               window.location.href = '#/user';  
+                            })
+                            .error(function(data) 
+                            {   
+                              var dialog = bootbox.dialog({
+                                message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                                    closeButton: false
+                                });
+                                setTimeout(function(){
+                                $('#btnsave').text("SAVE");
+                                $('#btnsave').removeAttr('disabled');
+                                    dialog.modal('hide'); 
+                              }, 1500);            
+                          });
+                      }
+                        /*if()
+                        {
+                          var dialog = bootbox.dialog({
+                          message: '<p class="text-center">Customer Already exists.</p>',
+                              closeButton: false
+                          });
+                          setTimeout(function(){
+                            console.log('test');
+                              dialog.modal('hide'); 
+                              $("#um_user_name").focus();
+                          }, 1500);  
+                        }
+                        else
+                        {
+                              
+                        } */        
                     })
                     .error(function(data) 
                     {   
@@ -139,3 +197,5 @@ angular.module('user').controller('userAddCtrl', function ($rootScope, $http, $s
     };
 
 });
+
+  
