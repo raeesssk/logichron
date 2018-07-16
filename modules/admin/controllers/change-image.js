@@ -60,7 +60,7 @@ angular.module('admin').controller('changeImageCtrl', function ($rootScope, $htt
 		        data: fd,
 		        transformRequest: angular.identity,
 		      headers: {'Content-Type': undefined,
-	                  'Authorization' :'Bearer '+localStorage.getItem("pos_admin_access_token")}
+	                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
 		    })
 		    .success(function(login)
 		    {

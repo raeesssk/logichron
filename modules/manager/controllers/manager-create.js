@@ -4,6 +4,14 @@ angular.module('manager').controller('managerCreateCtrl', function ($rootScope, 
     $scope.project = {};
 
 	$scope.apiURL = $rootScope.baseURL+'/manager/add';
+
+    $scope.getpermission=function(){
+      if(localStorage.getItem('logichron_user_permission') == 0){
+        alert('You are not authorized');
+        window.location.href='#/';
+      }
+    };
+    $scope.getpermission();
     $scope.addUser = function () {
       $scope.user='';
 		var nameRegex = /^\d+$/;

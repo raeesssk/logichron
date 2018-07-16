@@ -66,7 +66,7 @@
                            <li class="user-profile header-notification">
                                <a href="">
                                    <img src="resources/images/avatar-4.jpg" class="img-radius" alt="User-Profile-Image">
-                                   <span>Admin</span>
+                                   <span>{{username}}</span>
                                    <i class="ti-angle-down"></i>
                                </a>
                                <ul class="show-notification profile-notification">
@@ -111,7 +111,7 @@
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="pcoded-hasmenu">
+                                <li class="pcoded-hasmenu" ng-show="admin==1">
                                     <a href="">
                                         <span class="pcoded-micon"><i class="ti-user"></i></span>
                                         <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">User Management</span>
@@ -148,7 +148,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="pcoded-hasmenu">
+                                <li class="pcoded-hasmenu" ng-show="admin==1">
                                     <a href="">
                                         <span class="pcoded-micon"><i class="ti-id-badge"></i></span>
                                         <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Employee Management</span>
@@ -195,7 +195,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="pcoded-hasmenu">
+                                <li class="pcoded-hasmenu" ng-show="admin==1">
                                     <a href="">
                                         <span class="pcoded-micon"><i class="ti-headphone-alt"></i></span>
                                         <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">TeleCaller</span>
@@ -203,7 +203,7 @@
                                     </a>
                                     <ul class="pcoded-submenu">
                                         <li class=" ">
-                                            <a href="#/telecaller/joblist">
+                                            <a href="#/telecaller">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs"><i class="ti-view-list"></i> Job List</span>
                                                 <span class="pcoded-mcaret"></span>
@@ -211,7 +211,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="pcoded-hasmenu">
+                                <li class="pcoded-hasmenu" ng-show="admin==1">
                                     <a href="">
                                         <span class="pcoded-micon"><i class="ti-wheelchair"></i></span>
                                         <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Manager</span>
@@ -241,7 +241,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="pcoded-hasmenu">
+                                <li class="pcoded-hasmenu" ng-show="admin==1">
                                     <a href="">
                                         <span class="pcoded-micon"><i class="ti-files"></i></span>
                                         <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Reports</span>
@@ -293,7 +293,7 @@
         <!-- Controllers-->
         <script type="text/javascript" src="js/main.js"></script>
         <script type="text/javascript" src="js/globalController.js"></script>
-
+        <script type="text/javascript" src="js/login.js"></script>
         
         <!-- admin -->
         <script src="modules/admin/config.js"></script>

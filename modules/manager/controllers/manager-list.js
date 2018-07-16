@@ -120,6 +120,14 @@ $scope.filter = function()
   };
 
     $scope.apiURL = $rootScope.baseURL+'/customer';
+
+    $scope.getpermission=function(){
+      if(localStorage.getItem('logichron_user_permission') == 0){
+        alert('You are not authorized');
+        window.location.href='#/';
+      }
+    };
+    $scope.getpermission();
    $scope.getAll = function () {
         
       $http({

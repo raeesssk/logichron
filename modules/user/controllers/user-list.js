@@ -94,7 +94,17 @@ $scope.filter = function()
     $scope.limit={};
 
 $scope.apiURL = $rootScope.baseURL+'/userm/user/total';
+
+  $scope.getpermission=function(){
+      if(localStorage.getItem('logichron_user_permission') == 0){
+        alert('You are not authorized');
+        window.location.href='#/';
+      }
+    };
+    $scope.getpermission();
    $scope.getAll = function () {
+
+
         if ($('#searchtext').val() == undefined || $('#searchtext').val() == "") {
         $scope.limit.search = "";
       }
@@ -189,7 +199,6 @@ $scope.apiURL = $rootScope.baseURL+'/userm/user/total';
     };
 
     $scope.deleteUser = function (um_id) {
-      console.log(um_id);
       $scope.um_id=um_id;
     }  
 

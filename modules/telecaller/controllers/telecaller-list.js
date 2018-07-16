@@ -119,6 +119,14 @@ $scope.filter = function()
     $scope.viewCustomerDetails($scope.ind);
   };
 
+  $scope.getpermission=function(){
+      if(localStorage.getItem('logichron_user_permission') == 0){
+        alert('You are not authorized');
+        window.location.href='#/';
+      }
+    };
+    $scope.getpermission();
+
     $scope.apiURL = $rootScope.baseURL+'/customer';
    $scope.getAll = function () {
         

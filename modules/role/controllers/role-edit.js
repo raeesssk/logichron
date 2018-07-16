@@ -5,7 +5,14 @@ angular.module('role').controller('roleEditCtrl', function ($rootScope, $http, $
     $scope.permissionList=[];
 	$scope.roleId = $routeParams.roleId;
   $scope.apiURL = $rootScope.baseURL+'/role/edit/'+$scope.roleId;
-
+  
+$scope.getpermission=function(){
+      if(localStorage.getItem('logichron_user_permission') == 0){
+        alert('You are not authorized');
+        window.location.href='#/';
+      }
+    };
+    $scope.getpermission();
   $scope.getrole = function () {
 	     $http({
 	      method: 'GET',

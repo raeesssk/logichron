@@ -8,7 +8,7 @@ function GlobalCtrl($rootScope, $http, $scope, $timeout) {
     $rootScope.firstname=localStorage.getItem("logichron_admin_firstname");
     $rootScope.iconimage=localStorage.getItem("logichron_admin_iconimage");
     $rootScope.baseURL = 'http://localhost:3001';
-
+    
     if(localStorage.getItem("logichron_admin_access_token") === null)
       {
           window.location = 'login.html';
@@ -17,7 +17,10 @@ function GlobalCtrl($rootScope, $http, $scope, $timeout) {
     // $rootScope.back = function () {
     //     window.history.back();
     // };
-
+    $scope.getAll = function(){
+      $scope.admin=localStorage.getItem('logichron_user_permission');
+    };
+    $scope.getAll();
     $rootScope.logOut = function(){
 
         $http({
@@ -29,6 +32,7 @@ function GlobalCtrl($rootScope, $http, $scope, $timeout) {
         })
         .success(function(deliverycount)
         {   
+
             localStorage.removeItem('logichron_admin_username');
             localStorage.removeItem('logichron_admin_firstname');
             localStorage.removeItem('logichron_admin_iconimage');

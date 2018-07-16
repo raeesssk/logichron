@@ -4,7 +4,13 @@ angular.module('employee').controller('employeeEditCtrl', function ($rootScope, 
     $scope.employee={};
 	$scope.employeeId = $routeParams.employeeId;
   $scope.apiURL = $rootScope.baseURL+'/employee/edit/'+$scope.employeeId;
-
+  $scope.getpermission=function(){
+      if(localStorage.getItem('logichron_user_permission') == 0){
+        alert('You are not authorized');
+        window.location.href='#/';
+      }
+    };
+    $scope.getpermission();
   $scope.getEmployee = function () {
 	     $http({
 	      method: 'GET',

@@ -16,7 +16,7 @@ angular.module('telecaller', [])
 
         $routeProvider
             
-            .when('/telecaller/joblist',
+            .when('/telecaller',
                 {
                     templateUrl: 'modules/telecaller/partials/telecaller-list.html',
                     controller: 'telecallerListCtrl',

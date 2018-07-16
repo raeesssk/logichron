@@ -5,6 +5,15 @@ angular.module('dataentry').controller('dataentryEditCtrl', function ($rootScope
 	$scope.jobId = $routeParams.jobId;
   $scope.apiURL = $rootScope.baseURL+'/job/edit/'+$scope.jobId;
 
+
+  $scope.getpermission=function(){
+      if(localStorage.getItem('logichron_user_permission') == 0){
+        alert('You are not authorized');
+        window.location.href='#/';
+      }
+    };
+    $scope.getpermission();
+    
   $scope.getEntry = function () {
 	     $http({
 	      method: 'GET',

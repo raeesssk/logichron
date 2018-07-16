@@ -5,7 +5,7 @@
 function LoginCtrl($scope, $location, $http, $routeParams, $rootScope) {
     
 	$scope.apiURL = 'http://localhost:3001';
-  
+  	$rootScope.admin = 0; 
   	$scope.login = function() {
   		if($scope.username == undefined || $scope.username == ""){
   			var dialog = bootbox.dialog({
@@ -39,7 +39,7 @@ function LoginCtrl($scope, $location, $http, $routeParams, $rootScope) {
 			 })
 		  	 .success(function(data, status, headers, config)
 		  	 {
-		  	 	
+		  	 		
 			        $http({
 			          method: 'POST',
 			          url: $scope.apiURL+'/login/isonline',
@@ -49,6 +49,15 @@ function LoginCtrl($scope, $location, $http, $routeParams, $rootScope) {
 			        })
 			        .success(function(deliverycount)
 			        {	
+			        	if(deliverycount[0].rm_name=='admin')
+			        	{
+			        		$scope.admin=1;
+			        	localStorage.setItem('logichron_user_permission',$scope.admin);
+			        	}
+			        	else{
+			        		$scope.admin=0;
+			        	localStorage.setItem('logichron_user_permission',$scope.admin);
+			        	}
 			        	$scope.user = deliverycount[0].username;
 			        	$scope.firstname = deliverycount[0].first_name;
 			        	$scope.iconimage = deliverycount[0].icon_image;

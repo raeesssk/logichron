@@ -15,6 +15,13 @@ angular.module('user').controller('userEditCtrl', function ($rootScope, $http, $
     });
 }
 
+$scope.getAll=function(){
+      if(localStorage.getItem('logichron_user_permission') == 0){
+        alert('You are not authorized');
+        window.location.href='#/';
+      }
+    };
+    $scope.getAll();
   $scope.getUser = function () {
 	     $http({
 	      method: 'GET',

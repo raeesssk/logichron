@@ -50,7 +50,7 @@ angular.module('admin').controller('changePasswordCtrl', function ($rootScope, $
 		      url: $rootScope.baseURL+'/login/changepassword',
 		      data: $scope.user,
 		      headers: {'Content-Type': 'application/json',
-	                  'Authorization' :'Bearer '+localStorage.getItem("pos_admin_access_token")}
+	                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
 		    })
 		    .success(function(login)
 		    {

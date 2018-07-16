@@ -136,7 +136,13 @@ $scope.filteredTodos = [];
 
 $scope.apiURL = $rootScope.baseURL+'/role/role/total';
 
-  
+  $scope.getpermission=function(){
+      if(localStorage.getItem('logichron_user_permission') == 0){
+        alert('You are not authorized');
+        window.location.href='#/';
+      }
+    };
+    $scope.getpermission();
    $scope.getAll = function () {
         if ($('#searchtext').val() == undefined || $('#searchtext').val() == "") {
         $scope.limit.search = "";
@@ -269,6 +275,8 @@ $scope.apiURL = $rootScope.baseURL+'/role/role/total';
 	};
 
   $scope.getPermission = function(index){
+
+                $scope.permissionList=[];
         $http({
           method: 'GET',
           url: $rootScope.baseURL+'/permission/view/'+$scope.filteredTodos[index].rm_id,
@@ -279,6 +287,7 @@ $scope.apiURL = $rootScope.baseURL+'/role/role/total';
         .success(function(obj)
         {
 
+        
                 obj.forEach(function(value, key){
                     if(value.rpm_add==1){
                       value.rpm_add = true;
