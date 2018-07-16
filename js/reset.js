@@ -1,6 +1,7 @@
 function resetCtrl($scope, $location, $http, $routeParams, $rootScope) {
-$scope.baseURL = 'http://localhost:3001';
+// $scope.baseURL = 'http://localhost:3001';
 
+$scope.baseURL = 'http://unitech.3commastechnologies.com:3001';
 	$scope.employeeId = $routeParams.employeeId;
 	$scope.pass={};
 	$scope.reset=function(){
