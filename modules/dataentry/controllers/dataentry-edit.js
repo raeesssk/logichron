@@ -2,17 +2,35 @@
 angular.module('dataentry').controller('dataentryEditCtrl', function ($rootScope, $http, $scope, $location, $routeParams, $route) {
 
     $scope.dataentry={};
+    $scope.obj={};
+    $scope.answers=[];
+    $scope.answersadd=[];
+    $scope.ansremove=[];
 	$scope.jobId = $routeParams.jobId;
   $scope.apiURL = $rootScope.baseURL+'/job/edit/'+$scope.jobId;
 
+  $scope.addto = function() {
+        
+        $scope.answersadd.push($scope.obj);
+        $('#qm_questions').focus();
+        $scope.obj="";
 
-  $scope.getpermission=function(){
-      if(localStorage.getItem('logichron_user_permission') == 0){
-        alert('You are not authorized');
-        window.location.href='#/';
-      }
     };
-    $scope.getpermission();
+  $scope.getSearch = function(vals) {
+
+      var searchTerms = {search: vals};
+      
+        const httpOptions = {
+          headers: {
+            'Content-Type':  'application/json',
+            'Authorization': 'Bearer '+localStorage.getItem("logichron_admin_access_token")
+          }
+        };
+        return $http.post($rootScope.baseURL+'/manager/typeahead/search', searchTerms, httpOptions).then((result) => {
+          
+          return result.data;
+      });
+  };
     
   $scope.getEntry = function () {
 	     $http({
@@ -24,8 +42,32 @@ angular.module('dataentry').controller('dataentryEditCtrl', function ($rootScope
 	    .success(function(dataentryObj)
 	    {
 	    	dataentryObj.forEach(function (value, key) {
+                value.dm_mm_id=value.mm_pm_name;
 	      		$scope.dataentry = value;
               });
+                $http({
+                  method: 'GET',
+                  url: $rootScope.baseURL+'/job/question/'+$scope.jobId,
+                  headers: {'Content-Type': 'application/json',
+                          'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+                })
+                .success(function(dataObj)
+                {
+                    dataObj.forEach(function (value, key) {
+
+                        $scope.answers.push(value);
+                      });
+                })
+                .error(function(data) 
+                {   
+                  var dialog = bootbox.dialog({
+                    message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                        closeButton: false
+                    });
+                    setTimeout(function(){
+                        dialog.modal('hide'); 
+                    }, 1500);            
+                });
       		  
 	    })
 	    .error(function(data) 
@@ -39,14 +81,32 @@ angular.module('dataentry').controller('dataentryEditCtrl', function ($rootScope
             }, 1500);            
 	    });
 	};
+    
 
-
+    $scope.deleteQA=function(index){
+        $scope.ansremove.push($scope.answers[index]);
+        $scope.answers.splice(index,1)
+        $('#qm_questions').focus();
+    };
+    $scope.deleteQA1=function(index){
+        $scope.answersadd.splice(index,1);
+        $('#qm_questions').focus();
+    };
   $scope.updateEntry = function () {
 
   		var nameRegex = /^\d+$/;
   		var emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-	    
-	    if($('#dm_first_name').val() == undefined || $('#dm_first_name').val() == ""){
+	    if($('#dm_mm_id').val() == undefined || $('#dm_mm_id').val() == ""){
+            var dialog = bootbox.dialog({
+            message: '<p class="text-center">please enter Project</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide'); 
+            }, 1500);
+        }
+	    else if($('#dm_first_name').val() == undefined || $('#dm_first_name').val() == ""){
             var dialog = bootbox.dialog({
             message: '<p class="text-center">please enter first name.</p>',
                 closeButton: false
@@ -227,12 +287,18 @@ angular.module('dataentry').controller('dataentryEditCtrl', function ($rootScope
             }, 1500);
         }
 	    else{
+                $scope.objects={
+                    dataentry:$scope.dataentry,
+                    answers:$scope.answers,
+                    answersadd:$scope.answersadd,
+                    remove:$scope.ansremove
+                }
                 $('#btnsave').attr('disabled','true');
                 $('#btnsave').text("please wait...");
 		    $http({
 		      method: 'POST',
 		      url: $scope.apiURL,
-		      data: $scope.dataentry,
+		      data: $scope.objects,
 		      headers: {'Content-Type': 'application/json',
 	                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
 		    })

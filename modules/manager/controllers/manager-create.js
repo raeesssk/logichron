@@ -74,7 +74,7 @@ angular.module('manager').controller('managerCreateCtrl', function ($rootScope, 
                     {
                         $('#btnsave').text("SAVE");
                         $('#btnsave').removeAttr('disabled');
-                       window.location.href = '#/';  
+                       window.location.href = '#/projectlist';  
                     })
                 .error(function(data) 
                 {   

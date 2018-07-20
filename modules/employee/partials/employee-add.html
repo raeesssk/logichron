@@ -72,8 +72,8 @@
                                 <br>
                                 </div>
                                 <div class="col-sm-6">
-                                        <img ng-src="{{displayImages}}" onclick="document.getElementById('img-path').click(); return false; " id="app-file-btn" title="Click to add Photo" height="100" width="100">
-                                        <input  type="file" 3d="img-path" name="file" id="profilePhotoFileUpload emp_image" placeholder="" ng-file-select="onFileSelect($files)" accept="" ng-model="employee.emp_image" />
+                                        <img id="blah" alt="your image" height="100" width="100" ng-src="{{displayImage}}"/>
+                                        <input type='file' id="emp_image" name="emp_image" ng-model=emp_image multiple/>
                                 </div>
                             </div>
                             <div class="form-group row">

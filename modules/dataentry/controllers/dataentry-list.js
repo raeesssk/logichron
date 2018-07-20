@@ -135,13 +135,7 @@ $scope.filter = function()
 
 $scope.apiURL = $rootScope.baseURL+'/job/job/total';
     
-    $scope.getpermission=function(){
-      if(localStorage.getItem('logichron_user_permission') == 0){
-        alert('You are not authorized');
-        window.location.href='#/';
-      }
-    };
-    $scope.getpermission();
+    
     
    $scope.getAll = function () {
         if ($('#searchtext').val() == undefined || $('#searchtext').val() == "") {
@@ -273,246 +267,34 @@ $scope.apiURL = $rootScope.baseURL+'/job/job/total';
 	    });
 	};
 
-  $scope.viewEmployeeDetails1 = function (index) {
-      $scope.ind = index;
-    $('#user-datepicker-from').val("");
-    $('#user-datepicker-to').val("");
-    $scope.viewCustomerDetails(index);
-  };
+  $scope.view = function(index){
 
-  $scope.viewCustomerDetails = function (index) {
-      $scope.venname = $scope.filteredTodos[index].cm_name;
-      $scope.venno = $scope.filteredTodos[index].cm_mobile;
-      $scope.venemail = $scope.filteredTodos[index].cm_email;
-      $scope.venadd = $scope.filteredTodos[index].cm_address;
-      $scope.venbal = $scope.filteredTodos[index].cm_balance;
-      $scope.vendebit = $scope.filteredTodos[index].cm_debit;
-      $scope.vencode = $scope.filteredTodos[index].cm_code;
-      $scope.cmgst = $scope.filteredTodos[index].cm_gst;
-
-      $scope.categoryList =[];
-      $http({
-        method: 'GET',
-        url: $rootScope.baseURL+'/customer/details/'+$scope.filteredTodos[index].cm_id,
-        headers: {'Content-Type': 'application/json',
-                  'Authorization' :'Bearer '+localStorage.getItem("unitech_admin_access_token")}
-      })
-      .success(function(categoryList)
-      {
-        // $scope.categoryList = angular.copy(categoryList);
-        var amount_balance = 0;
-          categoryList.forEach(function (value, key) {
-            $scope.data = new Date(value.date);
-
-            if(value.credit == 0)
-            {
-              amount_balance = parseInt(amount_balance) - parseInt(value.debit);
-            }
-            else if(value.debit == 0)
-            {
-              amount_balance = parseInt(amount_balance) + parseInt(value.credit);
-            }
-            if(amount_balance < 0)
-            {
-              Math.abs(amount_balance);
-            value.bal = Math.abs(amount_balance);
-              value.drcr="DR";
-            }
-            else{
-              value.drcr="CR";
-              value.bal = amount_balance;
-            }
-            if($scope.fDate <= $scope.data && $scope.tDate >= $scope.data)
-            {
-              $scope.categoryList.push(value);
-            }
-            else if($('#user-datepicker-from').val() == "" && $('#user-datepicker-to').val() == "")  
-            {
-              $scope.categoryList.push(value);
-            }
-          });
-        
-          $('#filter-user-btn').text("Filter");
-          $('#filter-user-btn').removeAttr('disabled');
-          $('#reset-user-btn').text("Reset");
-          $('#reset-user-btn').removeAttr('disabled');
-      })
-      .error(function(data) 
-      {
-            var dialog = bootbox.dialog({
-            message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
-                closeButton: false
+        $scope.answers=[];
+        $http({
+          method: 'GET',
+          url: $rootScope.baseURL+'/question/view/'+$scope.filteredTodos[index].dm_id,
+          //data: $scope.data,
+          headers: {'Content-Type': 'application/json',
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+        })
+        .success(function(obj)
+        {
+            obj.forEach(function(value, key){
+              $scope.answers.push(value);
             });
-            setTimeout(function(){
-                dialog.modal('hide'); 
-            }, 1500);
-      });
 
+        })
+        .error(function(data) 
+        {   
+            toastr.error('Oops, Something Went Wrong.', 'Error', {
+                closeButton: true,
+                progressBar: true,
+                positionClass: "toast-top-center",
+                timeOut: "500",
+                extendedTimeOut: "500",
+            });  
+        });
     };
-
-    $scope.printDetails = function(){
-      var popupWin = window.open('', 'winname','directories=0,titlebar=0,toolbar=0,location=0,status=0,menubar=0,scrollbars=no,resizable=no');
-          
-          var printchar = "<html>" +
-         " <head>" +
-            "<link rel='stylesheet' href='./././resources/vendor/bootstrap/css/bootstrap.min.css' />" +
-            "<style>.action{display:none;} .print-hide{display:none;}</style>"+
-            "   <style type='text/css' media='print'>" +
-            "  @page " +
-             " {" +
-              "    size:  A4 portrait;" +  /* auto is the initial value */
-               "   margin: 0; " + /* this affects the margin in the printer settings */
-              "}" +
-
-              "html" +
-              "{" +
-               "   background-color: #FFFFFF;" + 
-                "  margin: 0px; " + /* this affects the margin on the html before sending to printer */
-              "}" +
-
-              "body" +
-              "{" +
-                "font-size:11pt;"+
-                "font-family:'Open Sans', sans-serif;"+
-               // "   border: solid 1px black ;" +
-                "  margin: 5mm 10mm 0mm 7.5mm;" + /* margin you want for the content */
-              "}" +
-              "</style>" +
-          "</head>" +
-          "<body onload='window.print()'>" +
-           "<table width='100%' height='95%'>" +
-            "<thead>"+
-              "<tr>"+
-                "<td colspan='3' style=' border-style: solid; border-width:0px;'>"+
-                  "<table width='100%'>"+
-                    "<tr>" +
-                      "<td colspan='2' style='text-align:left; padding: 10px; border-style: solid solid none solid; border-width:1px; font-size:10pt;' valign='top'>" +
-                          "<img src='./././resources/header.png' width='100%' height='100%'>"+
-                      "</td>" +
-                    "</tr>" +
-                    "<tr>" +
-                      "<td colspan='2' style='text-align:center; padding: 4px; border-style: solid solid none solid; border-width:1px; font-size:13pt;' valign='top'>" +
-                          "<strong>Customer Ledger</strong>"+
-                      "</td>" +
-                    "</tr>" +
-                    "<tr>" +
-                      "<td width='60%' style='text-align:left; padding: 4px; border-style: solid solid none solid; border-width:1px; font-size:10pt;' valign='top'>" +
-                          "<table width='100%'>"+
-                            "<tr>"+
-                              "<td width='30%' style='text-align:left; padding: 4px; border-style: none none none none; border-width:1px; font-size:10pt;'>"+
-                                "Name: "+
-                              "</td>"+
-                              "<td width='70%' style='text-align:left; padding: 4px; border-style: none none none none; border-width:1px; font-size:10pt;'>"+
-                                "<strong>"+$scope.venname+"</strong>"+
-                              "</td>"+
-                            "</tr>"+
-                            "<tr>"+
-                              "<td width='30%' style='text-align:left; padding: 4px; border-style: none none none none; border-width:1px; font-size:10pt;'>"+
-                                "Address: "+
-                              "</td>"+
-                              "<td width='70%' style='text-align:left; padding: 4px; border-style: none none none none; border-width:1px; font-size:10pt;'>"+
-                                "<strong>"+$scope.venadd+"</strong>"+
-                              "</td>"+
-                            "</tr>"+
-                            "<tr>"+
-                              "<td width='30%' style='text-align:left; padding: 4px; border-style: none none none none; border-width:1px; font-size:10pt;'>"+
-                                "Contact No.: "+
-                              "</td>"+
-                              "<td width='70%' style='text-align:left; padding: 4px; border-style: none none none none; border-width:1px; font-size:10pt;'>"+
-                                "<strong>"+$scope.venno+"</strong>"+
-                              "</td>"+
-                            "</tr>"+
-                            "<tr>"+
-                              "<td width='30%' style='text-align:left; padding: 4px; border-style: none none none none; border-width:1px; font-size:10pt;'>"+
-                                "GSTIN: "+
-                              "</td>"+
-                              "<td width='70%' style='text-align:left; padding: 4px; border-style: none none none none; border-width:1px; font-size:10pt;'>"+
-                                "<strong>"+$scope.cmgst+"</strong>"+
-                              "</td>"+
-                            "</tr>"+
-                          "</table>"+
-                      "</td>" +
-                      "<td width='40%' style='text-align:left; padding: 4px; border-style: solid solid none none; border-width:1px; font-size:10pt;' valign='top'>" +
-                          "<table width='100%'>"+
-                            "<tr>"+
-                              "<td width='50%' style='text-align:left; padding: 4px; border-style: none none none none; border-width:1px; font-size:10pt;'>"+
-                                "Debit: "+
-                              "</td>"+
-                              "<td width='50%' style='text-align:left; padding: 4px; border-style: none none none none; border-width:1px; font-size:10pt;'>"+
-                                "<strong>"+$scope.vendebit+"</strong>"+
-                              "</td>"+
-                            "</tr>"+
-                            "<tr>"+
-                              "<td width='50%' style='text-align:left; padding: 4px; border-style: none none none none; border-width:1px; font-size:10pt;'>"+
-                                "Credit: "+
-                              "</td>"+
-                              "<td width='50%' style='text-align:left; padding: 4px; border-style: none none none none; border-width:1px; font-size:10pt;'>"+
-                                "<strong>"+$scope.venbal+"</strong>"+
-                              "</td>"+
-                            "</tr>";
-                            if($('#user-datepicker-from').val() != "" && $('#user-datepicker-to').val() != "") 
-                            {
-
-                              printchar = printchar + "<tr>"+
-                                "<td width='50%' style='text-align:left; padding: 4px; border-style: none none none none; border-width:1px; font-size:10pt;'>"+
-                                  "From Date: "+
-                                "</td>"+
-                                "<td width='50%' style='text-align:left; padding: 4px; border-style: none none none none; border-width:1px; font-size:10pt;'>"+
-                                  "<strong>"+$filter('date')($scope.fDate, "mediumDate")+"</strong>"+
-                                "</td>"+
-                              "</tr>"+
-                              "<tr>"+
-                                "<td width='50%' style='text-align:left; padding: 4px; border-style: none none none none; border-width:1px; font-size:10pt;'>"+
-                                  "To Date: "+
-                                "</td>"+
-                                "<td width='50%' style='text-align:left; padding: 4px; border-style: none none none none; border-width:1px; font-size:10pt;'>"+
-                                  "<strong>"+$filter('date')($scope.tDate, "mediumDate")+"</strong>"+
-                                "</td>"+
-                              "</tr>";
-                            }
-                          printchar = printchar + "</table>"+
-                      "</td>" +
-                    "</tr>" +
-                  "</table>"+
-                "</td>"+
-              "</tr>"+
-            "</thead>"+
-            "<tbody>"+
-              "<tr>"+
-                "<td valign='top' style=' border-style: solid; border-width:1px;'>"+
-                  "<table width='100%'>" +
-                    "<thead>"+
-                      "<tr>"+      
-                        "<th style='padding:10px; border-style: none solid solid none; border-width:1px;'>Type</th>" +
-                        "<th style='padding:10px; border-style: none solid solid none; border-width:1px;'>Invoice</th> " +
-                        "<th style='padding:10px; border-style: none solid solid none; border-width:1px;'>Date</th>"+
-                        "<th style='padding:10px; border-style: none solid solid none; border-width:1px;'>Debit</th>" +
-                        "<th style='padding:10px; border-style: none solid solid none; border-width:1px;'>Credit</th>" +
-                        "<th style='padding:10px; border-style: none solid solid none; border-width:1px;'>DR/CR</th>" +
-                        "<th style='padding:10px; border-style: none none solid none; border-width:1px;'>Balance</th>" +
-                      "</tr>"+
-                    "</thead>"+
-                    " "+$('#content').html()+" " +
-                  "</table>"+
-                "</td>"+
-              "</tr>"+
-            "</tbody>"+
-            "<tfoot>"+
-              "<tr>"+
-                "<td style=' border-style: solid; border-width:1px;'>"+
-                  "<table width='100%'>"+
-                    "<tr>" +
-                        "<td valign='bottom' style='text-align:center; padding:6px; font-size:12pt;'>THANK YOU</td>" +
-                    "</tr>" +
-                  "</table>"+
-                "</td>"+
-              "</tr>"+
-            "</tfoot>"+
-          "</table>"+
-          "</body>" +
-        "</html>";
-        popupWin.document.write(printchar);
-        popupWin.document.close();
-    }
+    
 
 });

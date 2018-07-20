@@ -6,7 +6,7 @@ angular.module('manager', [])
 
         $routeProvider
             
-            .when('/manager/joblist',
+            .when('/joblist',
                 {
                     templateUrl: 'modules/manager/partials/manager-list.html',
                     controller: 'managerListCtrl',
@@ -46,5 +46,32 @@ angular.module('manager', [])
                         }]
                     }
                 })
+                
+            .when('/manager/edit/:projectId',
+                {
+                    templateUrl: 'modules/manager/partials/manager-edit.html',
+                    controller: 'managerEditCtrl',
+                    resolve: {
+                        lazy: ['$ocLazyLoad',"$q", "$location","$rootScope", function ($ocLazyLoad, $q, $location, $rootScope) {
+                            return $ocLazyLoad.load([{
+                                name: 'myApp',
+                                files: ['modules/manager/controllers/manager-edit.js']
+                            }]);
+                        }]
+                    }
+                })
+            .when('/projectlist',
+                {
+                    templateUrl: 'modules/manager/partials/manager-projectlist.html',
+                    controller: 'managerprojectListCtrl',
+                    resolve: {
+                        lazy: ['$ocLazyLoad',"$q", "$location","$rootScope", function ($ocLazyLoad, $q, $location, $rootScope) {
+                            return $ocLazyLoad.load([{
+                                name: 'myApp',
+                                files: ['modules/manager/controllers/manager-projectlist.js']
+                            }]);
+                        }]
+                    }
+                });
 				
         }]);

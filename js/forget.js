@@ -1,6 +1,6 @@
 function forgetpassCtrl($scope, $location, $http, $routeParams, $rootScope) {
-/*$scope.baseURL = 'http://localhost:3001';*/
-$scope.baseURL = 'http://unitech.3commastechnologies.com:3001';
+$scope.baseURL = 'http://localhost:3001';
+// $scope.baseURL = 'http://unitech.3commastechnologies.com:3001';
 	$scope.emp={};
 	$scope.forgot=function(){
 		if($scope.emp.email == undefined || $scope.emp.email == ""){

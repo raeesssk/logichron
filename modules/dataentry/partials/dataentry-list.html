@@ -74,7 +74,7 @@
                                       <td>{{dataentry.dm_asset}}</td>
                                       <td>{{dataentry.dm_domain}}</td>
                           						<td>
-                          							<i class="fa fa-info-circle" data-toggle="modal" data-target="#view-details" ng-click="viewEmployeeDetails1($index)"></i>
+                          							<i class="fa fa-info-circle" data-toggle="modal" data-target="#view-details" ng-click="view($index)"></i>
                           							<a href="#/dataentry/edit/{{dataentry.dm_id}}"><i class="fa fa-pencil"></i></a>
                           							<i class="fa fa-trash" data-toggle="modal" data-target="#confirm-delete" ng-click="deleteEntry(dataentry.dm_id)"></i>
                           						</td>
@@ -131,69 +131,26 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Employee Details</h4>
+        <h4 class="modal-title"></h4>
       </div>
       <div class="modal-body">
-      	<table class="table">
-			<tr>
-	          <td>
-	          	<div class="input-group date">
-	                <div class="input-group-addon">
-	                    <i class="fa fa-calendar"></i>
-	                </div>
-	                <input type="text" class="form-control pull-right" id="user-datepicker-from" placeholder="From Date">
-                </div>
-              </td>
-              <td>
-	          	<div class="input-group date">
-	                <div class="input-group-addon">
-	                    <i class="fa fa-calendar"></i>
-	                </div>
-	                <input type="text" class="form-control pull-right" id="user-datepicker-to" placeholder="To Date">
-                </div>
-              </td>
-	          <td><button type="button" class="btn" id="filter-user-btn" ng-click="filter()">Filter</button></td>
-	          <td><button type="button" class="btn" id="reset-user-btn" ng-click="reset()">Reset</button></td>
-              
-	      	</tr>
-	    </table>
-        <table class="table">
-    		<tr>
-    			<td>Name: <strong>{{venname}}</strong></td>
-    			<td>Number: <strong>{{venno}}</strong></td>
-    			<td>Address: <strong>{{venadd}}</strong></td>
-    			<td>Credit: <strong>{{venbal}}</strong></td>
-    			<td>Debit: <strong>{{vendebit}}</strong></td>
-    		</tr>
-    	</table>
-    	<table class="table" border="1">
-			<thead>
-			<tr>
-				<th>Type</th>
-				<th>Invoice</th>
-				<th>Date</th>
-				<th>Debit</th>
-				<th>Credit</th>
-				<th>DR/CR</th>
-				<th>Balance</th>
-			</tr>
-			</thead>
-			<tbody id="content">
-			<tr ng-repeat="purchaseDetails in categoryList | filter : purchaseDetails">
-				<td style="padding:6px; border-style: none solid solid none; border-width:1px;">{{purchaseDetails.type}}</td>
-				<td style="padding:6px; border-style: none solid solid none; border-width:1px;">{{purchaseDetails.invoice}}</td>
-				<td style="padding:6px; border-style: none solid solid none; border-width:1px;">{{purchaseDetails.date | date : 'mediumDate'}}</td>
-				<td style="padding:6px; border-style: none solid solid none; border-width:1px;">{{purchaseDetails.debit}}</td>
-				<td style="padding:6px; border-style: none solid solid none; border-width:1px;">{{purchaseDetails.credit}}</td>
-				<td style="padding:6px; border-style: none solid solid none; border-width:1px;">{{purchaseDetails.drcr}}</td>
-				<td style="padding:6px; border-style: none none solid none; border-width:1px;">{{purchaseDetails.bal}}</td>
-			</tr>
-			</tbody>
-		</table>
+      	<table class="table table-hover">
+          <thead>
+            <tr>
+              <th class="" style="border: 1px solid #ccc; text-align: center;">Question</th>
+              <th class="" style="border: 1px solid #ccc; text-align: center;">Answers</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="question in answers track by $index">
+                <td>{{question.qm_questions}}</td>
+                <td>{{question.qm_answers}}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-        <button type="button" id="del" class="btn btn-primary" ng-click="printDetails();">Print</button>
       </div>
     </div>
     <!-- /.modal-content -->

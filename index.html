@@ -111,7 +111,7 @@
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="pcoded-hasmenu" ng-show="admin==1">
+                                <li class="pcoded-hasmenu">
                                     <a href="">
                                         <span class="pcoded-micon"><i class="ti-user"></i></span>
                                         <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">User Management</span>
@@ -148,7 +148,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="pcoded-hasmenu" ng-show="admin==1">
+                                <li class="pcoded-hasmenu">
                                     <a href="">
                                         <span class="pcoded-micon"><i class="ti-id-badge"></i></span>
                                         <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Employee Management</span>
@@ -172,7 +172,7 @@
 
                                     </ul>
                                 </li>
-                                <li class="pcoded-hasmenu">
+                                <li class="pcoded-hasmenu" id="dataentry">
                                     <a href="">
                                         <span class="pcoded-micon"><i class="ti-write"></i></span>
                                         <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Data Entry</span>
@@ -195,7 +195,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="pcoded-hasmenu" ng-show="admin==1">
+                                <li class="pcoded-hasmenu">
                                     <a href="">
                                         <span class="pcoded-micon"><i class="ti-headphone-alt"></i></span>
                                         <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">TeleCaller</span>
@@ -211,7 +211,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="pcoded-hasmenu" ng-show="admin==1">
+                                <li class="pcoded-hasmenu">
                                     <a href="">
                                         <span class="pcoded-micon"><i class="ti-wheelchair"></i></span>
                                         <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Manager</span>
@@ -226,6 +226,13 @@
                                             </a>
                                         </li>
                                         <li class=" ">
+                                            <a href="#/projectlist">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs"><i class="ti-view-list"></i> Project List</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class=" ">
                                             <a href="#/manager/jobassign">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs"><i class="ti-view-list"></i> Job Assign</span>
@@ -233,7 +240,7 @@
                                             </a>
                                         </li>
                                         <li class=" ">
-                                            <a href="#/manager/joblist">
+                                            <a href="#/joblist">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs"><i class="ti-view-list"></i> Job List</span>
                                                 <span class="pcoded-mcaret"></span>
@@ -241,7 +248,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="pcoded-hasmenu" ng-show="admin==1">
+                                <li class="pcoded-hasmenu">
                                     <a href="">
                                         <span class="pcoded-micon"><i class="ti-files"></i></span>
                                         <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Reports</span>

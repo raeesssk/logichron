@@ -22,76 +22,86 @@
                         <div class="card-block">
                             <div class="form-group row">
                                 <div class="col-sm-6">
+                                        <label>Project Name</label>
+                                        <input type="text" id="dm_mm_id" 
+                                        ng-model="dataentry.dm_mm_id"
+                                        typeahead="obj as obj.mm_pm_name for obj in getSearch($viewValue)"
+                                        class="form-control"/>
+                                </div>
+                                <div class="col-sm-6">
                                         <label>First Name</label>
                                         <input type="text" id="dm_first_name" class="form-control" ng-model="dataentry.dm_first_name" />
+                                        <br>
                                 </div>
                                 <div class="col-sm-6">
                                         <label>Last Name</label>
                                         <input type="text" id="dm_last_name" class="form-control" ng-model="dataentry.dm_last_name" />
-                                        <br>
+                                        
                                 </div>
 
                                 <div class="col-sm-6">
                                         <label>Job Title</label>
                                         <input type="text" id="dm_job_title" class="form-control" ng-model="dataentry.dm_job_title" />
-                                        
+                                        <br>
                                 </div>
                                 <div class="col-sm-6">
                                         <label>Job Level</label>
                                         <input type="text" id="dm_job_level" class="form-control" ng-model="dataentry.dm_job_level" />
-                                        <br>
+                                        
                                 </div>
 
                                 <div class="col-sm-6">
                                         <label>Department</label>
                                         <input type="text" id="dm_dept" class="form-control" ng-model="dataentry.dm_dept" />
-                                        
+                                       <br> 
                                 </div>
                                 <div class="col-sm-6">
                                         <label>Email-Id</label>
                                         <input type="email" id="dm_email_id" class="form-control" ng-model="dataentry.dm_email_id" />
-                                        <br>
+                                        
                                 </div>
                                 
                                 <div class="col-sm-6">
                                         <label>Mobile Number</label>
                                         <input type="text" id="dm_mobile" class="form-control" ng-model="dataentry.dm_mobile" />
+                                        <br>
                                 </div>
                                 <div class="col-sm-6">
                                         <label>Company Name</label>
-                                        <textarea id="dm_company_name" class="form-control" ng-model="dataentry.dm_company_name" rows="1"></textarea>
-                                <br>
+                                        <input type="text" id="dm_company_name" class="form-control" ng-model="dataentry.dm_company_name"/>
+                                
                                 </div>
 
                                 <div class="col-sm-6">
                                         <label>Address</label>
                                         <textarea id="dm_address" class="form-control" ng-model="dataentry.dm_address" rows="1"></textarea>
+                                        <br>
                                 </div>
                                 <div class="col-sm-6">
                                         <label>City</label>
                                         <input type="text" id="dm_city" class="form-control" ng-model="dataentry.dm_city">
-                                <br>
+                                
                                 </div>
 
                                 <div class="col-lg-6">
                                         <label>State</label>
                                         <input type="text" id="dm_state" class="form-control" ng-model="dataentry.dm_state">
-                                
+                                    <br>
                                 </div>
                                 <div class="col-sm-6">
                                         <label>Postal Code</label>
                                         <input type="text" id="dm_postal_code" class="form-control" ng-model="dataentry.dm_postal_code" />
-                                <br>
+                                
                                 </div>
                                 <div class="col-sm-6">
                                         <label>Country</label>
                                         <input type="text" id="dm_country" class="form-control" ng-model="dataentry.dm_country" />
-                                        
+                                    <br>    
                                 </div>
                                 <div class="col-sm-6">
                                         <label>Industry</label>
                                         <input type="text" id="dm_industry" class="form-control" ng-model="dataentry.dm_industry">
-                                <br>
+                                
                                 </div>
                                 <div class="col-sm-6">
                                         <label>Company Size</label>
@@ -102,17 +112,17 @@
                                             <option>501-1000</option>
                                             <option>1000-10000</option>
                                         </select>
-                                        
+                                    <br>    
                                 </div>
                                 <div class="col-sm-6">
                                         <label>Revenue</label>
                                         <input type="text" id="dm_revenue" class="form-control" ng-model="dataentry.dm_revenue" />
-                                <br>
+                                
                                 </div>
                                 <div class="col-sm-6">
                                         <label>Asset</label>
                                         <input type="text" id="dm_asset" class="form-control" ng-model="dataentry.dm_asset" />
-                                        
+                                    <br>    
                                 </div>
                                 <div class="col-sm-6">
                                         <label>Domain</label>
@@ -120,6 +130,35 @@
                                 <br>
                                 </div>
                             </div>
+                            <table class="table table-hover">
+                              <thead>
+                                <tr>
+                                  <th class="" style="border: 1px solid #ccc; text-align: center;">Question</th>
+                                  <th class="" style="border: 1px solid #ccc; text-align: center;">Answers</th>
+                                  <th style="border: 1px solid #ccc; text-align: center;">Action</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                    <td><input type="text" id="qm_questions" class="form-control" ng-model="obj.qm_questions"></td>
+                                    <td><input type="text" id="qm_answers" class="form-control" ng-model="obj.qm_answers"></td>
+                                    <td><button class="btn-outline-success form-control" ng-click="addto()" type="submit">Add</button></td>
+                                </tr>
+                              </tbody>
+                              <tbody>
+                                <tr ng-repeat="question in answers track by $index">
+                                    <td contenteditable="true">{{question.qm_questions}}</td>
+                                    <td contenteditable="true">{{question.qm_answers}}</td>
+                                    <td><button class="form-control" ng-click="deleteQA($index)"><i class="fa fa-trash" ></button></i></td>
+                                </tr>
+                                <tr ng-repeat="ans in answersadd track by $index">
+                                    <td contenteditable="true">{{ans.qm_questions}}</td>
+                                    <td contenteditable="true">{{ans.qm_answers}}</td>
+                                    <td><button class="form-control" ng-click="deleteQA1($index)"><i class="fa fa-trash" ></button></i></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                            <br>
                             <div class="form-group row">
                                 <br>
                                 <div class="col-sm-12">

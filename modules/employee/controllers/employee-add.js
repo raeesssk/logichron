@@ -4,25 +4,27 @@ angular.module('employee').controller('employeeAddCtrl', function ($rootScope, $
   
     $scope.employee = {};
     $('#emp_name').focus();
-  $scope.displayImages = "resources/images/default-image.png";
 
 
 	$scope.apiURL = $rootScope.baseURL+'/employee/add';
 
-     $scope.onFileSelect = function ($files) {
-        $scope.speakerIcon = $files[0];
-        $scope.fileName = $scope.speakerIcon.name;
-        var reader = new FileReader();
-        reader.readAsDataURL($files[0]);
+     $scope.displayImage = "resources/images/default-image.png";
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+          var reader = new FileReader();
 
-        reader.onloadend = function () {
-            var img_data = reader.result;
-            var spl_dt = img_data.split(',');
-            $scope.displayImages = 'data:image/png;base64, ' + spl_dt[1];
-            $scope.displayImagesdb = spl_dt[1];
-            $scope.$apply();
-        };
-    };
+              $scope.employee.file = input.files[0];
+          reader.onload = function (e) {
+              $('#blah').attr('src', e.target.result);
+          }
+          reader.readAsDataURL(input.files[0]);
+
+      }
+  }
+
+  $("#emp_image").change(function(){
+      readURL(this);
+  });
 
     $scope.getpermission=function(){
       if(localStorage.getItem('logichron_user_permission') == 0){
@@ -150,7 +152,6 @@ angular.module('employee').controller('employeeAddCtrl', function ($rootScope, $
 	    else{
 
                 var fd = new FormData();
-                fd.append('imgUploader', $scope.displayImagesdb);
                 fd.append('emp_name', $scope.employee.emp_name);
                 fd.append('emp_mobile', $scope.employee.emp_mobile);
                 fd.append('emp_address',$scope.employee.emp_address);
@@ -161,13 +162,13 @@ angular.module('employee').controller('employeeAddCtrl', function ($rootScope, $
                 fd.append('emp_emp_no',$scope.employee.emp_emp_no);
                 fd.append('emp_email_id',$scope.employee.emp_email_id);
                 fd.append('emp_qualification',$scope.employee.emp_qualification);
-                $('#btnsave').attr('disabled','true');
-                $('#btnsave').text("please wait...");
+                fd.append('imgUploader', $scope.employee.file);
                     
                     $http({
                       method: 'POST',
                       url: $scope.apiURL,
                       data: fd,
+                      transformRequest: angular.identity,
                       headers: {'Content-Type': undefined,
                               'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
                     })

@@ -7,8 +7,8 @@ function GlobalCtrl($rootScope, $http, $scope, $timeout) {
     $rootScope.userid=localStorage.getItem("logichron_admin_username");
     $rootScope.firstname=localStorage.getItem("logichron_admin_firstname");
     $rootScope.iconimage=localStorage.getItem("logichron_admin_iconimage");
-    // $rootScope.baseURL = 'http://localhost:3001';
-    $rootScope.baseURL = 'http://unitech.3commastechnologies.com:3001';
+    $rootScope.baseURL = 'http://localhost:3001';
+    // $rootScope.baseURL = 'http://unitech.3commastechnologies.com:3001';
     if(localStorage.getItem("logichron_admin_access_token") === null)
       {
           window.location = 'login.html';
@@ -17,11 +17,39 @@ function GlobalCtrl($rootScope, $http, $scope, $timeout) {
     // $rootScope.back = function () {
     //     window.history.back();
     // };
-    $scope.getAll = function(){
-      $scope.admin=localStorage.getItem('logichron_user_permission');
-    };
-    $scope.getAll();
-    $rootScope.logOut = function(){
+    
+      $scope.getAll=function(){
+
+        $scope.states=[];
+          $http({
+            method: 'GET',
+            url: $rootScope.baseURL+'/role',
+            //data: $scope.data,
+            headers: {'Content-Type': 'application/json',
+                    'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+          })
+          .success(function(obj)
+          {
+
+                  obj.forEach(function(value, key){
+                      
+                      $scope.states.push(value);
+                  });
+
+          })
+          .error(function(data) 
+          {   
+              toastr.error('Oops, Something Went Wrong.', 'Error', {
+                  closeButton: true,
+                  progressBar: true,
+                  positionClass: "toast-top-center",
+                  timeOut: "500",
+                  extendedTimeOut: "500",
+              });  
+          });
+      };
+      $scope.getAll();
+      $rootScope.logOut = function(){
 
         $http({
           method: 'POST',

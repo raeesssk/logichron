@@ -3,17 +3,39 @@ angular.module('dataentry').controller('dataentryAddCtrl', function ($rootScope,
 
   
     $scope.dataentry = {};
+    $scope.obj={};
+    $scope.answers=[];
     $('#dm_first_name').focus();
 	$scope.apiURL = $rootScope.baseURL+'/job/add';
 
-    $scope.getpermission=function(){
-      if(localStorage.getItem('logichron_user_permission') == 0){
-        alert('You are not authorized');
-        window.location.href='#/';
-      }
-    };
-    $scope.getpermission();
+      $scope.getSearch = function(vals) {
+
+      var searchTerms = {search: vals};
+      
+        const httpOptions = {
+          headers: {
+            'Content-Type':  'application/json',
+            'Authorization': 'Bearer '+localStorage.getItem("logichron_admin_access_token")
+          }
+        };
+        return $http.post($rootScope.baseURL+'/manager/typeahead/search', searchTerms, httpOptions).then((result) => {
+          
+          return result.data;
+      });
+  };
     
+    $scope.addto = function() {
+        
+        $scope.answers.push($scope.obj);
+        $('#qm_questions').focus();
+        $scope.obj="";
+
+    };
+
+    $scope.deleteQA=function(x){
+        $scope.answers.splice(x,1);
+        $('#qm_questions').focus();
+    };
     $scope.addEntry = function () {
 		var nameRegex = /^\d+$/;
   		var emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -209,6 +231,10 @@ angular.module('dataentry').controller('dataentryAddCtrl', function ($rootScope,
             }, 1500);
         }*/
 	    else{
+                $scope.objs={
+                    answer:$scope.answers,
+                    dataentry:$scope.dataentry
+                }
 
                 $('#btnsave').attr('disabled','true');
                 $('#btnsave').text("please wait...");
@@ -216,7 +242,7 @@ angular.module('dataentry').controller('dataentryAddCtrl', function ($rootScope,
                 $http({
                       method: 'POST',
                       url: $scope.apiURL,
-                      data: $scope.dataentry,
+                      data: $scope.objs,
                       headers: {'Content-Type': 'application/json',
                               'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
                     })

@@ -6,13 +6,13 @@ angular.module('user').controller('userAddCtrl', function ($rootScope, $http, $s
     $('#um_emp_id').focus();
 	$scope.apiURL = $rootScope.baseURL+'/userm/add';
 
-    $scope.getAll=function(){
+    $scope.getpermission=function(){
       if(localStorage.getItem('logichron_user_permission') == 0){
         alert('You are not authorized');
         window.location.href='#/';
       }
     };
-    $scope.getAll();
+    $scope.getpermission();
   
     $scope.getSearch = function(vals) {
 

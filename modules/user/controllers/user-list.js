@@ -102,6 +102,7 @@ $scope.apiURL = $rootScope.baseURL+'/userm/user/total';
       }
     };
     $scope.getpermission();
+  
    $scope.getAll = function () {
 
 

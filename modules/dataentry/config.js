@@ -44,7 +44,7 @@ angular.module('dataentry', [])
                     }
                 })
 				
-			.when('/dataentry/edit/:dataentryId',
+			.when('/dataentry/edit/:jobId',
                 {
                     templateUrl: 'modules/dataentry/partials/dataentry-edit.html',
                     controller: 'dataentryEditCtrl',
