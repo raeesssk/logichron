@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app='logichron'>
+<html lang="en" ng-app='logichron' ng-cloak>
 
 <head>
     <title>Logichron </title>
@@ -66,7 +66,7 @@
                            <li class="user-profile header-notification">
                                <a href="">
                                    <img src="resources/images/avatar-4.jpg" class="img-radius" alt="User-Profile-Image">
-                                   <span>{{username}}</span>
+                                   <span>{{firstname}}</span>
                                    <i class="ti-angle-down"></i>
                                </a>
                                <ul class="show-notification profile-notification">
@@ -96,7 +96,7 @@
                    </div>
                </div>
            </nav>
-            <div class="pcoded-main-container">
+            <div class="pcoded-main-container" >
                 <div class="pcoded-wrapper">
                     <nav class="pcoded-navbar">
                         <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
@@ -104,21 +104,21 @@
                             
                             <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation"></div>
                             <ul class="pcoded-item pcoded-left-item">
-                                <li class="active">
+                                <li class="active" >
                                     <a href="#/">
                                         <span class="pcoded-micon"><i class="ti-dashboard"></i><b>D</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="pcoded-hasmenu">
+                                <li class="pcoded-hasmenu" ng-show="access=='admin'">
                                     <a href="">
                                         <span class="pcoded-micon"><i class="ti-user"></i></span>
                                         <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">User Management</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
-                                    <ul class="pcoded-submenu">
-                                        <li class=" ">
+                                    <ul class="pcoded-submenu" permission-list="['admin']">
+                                        <li class="">
                                             <a href="#/user/add">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.basic-components.alert"><i class="ti-file"></i> Add User</span>
@@ -148,13 +148,13 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="pcoded-hasmenu">
+                                <li class="pcoded-hasmenu" ng-show="access=='admin'" ng-hide="access!='admin'">
                                     <a href="">
                                         <span class="pcoded-micon"><i class="ti-id-badge"></i></span>
                                         <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Employee Management</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
-                                    <ul class="pcoded-submenu">
+                                    <ul class="pcoded-submenu" permission-list="['admin','user']">
                                         <li class=" ">
                                             <a href="#/employee/add">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
@@ -172,13 +172,13 @@
 
                                     </ul>
                                 </li>
-                                <li class="pcoded-hasmenu" id="dataentry">
+                                <li class="pcoded-hasmenu">
                                     <a href="">
                                         <span class="pcoded-micon"><i class="ti-write"></i></span>
                                         <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Data Entry</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
-                                    <ul class="pcoded-submenu">
+                                    <ul class="pcoded-submenu" permission-list="['user']">
                                         <li class=" ">
                                             <a href="#/dataentry/createjob">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
@@ -195,13 +195,13 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="pcoded-hasmenu">
+                                <li class="pcoded-hasmenu" ng-hide="access!='admin'">
                                     <a href="">
                                         <span class="pcoded-micon"><i class="ti-headphone-alt"></i></span>
                                         <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">TeleCaller</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
-                                    <ul class="pcoded-submenu">
+                                    <ul class="pcoded-submenu" permission-list="['admin','user']">
                                         <li class=" ">
                                             <a href="#/telecaller">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
@@ -211,13 +211,13 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="pcoded-hasmenu">
+                                <li class="pcoded-hasmenu" ng-hide="access!='admin'">
                                     <a href="">
                                         <span class="pcoded-micon"><i class="ti-wheelchair"></i></span>
                                         <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Manager</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
-                                    <ul class="pcoded-submenu">
+                                    <ul class="pcoded-submenu" permission-list="['admin','manager']">
                                         <li class="">
                                             <a href="#/manager/create">
                                                 <span class="pcoded-micon"></span>
@@ -239,7 +239,7 @@
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
-                                        <li class=" ">
+                                        <li class="">
                                             <a href="#/joblist">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs"><i class="ti-view-list"></i> Job List</span>
@@ -248,7 +248,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="pcoded-hasmenu">
+                                <li class="pcoded-hasmenu" ng-show="access=='admin'" permission-list="['admin','manager']">
                                     <a href="">
                                         <span class="pcoded-micon"><i class="ti-files"></i></span>
                                         <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Reports</span>

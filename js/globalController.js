@@ -18,24 +18,31 @@ function GlobalCtrl($rootScope, $http, $scope, $timeout) {
     //     window.history.back();
     // };
     
-      $scope.getAll=function(){
+      $scope.getAll=function(view){
 
         $scope.states=[];
           $http({
             method: 'GET',
-            url: $rootScope.baseURL+'/role',
+            url: $rootScope.baseURL+'/permission',
             //data: $scope.data,
             headers: {'Content-Type': 'application/json',
                     'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
           })
           .success(function(obj)
           {
-
-                  obj.forEach(function(value, key){
-                      
-                      $scope.states.push(value);
-                  });
-
+              obj.forEach(function(value,key){
+                $scope.states.push(value);
+              });
+              if(localStorage.getItem('logichron_role_name')=='admin' && localStorage.getItem('logichron_add')==1 && localStorage.getItem('logichron_edit')==1 && localStorage.getItem('logichron_delete')==1 && localStorage.getItem('logichron_list')==1 )
+              {
+                $scope.access='admin'
+                $('.pcoded-hasmenu').removeAttr('ng-hide');
+              }
+              else
+              {
+                $scope.access='user';
+                $('.pcoded-hasmenu').attr("ng-hide='access==admin'");
+              }
           })
           .error(function(data) 
           {   
@@ -60,7 +67,6 @@ function GlobalCtrl($rootScope, $http, $scope, $timeout) {
         })
         .success(function(deliverycount)
         {   
-
             localStorage.removeItem('logichron_admin_username');
             localStorage.removeItem('logichron_admin_firstname');
             localStorage.removeItem('logichron_admin_iconimage');

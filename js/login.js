@@ -50,10 +50,19 @@ function LoginCtrl($scope, $location, $http, $routeParams, $rootScope) {
 			        })
 			        .success(function(deliverycount)
 			        {	
-			        	
+			        	$scope.rpm_add=deliverycount[0].rpm_add;
+			        	$scope.rpm_edit=deliverycount[0].rpm_edit;
+			        	$scope.rpm_delete=deliverycount[0].rpm_delete;
+			        	$scope.rpm_list=deliverycount[0].rpm_list;
+			        	$scope.rm_name=deliverycount[0].rm_name;
 			        	$scope.user = deliverycount[0].username;
 			        	$scope.firstname = deliverycount[0].first_name;
 			        	$scope.iconimage = deliverycount[0].icon_image;
+			        	localStorage.setItem('logichron_add',$scope.rpm_add);
+			        	localStorage.setItem('logichron_edit',$scope.rpm_edit);
+			        	localStorage.setItem('logichron_delete',$scope.rpm_delete);
+			        	localStorage.setItem('logichron_list',$scope.rpm_list);
+			        	localStorage.setItem('logichron_role_name', $scope.rm_name);
 				  	 	localStorage.setItem('logichron_admin_username', $scope.user);
 				  	 	localStorage.setItem('logichron_admin_firstname', $scope.firstname);
 				  	 	localStorage.setItem('logichron_admin_iconimage', $scope.iconimage);

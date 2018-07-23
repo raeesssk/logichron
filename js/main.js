@@ -26,6 +26,24 @@ angular.module('logichron',
   KeepaliveProvider.interval(2); // in seconds
   $controllerProvider.allowGlobals();
   $routeProvider
+}).directive('permissionList',function(){
+  return{
+    restrict:'A',
+    scope:{
+        permissionList: '='
+    },
+    link: function(scope,elem,attr){
+        
+          if(scope.permissionList[0]){
+            
+            elem.show();
+          }
+          else if(scope.permissionList[1])
+          {
+            elem.hide();
+          }
+    }
+  }
 })
 .run(function(Idle){
   // start watching when the app runs. also starts the Keepalive service by default.

@@ -4,7 +4,7 @@ angular.module('admin').controller('changeImageCtrl', function ($rootScope, $htt
 
 	$scope.first_name = $rootScope.firstname;
 
-  	$scope.displayImages = "resources/images/avatar-4.png";
+  	$scope.displayImages = "resources/images/default.png";
 	$scope.fileupload = {};
 	$scope.getUserImage = function (){
 
@@ -67,10 +67,10 @@ angular.module('admin').controller('changeImageCtrl', function ($rootScope, $htt
 	            $('#btnsave').text("Update Profile");
 	            $('#btnsave').removeAttr('disabled');
 	        	$scope.iconimages = login[0].icon_image;
-		  	 	localStorage.setItem('pos_admin_iconimage', $scope.iconimages);
-		  	 	localStorage.setItem('pos_admin_firstname', login[0].first_name);
-    			$rootScope.iconimage=localStorage.getItem("pos_admin_iconimage");
-    			$rootScope.firstname=localStorage.getItem("pos_admin_firstname");
+		  	 	localStorage.setItem('logichron_admin_iconimage', $scope.iconimages);
+		  	 	localStorage.setItem('logichron_admin_firstname', login[0].first_name);
+    			$rootScope.iconimage=localStorage.getItem("logichron_admin_iconimage");
+    			$rootScope.firstname=localStorage.getItem("logichron_admin_firstname");
 		       window.location.href = '#/';  
 		    })
 		    .error(function(data) 
