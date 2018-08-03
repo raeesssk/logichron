@@ -14,7 +14,7 @@ angular.module('campaign').controller('campaignListCtrl', function ($rootScope, 
     $scope.loading1 = 1;
     $scope.limit={};
 
-$scope.apiURL = $rootScope.baseURL+'/job/job/total';
+$scope.apiURL = $rootScope.baseURL+'/campaign/campaign/total';
     
     
     
@@ -73,7 +73,7 @@ $scope.apiURL = $rootScope.baseURL+'/job/job/total';
               $scope.limit.end = end;
               $http({
                 method: 'POST',
-                url: $rootScope.baseURL+'/job/job/limit',
+                url: $rootScope.baseURL+'/campaign/campaign/limit',
                 data: $scope.limit,
                 headers: {'Content-Type': 'application/json',
                           'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
@@ -85,6 +85,7 @@ $scope.apiURL = $rootScope.baseURL+'/job/job/total';
                  
                   data.forEach(function (value, key) {
                     $scope.filteredTodos.push(value);
+                    console.log($scope.filteredTodos);
                   });
                 }
                 else{
@@ -112,8 +113,8 @@ $scope.apiURL = $rootScope.baseURL+'/job/job/total';
        $scope.getAll();
     };
 
-    $scope.deleteEntry = function (dm_id) {
-      $scope.dm_id=dm_id;
+    $scope.deleteCampaign = function (cm_id) {
+      $scope.cm_id=cm_id;
     }  
 
     $scope.deleteConfirm = function () {
@@ -121,7 +122,7 @@ $scope.apiURL = $rootScope.baseURL+'/job/job/total';
                 $('#del').text("please wait...");
 	     $http({
 	      method: 'POST',
-	      url: $rootScope.baseURL+'/job/delete/'+$scope.dm_id,
+	      url: $rootScope.baseURL+'/campaign/delete/'+$scope.cm_id,
 	      headers: {'Content-Type': 'application/json',
                   'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
 	    })

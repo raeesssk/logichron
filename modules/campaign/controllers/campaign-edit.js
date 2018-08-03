@@ -6,8 +6,8 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
     $scope.answers=[];
     $scope.answersadd=[];
     $scope.ansremove=[];
-	$scope.jobId = $routeParams.jobId;
-  $scope.apiURL = $rootScope.baseURL+'/job/edit/'+$scope.jobId;
+	$scope.campaignId = $routeParams.campaignId;
+  $scope.apiURL = $rootScope.baseURL+'/campaign/edit/'+$scope.campaignId;
 
   $scope.addto = function() {
         
@@ -32,42 +32,20 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
       });
   };
     
-  $scope.getEntry = function () {
+  $scope.getCampaign = function () {
 	     $http({
 	      method: 'GET',
-	      url: $rootScope.baseURL+'/job/'+$scope.jobId,
+	      url: $rootScope.baseURL+'/campaign/'+$scope.campaignId,
 	      headers: {'Content-Type': 'application/json',
                   'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
 	    })
 	    .success(function(campaignObj)
 	    {
 	    	campaignObj.forEach(function (value, key) {
-                value.dm_mm_id=value.mm_pm_name;
+                
 	      		$scope.campaign = value;
               });
-                $http({
-                  method: 'GET',
-                  url: $rootScope.baseURL+'/job/question/'+$scope.jobId,
-                  headers: {'Content-Type': 'application/json',
-                          'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
-                })
-                .success(function(dataObj)
-                {
-                    dataObj.forEach(function (value, key) {
-
-                        $scope.answers.push(value);
-                      });
-                })
-                .error(function(data) 
-                {   
-                  var dialog = bootbox.dialog({
-                    message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
-                        closeButton: false
-                    });
-                    setTimeout(function(){
-                        dialog.modal('hide'); 
-                    }, 1500);            
-                });
+                
       		  
 	    })
 	    .error(function(data) 

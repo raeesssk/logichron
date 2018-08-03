@@ -4,38 +4,57 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
   
     $scope.campaign = {};
     $scope.obj={};
-    $scope.answers=[];
-	$scope.apiURL = $rootScope.baseURL+'/job/add';
 
-      $scope.getSearch = function(vals) {
+    $scope.account={};
+    $scope.accountList=[];
+    $scope.supression={};
+    $scope.supressionList=[];
+    $scope.allow_domain={};
+    $scope.allowDomainList=[];
+    $scope.custom_question={};
+    $scope.customQuestionList=[];
+    $scope.denied_domain={};
+    $scope.deniedDomainList=[];
 
-      var searchTerms = {search: vals};
-      
-        const httpOptions = {
-          headers: {
-            'Content-Type':  'application/json',
-            'Authorization': 'Bearer '+localStorage.getItem("logichron_admin_access_token")
-          }
-        };
+	$scope.apiURL = $rootScope.baseURL+'/campaign/add';
+
+    $scope.getSearch = function(vals) {
+        var searchTerms = {search: vals};
+            const httpOptions = {
+              headers: {
+                'Content-Type':  'application/json',
+                'Authorization': 'Bearer '+localStorage.getItem("logichron_admin_access_token")
+              }
+            };
         return $http.post($rootScope.baseURL+'/manager/typeahead/search', searchTerms, httpOptions).then((result) => {
           
-          return result.data;
-      });
-  };
-    
-    $scope.addto = function() {
-        
-        $scope.answers.push($scope.obj);
-        $('#qm_questions').focus();
-        $scope.obj="";
-
+            return result.data;
+        });
     };
 
-    $scope.deleteQA=function(x){
-        $scope.answers.splice(x,1);
-        $('#qm_questions').focus();
+    //Modal data Show
+    $scope.accntAdd=function(){
+        $scope.accountList.push($scope.account);
+        $scope.account=""; 
+    };
+    $scope.supressionAdd=function(){
+        $scope.supressionList.push($scope.supression);
+        $scope.supression=""; 
+    };
+    $scope.allowDomainAdd=function(){
+        $scope.allowDomainList.push($scope.allow_domain);
+        $scope.allow_domain=""; 
+    };
+    $scope.customQuestionAdd=function(){
+        $scope.customQuestionList.push($scope.custom_question);
+        $scope.custom_question=""; 
+    };
+    $scope.deniedDomainAdd=function(){
+        $scope.deniedDomainList.push($scope.denied_domain);
+        $scope.denied_domain=""; 
     };
 
+   
 
     $('#cm_first_dely').focus();
     $scope.addEntry = function () { 
@@ -297,8 +316,13 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         }
 	    else{
                 $scope.objs={
-                    answer:$scope.answers,
-                    campaign:$scope.campaign
+                    campaign:$scope.campaign,
+                    
+                    acountList:$scope.accountList,
+                    supressionList:$scope.supressionList,
+                    allowDomainList:$scope.allowDomainList,
+                    customQuestionList:$scope.customQuestionList,
+                    deniedDomainList:$scope.deniedDomainList
                 }
 
                 $('#btnsave').attr('disabled','true');

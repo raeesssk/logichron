@@ -179,7 +179,7 @@ a<div class="pcoded-content">
     </div>
 </div>
 
-<!-- Account List (Y/N) Modal -->
+<!--1  Account List (Y/N) Modal -->
 <div class="modal fade" id="account_list">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -194,16 +194,16 @@ a<div class="pcoded-content">
             <div class="row">
                 <div class="col-sm-2-offset">
                     <label>Company</label><br>
-                    <input type="text" id="cm_company">
+                    <input type="text" id="amcm_company" ng-model="account.amcm_company">
                 </div>
                 <div class="col-sm-2">
                     <label>Website</label><br>
-                    <input type="text" id="cm_company">
+                    <input type="text" id="amcm_website" ng-model="account.amcm_website">
                 </div>
                 <div class="col-sm-3">
                 </div>
                 <div class="col-sm-2"><br>
-                    <button class="btn btn-primary">Add</button>
+                    <button class="btn btn-primary" ng-click="accntAdd()">Add</button>
                 </div>
             </div>
         </div><br>
@@ -218,10 +218,12 @@ a<div class="pcoded-content">
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="question in list track by $index">
-                    <td>{{question.qm_questions}}</td>
-                    <td>{{question.qm_answers}}</td>
-                    <td>{{question.qm_answers}}</td>
+                <tr ng-repeat="list in accountList track by $index">
+                    <td>{{list.amcm_company}}</td>
+                    <td>{{list.amcm_website}}</td>
+                    <td>
+                        <i class="fa fa-trash" ng-click="deleteRow(account.am_id)"></i>
+                    </td>
                 </tr>
               </tbody>
             </table>
@@ -230,7 +232,7 @@ a<div class="pcoded-content">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-success pull-right" ng-click="addtable()">SAVE</button>
+        <button type="submit" class="btn btn-success pull-right" ng-click="addAccntList()">SAVE</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -239,7 +241,7 @@ a<div class="pcoded-content">
 </div>
 <!-- END Account List (Y/N) Modal -->
 
-<!-- Supression File (Y/N) Modal -->
+<!--2 Supression File (Y/N) Modal -->
 <div class="modal fade" id="supression_file">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -254,16 +256,16 @@ a<div class="pcoded-content">
             <div class="row">
                 <div class="col-sm-2-offset">
                     <label>Company</label><br>
-                    <input type="text" id="cm_company">
+                    <input type="text" id="scm_company" ng-model="supression.scm_company">
                 </div>
                 <div class="col-sm-2">
                     <label>Website</label><br>
-                    <input type="text" id="cm_company">
+                    <input type="text" id="scm_website" ng-model="supression.scm_website">
                 </div>
                 <div class="col-sm-3">
                 </div>
                 <div class="col-sm-2"><br>
-                    <button class="btn btn-primary">Add</button>
+                    <button class="btn btn-primary" ng-click="supressionAdd()">Add</button>
                 </div>
             </div>
         </div><br>
@@ -278,10 +280,12 @@ a<div class="pcoded-content">
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="question in answers track by $index">
-                    <td>{{question.qm_questions}}</td>
-                    <td>{{question.qm_answers}}</td>
-                    <td>{{question.qm_answers}}</td>
+                <tr ng-repeat="list in supressionList track by $index">
+                    <td>{{list.scm_company}}</td>
+                    <td>{{list.scm_website}}</td>
+                    <td>
+                        <i class="fa fa-trash" ng-click="deleteRow(campaign.cm_id)"></i>
+                    </td>
                 </tr>
               </tbody>
             </table>
@@ -299,7 +303,7 @@ a<div class="pcoded-content">
 </div>
 <!-- END Supression File (Y/N) Modal -->
 
-<!-- Allowed Domain Modal -->
+<!--3 Allowed Domain Modal -->
 <div class="modal fade" id="allow_domain">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -314,10 +318,10 @@ a<div class="pcoded-content">
             <div class="row">
                 <div class="col-sm-3-offset">
                     <label>Website</label><br>
-                    <input type="text" id="cm_company">
+                    <input type="text" id="adcm_website" ng-model="allow_domain.adcm_website">
                 </div>
                 <div class="col-sm-2"><br>
-                    <button class="btn btn-primary">Add</button>
+                    <button class="btn btn-primary" ng-click="allowDomainAdd()">Add</button>
                 </div>
             </div>
         </div><br>
@@ -331,9 +335,11 @@ a<div class="pcoded-content">
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="question in answers track by $index">
-                    <td>{{question.qm_questions}}</td>
-                    <td>{{question.qm_answers}}</td>
+                <tr ng-repeat="list in allowDomainList track by $index">
+                    <td>{{list.adcm_website}}</td>
+                    <td>
+                        <i class="fa fa-trash" ng-click="deleteRow(campaign.cm_id)"></i>
+                    </td>
                 </tr>
               </tbody>
             </table>
@@ -351,7 +357,7 @@ a<div class="pcoded-content">
 </div>
 <!-- END Allowed Domain Modal -->
 
-<!-- Custom Question Modal -->
+<!--4 Custom Question Modal -->
 <div class="modal fade" id="custom_question">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -366,10 +372,10 @@ a<div class="pcoded-content">
             <div class="row">
                 <div class="col-sm-3-offset">
                     <label>Question</label><br>
-                    <input type="text" id="cm_company">
+                    <input type="text" id="cmcm_question" ng-model="custom_question.cmcm_question">
                 </div>
                 <div class="col-sm-2"><br>
-                    <button class="btn btn-primary">Add</button>
+                    <button class="btn btn-primary" ng-click="customQuestionAdd()">Add</button>
                 </div>
             </div>
         </div><br>
@@ -383,9 +389,11 @@ a<div class="pcoded-content">
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="question in answers track by $index">
-                    <td>{{question.qm_questions}}</td>
-                    <td>{{question.qm_answers}}</td>
+                <tr ng-repeat="list in customQuestionList track by $index">
+                    <td>{{list.cmcm_question}}</td>
+                    <td>
+                        <i class="fa fa-trash" ng-click="deleteRow(campaign.cm_id)"></i>
+                    </td>
                 </tr>
               </tbody>
             </table>
@@ -403,7 +411,7 @@ a<div class="pcoded-content">
 </div>
 <!-- END Custom Question Modal -->
 
-<!-- Denied Domain Modal -->
+<!--5 Denied Domain Modal -->
 <div class="modal fade" id="denied_domain">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -418,10 +426,10 @@ a<div class="pcoded-content">
             <div class="row">
                 <div class="col-sm-3-offset">
                     <label>Website</label><br>
-                    <input type="text" id="cm_company">
+                    <input type="text" id="dd_cm_website" ng-model="denied_domain.dd_cm_website">
                 </div>
                 <div class="col-sm-2"><br>
-                    <button class="btn btn-primary">Add</button>
+                    <button class="btn btn-primary" ng-click="deniedDomainAdd()">Add</button>
                 </div>
             </div>
         </div><br>
@@ -435,9 +443,11 @@ a<div class="pcoded-content">
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="question in answers track by $index">
-                    <td>{{question.qm_questions}}</td>
-                    <td>{{question.qm_answers}}</td>
+                <tr ng-repeat="list in deniedDomainList track by $index">
+                    <td>{{list.dd_cm_website}}</td>
+                    <td>
+                        <i class="fa fa-trash" ng-click="deleteRow(campaign.cm_id)"></i>
+                    </td>
                 </tr>
               </tbody>
             </table>

@@ -16,7 +16,7 @@ angular.module('campaign', [])
 
         $routeProvider
             
-            .when('/campaign/joblist',
+            .when('/campaign/',
                 {
                     templateUrl: 'modules/campaign/partials/campaign-list.html',
                     controller: 'campaignListCtrl',
@@ -30,7 +30,7 @@ angular.module('campaign', [])
                     }
                 })
 
-			.when('/campaign/createjob',
+			.when('/campaign/create',
                 {
                     templateUrl: 'modules/campaign/partials/campaign-create.html',
                     controller: 'campaignAddCtrl',
@@ -44,7 +44,7 @@ angular.module('campaign', [])
                     }
                 })
 				
-			.when('/campaign/edit/:jobId',
+			.when('/campaign/edit/:campaignId',
                 {
                     templateUrl: 'modules/campaign/partials/campaign-edit.html',
                     controller: 'campaignEditCtrl',

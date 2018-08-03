@@ -1,4 +1,4 @@
-<div class="pcoded-content">
+<div class="pcoded-content" ng-init="getAll();">
     <div class="pcoded-inner-content">
         <div class="main-body">
             <div class="page-wrapper">
@@ -29,7 +29,7 @@
                               </div>
                             </div>
                             <div class="form-group row">
-                                <table class="table table-hover">
+                                <table class="table table-hover table-responsive">
                                   <thead>
                                     <tr>
                                       <th>First Delivery</th>
@@ -37,22 +37,56 @@
                                       <th>Delivery Frequency</th>
                                       <th>Campaign Name</th>
                                       <th>Restriction</th>
+                                      <th>Account List</th>
+                                      <th>Supression File</th>
                                       <th>Domain Limit</th>
+                                      <th>Employee Size</th>
+                                      <th>Disqualifies</th>
+                                      <th>Title</th>
+                                      <th>Lead Count</th>
+                                      <th>Verticals</th>
+                                      <th>Geo</th>
+                                      <th>Allowed Domain</th>
+                                      <th>Revenue</th>
+                                      <th>Custom Question</th>
+                                      <th>Denied Domain</th>
+                                      <th>Campaign Asset</th>
+                                      <th>Industry</th>
+                                      <th>Department</th>
+                                      <th>Method</th>
+                                      <th>Job Function / Level</th>
                                       <th>Action</th>
                                     </tr>
                                   </thead>
                                   <tbody>
                                     <tr ng-repeat="campaign in filteredTodos | filter : campaign">
                                       <td>{{campaign.cm_first_dely}}</td>
-                                      <td>{{campaign.cm_end_date}}</td>
+                                      <td>{{campaign.cm_end_date | date}}</td>
                                       <td>{{campaign.cm_dely_frequency}}</td>
                                       <td>{{campaign.cm_campaign_name}}</td>
                                       <td>{{campaign.cm_restrict}}</td>
+                                      <td>{{campaign.cm_account_list}}</td>
+                                      <td>{{campaign.cm_supression_file}}</td>
                                       <td>{{campaign.cm_domain_limit}}</td>
+                                      <td>{{campaign.cm_emp_size}}</td>
+                                      <td>{{campaign.cm_disqualifies}}</td>
+                                      <td>{{campaign.cm_title}}</td>
+                                      <td>{{campaign.cm_lead_count}}</td>
+                                      <td>{{campaign.cm_vertical}}</td>
+                                      <td>{{campaign.cm_geo}}</td>
+                                      <td>{{campaign.cm_allow_domain}}</td>
+                                      <td>{{campaign.cm_revenue}}</td>
+                                      <td>{{campaign.cm_custom_question}}</td>
+                                      <td>{{campaign.cm_denied_domain}}</td>
+                                      <td>{{campaign.cm_campaign_asset}}</td>
+                                      <td>{{campaign.cm_industry}}</td>
+                                      <td>{{campaign.cm_dept}}</td>
+                                      <td>{{campaign.cm_method}}</td>
+                                      <td>{{campaign.cm_job}}</td>
                                       <td>
                                         <i class="fa fa-info-circle" data-toggle="modal" data-target="#view-details" ng-click="view($index)"></i>
                                         <a href="#/campaign/edit/{{campaign.cm_id}}"><i class="fa fa-pencil"></i></a>
-                                        <i class="fa fa-trash" data-toggle="modal" data-target="#confirm-delete" ng-click="deleteEntry(campaign.cm_id)"></i>
+                                        <i class="fa fa-trash" data-toggle="modal" data-target="#confirm-delete" ng-click="deleteCampaign(campaign.cm_id)"></i>
                                       </td>
                                     </tr>
                                   </tbody>
