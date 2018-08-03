@@ -317,14 +317,13 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
 	    else{
                 $scope.objs={
                     campaign:$scope.campaign,
-                    
-                    acountList:$scope.accountList,
+                    accountList:$scope.accountList,
                     supressionList:$scope.supressionList,
                     allowDomainList:$scope.allowDomainList,
                     customQuestionList:$scope.customQuestionList,
                     deniedDomainList:$scope.deniedDomainList
                 }
-
+                console.log($scope.objs);
                 $('#btnsave').attr('disabled','true');
                 $('#btnsave').text("please wait...");
 
@@ -339,7 +338,7 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
                     {
                         $('#btnsave').text("SAVE");
                         $('#btnsave').removeAttr('disabled');
-                       window.location.href = '#/campaign/joblist';  
+                       window.location.href = '#/campaign/';  
                     })
                 .error(function(data) 
                 {   

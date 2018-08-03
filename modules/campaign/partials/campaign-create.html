@@ -1,4 +1,4 @@
-a<div class="pcoded-content">
+<div class="pcoded-content">
     <div class="pcoded-inner-content">
         <div class="main-body">
             <div class="page-wrapper">
@@ -26,7 +26,6 @@ a<div class="pcoded-content">
                                         <label>First Delivery</label>
                                         <input type="text" id="cm_first_dely" 
                                         ng-model="campaign.cm_first_dely"
-                                        typeahead="obj as obj.mm_pm_name for obj in getSearch($viewValue)"
                                         class="form-control"/>
                                 </div>
                                 <div class="col-sm-6">
@@ -426,7 +425,7 @@ a<div class="pcoded-content">
             <div class="row">
                 <div class="col-sm-3-offset">
                     <label>Website</label><br>
-                    <input type="text" id="dd_cm_website" ng-model="denied_domain.dd_cm_website">
+                    <input type="text" id="ddcm_website" ng-model="denied_domain.ddcm_website">
                 </div>
                 <div class="col-sm-2"><br>
                     <button class="btn btn-primary" ng-click="deniedDomainAdd()">Add</button>

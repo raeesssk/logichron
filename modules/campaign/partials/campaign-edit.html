@@ -13,20 +13,19 @@
                                     <a href="#/">Campaign</a>
                                 </li>
                                 <li class="active breadcrumb-item">
-                                    <a href="#/employee/add" class="active">Edit Campaign</a>
+                                    <a href="#/" class="active">Create Campaign</a>
                                 </li>
                             </ul>
-                            <h3>Edit Campaign</h3>
+                            <h3>Create New Campaign</h3>
                             <hr>
                         </div>
                         <div class="card-block">
                             <div class="form-group row">
-                                
+
                                 <div class="col-sm-6">
-                                        <label>Free Delivery</label>
-                                        <input type="text" id="cm_free_dely" 
-                                        ng-model="campaign.cm_free_dely"
-                                        typeahead="obj as obj.mm_pm_name for obj in getSearch($viewValue)"
+                                        <label>First Delivery</label>
+                                        <input type="text" id="cm_first_dely" 
+                                        ng-model="campaign.cm_first_dely"
                                         class="form-control"/>
                                 </div>
                                 <div class="col-sm-6">
@@ -55,7 +54,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                         <label>Account List (Y/N)</label>
-                                        <select id="cm_account_list" class="form-control" ng-model="campaign.cm_account_list">
+                                        <select id="cm_account_list" class="form-control" ng-model="campaign.cm_account_list" data-toggle="modal" data-target="#account_list">
                                             <option value="">Select your option</option>
                                             <option>Yes</option>
                                             <option>No</option>
@@ -64,7 +63,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                         <label>Supression File (Y/N)</label>
-                                        <select id="cm_supression_file" class="form-control" ng-model="campaign.cm_supression_file">
+                                        <select id="cm_supression_file" class="form-control" ng-model="campaign.cm_supression_file" data-toggle="modal" data-target="#supression_file">
                                             <option value="">Select your option</option>
                                             <option>Yes</option>
                                             <option>No</option>
@@ -107,7 +106,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                         <label>Allowed Domain</label>
-                                        <select id="cm_allow_domain" class="form-control" ng-model="campaign.cm_allow_domain">
+                                        <select id="cm_allow_domain" class="form-control" ng-model="campaign.cm_allow_domain" data-toggle="modal" data-target="#allow_domain">
                                             <option value="">Select your option</option>
                                             <option>Yes</option>
                                             <option>No</option>
@@ -121,7 +120,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                         <label>Custom Question</label>
-                                        <select id="cm_custom_question" class="form-control" ng-model="campaign.cm_custom_question">
+                                        <select id="cm_custom_question" class="form-control" ng-model="campaign.cm_custom_question" data-toggle="modal" data-target="#custom_question">
                                             <option value="">Select your option</option>
                                             <option>Yes</option>
                                             <option>No</option>
@@ -130,7 +129,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                         <label>Denied Domain</label>
-                                        <select id="cm_denied_domain" class="form-control" ng-model="campaign.cm_denied_domain">
+                                        <select id="cm_denied_domain" class="form-control" ng-model="campaign.cm_denied_domain" data-toggle="modal" data-target="#denied_domain">
                                             <option value="">Select your option</option>
                                             <option>Yes</option>
                                             <option>No</option>
@@ -159,7 +158,7 @@
                                 </div>
                                 <div class="col-sm-6">
                                         <label>Job Function / Level</label>
-                                        <input type="text" id="cm_job" class="form-control" ng-model="campaign.cm_job">
+                                        <input type="text" id="cm_job" class="form-control" ng-model="campaign.cm_job" >
                                     <br>
                                 </div>
                             </div>
@@ -168,7 +167,7 @@
                                 <br>
                                 <div class="col-sm-12">
                                     <button type="button" class="btn btn-grd-danger" onclick="window.location = '#/campaign/joblist'" id="btncancel">Back</button>
-                                    <button type="submit" class="btn btn-grd-success" id="btnsave" ng-click="updateEntry()">SAVE</button>
+                                    <button type="submit" class="btn btn-grd-success" id="btnsave" ng-click="addEntry()">SAVE</button>
                                 </div>
                             </div>
                         </div>
@@ -178,3 +177,289 @@
         </div>
     </div>
 </div>
+
+<!--1  Account List (Y/N) Modal -->
+<div class="modal fade" id="account_list">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Campaign Account List</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-2-offset">
+                    <label>Company</label><br>
+                    <input type="text" id="amcm_company" ng-model="account.amcm_company">
+                </div>
+                <div class="col-sm-2">
+                    <label>Website</label><br>
+                    <input type="text" id="amcm_website" ng-model="account.amcm_website">
+                </div>
+                <div class="col-sm-3">
+                </div>
+                <div class="col-sm-2"><br>
+                    <button class="btn btn-primary" ng-click="accntAdd()">Add</button>
+                </div>
+            </div>
+        </div><br>
+
+        <div class="box-body table-responsive no-padding">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Company</th>
+                  <th>Website</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="list in accountList track by $index">
+                    <td>{{list.amcm_company}}</td>
+                    <td>{{list.amcm_website}}</td>
+                    <td>
+                        <i class="fa fa-trash" ng-click="deleteRow(account.am_id)"></i>
+                    </td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-success pull-right" ng-click="addAccntList()">SAVE</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- END Account List (Y/N) Modal -->
+
+<!--2 Supression File (Y/N) Modal -->
+<div class="modal fade" id="supression_file">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Campaign Account List</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-2-offset">
+                    <label>Company</label><br>
+                    <input type="text" id="scm_company" ng-model="supression.scm_company">
+                </div>
+                <div class="col-sm-2">
+                    <label>Website</label><br>
+                    <input type="text" id="scm_website" ng-model="supression.scm_website">
+                </div>
+                <div class="col-sm-3">
+                </div>
+                <div class="col-sm-2"><br>
+                    <button class="btn btn-primary" ng-click="supressionAdd()">Add</button>
+                </div>
+            </div>
+        </div><br>
+
+        <div class="box-body table-responsive no-padding">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Company</th>
+                  <th>Website</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="list in supressionList track by $index">
+                    <td>{{list.scm_company}}</td>
+                    <td>{{list.scm_website}}</td>
+                    <td>
+                        <i class="fa fa-trash" ng-click="deleteRow(campaign.cm_id)"></i>
+                    </td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-success pull-right" ng-click="addtable()">SAVE</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- END Supression File (Y/N) Modal -->
+
+<!--3 Allowed Domain Modal -->
+<div class="modal fade" id="allow_domain">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Domain Account List</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-3-offset">
+                    <label>Website</label><br>
+                    <input type="text" id="adcm_website" ng-model="allow_domain.adcm_website">
+                </div>
+                <div class="col-sm-2"><br>
+                    <button class="btn btn-primary" ng-click="allowDomainAdd()">Add</button>
+                </div>
+            </div>
+        </div><br>
+
+        <div class="box-body table-responsive no-padding">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Website</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="list in allowDomainList track by $index">
+                    <td>{{list.adcm_website}}</td>
+                    <td>
+                        <i class="fa fa-trash" ng-click="deleteRow(campaign.cm_id)"></i>
+                    </td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-success pull-right" ng-click="addtable()">SAVE</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- END Allowed Domain Modal -->
+
+<!--4 Custom Question Modal -->
+<div class="modal fade" id="custom_question">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Question Campaign Account List</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+        
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-3-offset">
+                    <label>Question</label><br>
+                    <input type="text" id="cmcm_question" ng-model="custom_question.cmcm_question">
+                </div>
+                <div class="col-sm-2"><br>
+                    <button class="btn btn-primary" ng-click="customQuestionAdd()">Add</button>
+                </div>
+            </div>
+        </div><br>
+
+        <div class="box-body table-responsive no-padding">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Question</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="list in customQuestionList track by $index">
+                    <td>{{list.cmcm_question}}</td>
+                    <td>
+                        <i class="fa fa-trash" ng-click="deleteRow(campaign.cm_id)"></i>
+                    </td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-success pull-right" ng-click="addtable()">SAVE</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- END Custom Question Modal -->
+
+<!--5 Denied Domain Modal -->
+<div class="modal fade" id="denied_domain">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Domain Account List</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-3-offset">
+                    <label>Website</label><br>
+                    <input type="text" id="ddcm_website" ng-model="denied_domain.ddcm_website">
+                </div>
+                <div class="col-sm-2"><br>
+                    <button class="btn btn-primary" ng-click="deniedDomainAdd()">Add</button>
+                </div>
+            </div>
+        </div><br>
+
+        <div class="box-body table-responsive no-padding">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Website</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="list in deniedDomainList track by $index">
+                    <td>{{list.dd_cm_website}}</td>
+                    <td>
+                        <i class="fa fa-trash" ng-click="deleteRow(campaign.cm_id)"></i>
+                    </td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-success pull-right" ng-click="addtable()">SAVE</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- END Denied Domain  Modal -->

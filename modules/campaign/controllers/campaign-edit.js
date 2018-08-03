@@ -1,36 +1,16 @@
 // import admin
-angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, $http, $scope, $location, $routeParams, $route) {
+angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, $http, $scope, $location, $routeParams, $route, $filter) {
 
     $scope.campaign={};
     $scope.obj={};
-    $scope.answers=[];
-    $scope.answersadd=[];
-    $scope.ansremove=[];
+    $scope.accountList=[];
+    $scope.supressionList=[];
+    $scope.allowDomainList=[];
+    $scope.customQuestionList=[];
+    $scope.deniedDomainList=[];
 	$scope.campaignId = $routeParams.campaignId;
   $scope.apiURL = $rootScope.baseURL+'/campaign/edit/'+$scope.campaignId;
 
-  $scope.addto = function() {
-        
-        $scope.answersadd.push($scope.obj);
-        $('#qm_questions').focus();
-        $scope.obj="";
-
-    };
-  $scope.getSearch = function(vals) {
-
-      var searchTerms = {search: vals};
-      
-        const httpOptions = {
-          headers: {
-            'Content-Type':  'application/json',
-            'Authorization': 'Bearer '+localStorage.getItem("logichron_admin_access_token")
-          }
-        };
-        return $http.post($rootScope.baseURL+'/manager/typeahead/search', searchTerms, httpOptions).then((result) => {
-          
-          return result.data;
-      });
-  };
     
   $scope.getCampaign = function () {
 	     $http({
@@ -42,11 +22,10 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
 	    .success(function(campaignObj)
 	    {
 	    	campaignObj.forEach(function (value, key) {
-                
+                value.cm_end_date=$filter('date')(value.cm_end_date, "MediumDate");
 	      		$scope.campaign = value;
-              });
-                
-      		  
+                console.log($scope.campaign);
+              });  
 	    })
 	    .error(function(data) 
 	    {   
@@ -59,16 +38,160 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
             }, 1500);            
 	    });
 	};
-    
 
-    $scope.deleteQA=function(index){
-        $scope.ansremove.push($scope.answers[index]);
-        $scope.answers.splice(index,1)
-        $('#qm_questions').focus();
+    $scope.getAccount = function () {
+         $http({
+          method: 'GET',
+          url: $rootScope.baseURL+'/campaign/account/'+$scope.campaignId,
+          headers: {'Content-Type': 'application/json',
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+        })
+        .success(function(campaignObj)
+        {
+            campaignObj.forEach(function (value, key) {
+                value.cm_end_date=$filter('date')(value.cm_end_date, "MediumDate");
+                $scope.accountList.push(value);
+                console.log($scope.campaign);
+              });  
+        })
+        .error(function(data) 
+        {   
+          var dialog = bootbox.dialog({
+            message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                closeButton: false
+            });
+            setTimeout(function(){
+                dialog.modal('hide'); 
+            }, 1500);            
+        });
     };
-    $scope.deleteQA1=function(index){
-        $scope.answersadd.splice(index,1);
-        $('#qm_questions').focus();
+    $scope.getAccount();
+    $scope.getSuppression = function () {
+         $http({
+          method: 'GET',
+          url: $rootScope.baseURL+'/campaign/suppression/'+$scope.campaignId,
+          headers: {'Content-Type': 'application/json',
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+        })
+        .success(function(campaignObj)
+        {
+            campaignObj.forEach(function (value, key) {
+                value.cm_end_date=$filter('date')(value.cm_end_date, "MediumDate");
+                $scope.supressionList.push(value);
+                console.log($scope.campaign);
+              });  
+        })
+        .error(function(data) 
+        {   
+          var dialog = bootbox.dialog({
+            message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                closeButton: false
+            });
+            setTimeout(function(){
+                dialog.modal('hide'); 
+            }, 1500);            
+        });
+    };
+
+    $scope.getAllow = function () {
+         $http({
+          method: 'GET',
+          url: $rootScope.baseURL+'/campaign/allowdomain/'+$scope.campaignId,
+          headers: {'Content-Type': 'application/json',
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+        })
+        .success(function(campaignObj)
+        {
+            campaignObj.forEach(function (value, key) {
+                value.cm_end_date=$filter('date')(value.cm_end_date, "MediumDate");
+                $scope.allowDomainList.push(value);
+                console.log($scope.campaign);
+              });  
+        })
+        .error(function(data) 
+        {   
+          var dialog = bootbox.dialog({
+            message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                closeButton: false
+            });
+            setTimeout(function(){
+                dialog.modal('hide'); 
+            }, 1500);            
+        });
+    };
+
+    $scope.getQuestion = function () {
+         $http({
+          method: 'GET',
+          url: $rootScope.baseURL+'/campaign/question/'+$scope.campaignId,
+          headers: {'Content-Type': 'application/json',
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+        })
+        .success(function(campaignObj)
+        {
+            campaignObj.forEach(function (value, key) {
+                value.cm_end_date=$filter('date')(value.cm_end_date, "MediumDate");
+                $scope.customQuestionList.push(value);
+                console.log($scope.campaign);
+              });  
+        })
+        .error(function(data) 
+        {   
+          var dialog = bootbox.dialog({
+            message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                closeButton: false
+            });
+            setTimeout(function(){
+                dialog.modal('hide'); 
+            }, 1500);            
+        });
+    };
+
+    $scope.getDeny = function () {
+         $http({
+          method: 'GET',
+          url: $rootScope.baseURL+'/campaign/deniedomain/'+$scope.campaignId,
+          headers: {'Content-Type': 'application/json',
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+        })
+        .success(function(campaignObj)
+        {
+            campaignObj.forEach(function (value, key) {
+                value.cm_end_date=$filter('date')(value.cm_end_date, "MediumDate");
+                $scope.deniedDomainList.push(value);
+                console.log($scope.campaign);
+              });  
+        })
+        .error(function(data) 
+        {   
+          var dialog = bootbox.dialog({
+            message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                closeButton: false
+            });
+            setTimeout(function(){
+                dialog.modal('hide'); 
+            }, 1500);            
+        });
+    };
+     $scope.accntAdd=function(){
+        $scope.accountList.push($scope.account);
+        $scope.account=""; 
+    };
+    $scope.supressionAdd=function(){
+        $scope.supressionList.push($scope.supression);
+        $scope.supression=""; 
+    };
+    $scope.allowDomainAdd=function(){
+        $scope.allowDomainList.push($scope.allow_domain);
+        $scope.allow_domain=""; 
+    };
+    $scope.customQuestionAdd=function(){
+        $scope.customQuestionList.push($scope.custom_question);
+        $scope.custom_question=""; 
+    };
+    $scope.deniedDomainAdd=function(){
+        $scope.deniedDomainList.push($scope.denied_domain);
+        $scope.denied_domain=""; 
     };
   $scope.updateEntry = function () {
 
@@ -330,9 +453,6 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
 	    else{
                 $scope.objects={
                     campaign:$scope.campaign,
-                    answers:$scope.answers,
-                    answersadd:$scope.answersadd,
-                    remove:$scope.ansremove
                 }
                 $('#btnsave').attr('disabled','true');
                 $('#btnsave').text("please wait...");

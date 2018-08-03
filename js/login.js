@@ -4,8 +4,8 @@
  //  angular.module('orientfurniture', []).controller('loginCtrl', function($scope, $http) {
 function LoginCtrl($scope, $location, $http, $routeParams, $rootScope) {
     
-	$scope.apiURL = 'http://10.1.0.53:3001';
-	// $scope.apiURL = 'http://localhost:3001';	
+	// $scope.apiURL = 'http://10.1.0.53:3001';
+	$scope.apiURL = 'http://localhost:3001';	
 	// $scope.apiURL = 'http://unitech.3commastechnologies.com:3001';
 	
   	$scope.admin = 0;
