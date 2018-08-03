@@ -1,0 +1,136 @@
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+                    <div class="card" ng-show='loading1==1'>
+                        <div class="card-header">
+                            <ul class="breadcrumb-title pull-right">
+                                <li class="breadcrumb-item">
+                                    <a href="#/"> <i class="fa fa-home"></i> </a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="#/">Campaign</a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="#">Campaign List</a>
+                                </li>
+                            </ul>
+                            <h3>Campaign List</h3>
+                            <hr>
+                        </div>
+                        <div class="card-block">
+                            <div class="row">
+                              <div class="col-lg-11">
+                                <input type="text" class="form-control" id="searchtext" ng-model="searchtext" onkeyup="angular.element(this).scope().getSearch();" placeholder = "Search by first name or last name"/><br>
+                              </div>
+                              <div class="col-lg-1">
+                                <a class="btn btn-outline btn-info" href="#/campaign/createjob">Add</a>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                                <table class="table table-hover">
+                                  <thead>
+                                    <tr>
+                                      <th>First Delivery</th>
+                                      <th>End Date</th>
+                                      <th>Delivery Frequency</th>
+                                      <th>Campaign Name</th>
+                                      <th>Restriction</th>
+                                      <th>Domain Limit</th>
+                                      <th>Action</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr ng-repeat="campaign in filteredTodos | filter : campaign">
+                                      <td>{{campaign.cm_first_dely}}</td>
+                                      <td>{{campaign.cm_end_date}}</td>
+                                      <td>{{campaign.cm_dely_frequency}}</td>
+                                      <td>{{campaign.cm_campaign_name}}</td>
+                                      <td>{{campaign.cm_restrict}}</td>
+                                      <td>{{campaign.cm_domain_limit}}</td>
+                                      <td>
+                                        <i class="fa fa-info-circle" data-toggle="modal" data-target="#view-details" ng-click="view($index)"></i>
+                                        <a href="#/campaign/edit/{{campaign.cm_id}}"><i class="fa fa-pencil"></i></a>
+                                        <i class="fa fa-trash" data-toggle="modal" data-target="#confirm-delete" ng-click="deleteEntry(campaign.cm_id)"></i>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                                <br>
+                                    <span id="pagination_detail" ng-show="filteredTodos.length > 0" class="pagination_ds">Showing {{ filterUserend }} to {{filterUser}} of {{campaignListcount}} Campaign's</span>
+                                <span id="pagination_div" align="right" ng-show="filteredTodos.length > 0"
+                                      style="float: right;margin-left: 60%;">
+                                  <pagination
+                                          ng-model="currentPage"
+                                          total-items="campaignListcount"
+                                          max-size="maxSize"
+                                          boundary-links="true" data-num-pages="noOfPages"
+                                          items-per-page="numPerPage">
+                                  </pagination>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="confirm-delete">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Confirm Delete</h4>
+      </div>
+      <div class="modal-body">
+        <p>You are about to delete <b><i class="title"></i></b> record, this procedure is irreversible.</p>
+                <p>Do you want to proceed?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        <button type="button" id="del" class="btn btn-danger" ng-click="deleteConfirm()">Delete</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<div class="modal fade" id="view-details">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"></h4>
+      </div>
+      <div class="modal-body">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th class="" style="border: 1px solid #ccc; text-align: center;">Question</th>
+              <th class="" style="border: 1px solid #ccc; text-align: center;">Answers</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="question in answers track by $index">
+                <td>{{question.qm_questions}}</td>
+                <td>{{question.qm_answers}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

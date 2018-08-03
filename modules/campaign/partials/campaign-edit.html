@@ -1,0 +1,180 @@
+<div class="pcoded-content" ng-init="getEntry();">
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+                    <div class="card">
+                        <div class="card-header">
+                            <ul class="breadcrumb-title pull-right">
+                                <li class="breadcrumb-item">
+                                    <a href="#/"> <i class="fa fa-home"></i> </a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="#/">Campaign</a>
+                                </li>
+                                <li class="active breadcrumb-item">
+                                    <a href="#/employee/add" class="active">Edit Campaign</a>
+                                </li>
+                            </ul>
+                            <h3>Edit Campaign</h3>
+                            <hr>
+                        </div>
+                        <div class="card-block">
+                            <div class="form-group row">
+                                
+                                <div class="col-sm-6">
+                                        <label>Free Delivery</label>
+                                        <input type="text" id="cm_free_dely" 
+                                        ng-model="campaign.cm_free_dely"
+                                        typeahead="obj as obj.mm_pm_name for obj in getSearch($viewValue)"
+                                        class="form-control"/>
+                                </div>
+                                <div class="col-sm-6">
+                                    
+                                </div>
+                                <div class="col-sm-6"><br>
+                                        <label>End Date</label>
+                                        <input type="date" id="cm_end_date" class="form-control" ng-model="campaign.cm_end_date" />
+                                        <br>
+                                </div>
+                                <div class="col-sm-6"><br>
+                                        <label>Delivery Frequency</label>
+                                        <input type="text" id="cm_dely_frequency" class="form-control" ng-model="campaign.cm_dely_frequency" />
+                                        
+                                </div>
+
+                                <div class="col-sm-6">
+                                        <label>Campaign Name</label>
+                                        <input type="text" id="cm_campaign_name" class="form-control" ng-model="campaign.cm_campaign_name" />
+                                        <br>
+                                </div>
+                                <div class="col-sm-6">
+                                        <label>Restriction</label>
+                                        <input type="text" id="cm_restrict" class="form-control" ng-model="campaign.cm_restrict" />
+                                        
+                                </div>
+                                <div class="col-sm-6">
+                                        <label>Account List (Y/N)</label>
+                                        <select id="cm_account_list" class="form-control" ng-model="campaign.cm_account_list">
+                                            <option value="">Select your option</option>
+                                            <option>Yes</option>
+                                            <option>No</option>
+                                        </select>
+                                    <br>    
+                                </div>
+                                <div class="col-sm-6">
+                                        <label>Supression File (Y/N)</label>
+                                        <select id="cm_supression_file" class="form-control" ng-model="campaign.cm_supression_file">
+                                            <option value="">Select your option</option>
+                                            <option>Yes</option>
+                                            <option>No</option>
+                                        </select>
+                                    <br>    
+                                </div>
+                                <div class="col-sm-6">
+                                        <label>Domain Limit</label>
+                                        <input type="text" id="cm_domain_limit" class="form-control" ng-model="campaign.cm_domain_limit" />
+                                        <br>
+                                </div>
+                                <div class="col-sm-6">
+                                        <label>Employee Size</label>
+                                        <input type="text" id="cm_emp_size" class="form-control" ng-model="campaign.cm_emp_size"/>
+                                
+                                </div>
+                                <div class="col-sm-6">
+                                        <label>Disqualifies</label>
+                                        <input type="text" id="cm_disqualifies" class="form-control" ng-model="campaign.cm_disqualifies"/>
+                                        <br>
+                                </div>
+                                <div class="col-sm-6">
+                                        <label>Title</label>
+                                        <input type="text" id="cm_title" class="form-control" ng-model="campaign.cm_title">
+                                </div>
+                                <div class="col-lg-6">
+                                        <label>Lead Count</label>
+                                        <input type="text" id="cm_lead_count" class="form-control" ng-model="campaign.cm_lead_count">
+                                    <br>
+                                </div>
+                                <div class="col-sm-6">
+                                        <label>Verticals</label>
+                                        <input type="text" id="cm_vertical" class="form-control" ng-model="campaign.cm_vertical" />
+                                
+                                </div>
+                                <div class="col-sm-6">
+                                        <label>Geo</label>
+                                        <input type="text" id="cm_geo" class="form-control" ng-model="campaign.cm_geo" />
+                                    <br>    
+                                </div>
+                                <div class="col-sm-6">
+                                        <label>Allowed Domain</label>
+                                        <select id="cm_allow_domain" class="form-control" ng-model="campaign.cm_allow_domain">
+                                            <option value="">Select your option</option>
+                                            <option>Yes</option>
+                                            <option>No</option>
+                                        </select>
+                                    <br>    
+                                </div>
+                                <div class="col-sm-6">
+                                        <label>Revenue</label>
+                                        <input type="text" id="cm_revenue" class="form-control" ng-model="campaign.cm_revenue">
+                                    <br> 
+                                </div>
+                                <div class="col-sm-6">
+                                        <label>Custom Question</label>
+                                        <select id="cm_custom_question" class="form-control" ng-model="campaign.cm_custom_question">
+                                            <option value="">Select your option</option>
+                                            <option>Yes</option>
+                                            <option>No</option>
+                                        </select>
+                                    <br>    
+                                </div>
+                                <div class="col-sm-6">
+                                        <label>Denied Domain</label>
+                                        <select id="cm_denied_domain" class="form-control" ng-model="campaign.cm_denied_domain">
+                                            <option value="">Select your option</option>
+                                            <option>Yes</option>
+                                            <option>No</option>
+                                        </select>
+                                    <br>    
+                                </div>
+                                <div class="col-sm-6">
+                                        <label>Campaign Asset</label>
+                                        <input type="text" id="cm_campaign_asset" class="form-control" ng-model="campaign.cm_campaign_asset">
+                                    <br>
+                                </div>
+                                <div class="col-sm-6">
+                                        <label>Industry</label>
+                                        <input type="text" id="cm_industry" class="form-control" ng-model="campaign.cm_industry">
+                                    <br>
+                                </div>
+                                <div class="col-sm-6">
+                                        <label>Department</label>
+                                        <input type="text" id="cm_dept" class="form-control" ng-model="campaign.cm_dept">
+                                    <br>
+                                </div>
+                                <div class="col-sm-6">
+                                        <label>Method</label>
+                                        <input type="text" id="cm_method" class="form-control" ng-model="campaign.cm_method">
+                                    <br>
+                                </div>
+                                <div class="col-sm-6">
+                                        <label>Job Function / Level</label>
+                                        <input type="text" id="cm_job" class="form-control" ng-model="campaign.cm_job">
+                                    <br>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="form-group row">
+                                <br>
+                                <div class="col-sm-12">
+                                    <button type="button" class="btn btn-grd-danger" onclick="window.location = '#/campaign/joblist'" id="btncancel">Back</button>
+                                    <button type="submit" class="btn btn-grd-success" id="btnsave" ng-click="updateEntry()">SAVE</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

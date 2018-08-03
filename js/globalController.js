@@ -7,8 +7,11 @@ function GlobalCtrl($rootScope, $http, $scope, $timeout) {
     $rootScope.userid=localStorage.getItem("logichron_admin_username");
     $rootScope.firstname=localStorage.getItem("logichron_admin_firstname");
     $rootScope.iconimage=localStorage.getItem("logichron_admin_iconimage");
+    
     $rootScope.baseURL = 'http://localhost:3001';
     // $rootScope.baseURL = 'http://unitech.3commastechnologies.com:3001';
+    // $rootScope.baseURL = 'http://10.1.0.53:3001';
+
     if(localStorage.getItem("logichron_admin_access_token") === null)
       {
           window.location = 'login.html';
@@ -18,44 +21,7 @@ function GlobalCtrl($rootScope, $http, $scope, $timeout) {
     //     window.history.back();
     // };
     
-      $scope.getAll=function(view){
-
-        $scope.states=[];
-          $http({
-            method: 'GET',
-            url: $rootScope.baseURL+'/permission',
-            //data: $scope.data,
-            headers: {'Content-Type': 'application/json',
-                    'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
-          })
-          .success(function(obj)
-          {
-              obj.forEach(function(value,key){
-                $scope.states.push(value);
-              });
-              if(localStorage.getItem('logichron_role_name')=='admin' && localStorage.getItem('logichron_add')==1 && localStorage.getItem('logichron_edit')==1 && localStorage.getItem('logichron_delete')==1 && localStorage.getItem('logichron_list')==1 )
-              {
-                $scope.access='admin'
-                $('.pcoded-hasmenu').removeAttr('ng-hide');
-              }
-              else
-              {
-                $scope.access='user';
-                $('.pcoded-hasmenu').attr("ng-hide='access==admin'");
-              }
-          })
-          .error(function(data) 
-          {   
-              toastr.error('Oops, Something Went Wrong.', 'Error', {
-                  closeButton: true,
-                  progressBar: true,
-                  positionClass: "toast-top-center",
-                  timeOut: "500",
-                  extendedTimeOut: "500",
-              });  
-          });
-      };
-      $scope.getAll();
+     
       $rootScope.logOut = function(){
 
         $http({

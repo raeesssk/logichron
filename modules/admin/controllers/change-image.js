@@ -4,7 +4,7 @@ angular.module('admin').controller('changeImageCtrl', function ($rootScope, $htt
 
 	$scope.first_name = $rootScope.firstname;
 
-  	$scope.displayImages = "resources/images/default.png";
+  	$scope.displayImages = "resources/images/default-image.png";
 	$scope.fileupload = {};
 	$scope.getUserImage = function (){
 
@@ -13,7 +13,7 @@ angular.module('admin').controller('changeImageCtrl', function ($rootScope, $htt
 		}
 		else{
 			
-  		$scope.displayImages = "resources/images/avatar-4.png";
+  	$scope.displayImages = "resources/images/default-image.png";
 		}
     }
     $scope.getUserImage();
@@ -34,6 +34,7 @@ angular.module('admin').controller('changeImageCtrl', function ($rootScope, $htt
   $("#imgInp").change(function(){
       readURL(this);
   });
+
 
     $scope.changeImage = function (){
     	if($('#first_name').val() == undefined || $('#first_name').val() == ""){

@@ -65,7 +65,7 @@
                            
                            <li class="user-profile header-notification">
                                <a href="">
-                                   <img src="resources/images/avatar-4.jpg" class="img-radius" alt="User-Profile-Image">
+                                   <!-- <img ng-src="{{iconimage}}" class="img-radius" alt="User-Profile-Image"> -->
                                    <span>{{firstname}}</span>
                                    <i class="ti-angle-down"></i>
                                </a>
@@ -111,13 +111,13 @@
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="pcoded-hasmenu" ng-show="access=='admin'">
+                                <li class="pcoded-hasmenu">
                                     <a href="">
                                         <span class="pcoded-micon"><i class="ti-user"></i></span>
                                         <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">User Management</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
-                                    <ul class="pcoded-submenu" permission-list="['admin']">
+                                    <ul class="pcoded-submenu" >
                                         <li class="">
                                             <a href="#/user/add">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
@@ -148,7 +148,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="pcoded-hasmenu" ng-show="access=='admin'" ng-hide="access!='admin'">
+                                <li class="pcoded-hasmenu">
                                     <a href="">
                                         <span class="pcoded-micon"><i class="ti-id-badge"></i></span>
                                         <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Employee Management</span>
@@ -175,27 +175,50 @@
                                 <li class="pcoded-hasmenu">
                                     <a href="">
                                         <span class="pcoded-micon"><i class="ti-write"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Data Entry</span>
+                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main"> Campaign</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
-                                    <ul class="pcoded-submenu" permission-list="['user']">
+                                    <ul class="pcoded-submenu">
                                         <li class=" ">
-                                            <a href="#/dataentry/createjob">
+                                            <a href="#/campaign/createjob">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs"><i class="ti-file"></i> Create Job</span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs"><i class="ti-file"></i> Create Campaign</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         <li class=" ">
-                                            <a href="#/dataentry/joblist">
+                                            <a href="#/campaign/joblist">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs"><i class="ti-view-list"></i> Job List</span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs"><i class="ti-view-list"></i> Campaign List</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="pcoded-hasmenu" ng-hide="access!='admin'">
+                                <li class="pcoded-hasmenu">
+                                    <a href="">
+                                        <span class="pcoded-micon"><i class="ti-write"></i></span>
+                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main"> Contact Discovery</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                    <ul class="pcoded-submenu" permission-list="['user']">
+                                        <li class=" ">
+                                            <a href="#/contactdiscovery/createjob">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs"><i class="ti-file"></i> Create Contact Discovery</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class=" ">
+                                            <a href="#/contactdiscovery/joblist">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs"><i class="ti-view-list"></i> Contact Discovery List</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <!-- <li class="pcoded-hasmenu" ng-hide="access!='admin'">
                                     <a href="">
                                         <span class="pcoded-micon"><i class="ti-headphone-alt"></i></span>
                                         <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">TeleCaller</span>
@@ -254,7 +277,7 @@
                                         <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Reports</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
                     </nav>
@@ -315,7 +338,10 @@
         <script src="modules/employee/config.js"></script>
 
          <!-- data-entry -->
-        <script src="modules/dataentry/config.js"></script>
+        <script src="modules/campaign/config.js"></script>
+
+         <!-- data-entry -->
+        <script src="modules/contactdiscovery/config.js"></script>
 
          <!-- telecaller -->
         <script src="modules/telecaller/config.js"></script>
