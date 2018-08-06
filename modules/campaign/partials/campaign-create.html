@@ -22,142 +22,143 @@ a<div class="pcoded-content">
                         <div class="card-block">
                             <div class="form-group row">
 
-                                <div class="col-sm-6">
+                                <div class="col-sm-3">
                                         <label>First Delivery</label>
                                         <input type="text" id="cm_first_dely" 
                                         ng-model="campaign.cm_first_dely"
                                         typeahead="obj as obj.mm_pm_name for obj in getSearch($viewValue)"
                                         class="form-control"/>
                                 </div>
-                                <div class="col-sm-6">
-                                    
-                                </div>
-                                <div class="col-sm-6"><br>
+                                <div class="col-sm-3">
                                         <label>End Date</label>
-                                        <input type="date" id="cm_end_date" class="form-control" ng-model="campaign.cm_end_date" />
+                                        <input type="text" id="cm_end_date" class="form-control" ng-model="campaign.cm_end_date" />
                                         <br>
                                 </div>
-                                <div class="col-sm-6"><br>
+                                <div class="col-sm-3">
                                         <label>Delivery Frequency</label>
                                         <input type="text" id="cm_dely_frequency" class="form-control" ng-model="campaign.cm_dely_frequency" />
-                                        
+                                      <br>  
                                 </div>
 
-                                <div class="col-sm-6">
+                                <div class="col-sm-3">
                                         <label>Campaign Name</label>
                                         <input type="text" id="cm_campaign_name" class="form-control" ng-model="campaign.cm_campaign_name" />
-                                        <br>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-3">
                                         <label>Restriction</label>
                                         <input type="text" id="cm_restrict" class="form-control" ng-model="campaign.cm_restrict" />
-                                        
+                                        <br>
                                 </div>
-                                <div class="col-sm-6">
-                                        <label>Account List (Y/N)</label>
-                                        <select id="cm_account_list" class="form-control" ng-model="campaign.cm_account_list" data-toggle="modal" data-target="#account_list">
-                                            <option value="">Select your option</option>
-                                            <option>Yes</option>
-                                            <option>No</option>
-                                        </select>
+                                <div class="col-sm-3">
+                                    <label>Account List (Y/N)</label>
+                                    <select id="cm_account_list" class="form-control" ng-model="campaign.cm_account_list">
+                                        <option value="">Select your option</option>
+                                        <option data-toggle="modal" data-target="#account_list" data-backdrop="static" data-keyboard="false">Yes</option>
+                                        <option>No</option>
+                                    </select>
+                                    <button style="position: absolute; margin-top: -11%; margin-left: 73%;" ng-click="updateAccntList()" ng-show="campaign.cm_account_list=='Yes'"><i class="fa fa-pencil"></i></button>
                                     <br>    
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-3">
                                         <label>Supression File (Y/N)</label>
-                                        <select id="cm_supression_file" class="form-control" ng-model="campaign.cm_supression_file" data-toggle="modal" data-target="#supression_file">
+                                        <select id="cm_supression_file" class="form-control" ng-model="campaign.cm_supression_file" >
                                             <option value="">Select your option</option>
-                                            <option>Yes</option>
+                                            <option data-toggle="modal" data-target="#supression_file" data-backdrop="static" data-keyboard="false" >Yes</option>
                                             <option>No</option>
                                         </select>
+                                        <button style="position: absolute; margin-top: -11%; margin-left: 73%;" ng-click="updateSupression()" ng-show="campaign.cm_supression_file=='Yes'"><i class="fa fa-pencil"></i></button>
                                     <br>    
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-3">
                                         <label>Domain Limit</label>
                                         <input type="text" id="cm_domain_limit" class="form-control" ng-model="campaign.cm_domain_limit" />
                                         <br>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-3">
                                         <label>Employee Size</label>
                                         <input type="text" id="cm_emp_size" class="form-control" ng-model="campaign.cm_emp_size"/>
                                 
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-3">
                                         <label>Disqualifies</label>
                                         <input type="text" id="cm_disqualifies" class="form-control" ng-model="campaign.cm_disqualifies"/>
                                         <br>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-3">
                                         <label>Title</label>
                                         <input type="text" id="cm_title" class="form-control" ng-model="campaign.cm_title">
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-3">
                                         <label>Lead Count</label>
                                         <input type="text" id="cm_lead_count" class="form-control" ng-model="campaign.cm_lead_count">
                                     <br>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-3">
                                         <label>Verticals</label>
                                         <input type="text" id="cm_vertical" class="form-control" ng-model="campaign.cm_vertical" />
                                 
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-3">
                                         <label>Geo</label>
                                         <input type="text" id="cm_geo" class="form-control" ng-model="campaign.cm_geo" />
                                     <br>    
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-3">
                                         <label>Allowed Domain</label>
-                                        <select id="cm_allow_domain" class="form-control" ng-model="campaign.cm_allow_domain" data-toggle="modal" data-target="#allow_domain">
+                                        <select id="cm_allow_domain" class="form-control" ng-model="campaign.cm_allow_domain">
                                             <option value="">Select your option</option>
-                                            <option>Yes</option>
+                                            <option data-toggle="modal" data-target="#allow_domain" data-backdrop="static" data-keyboard="false">Yes</option>
                                             <option>No</option>
                                         </select>
+                                        <button style="position: absolute; margin-top: -11%; margin-left: 73%;" ng-click="updateAllowDomain()" ng-show="campaign.cm_allow_domain=='Yes'"><i class="fa fa-pencil"></i></button>
                                     <br>    
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-3">
                                         <label>Revenue</label>
                                         <input type="text" id="cm_revenue" class="form-control" ng-model="campaign.cm_revenue">
                                     <br> 
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-3">
                                         <label>Custom Question</label>
-                                        <select id="cm_custom_question" class="form-control" ng-model="campaign.cm_custom_question" data-toggle="modal" data-target="#custom_question">
+                                        <select id="cm_custom_question" class="form-control" ng-model="campaign.cm_custom_question">
                                             <option value="">Select your option</option>
-                                            <option>Yes</option>
+                                            <option data-toggle="modal" data-target="#custom_question" data-backdrop="static" data-keyboard="false">Yes</option>
                                             <option>No</option>
                                         </select>
+                                        <button style="position: absolute; margin-top: -11%; margin-left: 73%;" ng-click="updateCustomQuestion()" ng-show="campaign.cm_custom_question=='Yes'"><i class="fa fa-pencil"></i></button>
                                     <br>    
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-3">
                                         <label>Denied Domain</label>
-                                        <select id="cm_denied_domain" class="form-control" ng-model="campaign.cm_denied_domain" data-toggle="modal" data-target="#denied_domain">
+                                        <select id="cm_denied_domain" class="form-control" ng-model="campaign.cm_denied_domain">
                                             <option value="">Select your option</option>
-                                            <option>Yes</option>
+                                            <option data-toggle="modal" data-target="#denied_domain" data-backdrop="static" data-keyboard="false">Yes</option>
                                             <option>No</option>
                                         </select>
+                                        <button style="position: absolute; margin-top: -11%; margin-left: 73%;" ng-click="updateDeniedDomain()" ng-show="campaign.cm_denied_domain=='Yes'"><i class="fa fa-pencil"></i></button>
                                     <br>    
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-3">
                                         <label>Campaign Asset</label>
                                         <input type="text" id="cm_campaign_asset" class="form-control" ng-model="campaign.cm_campaign_asset">
                                     <br>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-3">
                                         <label>Industry</label>
                                         <input type="text" id="cm_industry" class="form-control" ng-model="campaign.cm_industry">
                                     <br>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-3">
                                         <label>Department</label>
                                         <input type="text" id="cm_dept" class="form-control" ng-model="campaign.cm_dept">
                                     <br>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-3">
                                         <label>Method</label>
                                         <input type="text" id="cm_method" class="form-control" ng-model="campaign.cm_method">
                                     <br>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-3">
                                         <label>Job Function / Level</label>
                                         <input type="text" id="cm_job" class="form-control" ng-model="campaign.cm_job" >
                                     <br>
@@ -185,8 +186,6 @@ a<div class="pcoded-content">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">Campaign Account List</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body">
 
@@ -222,7 +221,7 @@ a<div class="pcoded-content">
                     <td>{{list.amcm_company}}</td>
                     <td>{{list.amcm_website}}</td>
                     <td>
-                        <i class="fa fa-trash" ng-click="deleteRow(account.am_id)"></i>
+                        <i class="fa fa-trash" ng-click="deleteAccntList($index)"></i>
                     </td>
                 </tr>
               </tbody>
@@ -231,7 +230,7 @@ a<div class="pcoded-content">
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger pull-left" ng-click="closeAccntList()">Close</button>
         <button type="submit" class="btn btn-success pull-right" ng-click="addAccntList()">SAVE</button>
       </div>
     </div>
@@ -247,8 +246,6 @@ a<div class="pcoded-content">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">Campaign Account List</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body">
 
@@ -284,7 +281,7 @@ a<div class="pcoded-content">
                     <td>{{list.scm_company}}</td>
                     <td>{{list.scm_website}}</td>
                     <td>
-                        <i class="fa fa-trash" ng-click="deleteRow(campaign.cm_id)"></i>
+                        <i class="fa fa-trash" ng-click="deleteSupression($index)"></i>
                     </td>
                 </tr>
               </tbody>
@@ -293,8 +290,8 @@ a<div class="pcoded-content">
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-success pull-right" ng-click="addtable()">SAVE</button>
+        <button type="button" class="btn btn-danger pull-left" ng-click="closeSupression()">Close</button>
+        <button type="submit" class="btn btn-success pull-right" ng-click="addSupression()">SAVE</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -304,13 +301,11 @@ a<div class="pcoded-content">
 <!-- END Supression File (Y/N) Modal -->
 
 <!--3 Allowed Domain Modal -->
-<div class="modal fade" id="allow_domain">
+<div class="modal fade" id="allow_Domain">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">Domain Account List</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body">
 
@@ -338,7 +333,7 @@ a<div class="pcoded-content">
                 <tr ng-repeat="list in allowDomainList track by $index">
                     <td>{{list.adcm_website}}</td>
                     <td>
-                        <i class="fa fa-trash" ng-click="deleteRow(campaign.cm_id)"></i>
+                        <i class="fa fa-trash" ng-click="deleteAllowDomain($index)"></i>
                     </td>
                 </tr>
               </tbody>
@@ -347,8 +342,8 @@ a<div class="pcoded-content">
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-success pull-right" ng-click="addtable()">SAVE</button>
+        <button type="button" class="btn btn-danger pull-left" ng-click="closeAllowDomain()">Close</button>
+        <button type="submit" class="btn btn-success pull-right" ng-click="addAllowDomain()">SAVE</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -363,8 +358,6 @@ a<div class="pcoded-content">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">Question Campaign Account List</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body">
         
@@ -392,7 +385,7 @@ a<div class="pcoded-content">
                 <tr ng-repeat="list in customQuestionList track by $index">
                     <td>{{list.cmcm_question}}</td>
                     <td>
-                        <i class="fa fa-trash" ng-click="deleteRow(campaign.cm_id)"></i>
+                        <i class="fa fa-trash" ng-click="deleteCustomQuestion($index)"></i>
                     </td>
                 </tr>
               </tbody>
@@ -401,8 +394,8 @@ a<div class="pcoded-content">
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-success pull-right" ng-click="addtable()">SAVE</button>
+        <button type="button" class="btn btn-danger pull-left" ng-click="closeCustomQuestion()">Close</button>
+        <button type="submit" class="btn btn-success pull-right" ng-click="addCustomQuestion()">SAVE</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -417,8 +410,6 @@ a<div class="pcoded-content">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">Domain Account List</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body">
 
@@ -426,7 +417,7 @@ a<div class="pcoded-content">
             <div class="row">
                 <div class="col-sm-3-offset">
                     <label>Website</label><br>
-                    <input type="text" id="dd_cm_website" ng-model="denied_domain.dd_cm_website">
+                    <input type="text" id="ddcm_website" ng-model="denied_domain.ddcm_website">
                 </div>
                 <div class="col-sm-2"><br>
                     <button class="btn btn-primary" ng-click="deniedDomainAdd()">Add</button>
@@ -444,9 +435,9 @@ a<div class="pcoded-content">
               </thead>
               <tbody>
                 <tr ng-repeat="list in deniedDomainList track by $index">
-                    <td>{{list.dd_cm_website}}</td>
+                    <td>{{list.ddcm_website}}</td>
                     <td>
-                        <i class="fa fa-trash" ng-click="deleteRow(campaign.cm_id)"></i>
+                        <i class="fa fa-trash" ng-click="deleteDeniedDomain($index)"></i>
                     </td>
                 </tr>
               </tbody>
@@ -455,8 +446,8 @@ a<div class="pcoded-content">
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-success pull-right" ng-click="addtable()">SAVE</button>
+        <button type="button" class="btn btn-danger pull-left" ng-click="closeDeniedDomain()">Close</button>
+        <button type="submit" class="btn btn-success pull-right" ng-click="addDeniedDomain()">SAVE</button>
       </div>
     </div>
     <!-- /.modal-content -->

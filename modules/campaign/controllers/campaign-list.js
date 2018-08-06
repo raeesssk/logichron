@@ -14,6 +14,12 @@ angular.module('campaign').controller('campaignListCtrl', function ($rootScope, 
     $scope.loading1 = 1;
     $scope.limit={};
 
+    $scope.accountList=[];
+    $scope.supressionList=[];
+    $scope.allowDomainList=[];
+    $scope.customQuestionList=[];
+    $scope.deniedDomainList=[];
+
 $scope.apiURL = $rootScope.baseURL+'/campaign/campaign/total';
     
     
@@ -85,7 +91,6 @@ $scope.apiURL = $rootScope.baseURL+'/campaign/campaign/total';
                  
                   data.forEach(function (value, key) {
                     $scope.filteredTodos.push(value);
-                    console.log($scope.filteredTodos);
                   });
                 }
                 else{
@@ -149,12 +154,13 @@ $scope.apiURL = $rootScope.baseURL+'/campaign/campaign/total';
 	    });
 	};
 
-  $scope.view = function(index){
-
-        $scope.answers=[];
+// Modal Views
+// 1
+  $scope.accntView = function(index){
+      if($scope.filteredTodos[index].cm_account_list == 'Yes'){
         $http({
           method: 'GET',
-          url: $rootScope.baseURL+'/question/view/'+$scope.filteredTodos[index].dm_id,
+          url: $rootScope.baseURL+'/campaign/Accview/'+$scope.filteredTodos[index].cm_id,
           //data: $scope.data,
           headers: {'Content-Type': 'application/json',
                   'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
@@ -162,9 +168,9 @@ $scope.apiURL = $rootScope.baseURL+'/campaign/campaign/total';
         .success(function(obj)
         {
             obj.forEach(function(value, key){
-              $scope.answers.push(value);
+              $scope.accountList.push(value);
             });
-
+            $("#account_list").modal("show");
         })
         .error(function(data) 
         {   
@@ -176,7 +182,127 @@ $scope.apiURL = $rootScope.baseURL+'/campaign/campaign/total';
                 extendedTimeOut: "500",
             });  
         });
+      }
     };
-    
+// 2
+  $scope.supressionView = function(index){
+      if($scope.filteredTodos[index].cm_supression_file == 'Yes'){
+        $http({
+          method: 'GET',
+          url: $rootScope.baseURL+'/campaign/Suppview/'+$scope.filteredTodos[index].cm_id,
+          //data: $scope.data,
+          headers: {'Content-Type': 'application/json',
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+        })
+        .success(function(obj)
+        {
+            obj.forEach(function(value, key){
+              $scope.supressionList.push(value);
+            });
+            $("#supression_file").modal("show");
+        })
+        .error(function(data) 
+        {   
+            toastr.error('Oops, Something Went Wrong.', 'Error', {
+                closeButton: true,
+                progressBar: true,
+                positionClass: "toast-top-center",
+                timeOut: "500",
+                extendedTimeOut: "500",
+            });  
+        });
+      }
+    };
+// 3
+  $scope.allowView = function(index){
+      if($scope.filteredTodos[index].cm_allow_domain == 'Yes'){
+        $http({
+          method: 'GET',
+          url: $rootScope.baseURL+'/campaign/Allowview/'+$scope.filteredTodos[index].cm_id,
+          //data: $scope.data,
+          headers: {'Content-Type': 'application/json',
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+        })
+        .success(function(obj)
+        {
+            obj.forEach(function(value, key){
+              $scope.allowDomainList.push(value);
+            });
+            $("#allow_Domain").modal("show");
+        })
+        .error(function(data) 
+        {   
+            toastr.error('Oops, Something Went Wrong.', 'Error', {
+                closeButton: true,
+                progressBar: true,
+                positionClass: "toast-top-center",
+                timeOut: "500",
+                extendedTimeOut: "500",
+            });  
+        });
+      }
+    };
+// 4
+  $scope.customView = function(index){
+      if($scope.filteredTodos[index].cm_custom_question == 'Yes'){
+        $http({
+          method: 'GET',
+          url: $rootScope.baseURL+'/campaign/Custview/'+$scope.filteredTodos[index].cm_id,
+          //data: $scope.data,
+          headers: {'Content-Type': 'application/json',
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+        })
+        .success(function(obj)
+        {
+            obj.forEach(function(value, key){
+              $scope.customQuestionList.push(value);
+            });
+            $("#custom_question").modal("show");
+        })
+        .error(function(data) 
+        {   
+            toastr.error('Oops, Something Went Wrong.', 'Error', {
+                closeButton: true,
+                progressBar: true,
+                positionClass: "toast-top-center",
+                timeOut: "500",
+                extendedTimeOut: "500",
+            });  
+        });
+      }
+    };
+
+// 5
+  $scope.deniedView = function(index){
+      if($scope.filteredTodos[index].cm_denied_domain == 'Yes'){
+        $http({
+          method: 'GET',
+          url: $rootScope.baseURL+'/campaign/Denyview/'+$scope.filteredTodos[index].cm_id,
+          //data: $scope.data,
+          headers: {'Content-Type': 'application/json',
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+        })
+        .success(function(obj)
+        {
+            obj.forEach(function(value, key){
+              $scope.deniedDomainList.push(value);
+            });
+            $("#denied_domain").modal("show");
+        })
+        .error(function(data) 
+        {   
+            toastr.error('Oops, Something Went Wrong.', 'Error', {
+                closeButton: true,
+                progressBar: true,
+                positionClass: "toast-top-center",
+                timeOut: "500",
+                extendedTimeOut: "500",
+            });  
+        });
+      }
+    };
+
+
+
 
 });
