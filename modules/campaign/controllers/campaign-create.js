@@ -145,6 +145,7 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         else{
             $scope.campaign.cm_account_list="No";
             $('#account_list').modal("hide");
+            $scope.accountList=[];
         }
     };
     $scope.updateAccntList=function(){
@@ -213,6 +214,7 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         else{
             $scope.campaign.cm_supression_file="No";
             $('#supression_file').modal("hide");
+            $scope.supressionList=[];
         }
     };
     $scope.updateSupression=function(){
@@ -270,6 +272,7 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         else{
             $scope.campaign.cm_allow_domain="No";
             $('#allow_Domain').modal("hide");
+            $scope.allowDomainList=[];
         }
     };
     $scope.updateAllowDomain=function(){
@@ -327,6 +330,7 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         else{
             $scope.campaign.cm_custom_question="No";
             $('#custom_question').modal("hide");
+            $scope.customQuestionList=[];
         }
     };
     $scope.updateCustomQuestion=function(){
@@ -386,6 +390,7 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         else{
             $scope.campaign.cm_denied_domain="No";
             $('#denied_domain').modal("hide");
+            $scope.deniedDomainList=[];
         }
     };
     $scope.updateDeniedDomain=function(){
@@ -654,7 +659,6 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
 	    else{
                 $scope.objs={
                     campaign:$scope.campaign,
-                    
                     accountList:$scope.accountList,
                     supressionList:$scope.supressionList,
                     allowDomainList:$scope.allowDomainList,

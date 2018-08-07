@@ -56,7 +56,7 @@
                                         <option data-toggle="modal" data-target="#account_list" data-backdrop="static" data-keyboard="false">Yes</option>
                                         <option>No</option>
                                     </select>
-                                    <button style="position: absolute; margin-top: -11%; margin-left: 73%;" ng-click="updateAccntList()" ng-show="campaign.cm_account_list=='Yes'"><i class="fa fa-pencil"></i></button>
+                                    <button style="position: absolute; margin-top: -14%; margin-left: 65%;" ng-click="updateAccntList()" ng-show="campaign.cm_account_list=='Yes'"><i class="fa fa-pencil"></i></button>
                                     <br>    
                                 </div>
                                 <div class="col-sm-3">
@@ -66,7 +66,7 @@
                                             <option data-toggle="modal" data-target="#supression_file" data-backdrop="static" data-keyboard="false" >Yes</option>
                                             <option>No</option>
                                         </select>
-                                        <button style="position: absolute; margin-top: -11%; margin-left: 73%;" ng-click="updateSupression()" ng-show="campaign.cm_supression_file=='Yes'"><i class="fa fa-pencil"></i></button>
+                                        <button style="position: absolute; margin-top: -14%; margin-left: 65%;" ng-click="updateSupression()" ng-show="campaign.cm_supression_file=='Yes'"><i class="fa fa-pencil"></i></button>
                                     <br>    
                                 </div>
                                 <div class="col-sm-3">
@@ -110,7 +110,7 @@
                                             <option data-toggle="modal" data-target="#allow_domain" data-backdrop="static" data-keyboard="false">Yes</option>
                                             <option>No</option>
                                         </select>
-                                        <button style="position: absolute; margin-top: -11%; margin-left: 73%;" ng-click="updateAllowDomain()" ng-show="campaign.cm_allow_domain=='Yes'"><i class="fa fa-pencil"></i></button>
+                                        <button style="position: absolute; margin-top: -14%; margin-left: 65%;" ng-click="updateAllowDomain()" ng-show="campaign.cm_allow_domain=='Yes'"><i class="fa fa-pencil"></i></button>
                                     <br>    
                                 </div>
                                 <div class="col-sm-3">
@@ -125,7 +125,7 @@
                                             <option data-toggle="modal" data-target="#custom_question" data-backdrop="static" data-keyboard="false">Yes</option>
                                             <option>No</option>
                                         </select>
-                                        <button style="position: absolute; margin-top: -11%; margin-left: 73%;" ng-click="updateCustomQuestion()" ng-show="campaign.cm_custom_question=='Yes'"><i class="fa fa-pencil"></i></button>
+                                        <button style="position: absolute; margin-top: -14%; margin-left: 65%;" ng-click="updateCustomQuestion()" ng-show="campaign.cm_custom_question=='Yes'"><i class="fa fa-pencil"></i></button>
                                     <br>    
                                 </div>
                                 <div class="col-sm-3">
@@ -135,7 +135,7 @@
                                             <option data-toggle="modal" data-target="#denied_domain" data-backdrop="static" data-keyboard="false">Yes</option>
                                             <option>No</option>
                                         </select>
-                                        <button style="position: absolute; margin-top: -11%; margin-left: 73%;" ng-click="updateDeniedDomain()" ng-show="campaign.cm_denied_domain=='Yes'"><i class="fa fa-pencil"></i></button>
+                                        <button style="position: absolute; margin-top: -14%; margin-left: 65%;" ng-click="updateDeniedDomain()" ng-show="campaign.cm_denied_domain=='Yes'"><i class="fa fa-pencil"></i></button>
                                     <br>    
                                 </div>
                                 <div class="col-sm-3">
@@ -169,7 +169,7 @@
                                 <br>
                                 <div class="col-sm-12">
                                     <button type="button" class="btn btn-grd-danger" onclick="window.location = '#/campaign/joblist'" id="btncancel">Back</button>
-                                    <button type="submit" class="btn btn-grd-success" id="btnsave" ng-click="updateEntry()">SAVE</button>
+                                    <button type="submit" class="btn btn-grd-success" id="btnsave" ng-click="updateCampaign()">SAVE</button>
                                 </div>
                             </div>
                         </div>
@@ -218,6 +218,13 @@
                 </tr>
               </thead>
               <tbody>
+                <tr ng-repeat="list1 in oldaccountList track by $index">
+                    <td>{{list1.amcm_company}}</td>
+                    <td>{{list1.amcm_website}}</td>
+                    <td>
+                        <i class="fa fa-trash" ng-click="deleteoldAccntList($index)"></i>
+                    </td>
+                </tr>
                 <tr ng-repeat="list in accountList track by $index">
                     <td>{{list.amcm_company}}</td>
                     <td>{{list.amcm_website}}</td>
@@ -278,6 +285,13 @@
                 </tr>
               </thead>
               <tbody>
+                <tr ng-repeat="list1 in oldsupressionList track by $index">
+                    <td>{{list1.scm_company}}</td>
+                    <td>{{list1.scm_website}}</td>
+                    <td>
+                        <i class="fa fa-trash" ng-click="deleteOldSupression($index)"></i>
+                    </td>
+                </tr>
                 <tr ng-repeat="list in supressionList track by $index">
                     <td>{{list.scm_company}}</td>
                     <td>{{list.scm_website}}</td>
@@ -331,6 +345,12 @@
                 </tr>
               </thead>
               <tbody>
+                <tr ng-repeat="list1 in oldallowDomainList track by $index">
+                    <td>{{list1.adcm_website}}</td>
+                    <td>
+                        <i class="fa fa-trash" ng-click="deleteOldAllowDomain($index)"></i>
+                    </td>
+                </tr>
                 <tr ng-repeat="list in allowDomainList track by $index">
                     <td>{{list.adcm_website}}</td>
                     <td>
@@ -383,6 +403,12 @@
                 </tr>
               </thead>
               <tbody>
+                <tr ng-repeat="list1 in oldcustomQuestionList track by $index">
+                    <td>{{list.cmcm_question}}</td>
+                    <td>
+                        <i class="fa fa-trash" ng-click="deleteOldCustomQuestion($index)"></i>
+                    </td>
+                </tr>
                 <tr ng-repeat="list in customQuestionList track by $index">
                     <td>{{list.cmcm_question}}</td>
                     <td>
@@ -435,6 +461,13 @@
                 </tr>
               </thead>
               <tbody>
+                <tr ng-repeat="list1 in olddeniedDomainList track by $index">
+                    <td>{{list1.ddcm_website}}</td>
+                    <td>
+                        <i class="fa fa-trash" ng-click="deleteOldDeniedDomain($index)"></i>
+                    </td>
+                </tr>
+
                 <tr ng-repeat="list in deniedDomainList track by $index">
                     <td>{{list.ddcm_website}}</td>
                     <td>

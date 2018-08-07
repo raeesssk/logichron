@@ -2,18 +2,27 @@
 angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, $http, $scope, $location, $routeParams, $route, $filter) {
 
     $scope.campaign={};
-    $scope.obj={};
 
     $scope.account={};
     $scope.accountList=[];
+    $scope.oldaccountList=[];
+    $scope.removeAccount=[];
     $scope.supression={};
+    $scope.oldsupressionList=[];
+    $scope.removesuppressionList=[];
     $scope.supressionList=[];
     $scope.allow_domain={};
     $scope.allowDomainList=[];
+    $scope.oldallowDomainList=[];
+    $scope.removeAllowedDomain=[];
     $scope.custom_question={};
     $scope.customQuestionList=[];
+    $scope.oldcustomQuestionList=[];
+    $scope.removecustomQuestion=[];
     $scope.denied_domain={};
     $scope.deniedDomainList=[];
+    $scope.olddeniedDomainList=[];
+    $scope.removeDeniedDomain=[];
 
 	$scope.campaignId = $routeParams.campaignId;
   $scope.apiURL = $rootScope.baseURL+'/campaign/edit/'+$scope.campaignId;
@@ -86,7 +95,7 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
         .success(function(campaignObj)
         {
             campaignObj.forEach(function (value, key) {
-                $scope.accountList.push(value);
+                $scope.oldaccountList.push(value);
               });
                 
               
@@ -104,6 +113,11 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
     };
     $scope.getaccount();
 
+    $scope.deleteoldAccntList = function(index){
+      $scope.removeAccount.push($scope.oldaccountList[index]);
+      $scope.oldaccountList.splice(index,1);
+    };
+
     $scope.getsupp = function () {
          $http({
           method: 'GET',
@@ -114,7 +128,7 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
         .success(function(campaignObj)
         {
             campaignObj.forEach(function (value, key) {
-                $scope.supressionList.push(value);
+                $scope.oldsupressionList.push(value);
               });
                 
               
@@ -132,6 +146,11 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
     };
     $scope.getsupp();
 
+    $scope.deleteOldSupression = function(index){
+      $scope.removesuppressionList.push($scope.oldsupressionList[index]);
+      $scope.oldsupressionList.splice(index,1);
+    };
+
     $scope.getallow = function () {
          $http({
           method: 'GET',
@@ -142,7 +161,7 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
         .success(function(campaignObj)
         {
             campaignObj.forEach(function (value, key) {
-                $scope.allowDomainList.push(value);
+                $scope.oldallowDomainList.push(value);
               });
                 
               
@@ -160,6 +179,11 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
     };
     $scope.getallow();
 
+    $scope.deleteAllowDomain = function(index){
+      $scope.removeAllowedDomain.push($scope.oldallowDomainList[index]);
+      $scope.oldallowDomainList.splice(index,1);
+    };
+
     $scope.getcustom = function () {
          $http({
           method: 'GET',
@@ -170,7 +194,7 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
         .success(function(campaignObj)
         {
             campaignObj.forEach(function (value, key) {
-                $scope.customQuestionList.push(value);
+                $scope.oldcustomQuestionList.push(value);
               });
                 
               
@@ -188,6 +212,11 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
     };
     $scope.getcustom();
 
+    $scope.deleteCustomQuestion = function(index){
+      $scope.removecustomQuestion.push($scope.oldcustomQuestionList[index]);
+      $scope.oldcustomQuestionList.splice(index,1);
+    };
+
     $scope.getdenied = function () {
          $http({
           method: 'GET',
@@ -198,7 +227,7 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
         .success(function(campaignObj)
         {
             campaignObj.forEach(function (value, key) {
-                $scope.deniedDomainList.push(value);
+                $scope.olddeniedDomainList.push(value);
               });
                 
               
@@ -215,6 +244,11 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
         });
     };
     $scope.getdenied();
+
+    $scope.deleteOldDeniedDomain = function(index){
+      $scope.removeDeniedDomain.push($scope.olddeniedDomainList[index]);
+      $scope.olddeniedDomainList.splice(index,1);
+    };
 
     $scope.deleteQA=function(index){
         $scope.ansremove.push($scope.answers[index]);
@@ -234,6 +268,7 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
         if(opval=="Yes"){ //Compare it and if true
             $('#account_list').modal({backdrop: 'static', keyboard: false});
             $('#account_list').modal("show"); //Open Modal
+            $scope.oldaccountList=[];
         } 
     });
     $('#cm_supression_file').change(function() { //jQuery Change Function
@@ -314,7 +349,7 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
         }
     };
     $scope.closeAccntList=function(){
-        if ($scope.accountList.length > 0){
+        if ($scope.oldaccountList.length > 0 || $scope.accountList.length > 0){
             var dialog = bootbox.dialog({
             message: '<p class="text-center">Cannot Delete The Data.</p>',
                 closeButton: false
@@ -382,7 +417,7 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
         }
     };
     $scope.closeSupression=function(){
-        if ($scope.supressionList.length > 0){
+        if ($scope.oldsupressionList.length > 0){
             var dialog = bootbox.dialog({
             message: '<p class="text-center">Cannot Delete The Data.</p>',
                 closeButton: false
@@ -439,7 +474,7 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
         }
     };
     $scope.closeAllowDomain=function(){
-        if ($scope.allowDomainList.length > 0){
+        if ($scope.oldallowDomainList.length > 0){
             var dialog = bootbox.dialog({
             message: '<p class="text-center">Cannot Delete The Data.</p>',
                 closeButton: false
@@ -496,7 +531,7 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
         }
     };
     $scope.closeCustomQuestion=function(){
-        if ($scope.customQuestionList.length > 0){
+        if ($scope.oldcustomQuestionList.length > 0){
             var dialog = bootbox.dialog({
             message: '<p class="text-center">Cannot Delete The Data.</p>',
                 closeButton: false
@@ -555,7 +590,7 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
         }
     };
     $scope.closeDeniedDomain=function(){
-        if ($scope.deniedDomainList.length > 0){
+        if ($scope.olddeniedDomainList.length > 0){
             var dialog = bootbox.dialog({
             message: '<p class="text-center">Cannot Delete The Data.</p>',
                 closeButton: false
@@ -574,7 +609,7 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
        $('#denied_domain').modal("show");
     };
    
-  $scope.updateEntry = function () {
+  $scope.updateCampaign = function () {
 
   		var nameRegex = /^\d+$/;
   		var emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -834,6 +869,22 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
 	    else{
                 $scope.objects={
                     campaign:$scope.campaign,
+                    accountList:$scope.accountList,
+                    supressionList:$scope.supressionList,
+                    allowDomainList:$scope.allowDomainList,
+                    customQuestionList:$scope.customQuestionList,
+                    deniedDomainList:$scope.deniedDomainList,
+                    oldaccountList: $scope.oldaccountList,
+                    oldsupressionList: $scope.oldsupressionList,
+                    oldallowDomainList : $scope.oldallowDomainList,
+                    oldcustomQuestionList : $scope.oldcustomQuestionList,
+                    olddeniedDomainList : $scope.olddeniedDomainList,
+                    removeAccount : $scope.removeAccount,
+                    removesuppressionList : $scope.removesuppressionList,
+                    removeAllowedDomain : $scope.removeAllowedDomain,
+                    removecustomQuestion : $scope.removecustomQuestion,
+                    removeDeniedDomain : $scope.removeDeniedDomain
+
                 }
                 $('#btnsave').attr('disabled','true');
                 $('#btnsave').text("please wait...");
