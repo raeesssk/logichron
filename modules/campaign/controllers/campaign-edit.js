@@ -899,7 +899,7 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
 		    {
                 $('#btnsave').text("SAVE");
                 $('#btnsave').removeAttr('disabled');
-		       window.location.href = '#/campaign/joblist';  
+		       window.location.href = '#/campaign/';  
 		    })
 		    .error(function(data) 
 		    {   

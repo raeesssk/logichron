@@ -281,7 +281,6 @@ $scope.apiURL = $rootScope.baseURL+'/contact/contact/total';
         {
             obj.forEach(function(value, key){
               $scope.answers.push(value);
-              console.log($scope.answers);
             });
 
         })

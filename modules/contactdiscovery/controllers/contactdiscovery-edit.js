@@ -7,7 +7,7 @@ angular.module('contactdiscovery').controller('contactdiscoveryEditCtrl', functi
     $scope.answersadd=[];
     $scope.ansremove=[];
 	$scope.jobId = $routeParams.jobId;
-  $scope.apiURL = $rootScope.baseURL+'/job/edit/'+$scope.jobId;
+  $scope.apiURL = $rootScope.baseURL+'/contact/edit/'+$scope.jobId;
 
   $scope.addto = function() {
         
