@@ -56,7 +56,7 @@
                                         <option data-toggle="modal" data-target="#account_list" data-backdrop="static" data-keyboard="false">Yes</option>
                                         <option>No</option>
                                     </select>
-                                    <button style="position: absolute; margin-top: -14%; margin-left: 65%;" ng-click="updateAccntList()" ng-show="campaign.cm_account_list=='Yes'"><i class="fa fa-pencil"></i></button>
+                                    <button style="position: absolute; margin-top: -13%; margin-left: 65%;" ng-click="updateAccntList()" ng-show="campaign.cm_account_list=='Yes'"><i class="fa fa-pencil"></i></button>
                                     <br>    
                                 </div>
                                 <div class="col-sm-3">
@@ -66,7 +66,7 @@
                                             <option data-toggle="modal" data-target="#supression_file" data-backdrop="static" data-keyboard="false" >Yes</option>
                                             <option>No</option>
                                         </select>
-                                        <button style="position: absolute; margin-top: -14%; margin-left: 65%;" ng-click="updateSupression()" ng-show="campaign.cm_supression_file=='Yes'"><i class="fa fa-pencil"></i></button>
+                                        <button style="position: absolute; margin-top: -13%; margin-left: 65%;" ng-click="updateSupression()" ng-show="campaign.cm_supression_file=='Yes'"><i class="fa fa-pencil"></i></button>
                                     <br>    
                                 </div>
                                 <div class="col-sm-3">
@@ -110,7 +110,7 @@
                                             <option data-toggle="modal" data-target="#allow_domain" data-backdrop="static" data-keyboard="false">Yes</option>
                                             <option>No</option>
                                         </select>
-                                        <button style="position: absolute; margin-top: -14%; margin-left: 65%;" ng-click="updateAllowDomain()" ng-show="campaign.cm_allow_domain=='Yes'"><i class="fa fa-pencil"></i></button>
+                                        <button style="position: absolute; margin-top: -13%; margin-left: 65%;" ng-click="updateAllowDomain()" ng-show="campaign.cm_allow_domain=='Yes'"><i class="fa fa-pencil"></i></button>
                                     <br>    
                                 </div>
                                 <div class="col-sm-3">
@@ -125,7 +125,7 @@
                                             <option data-toggle="modal" data-target="#custom_question" data-backdrop="static" data-keyboard="false">Yes</option>
                                             <option>No</option>
                                         </select>
-                                        <button style="position: absolute; margin-top: -14%; margin-left: 65%;" ng-click="updateCustomQuestion()" ng-show="campaign.cm_custom_question=='Yes'"><i class="fa fa-pencil"></i></button>
+                                        <button style="position: absolute; margin-top: -13%; margin-left: 65%;" ng-click="updateCustomQuestion()" ng-show="campaign.cm_custom_question=='Yes'"><i class="fa fa-pencil"></i></button>
                                     <br>    
                                 </div>
                                 <div class="col-sm-3">
@@ -135,7 +135,7 @@
                                             <option data-toggle="modal" data-target="#denied_domain" data-backdrop="static" data-keyboard="false">Yes</option>
                                             <option>No</option>
                                         </select>
-                                        <button style="position: absolute; margin-top: -14%; margin-left: 65%;" ng-click="updateDeniedDomain()" ng-show="campaign.cm_denied_domain=='Yes'"><i class="fa fa-pencil"></i></button>
+                                        <button style="position: absolute; margin-top: -13%; margin-left: 65%;" ng-click="updateDeniedDomain()" ng-show="campaign.cm_denied_domain=='Yes'"><i class="fa fa-pencil"></i></button>
                                     <br>    
                                 </div>
                                 <div class="col-sm-3">
@@ -239,7 +239,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger pull-left" ng-click="closeAccntList()">Close</button>
-        <button type="submit" class="btn btn-success pull-right" ng-click="addAccntList()">SAVE</button>
+        <button type="submit" class="btn btn-success pull-right" ng-click="addAccntList()">Save & Close</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -306,7 +306,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger pull-left" ng-click="closeSupression()">Close</button>
-        <button type="submit" class="btn btn-success pull-right" ng-click="addSupression()">SAVE</button>
+        <button type="submit" class="btn btn-success pull-right" ng-click="addSupression()">Save & Close</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -364,7 +364,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger pull-left" ng-click="closeAllowDomain()">Close</button>
-        <button type="submit" class="btn btn-success pull-right" ng-click="addAllowDomain()">SAVE</button>
+        <button type="submit" class="btn btn-success pull-right" ng-click="addAllowDomain()">Save & Close</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -422,7 +422,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger pull-left" ng-click="closeCustomQuestion()">Close</button>
-        <button type="submit" class="btn btn-success pull-right" ng-click="addCustomQuestion()">SAVE</button>
+        <button type="submit" class="btn btn-success pull-right" ng-click="addCustomQuestion()">Save & Close</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -481,7 +481,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger pull-left" ng-click="closeDeniedDomain()">Close</button>
-        <button type="submit" class="btn btn-success pull-right" ng-click="addDeniedDomain()">SAVE</button>
+        <button type="submit" class="btn btn-success pull-right" ng-click="addDeniedDomain()">Save & Close</button>
       </div>
     </div>
     <!-- /.modal-content -->

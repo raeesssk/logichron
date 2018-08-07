@@ -13,10 +13,10 @@
                                     <a href="#/">Contact Discovery</a>
                                 </li>
                                 <li class="breadcrumb-item">
-                                    <a href="#">Job List</a>
+                                    <a href="#">Contact Discovery List</a>
                                 </li>
                             </ul>
-                            <h3>Job List</h3>
+                            <h3>Contact Discovery List</h3>
                             <hr>
                       	</div>
                       	<div class="card-block">
@@ -32,6 +32,7 @@
                                 <table class="table table-responsive">
                       		        <thead>
                   	                <tr>
+                                      <th>Campaign Name</th>
                 	                    <th>First Name</th>
                           						<th>Last Name</th>
                           						<th>Job Title</th>
@@ -54,29 +55,30 @@
                   	                </tr>
                     	            </thead>
                     	            <tbody>
-                  	                <tr ng-repeat="contactdiscovery in filteredTodos | filter : employee">
-                          						<td>{{contactdiscovery.dm_first_name}}</td>
-                          						<td>{{contactdiscovery.dm_last_name}}</td>
-                          						<td>{{contactdiscovery.dm_job_title}}</td>
-                          						<td>{{contactdiscovery.dm_job_level}}</td>
-                                      <td>{{contactdiscovery.dm_dept}}</td>
-                                      <td>{{contactdiscovery.dm_email_id}}</td>
-                                      <td>{{contactdiscovery.dm_mobile}}</td>
-                                      <td>{{contactdiscovery.dm_company_name}}</td>
-                                      <td>{{contactdiscovery.dm_address}}</td>
-                                      <td>{{contactdiscovery.dm_city}}</td>
-                                      <td>{{contactdiscovery.dm_state}}</td>
-                                      <td>{{contactdiscovery.dm_postal_code}}</td>
-                                      <td>{{contactdiscovery.dm_country}}</td>
-                                      <td>{{contactdiscovery.dm_industry}}</td>
-                                      <td>{{contactdiscovery.dm_company_size}}</td>
-                                      <td>{{contactdiscovery.dm_revenue}}</td>
-                                      <td>{{contactdiscovery.dm_asset}}</td>
-                                      <td>{{contactdiscovery.dm_domain}}</td>
+                  	                <tr ng-repeat="contactdiscovery in filteredTodos | filter : contactdiscovery">
+                                      <td>{{contactdiscovery.cdm_campaign}}</td>
+                          						<td>{{contactdiscovery.cdm_first_name}}</td>
+                          						<td>{{contactdiscovery.cdm_last_name}}</td>
+                          						<td>{{contactdiscovery.cdm_job_title}}</td>
+                          						<td>{{contactdiscovery.cdm_job_level}}</td>
+                                      <td>{{contactdiscovery.cdm_dept}}</td>
+                                      <td>{{contactdiscovery.cdm_email_id}}</td>
+                                      <td>{{contactdiscovery.cdm_mobile}}</td>
+                                      <td>{{contactdiscovery.cdm_company_name}}</td>
+                                      <td>{{contactdiscovery.cdm_address}}</td>
+                                      <td>{{contactdiscovery.cdm_city}}</td>
+                                      <td>{{contactdiscovery.cdm_state}}</td>
+                                      <td>{{contactdiscovery.cdm_postal_code}}</td>
+                                      <td>{{contactdiscovery.cdm_country}}</td>
+                                      <td>{{contactdiscovery.cdm_industry}}</td>
+                                      <td>{{contactdiscovery.cdm_company_size}}</td>
+                                      <td>{{contactdiscovery.cdm_revenue}}</td>
+                                      <td>{{contactdiscovery.cdm_asset}}</td>
+                                      <td>{{contactdiscovery.cdm_domain}}</td>
                           						<td>
                           							<i class="fa fa-info-circle" data-toggle="modal" data-target="#view-details" ng-click="view($index)"></i>
-                          							<a href="#/contactdiscovery/edit/{{contactdiscovery.dm_id}}"><i class="fa fa-pencil"></i></a>
-                          							<i class="fa fa-trash" data-toggle="modal" data-target="#confirm-delete" ng-click="deleteEntry(contactdiscovery.dm_id)"></i>
+                          							<a href="#/contactdiscovery/edit/{{contactdiscovery.cdm_id}}"><i class="fa fa-pencil"></i></a>
+                          							<i class="fa fa-trash" data-toggle="modal" data-target="#confirm-delete" ng-click="deleteEntry(contactdiscovery.cdm_id)"></i>
                           						</td>
               	                    </tr>
                     	            </tbody>

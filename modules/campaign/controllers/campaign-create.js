@@ -132,25 +132,33 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         }
     };
     $scope.closeAccntList=function(){
-        if ($scope.accountList.length > 0){
+         if ($scope.accountList.length == 0){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">Cannot Delete The Data.</p>',
+            message: '<p class="text-center">There Is No Such Data.</p>',
                 closeButton: false
             });
-            dialog.find('.modal-body').addClass("btn-danger");
+            dialog.find('.modal-body').addClass("btn-warning");
             setTimeout(function(){
                 dialog.modal('hide'); 
             }, 1500);
-        }
-        else{
-            $scope.campaign.cm_account_list="No";
+
             $('#account_list').modal("hide");
-            $scope.accountList=[];
+            $scope.campaign.cm_account_list="No";
+            $scope.account="";
         }
+        else if ($scope.accountList.length > 0){
+            $('#accnt_delete').modal("show");
+            $scope.campaign.cm_account_list="No";
+        }
+    };
+    $scope.accntDelConfirm=function(){
+        $scope.accountList=[];
+        $scope.campaign.cm_account_list="No";
+        $('#accnt_delete').modal("hide");
+        $('#account_list').modal("hide");
     };
     $scope.updateAccntList=function(){
        $('#account_list').modal("show");
-        
     };
 
 // 2
@@ -201,22 +209,32 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         }
     };
     $scope.closeSupression=function(){
-        if ($scope.supressionList.length > 0){
+         if ($scope.supressionList.length == 0){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">Cannot Delete The Data.</p>',
+            message: '<p class="text-center">There Is No Such Data.</p>',
                 closeButton: false
             });
-            dialog.find('.modal-body').addClass("btn-danger");
+            dialog.find('.modal-body').addClass("btn-warning");
             setTimeout(function(){
                 dialog.modal('hide'); 
             }, 1500);
-        }
-        else{
-            $scope.campaign.cm_supression_file="No";
+
             $('#supression_file').modal("hide");
-            $scope.supressionList=[];
+            $scope.campaign.cm_supression_file="No";
+            $scope.supression="";
+        }
+        else if ($scope.supressionList.length > 0){
+            $('#supression_delete').modal("show");
+            $scope.campaign.cm_supression_file="No";
         }
     };
+    $scope.supresDelConfirm=function(){
+        $scope.supressionList=[];
+        $scope.campaign.cm_supression_file="No";
+        $('#supression_delete').modal("hide");
+        $('#supression_file').modal("hide");
+    };
+
     $scope.updateSupression=function(){
        $('#supression_file').modal("show");
     };
@@ -259,22 +277,32 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         }
     };
     $scope.closeAllowDomain=function(){
-        if ($scope.allowDomainList.length > 0){
+         if ($scope.allowDomainList.length == 0){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">Cannot Delete The Data.</p>',
+            message: '<p class="text-center">There Is No Such Data.</p>',
                 closeButton: false
             });
-            dialog.find('.modal-body').addClass("btn-danger");
+            dialog.find('.modal-body').addClass("btn-warning");
             setTimeout(function(){
                 dialog.modal('hide'); 
             }, 1500);
-        }
-        else{
-            $scope.campaign.cm_allow_domain="No";
+
             $('#allow_Domain').modal("hide");
-            $scope.allowDomainList=[];
+            $scope.campaign.cm_allow_domain="No";
+            $scope.allow_domain="";
+        }
+        else if ($scope.allowDomainList.length > 0){
+            $('#allowed_delete').modal("show");
+            $scope.campaign.cm_allow_domain="No";
         }
     };
+    $scope.allowDelConfirm=function(){
+        $scope.allowDomainList=[];
+        $scope.campaign.cm_allow_domain="No";
+        $('#allowed_delete').modal("hide");
+        $('#allow_Domain').modal("hide");
+    };
+
     $scope.updateAllowDomain=function(){
        $('#allow_Domain').modal("show");
     };
@@ -317,22 +345,32 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         }
     };
     $scope.closeCustomQuestion=function(){
-        if ($scope.customQuestionList.length > 0){
+         if ($scope.customQuestionList.length == 0){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">Cannot Delete The Data.</p>',
+            message: '<p class="text-center">There Is No Such Data.</p>',
                 closeButton: false
             });
-            dialog.find('.modal-body').addClass("btn-danger");
+            dialog.find('.modal-body').addClass("btn-warning");
             setTimeout(function(){
                 dialog.modal('hide'); 
             }, 1500);
-        }
-        else{
-            $scope.campaign.cm_custom_question="No";
+
             $('#custom_question').modal("hide");
-            $scope.customQuestionList=[];
+            $scope.campaign.cm_custom_question="No";
+            $scope.custom_question="";
+        }
+        else if ($scope.customQuestionList.length > 0){
+            $('#custom_delete').modal("show");
+            $scope.campaign.cm_custom_question="No";
         }
     };
+    $scope.customDelConfirm=function(){
+        $scope.customQuestionList=[];
+        $scope.campaign.cm_custom_question="No";
+        $('#custom_delete').modal("hide");
+        $('#custom_question').modal("hide");
+    };
+
     $scope.updateCustomQuestion=function(){
        $('#custom_question').modal("show");
     };
@@ -377,21 +415,30 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         }
     };
     $scope.closeDeniedDomain=function(){
-        if ($scope.deniedDomainList.length > 0){
+         if ($scope.deniedDomainList.length == 0){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">Cannot Delete The Data.</p>',
+            message: '<p class="text-center">There Is No Such Data.</p>',
                 closeButton: false
             });
-            dialog.find('.modal-body').addClass("btn-danger");
+            dialog.find('.modal-body').addClass("btn-warning");
             setTimeout(function(){
                 dialog.modal('hide'); 
             }, 1500);
-        }
-        else{
-            $scope.campaign.cm_denied_domain="No";
+
             $('#denied_domain').modal("hide");
-            $scope.deniedDomainList=[];
+            $scope.campaign.cm_denied_domain="No";
+            $scope.denied_domain="";
         }
+        else if ($scope.deniedDomainList.length > 0){
+            $('#denied_delete').modal("show");
+            $scope.campaign.cm_denied_domain="No";
+        }
+    };
+    $scope.deniedDelConfirm=function(){
+        $scope.deniedDomainList=[];
+        $scope.campaign.cm_denied_domain="No";
+        $('#denied_delete').modal("hide");
+        $('#denied_domain').modal("hide");
     };
     $scope.updateDeniedDomain=function(){
        $('#denied_domain').modal("show");
@@ -697,5 +744,6 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
 		}
 	};
 
+   
 
 });

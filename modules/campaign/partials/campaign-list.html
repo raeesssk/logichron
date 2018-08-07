@@ -1,3 +1,8 @@
+<!-- <style type="text/css">
+  #mouse_hover:hover{
+    cursor: pointer;
+  }
+</style> -->
 <div class="pcoded-content" ng-init="getAll();">
     <div class="pcoded-inner-content">
         <div class="main-body">
@@ -66,7 +71,7 @@
                                       <td>{{campaign.cm_campaign_name}}</td>
                                       <td>{{campaign.cm_restrict}}</td>
 
-                                      <td ng-click="accntView($index)">{{campaign.cm_account_list}}</td>
+                                      <td ng-click="accntView($index)" id="mouse_hover">{{campaign.cm_account_list}}</td>
 
                                       <td ng-click="supressionView($index)">{{campaign.cm_supression_file}}</td>
 
@@ -144,12 +149,10 @@
 
 <!--1  Account List (Y/N) Modal -->
 <div class="modal fade" id="account_list">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title"></h4>
+         <h4 class="modal-title">Account List</h4>
       </div>
       <div class="modal-body">
          <table class="table table-hover">
@@ -168,7 +171,7 @@
             </table>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -180,12 +183,10 @@
 
 <!--2 Supression File (Y/N) Modal -->
 <div class="modal fade" id="supression_file">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title"></h4>
+        <h4 class="modal-title">Supression File</h4>
       </div>
       <div class="modal-body">
          <table class="table table-hover">
@@ -204,7 +205,7 @@
             </table>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -215,12 +216,10 @@
 
 <!--3 Allowed Domain Modal -->
 <div class="modal fade" id="allow_Domain">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title"></h4>
+        <h4 class="modal-title">Allowed Domain</h4>
       </div>
       <div class="modal-body">
          <table class="table table-hover">
@@ -237,7 +236,7 @@
             </table>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -248,12 +247,10 @@
 
 <!--4 Custom Question Modal -->
 <div class="modal fade" id="custom_question">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title"></h4>
+        <h4 class="modal-title">Custom Question</h4>
       </div>
       <div class="modal-body">
           <table class="table table-hover">
@@ -270,7 +267,7 @@
             </table>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -281,12 +278,10 @@
 
 <!--5 Denied Domain Modal -->
 <div class="modal fade" id="denied_domain">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title"></h4>
+        <h4 class="modal-title">Denied Domain</h4>
       </div>
       <div class="modal-body">
           <table class="table table-hover">
@@ -303,7 +298,7 @@
             </table>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
       </div>
     </div>
     <!-- /.modal-content -->

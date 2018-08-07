@@ -21,92 +21,106 @@
                         </div>
                         <div class="card-block">
                             <div class="form-group row">
-
-                                <div class="col-sm-6">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Campaign Name</label>
+                                        <input type="text"
+                                            id="cdm_campaign_name"
+                                            ng-model="contactdiscovery.cdm_campaign_name"
+                                            typeahead="obj as obj.cm_campaign_name for obj in getSearchCampaign($viewValue)"
+                                            typeahead-loading="loadingCampaignList"
+                                            typeahead-no-results="noCampaignListResults"
+                                            typeahead-on-select="getCampaignDetails()"
+                                            class="form-control">
+                                        <i ng-show="loadingCampaignList" class="glyphicon glyphicon-refresh"></i>
+                                        <div ng-show="noCampaignListResults">
+                                            <i class="glyphicon glyphicon-remove"></i> No Results Found
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-sm-4">
                                         <label>Project Name</label>
-                                        <input type="text" id="dm_mm_id" 
-                                        ng-model="contactdiscovery.dm_mm_id"
-                                        typeahead="obj as obj.mm_pm_name for obj in getSearch($viewValue)"
-                                        class="form-control"/>
-                                </div>
-                                <div class="col-sm-6">
+                                        <input type="text" id="cdm_project_name" class="form-control" ng-model="contactdiscovery.cdm_project_name" />
+                                        <br>
+                                </div> -->
+                                <div class="col-sm-4">
                                         <label>First Name</label>
-                                        <input type="text" id="dm_first_name" class="form-control" ng-model="contactdiscovery.dm_first_name" />
+                                        <input type="text" id="cdm_first_name" class="form-control" ng-model="contactdiscovery.cdm_first_name" />
                                         <br>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                         <label>Last Name</label>
-                                        <input type="text" id="dm_last_name" class="form-control" ng-model="contactdiscovery.dm_last_name" />
+                                        <input type="text" id="cdm_last_name" class="form-control" ng-model="contactdiscovery.cdm_last_name" />
                                         
                                 </div>
 
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                         <label>Job Title</label>
-                                        <input type="text" id="dm_job_title" class="form-control" ng-model="contactdiscovery.dm_job_title" />
+                                        <input type="text" id="cdm_job_title" class="form-control" ng-model="contactdiscovery.cdm_job_title" />
                                         <br>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                         <label>Job Level</label>
-                                        <input type="text" id="dm_job_level" class="form-control" ng-model="contactdiscovery.dm_job_level" />
+                                        <input type="text" id="cdm_job_level" class="form-control" ng-model="contactdiscovery.cdm_job_level" />
                                         
                                 </div>
 
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                         <label>Department</label>
-                                        <input type="text" id="dm_dept" class="form-control" ng-model="contactdiscovery.dm_dept" />
+                                        <input type="text" id="cdm_dept" class="form-control" ng-model="contactdiscovery.cdm_dept" />
                                        <br> 
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                         <label>Email-Id</label>
-                                        <input type="email" id="dm_email_id" class="form-control" ng-model="contactdiscovery.dm_email_id" />
+                                        <input type="email" id="cdm_email_id" class="form-control" ng-model="contactdiscovery.cdm_email_id" />
                                         
                                 </div>
                                 
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                         <label>Mobile Number</label>
-                                        <input type="text" id="dm_mobile" class="form-control" ng-model="contactdiscovery.dm_mobile" />
+                                        <input type="text" id="cdm_mobile" class="form-control" ng-model="contactdiscovery.cdm_mobile" />
                                         <br>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                         <label>Company Name</label>
-                                        <input type="text" id="dm_company_name" class="form-control" ng-model="contactdiscovery.dm_company_name"/>
+                                        <input type="text" id="cdm_company_name" class="form-control" ng-model="contactdiscovery.cdm_company_name"/>
                                 
                                 </div>
 
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                         <label>Address</label>
-                                        <textarea id="dm_address" class="form-control" ng-model="contactdiscovery.dm_address" rows="1"></textarea>
+                                        <textarea id="cdm_address" class="form-control" ng-model="contactdiscovery.cdm_address" rows="1"></textarea>
                                         <br>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                         <label>City</label>
-                                        <input type="text" id="dm_city" class="form-control" ng-model="contactdiscovery.dm_city">
+                                        <input type="text" id="cdm_city" class="form-control" ng-model="contactdiscovery.cdm_city">
                                 
                                 </div>
 
-                                <div class="col-lg-6">
+                                <div class="col-lg-4">
                                         <label>State</label>
-                                        <input type="text" id="dm_state" class="form-control" ng-model="contactdiscovery.dm_state">
+                                        <input type="text" id="cdm_state" class="form-control" ng-model="contactdiscovery.cdm_state">
                                     <br>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                         <label>Postal Code</label>
-                                        <input type="text" id="dm_postal_code" class="form-control" ng-model="contactdiscovery.dm_postal_code" />
+                                        <input type="text" id="cdm_postal_code" class="form-control" ng-model="contactdiscovery.cdm_postal_code" />
                                 
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                         <label>Country</label>
-                                        <input type="text" id="dm_country" class="form-control" ng-model="contactdiscovery.dm_country" />
+                                        <input type="text" id="cdm_country" class="form-control" ng-model="contactdiscovery.cdm_country" />
                                     <br>    
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                         <label>Industry</label>
-                                        <input type="text" id="dm_industry" class="form-control" ng-model="contactdiscovery.dm_industry">
+                                        <input type="text" id="cdm_industry" class="form-control" ng-model="contactdiscovery.cdm_industry">
                                 
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                         <label>Company Size</label>
-                                        <select id="dm_company_size" class="form-control" ng-model="contactdiscovery.dm_company_size">
+                                        <select id="cdm_company_size" class="form-control" ng-model="contactdiscovery.cdm_company_size">
                                             <option>N/A</option>
                                             <option>0-100</option>
                                             <option>101-500</option>
@@ -115,19 +129,19 @@
                                         </select>
                                     <br>    
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                         <label>Revenue</label>
-                                        <input type="text" id="dm_revenue" class="form-control" ng-model="contactdiscovery.dm_revenue" />
+                                        <input type="text" id="cdm_revenue" class="form-control" ng-model="contactdiscovery.cdm_revenue" />
                                 
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                         <label>Asset</label>
-                                        <input type="text" id="dm_asset" class="form-control" ng-model="contactdiscovery.dm_asset" />
+                                        <input type="text" id="cdm_asset" class="form-control" ng-model="contactdiscovery.cdm_asset" />
                                     <br>    
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-4">
                                         <label>Domain</label>
-                                        <input type="text" id="dm_domain" class="form-control" ng-model="contactdiscovery.dm_domain" />
+                                        <input type="text" id="cdm_domain" class="form-control" ng-model="contactdiscovery.cdm_domain" />
                                 <br>
                                 </div>
                             </div>

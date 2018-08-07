@@ -23,6 +23,17 @@ angular.module('campaign').controller('campaignListCtrl', function ($rootScope, 
 $scope.apiURL = $rootScope.baseURL+'/campaign/campaign/total';
     
     
+      // $('#mouse_hover').mouseover(function(){
+      //   alert("test");
+      //   $("#mouse_hover").css("cursor", "pointer");
+      // });
+    
+    // if(value.cm_account_list == 'Yes'){
+    //   $('#mouse_hover').hover(function(){
+    //     alert("test");
+    //     $(this).css("cursor", "pointer");
+    //   });
+    // }
     
    $scope.getAll = function () {
         if ($('#searchtext').val() == undefined || $('#searchtext').val() == "") {
@@ -90,11 +101,10 @@ $scope.apiURL = $rootScope.baseURL+'/campaign/campaign/total';
                 if (data.length > 0) {
                  
                   data.forEach(function (value, key) {
+                    
                     $scope.filteredTodos.push(value);
+                    
                   });
-                }
-                else{
-                  
                 }
                 
                       // $scope.obj_Main = $scope.vendorList;
@@ -153,10 +163,12 @@ $scope.apiURL = $rootScope.baseURL+'/campaign/campaign/total';
             }, 1500);            
 	    });
 	};
+    
 
 // Modal Views
 // 1
   $scope.accntView = function(index){
+    $scope.accountList=[];
       if($scope.filteredTodos[index].cm_account_list == 'Yes'){
         $http({
           method: 'GET',
@@ -171,6 +183,7 @@ $scope.apiURL = $rootScope.baseURL+'/campaign/campaign/total';
               $scope.accountList.push(value);
             });
             $("#account_list").modal("show");
+
         })
         .error(function(data) 
         {   
@@ -186,6 +199,7 @@ $scope.apiURL = $rootScope.baseURL+'/campaign/campaign/total';
     };
 // 2
   $scope.supressionView = function(index){
+    $scope.supressionList=[];
       if($scope.filteredTodos[index].cm_supression_file == 'Yes'){
         $http({
           method: 'GET',
@@ -215,6 +229,7 @@ $scope.apiURL = $rootScope.baseURL+'/campaign/campaign/total';
     };
 // 3
   $scope.allowView = function(index){
+    $scope.allowDomainList=[];
       if($scope.filteredTodos[index].cm_allow_domain == 'Yes'){
         $http({
           method: 'GET',
@@ -244,6 +259,7 @@ $scope.apiURL = $rootScope.baseURL+'/campaign/campaign/total';
     };
 // 4
   $scope.customView = function(index){
+    $scope.customQuestionList=[];
       if($scope.filteredTodos[index].cm_custom_question == 'Yes'){
         $http({
           method: 'GET',
@@ -274,6 +290,7 @@ $scope.apiURL = $rootScope.baseURL+'/campaign/campaign/total';
 
 // 5
   $scope.deniedView = function(index){
+    $scope.deniedDomainList=[];
       if($scope.filteredTodos[index].cm_denied_domain == 'Yes'){
         $http({
           method: 'GET',

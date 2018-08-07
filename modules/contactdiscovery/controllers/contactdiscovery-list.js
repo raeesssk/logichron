@@ -133,7 +133,7 @@ $scope.filter = function()
     $scope.loading1 = 0;
     $scope.limit={};
 
-$scope.apiURL = $rootScope.baseURL+'/job/job/total';
+$scope.apiURL = $rootScope.baseURL+'/contact/contact/total';
     
     
     
@@ -192,7 +192,7 @@ $scope.apiURL = $rootScope.baseURL+'/job/job/total';
               $scope.limit.end = end;
               $http({
                 method: 'POST',
-                url: $rootScope.baseURL+'/job/job/limit',
+                url: $rootScope.baseURL+'/contact/contact/limit',
                 data: $scope.limit,
                 headers: {'Content-Type': 'application/json',
                           'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
@@ -231,8 +231,8 @@ $scope.apiURL = $rootScope.baseURL+'/job/job/total';
        $scope.getAll();
     };
 
-    $scope.deleteEntry = function (dm_id) {
-      $scope.dm_id=dm_id;
+    $scope.deleteEntry = function (cdm_id) {
+      $scope.cdm_id=cdm_id;
     }  
 
     $scope.deleteConfirm = function () {
@@ -240,7 +240,7 @@ $scope.apiURL = $rootScope.baseURL+'/job/job/total';
                 $('#del').text("please wait...");
 	     $http({
 	      method: 'POST',
-	      url: $rootScope.baseURL+'/job/delete/'+$scope.dm_id,
+	      url: $rootScope.baseURL+'/contact/delete/'+$scope.cdm_id,
 	      headers: {'Content-Type': 'application/json',
                   'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
 	    })
@@ -272,7 +272,7 @@ $scope.apiURL = $rootScope.baseURL+'/job/job/total';
         $scope.answers=[];
         $http({
           method: 'GET',
-          url: $rootScope.baseURL+'/question/view/'+$scope.filteredTodos[index].dm_id,
+          url: $rootScope.baseURL+'/question/view/'+$scope.filteredTodos[index].cdm_id,
           //data: $scope.data,
           headers: {'Content-Type': 'application/json',
                   'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
@@ -281,6 +281,7 @@ $scope.apiURL = $rootScope.baseURL+'/job/job/total';
         {
             obj.forEach(function(value, key){
               $scope.answers.push(value);
+              console.log($scope.answers);
             });
 
         })

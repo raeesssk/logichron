@@ -250,16 +250,6 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
       $scope.olddeniedDomainList.splice(index,1);
     };
 
-    $scope.deleteQA=function(index){
-        $scope.ansremove.push($scope.answers[index]);
-        $scope.answers.splice(index,1)
-        $('#qm_questions').focus();
-    };
-    $scope.deleteQA1=function(index){
-        $scope.answersadd.splice(index,1);
-        $('#qm_questions').focus();
-    };
-
 
 
     // Show Modal on click of yes
@@ -362,6 +352,8 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
         else{
             $scope.campaign.cm_account_list="No";
             $('#account_list').modal("hide");
+            $scope.accountList=[];
+            $scope.account = "";
         }
     };
     $scope.updateAccntList=function(){
@@ -430,6 +422,8 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
         else{
             $scope.campaign.cm_supression_file="No";
             $('#supression_file').modal("hide");
+            $scope.supressionList=[];
+            $scope.supression = "";
         }
     };
     $scope.updateSupression=function(){
@@ -487,6 +481,8 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
         else{
             $scope.campaign.cm_allow_domain="No";
             $('#allow_Domain').modal("hide");
+            $scope.allowDomainList=[];
+            $scope.allow_domain = "";
         }
     };
     $scope.updateAllowDomain=function(){
@@ -544,6 +540,8 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
         else{
             $scope.campaign.cm_custom_question="No";
             $('#custom_question').modal("hide");
+            $scope.customQuestionList=[];
+            $scope.custom_question = "";
         }
     };
     $scope.updateCustomQuestion=function(){
@@ -603,6 +601,8 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
         else{
             $scope.campaign.cm_denied_domain="No";
             $('#denied_domain').modal("hide");
+            $scope.deniedDomainList=[];
+            $scope.denied_domain = "";
         }
     };
     $scope.updateDeniedDomain=function(){
