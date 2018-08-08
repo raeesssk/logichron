@@ -10,11 +10,33 @@ angular.module('contactdiscovery').controller('contactdiscoveryEditCtrl', functi
   $scope.apiURL = $rootScope.baseURL+'/contact/edit/'+$scope.jobId;
 
   $scope.addto = function() {
-        
-        $scope.answersadd.push($scope.obj);
-        $('#qm_questions').focus();
-        $scope.obj="";
-
+         if($('#qm_questions').val() == undefined || $('#qm_questions').val() == ""){
+            var dialog = bootbox.dialog({
+            message: '<p class="text-center">Please Enter Question.</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide'); 
+                $('#qm_questions').focus();
+            }, 1500);
+        }
+        else if($('#qm_answers').val() == undefined || $('#qm_answers').val() == ""){
+            var dialog = bootbox.dialog({
+            message: '<p class="text-center">Please Enter Answer.</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide');
+                $('#qm_answers').focus(); 
+            }, 1500);
+        }
+        else{
+            $scope.answers.push($scope.obj);
+            $('#qm_questions').focus();
+            $scope.obj="";
+        }
     };
   $scope.getSearch = function(vals) {
 
@@ -35,7 +57,7 @@ angular.module('contactdiscovery').controller('contactdiscoveryEditCtrl', functi
   $scope.getEntry = function () {
 	     $http({
 	      method: 'GET',
-	      url: $rootScope.baseURL+'/job/'+$scope.jobId,
+	      url: $rootScope.baseURL+'/contact/'+$scope.jobId,
 	      headers: {'Content-Type': 'application/json',
                   'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
 	    })
@@ -47,7 +69,7 @@ angular.module('contactdiscovery').controller('contactdiscoveryEditCtrl', functi
               });
                 $http({
                   method: 'GET',
-                  url: $rootScope.baseURL+'/job/question/'+$scope.jobId,
+                  url: $rootScope.baseURL+'/contact/question/'+$scope.jobId,
                   headers: {'Content-Type': 'application/json',
                           'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
                 })
@@ -96,194 +118,235 @@ angular.module('contactdiscovery').controller('contactdiscoveryEditCtrl', functi
 
   		var nameRegex = /^\d+$/;
   		var emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-	    if($('#dm_mm_id').val() == undefined || $('#dm_mm_id').val() == ""){
+	    if($('#cdm_campaign_name').val() == undefined || $('#cdm_campaign_name').val() == ""){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter Project</p>',
+            message: '<p class="text-center">Please Enter Campaign Name.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
             setTimeout(function(){
                 dialog.modal('hide'); 
+                $('#cdm_campaign_name').focus();
             }, 1500);
         }
-	    else if($('#dm_first_name').val() == undefined || $('#dm_first_name').val() == ""){
+        else if($('#cdm_first_name').val() == undefined || $('#cdm_first_name').val() == ""){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter first name.</p>',
+            message: '<p class="text-center">Please Enter First Name.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
             setTimeout(function(){
                 dialog.modal('hide'); 
+                $('#cdm_first_name').focus();
             }, 1500);
         }
-        else if($('#dm_last_name').val() == undefined || $('#dm_last_name').val() == ""){
+        else if($('#cdm_last_name').val() == undefined || $('#cdm_last_name').val() == ""){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter last name.</p>',
+            message: '<p class="text-center">Please Enter Last Name.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
             setTimeout(function(){
                 dialog.modal('hide'); 
+                $('#cdm_last_name').focus();
             }, 1500);
         }
-      else if($('#dm_job_title').val() == undefined || $('#dm_job_title').val() == ""){
+      else if($('#cdm_job_title').val() == undefined || $('#cdm_job_title').val() == ""){
         var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter job title.</p>',
+            message: '<p class="text-center">Please Enter Job Title.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
             setTimeout(function(){
-                dialog.modal('hide'); 
+                dialog.modal('hide');
+                $('#cdm_job_title').focus(); 
             }, 1500);
       }
-        else if($('#dm_job_level').val() == undefined || $('#dm_job_level').val() == ""){
+        else if($('#cdm_job_level').val() == undefined || $('#cdm_job_level').val() == ""){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter job level.</p>',
+            message: '<p class="text-center">Please Enter Job Level.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
             setTimeout(function(){
-                dialog.modal('hide'); 
+                dialog.modal('hide');
+                $('#cdm_job_level').focus(); 
             }, 1500);
         }
-        else if($('#dm_dept').val() == undefined || $('#dm_dept').val() == ""){
+        else if($('#cdm_dept').val() == undefined || $('#cdm_dept').val() == ""){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter department.</p>',
+            message: '<p class="text-center">Please Enter Department.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
             setTimeout(function(){
                 dialog.modal('hide'); 
+                $('#cdm_dept').focus();
             }, 1500);
         }
-        else if($('#dm_email_id').val() == undefined || $('#dm_email_id').val() == ""){
+        else if($('#cdm_email_id').val() == undefined || $('#cdm_email_id').val() == ""){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter Email-Address.</p>',
+            message: '<p class="text-center">Please Enter Email-Address.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
             setTimeout(function(){
-                dialog.modal('hide'); 
+                dialog.modal('hide');
+                $('#cdm_email_id').focus(); 
             }, 1500);
         }
-        else if($('#dm_mobile').val() == undefined || $('#dm_mobile').val() == ""){
+        else if($('#cdm_mobile').val() == undefined || $('#cdm_mobile').val() == ""){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter Mobile No.</p>',
+            message: '<p class="text-center">Please Enter Mobile No.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
             setTimeout(function(){
                 dialog.modal('hide'); 
+                $('#cdm_mobile').focus();
             }, 1500);
         }
-        else if($('#dm_company_name').val() == undefined || $('#dm_company_name').val() == ""){
+        else if($('#cdm_company_name').val() == undefined || $('#cdm_company_name').val() == ""){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter Company name.</p>',
+            message: '<p class="text-center">Please Enter Company name.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
             setTimeout(function(){
-                dialog.modal('hide'); 
+                dialog.modal('hide');
+                $('#cdm_company_name').focus(); 
             }, 1500);
         }
-        else if($('#dm_address').val() == undefined || $('#dm_address').val() == ""){
+        else if($('#cdm_address').val() == undefined || $('#cdm_address').val() == ""){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter address.</p>',
+            message: '<p class="text-center">Please Enter Address.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
             setTimeout(function(){
                 dialog.modal('hide'); 
+                $('#cdm_address').focus();
             }, 1500);
         }
-        else if($('#dm_city').val() == undefined || $('#dm_city').val() == ""){
+        else if($('#cdm_city').val() == undefined || $('#cdm_city').val() == ""){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter city.</p>',
+            message: '<p class="text-center">Please Enter City.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
             setTimeout(function(){
-                dialog.modal('hide'); 
+                dialog.modal('hide');
+                $('#cdm_city').focus(); 
             }, 1500);
         }
-        else if($('#dm_state').val() == undefined || $('#dm_state').val() == ""){
+        else if($('#cdm_state').val() == undefined || $('#cdm_state').val() == ""){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter state.</p>',
+            message: '<p class="text-center">Please Enter State.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
             setTimeout(function(){
                 dialog.modal('hide'); 
+                $('#cdm_state').focus();
             }, 1500);
         }
-        else if($('#dm_postal_code').val() == undefined || $('#dm_postal_code').val() == ""){
+        else if($('#cdm_postal_code').val() == undefined || $('#cdm_postal_code').val() == ""){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter postal code.</p>',
+            message: '<p class="text-center">Please Enter Postal Code.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
             setTimeout(function(){
                 dialog.modal('hide'); 
+                $('#cdm_postal_code').focus();
             }, 1500);
         }
-        else if($('#dm_country').val() == undefined || $('#dm_country').val() == ""){
+        else if($('#cdm_country').val() == undefined || $('#cdm_country').val() == ""){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter country.</p>',
+            message: '<p class="text-center">Please Enter Country.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
             setTimeout(function(){
                 dialog.modal('hide'); 
+                $('#cdm_country').focus();
             }, 1500);
         }
-        else if($('#dm_industry').val() == undefined || $('#dm_industry').val() == ""){
+        else if($('#cdm_industry').val() == undefined || $('#cdm_industry').val() == ""){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter industry.</p>',
+            message: '<p class="text-center">Please Enter Industry.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
             setTimeout(function(){
                 dialog.modal('hide'); 
+                $('#cdm_industry').focus();
             }, 1500);
         }
-        else if($('#dm_company_size').val() == undefined || $('#dm_company_size').val() == ""){
+        else if($('#cdm_company_size').val() == undefined || $('#cdm_company_size').val() == ""){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter company size.</p>',
+            message: '<p class="text-center">Please Enter Company Size.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
             setTimeout(function(){
-                dialog.modal('hide'); 
+                dialog.modal('hide');
+                $('#cdm_company_size').focus(); 
             }, 1500);
         }
-        else if($('#dm_revenue').val() == undefined || $('#dm_revenue').val() == ""){
+        else if($('#cdm_revenue').val() == undefined || $('#cdm_revenue').val() == ""){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter revenue.</p>',
+            message: '<p class="text-center">Please Enter Revenue.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
             setTimeout(function(){
-                dialog.modal('hide'); 
+                dialog.modal('hide');
+                $('#cdm_revenue').focus(); 
             }, 1500);
         }
-        else if($('#dm_asset').val() == undefined || $('#dm_asset').val() == ""){
+        else if($('#cdm_asset').val() == undefined || $('#cdm_asset').val() == ""){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter asset.</p>',
+            message: '<p class="text-center">Please Enter Asset.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
             setTimeout(function(){
-                dialog.modal('hide'); 
+                dialog.modal('hide');
+                $('#cdm_asset').focus(); 
             }, 1500);
         }
-        else if($('#dm_domain').val() == undefined || $('#dm_domain').val() == ""){
+        else if($('#cdm_domain').val() == undefined || $('#cdm_domain').val() == ""){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter domain.</p>',
+            message: '<p class="text-center">Please Enter Domain.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
             setTimeout(function(){
-                dialog.modal('hide'); 
+                dialog.modal('hide');
+                $('#cdm_domain').focus(); 
+            }, 1500);
+        }
+        else if($('#qm_questions').val() == undefined || $('#qm_questions').val() == ""){
+            var dialog = bootbox.dialog({
+            message: '<p class="text-center">Please Enter Question?.</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide');
+                $('#qm_questions').focus(); 
+            }, 1500);
+        }
+        else if($('#qm_answers').val() == undefined || $('#qm_answers').val() == ""){
+            var dialog = bootbox.dialog({
+            message: '<p class="text-center">Please Enter Answer.</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide');
+                $('#qm_answers').focus(); 
             }, 1500);
         }
 	    else{
@@ -304,7 +367,7 @@ angular.module('contactdiscovery').controller('contactdiscoveryEditCtrl', functi
 		    })
 		    .success(function(login)
 		    {
-                $('#btnsave').text("SAVE");
+                $('#btnsave').text("Update");
                 $('#btnsave').removeAttr('disabled');
 		       window.location.href = '#/contactdiscovery/joblist';  
 		    })
@@ -315,7 +378,7 @@ angular.module('contactdiscovery').controller('contactdiscoveryEditCtrl', functi
 	                closeButton: false
 	            });
 	            setTimeout(function(){
-                $('#btnsave').text("SAVE");
+                $('#btnsave').text("Update");
                 $('#btnsave').removeAttr('disabled');
 	                dialog.modal('hide'); 
 	            }, 1500);            

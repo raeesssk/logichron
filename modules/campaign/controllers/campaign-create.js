@@ -764,7 +764,7 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
                     })
                     .success(function(login)
                     {
-                        $('#btnsave').text("SAVE");
+                        $('#btnsave').text("Save");
                         $('#btnsave').removeAttr('disabled');
                        window.location.href = '#/campaign/';  
                     })
@@ -775,7 +775,7 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
                         closeButton: false
                     });
                     setTimeout(function(){
-                        $('#btnsave').text("SAVE");
+                        $('#btnsave').text("Save");
                         $('#btnsave').removeAttr('disabled');
                         dialog.modal('hide');  
                     }, 1500);

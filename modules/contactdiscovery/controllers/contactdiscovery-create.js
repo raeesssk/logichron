@@ -118,10 +118,12 @@ angular.module('contactdiscovery').controller('contactdiscoveryAddCtrl', functio
         $scope.answers.splice(index,1);
         $('#qm_questions').focus();
     };
+
+    $('#cdm_campaign_name').focus();
     $scope.addEntry = function () {
 		var nameRegex = /^\d+$/;
   		var emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-	    $('#cdm_campaign_name').focus();
+	    
 
         if($('#cdm_campaign_name').val() == undefined || $('#cdm_campaign_name').val() == ""){
 	    	var dialog = bootbox.dialog({
@@ -134,17 +136,6 @@ angular.module('contactdiscovery').controller('contactdiscoveryAddCtrl', functio
                 $('#cdm_campaign_name').focus();
             }, 1500);
 	    }
-	    // else if($('#cdm_project_name').val() == undefined || $('#cdm_project_name').val() == ""){
-	    // 	var dialog = bootbox.dialog({
-     //        message: '<p class="text-center">Please Enter Project Name.</p>',
-     //            closeButton: false
-     //        });
-     //        dialog.find('.modal-body').addClass("btn-danger");
-     //        setTimeout(function(){
-     //            dialog.modal('hide'); 
-     //            $('#cdm_project_name').focus();
-     //        }, 1500);
-	    // }
         else if($('#cdm_first_name').val() == undefined || $('#cdm_first_name').val() == ""){
             var dialog = bootbox.dialog({
             message: '<p class="text-center">Please Enter First Name.</p>',
@@ -382,7 +373,7 @@ angular.module('contactdiscovery').controller('contactdiscoveryAddCtrl', functio
                     })
                     .success(function(login)
                     {
-                        $('#btnsave').text("SAVE");
+                        $('#btnsave').text("Save");
                         $('#btnsave').removeAttr('disabled');
                        window.location.href = '#/contactdiscovery/joblist';  
                     })
@@ -393,7 +384,7 @@ angular.module('contactdiscovery').controller('contactdiscoveryAddCtrl', functio
                         closeButton: false
                     });
                     setTimeout(function(){
-                        $('#btnsave').text("SAVE");
+                        $('#btnsave').text("Save");
                         $('#btnsave').removeAttr('disabled');
                         dialog.modal('hide');  
                     }, 1500);
