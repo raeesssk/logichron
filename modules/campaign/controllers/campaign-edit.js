@@ -27,20 +27,7 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
 	$scope.campaignId = $routeParams.campaignId;
     $scope.apiURL = $rootScope.baseURL+'/campaign/edit/'+$scope.campaignId;
 
-    $('#cm_end_date').datepicker({
-          validateOnBlur: false,
-          todayButton: false,
-          timepicker: false,
-          scrollInput: false,
-          format: 'yyyy-mm-dd',
-          autoclose: true,
-          /*minDate: (parseInt(new Date().getFullYear()) - 100) + '/01/01',// minimum date(for today use 0 or -1970/01/01)
-          maxDate: (parseInt(new Date().getFullYear()) - 18) + '/01/01',//maximum date calendar*/
-          onChangeDateTime: function (dp, $input) {
-              $scope.campaign.cm_end_date = $('#cm_end_date').val();
-          }
-    });
-
+   
   $scope.getSearch = function(vals) {
 
       var searchTerms = {search: vals};
@@ -261,8 +248,8 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
         }
         else {
             if($scope.accountList.length > 0 || $scope.oldaccountList.length > 0){
-                $('#accnt_delete').modal("show");
                 $('#accnt_delete').modal({backdrop: 'static', keyboard: false});
+                $('#accnt_delete').modal("show");
                 
             }
         } 
@@ -275,8 +262,8 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
         }
         else {
             if($scope.supressionList.length > 0 || $scope.oldsupressionList.length > 0){
-                $('#supression_delete').modal("show");
                 $('#supression_delete').modal({backdrop: 'static', keyboard: false});
+                $('#supression_delete').modal("show");
             }
         } 
     });
@@ -288,8 +275,8 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
         }
         else {
             if($scope.allowDomainList.length > 0 || $scope.oldallowDomainList.length > 0){
-                $('#allowed_delete').modal("show");
                 $('#allowed_delete').modal({backdrop: 'static', keyboard: false});
+                $('#allowed_delete').modal("show");
             }
         } 
     });
@@ -301,8 +288,8 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
         }
         else {
             if($scope.customQuestionList.length > 0 || $scope.oldcustomQuestionList.length > 0){
-                $('#custom_delete').modal("show");
                 $('#custom_delete').modal({backdrop: 'static', keyboard: false});
+                $('#custom_delete').modal("show");
             }
         } 
     });
@@ -314,8 +301,8 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
         }
         else {
             if($scope.deniedDomainList.length > 0 || $scope.olddeniedDomainList.length > 0){
-                $('#denied_delete').modal("show");
                 $('#denied_delete').modal({backdrop: 'static', keyboard: false});
+                $('#denied_delete').modal("show");
             }   
         } 
     });
@@ -401,7 +388,9 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
         $scope.campaign.cm_account_list="Yes";
     };
     $scope.updateAccntList=function(){
-       $('#account_list').modal("show");
+        $('#account_list').modal({backdrop: 'static', keyboard: false});
+        $('#account_list').modal("show");
+
     };
 
 // 2
@@ -483,7 +472,8 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
     };
 
     $scope.updateSupression=function(){
-       $('#supression_file').modal("show");
+        $('#supression_file').modal({backdrop: 'static', keyboard: false});
+        $('#supression_file').modal("show");
     };
 
 
@@ -555,7 +545,8 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
     };
 
     $scope.updateAllowDomain=function(){
-       $('#allow_Domain').modal("show");
+        $('#allow_Domain').modal({backdrop: 'static', keyboard: false});
+        $('#allow_Domain').modal("show");
     };
 
 
@@ -627,7 +618,8 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
     };
 
     $scope.updateCustomQuestion=function(){
-       $('#custom_question').modal("show");
+        $('#custom_question').modal({backdrop: 'static', keyboard: false});
+        $('#custom_question').modal("show");
     };
 
 
@@ -700,7 +692,8 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
         $scope.campaign.cm_denied_domain="Yes";
     };
     $scope.updateDeniedDomain=function(){
-       $('#denied_domain').modal("show");
+        $('#denied_domain').modal({backdrop: 'static', keyboard: false});
+        $('#denied_domain').modal("show");
     };
    
 

@@ -57,6 +57,7 @@ angular.module('employee').controller('employeeAddCtrl', function ($rootScope, $
             setTimeout(function(){
                 dialog.modal('hide'); 
             }, 1500);
+            
 	    }
       else if($('#emp_address').val() == undefined || $('#emp_address').val() == ""){
         var dialog = bootbox.dialog({

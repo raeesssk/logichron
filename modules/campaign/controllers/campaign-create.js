@@ -19,19 +19,6 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
 
 	$scope.apiURL = $rootScope.baseURL+'/campaign/add';
 
-    $('#cm_end_date').datepicker({
-          validateOnBlur: false,
-          todayButton: false,
-          timepicker: false,
-          scrollInput: false,
-          format: 'yyyy-mm-dd',
-          autoclose: true,
-          /*minDate: (parseInt(new Date().getFullYear()) - 100) + '/01/01',// minimum date(for today use 0 or -1970/01/01)
-          maxDate: (parseInt(new Date().getFullYear()) - 18) + '/01/01',//maximum date calendar*/
-          onChangeDateTime: function (dp, $input) {
-              $scope.campaign.cm_end_date = $('#cm_end_date').val();
-          }
-    });
     $scope.getSearch = function(vals) {
         var searchTerms = {search: vals};
             const httpOptions = {
