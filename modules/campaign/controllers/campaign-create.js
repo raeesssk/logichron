@@ -153,10 +153,10 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
     $scope.closeAccntList=function(){
          if ($scope.accountList.length == 0){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">There Is No Such Data.</p>',
+            message: '<p class="text-center">No Data Found.</p>',
                 closeButton: false
             });
-            dialog.find('.modal-body').addClass("btn-warning");
+            dialog.find('.modal-body').addClass("btn-success");
             setTimeout(function(){
                 dialog.modal('hide'); 
             }, 1500);
@@ -234,10 +234,10 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
     $scope.closeSupression=function(){
          if ($scope.supressionList.length == 0){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">There Is No Such Data.</p>',
+            message: '<p class="text-center">No Data Found.</p>',
                 closeButton: false
             });
-            dialog.find('.modal-body').addClass("btn-warning");
+            dialog.find('.modal-body').addClass("btn-success");
             setTimeout(function(){
                 dialog.modal('hide'); 
             }, 1500);
@@ -306,10 +306,10 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
     $scope.closeAllowDomain=function(){
          if ($scope.allowDomainList.length == 0){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">There Is No Such Data.</p>',
+            message: '<p class="text-center">No Data Found.</p>',
                 closeButton: false
             });
-            dialog.find('.modal-body').addClass("btn-warning");
+            dialog.find('.modal-body').addClass("btn-success");
             setTimeout(function(){
                 dialog.modal('hide'); 
             }, 1500);
@@ -379,10 +379,10 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
     $scope.closeCustomQuestion=function(){
          if ($scope.customQuestionList.length == 0){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">There Is No Such Data.</p>',
+            message: '<p class="text-center">No Data Found.</p>',
                 closeButton: false
             });
-            dialog.find('.modal-body').addClass("btn-warning");
+            dialog.find('.modal-body').addClass("btn-success");
             setTimeout(function(){
                 dialog.modal('hide'); 
             }, 1500);
@@ -453,10 +453,10 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
     $scope.closeDeniedDomain=function(){
          if ($scope.deniedDomainList.length == 0){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">There Is No Such Data.</p>',
+            message: '<p class="text-center">No Data Found.</p>',
                 closeButton: false
             });
-            dialog.find('.modal-body').addClass("btn-warning");
+            dialog.find('.modal-body').addClass("btn-success");
             setTimeout(function(){
                 dialog.modal('hide'); 
             }, 1500);

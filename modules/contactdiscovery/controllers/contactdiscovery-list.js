@@ -162,6 +162,7 @@ $scope.apiURL = $rootScope.baseURL+'/contact/contact/total';
                     $scope.resetpagination();
                   });
               // $scope.$apply(); 
+
       })
       .error(function(data) 
       {   
@@ -282,7 +283,6 @@ $scope.apiURL = $rootScope.baseURL+'/contact/contact/total';
             obj.forEach(function(value, key){
               $scope.answers.push(value);
             });
-
         })
         .error(function(data) 
         {   

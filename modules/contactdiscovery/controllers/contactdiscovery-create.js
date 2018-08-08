@@ -8,6 +8,7 @@ angular.module('contactdiscovery').controller('contactdiscoveryAddCtrl', functio
 
 	$scope.apiURL = $rootScope.baseURL+'/contact/add';
     $("#cdm_campaign_name").focus();
+    
     $("#cdm_company_name").focusout(function(){
         $http({
               method: 'POST',
@@ -334,28 +335,28 @@ angular.module('contactdiscovery').controller('contactdiscoveryAddCtrl', functio
                 $('#cdm_domain').focus(); 
             }, 1500);
         }
-        else if($('#qm_questions').val() == undefined || $('#qm_questions').val() == ""){
-            var dialog = bootbox.dialog({
-            message: '<p class="text-center">Please Enter Question?.</p>',
-                closeButton: false
-            });
-            dialog.find('.modal-body').addClass("btn-danger");
-            setTimeout(function(){
-                dialog.modal('hide');
-                $('#qm_questions').focus(); 
-            }, 1500);
-        }
-        else if($('#qm_answers').val() == undefined || $('#qm_answers').val() == ""){
-            var dialog = bootbox.dialog({
-            message: '<p class="text-center">Please Enter Answer.</p>',
-                closeButton: false
-            });
-            dialog.find('.modal-body').addClass("btn-danger");
-            setTimeout(function(){
-                dialog.modal('hide');
-                $('#qm_answers').focus(); 
-            }, 1500);
-        }
+        // else if($('#qm_questions').val() == undefined || $('#qm_questions').val() == ""){
+        //     var dialog = bootbox.dialog({
+        //     message: '<p class="text-center">Please Enter Question?.</p>',
+        //         closeButton: false
+        //     });
+        //     dialog.find('.modal-body').addClass("btn-danger");
+        //     setTimeout(function(){
+        //         dialog.modal('hide');
+        //         $('#qm_questions').focus(); 
+        //     }, 1500);
+        // }
+        // else if($('#qm_answers').val() == undefined || $('#qm_answers').val() == ""){
+        //     var dialog = bootbox.dialog({
+        //     message: '<p class="text-center">Please Enter Answer.</p>',
+        //         closeButton: false
+        //     });
+        //     dialog.find('.modal-body').addClass("btn-danger");
+        //     setTimeout(function(){
+        //         dialog.modal('hide');
+        //         $('#qm_answers').focus(); 
+        //     }, 1500);
+        // }
 	    else{
                 $scope.objs={
                     answer:$scope.answers,

@@ -13,7 +13,7 @@
                                     <a href="#/">Contact Discovery</a>
                                 </li>
                                 <li class="active breadcrumb-item">
-                                    <a href="#/employee/add" class="active">Edit Contact Discovery</a>
+                                    <a class="active">Edit Contact Discovery</a>
                                 </li>
                             </ul>
                             <h3>Edit Contact Discovery</h3>
@@ -21,22 +21,10 @@
                         </div>
                         <div class="card-block">
                             <div class="form-group row">
-                                <div class="col-lg-4">
-                                    <div class="form-group">
+                                <div class="col-sm-4">
                                         <label>Campaign Name</label>
-                                        <input type="text"
-                                            id="cdm_campaign_name"
-                                            ng-model="contactdiscovery.cdm_campaign_name"
-                                            typeahead="obj as obj.cm_campaign_name for obj in getSearchCampaign($viewValue)"
-                                            typeahead-loading="loadingCampaignList"
-                                            typeahead-no-results="noCampaignListResults"
-                                            typeahead-on-select="getCampaignDetails()"
-                                            class="form-control">
-                                        <i ng-show="loadingCampaignList" class="glyphicon glyphicon-refresh"></i>
-                                        <div ng-show="noCampaignListResults">
-                                            <i class="glyphicon glyphicon-remove"></i> No Results Found
-                                        </div>
-                                    </div>
+                                        <input type="text" id="cdm_campaign" class="form-control" ng-model="contactdiscovery.cdm_campaign" readonly />
+                                        <br>
                                 </div>
                                 <!-- <div class="col-sm-4">
                                         <label>Project Name</label>
@@ -171,12 +159,12 @@
                                 <tr ng-repeat="question in answers track by $index">
                                     <td>{{question.qm_questions}}</td>
                                     <td>{{question.qm_answers}}</td>
-                                    <td><button class="form-control" ng-click="deleteQA()"><i class="fa fa-trash" ></button></i></td>
+                                    <td><button class="form-control" ng-click="deleteQA($index)"><i class="fa fa-trash" ></button></i></td>
                                 </tr>
                                 <tr ng-repeat="ans in answersadd track by $index">
                                     <td>{{ans.qm_questions}}</td>
                                     <td>{{ans.qm_answers}}</td>
-                                    <td><button class="form-control" ng-click="deleteQA()"><i class="fa fa-trash" ></button></i></td>
+                                    <td><button class="form-control" ng-click="deleteQA($index)"><i class="fa fa-trash" ></button></i></td>
                                 </tr>
                               </tbody>
                             </table>

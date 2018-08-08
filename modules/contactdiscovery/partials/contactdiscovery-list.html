@@ -13,7 +13,7 @@
                                     <a href="#/">Contact Discovery</a>
                                 </li>
                                 <li class="breadcrumb-item">
-                                    <a href="#">Contact Discovery List</a>
+                                    <a class="active">Contact Discovery List</a>
                                 </li>
                             </ul>
                             <h3>Contact Discovery List</h3>
@@ -22,7 +22,7 @@
                       	<div class="card-block">
                             <div class="row">
                               <div class="col-lg-11">
-                                <input type="text" class="form-control" id="searchtext" ng-model="searchtext" onkeyup="angular.element(this).scope().getSearch();" placeholder = "Search by first name or last name"/><br>
+                                <input type="text" class="form-control" id="searchtext" ng-model="searchtext" onkeyup="angular.element(this).scope().getSearch();" placeholder = "Search by-  Campaign Name / First Name / Last Name..."/><br>
                               </div>
                               <div class="col-lg-1">
                                 <a class="btn btn-outline btn-info" href="#/contactdiscovery/createjob">Add</a>
@@ -84,7 +84,7 @@
                     	            </tbody>
                       		      </table>
                       		      <br>
-                      	            <span id="pagination_detail" ng-show="filteredTodos.length > 0" class="pagination_ds">Showing {{ filterUserend }} to {{filterUser}} of {{contactdiscoveryListcount}} Customer's</span>
+                      	            <span id="pagination_detail" ng-show="filteredTodos.length > 0" class="pagination_ds">Showing {{ filterUserend }} to {{filterUser}} of {{contactdiscoveryListcount}} Contact Discovery's</span>
                       			    <span id="pagination_div" align="right" ng-show="filteredTodos.length > 0"
                       			          style="float: right;margin-left: 60%;">
                       			      <pagination
@@ -131,9 +131,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title"></h4>
+        <h4 class="modal-title">Custom Question's</h4>
       </div>
       <div class="modal-body">
       	<table class="table table-hover">
@@ -152,7 +150,7 @@
         </table>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
       </div>
     </div>
     <!-- /.modal-content -->

@@ -33,104 +33,114 @@ angular.module('employee').controller('employeeAddCtrl', function ($rootScope, $
 	    
         if($('#emp_name').val() == undefined || $('#emp_name').val() == ""){
 	    	var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter Employee name.</p>',
+            message: '<p class="text-center">Please Enter Employee Name.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
             setTimeout(function(){
-                dialog.modal('hide'); 
+                dialog.modal('hide');
+                $('#emp_name').focus();
             }, 1500);
         }
 	    else if($('#emp_mobile').val() == undefined || $('#emp_mobile').val() == ""){
 	    	var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter Mobile no.</p>',
+            message: '<p class="text-center">Please Enter Mobile Number.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
             setTimeout(function(){
-                dialog.modal('hide'); 
+                dialog.modal('hide');
+                $('#emp_mobile').focus(); 
             }, 1500);
             
 	    }
       else if($('#emp_address').val() == undefined || $('#emp_address').val() == ""){
         var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter Residential Address.</p>',
+            message: '<p class="text-center">Please Enter Residential Address.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
             setTimeout(function(){
-                dialog.modal('hide'); 
+                dialog.modal('hide');
+                $('#emp_address').focus(); 
             }, 1500);
       }
         else if($('#emp_correspondence_address').val() == undefined || $('#emp_correspondence_address').val() == ""){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter Correspondence Address.</p>',
+            message: '<p class="text-center">Please Enter Correspondence Address.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
             setTimeout(function(){
-                dialog.modal('hide'); 
+                dialog.modal('hide');
+                $('#emp_correspondence_address').focus(); 
             }, 1500);
 
         }
         else if($('#emp_aadhar_no').val() == undefined || $('#emp_aadhar_no').val() == ""){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter Adhaar No.</p>',
+            message: '<p class="text-center">Please Enter Adhaar Number.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
             setTimeout(function(){
-                dialog.modal('hide'); 
+                dialog.modal('hide');
+                $('#emp_aadhar_no').focus(); 
             }, 1500);
         }
         else if($('#emp_pancard_no').val() == undefined || $('#emp_pancard_no').val() == ""){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter Pancard No.</p>',
+            message: '<p class="text-center">Please Enter Pan Card.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
             setTimeout(function(){
-                dialog.modal('hide'); 
+                dialog.modal('hide');
+                $('#emp_pancard_no').focus();  
             }, 1500);
         }
         else if($('#emp_designation').val() == undefined || $('#emp_designation').val() == ""){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter Designation.</p>',
+            message: '<p class="text-center">Please Enter Designation.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
             setTimeout(function(){
-                dialog.modal('hide'); 
+                dialog.modal('hide');
+                $('#emp_designation').focus();  
             }, 1500);
         }
         else if($('#emp_emp_no').val() == undefined || $('#emp_emp_no').val() == ""){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter Employee Id.</p>',
+            message: '<p class="text-center">Please Enter Employee ID.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
             setTimeout(function(){
                 dialog.modal('hide'); 
+                $('#emp_emp_no').focus(); 
             }, 1500);
         }
         else if($('#emp_email_id').val() == undefined || $('#emp_email_id').val() == ""){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter Email-Address.</p>',
+            message: '<p class="text-center">Please Enter Email-Address.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
             setTimeout(function(){
                 dialog.modal('hide'); 
+                $('#emp_email_id').focus();  
             }, 1500);
         }
         else if($('#emp_qualification').val() == undefined || $('#emp_qualification').val() == ""){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">please enter Qualification.</p>',
+            message: '<p class="text-center">Please Enter Qualification.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
             setTimeout(function(){
                 dialog.modal('hide'); 
+                $('#emp_qualification').focus();  
             }, 1500);
         }/*
         else if($('#emp_image').val() == undefined || $('#emp_image').val() == ""){
@@ -168,7 +178,7 @@ angular.module('employee').controller('employeeAddCtrl', function ($rootScope, $
                     })
                     .success(function(employees)
                     {
-                        $('#btnsave').text("SAVE");
+                        $('#btnsave').text("Save");
                         $('#btnsave').removeAttr('disabled');
                        window.location.href = '#/employee';  
                     })
@@ -179,7 +189,7 @@ angular.module('employee').controller('employeeAddCtrl', function ($rootScope, $
                             closeButton: false
                         });
                         setTimeout(function(){
-                            $('#btnsave').text("SAVE");
+                            $('#btnsave').text("Save");
                             $('#btnsave').removeAttr('disabled');
                             dialog.modal('hide');  
                         }, 1500);
