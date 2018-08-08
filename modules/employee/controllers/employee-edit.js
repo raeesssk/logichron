@@ -182,7 +182,7 @@ angular.module('employee').controller('employeeEditCtrl', function ($rootScope, 
 		    })
 		    .success(function(login)
 		    {
-                $('#btnsave').text("SAVE");
+                $('#btnsave').text("Update");
                 $('#btnsave').removeAttr('disabled');
 		       window.location.href = '#/employee';  
 		    })
@@ -193,7 +193,7 @@ angular.module('employee').controller('employeeEditCtrl', function ($rootScope, 
 	                closeButton: false
 	            });
 	            setTimeout(function(){
-                $('#btnsave').text("SAVE");
+                $('#btnsave').text("Update");
                 $('#btnsave').removeAttr('disabled');
 	                dialog.modal('hide'); 
 	            }, 1500);            
