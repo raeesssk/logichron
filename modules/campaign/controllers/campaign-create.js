@@ -1,5 +1,5 @@
 // import admin
-angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $http, $scope, $location, $routeParams, $route) {
+angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $http, $scope, $location, $routeParams, $route,$filter) {
 
   
     $scope.campaign = {};
@@ -18,6 +18,18 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
 
 
 	$scope.apiURL = $rootScope.baseURL+'/campaign/add';
+
+    $('#cm_end_date').on('change', function() {
+    var newVal = $(this).val().split('-'), //renamed new_val to newVal, always stick to one naming convention
+        dateParts = {
+            year: parseInt(newVal[0], 10),
+            month: parseInt(newVal[1], 10),
+            day: parseInt(newVal[2], 10)
+        };
+
+        $scope.campaign.cm_end_date= new Date();
+
+    });
 
     $scope.getSearch = function(vals) {
         var searchTerms = {search: vals};

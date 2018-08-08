@@ -26,7 +26,6 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
 
 	$scope.campaignId = $routeParams.campaignId;
     $scope.apiURL = $rootScope.baseURL+'/campaign/edit/'+$scope.campaignId;
-
    
   $scope.getSearch = function(vals) {
 
@@ -53,12 +52,12 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
 	    })
 	    .success(function(campaignObj)
 	    {
+
 	    	campaignObj.forEach(function (value, key) {
-                value.cm_end_date = $filter('date')(value.cm_end_date, "mediumDate");
-	      		$scope.campaign = value;
-              });
-                
-      		  
+                value.cm_end_date=new Date()
+                $scope.campaign = value;
+          });
+
 	    })
 	    .error(function(data) 
 	    {   
