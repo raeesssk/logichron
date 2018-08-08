@@ -52,13 +52,26 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         if(opval=="Yes"){ //Compare it and if true
             $('#account_list').modal({backdrop: 'static', keyboard: false});
             $('#account_list').modal("show"); //Open Modal
-        } 
+        }
+        else {
+            if($scope.accountList.length > 0){
+                $('#accnt_delete').modal({backdrop: 'static', keyboard: false});
+                $('#accnt_delete').modal("show");
+                
+            }
+        }  
     });
     $('#cm_supression_file').change(function() { //jQuery Change Function
         var opval = $(this).val(); //Get value from select element
         if(opval=="Yes"){ //Compare it and if true
             $('#supression_file').modal({backdrop: 'static', keyboard: false});
             $('#supression_file').modal("show"); //Open Modal
+        }
+        else {
+            if($scope.supressionList.length > 0){
+                $('#supression_delete').modal({backdrop: 'static', keyboard: false});
+                $('#supression_delete').modal("show");
+            }
         }
     });
     $('#cm_allow_domain').change(function() { //jQuery Change Function
@@ -67,6 +80,12 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
             $('#allow_Domain').modal({backdrop: 'static', keyboard: false});
             $('#allow_Domain').modal("show"); //Open Modal
         }
+        else {
+            if($scope.allowDomainList.length > 0){
+                $('#allowed_delete').modal({backdrop: 'static', keyboard: false});
+                $('#allowed_delete').modal("show");
+            }
+        } 
     });
     $('#cm_custom_question').change(function() { //jQuery Change Function
         var opval = $(this).val(); //Get value from select element
@@ -74,6 +93,12 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
             $('#custom_question').modal({backdrop: 'static', keyboard: false});
             $('#custom_question').modal("show"); //Open Modal
         }
+        else {
+            if($scope.customQuestionList.length > 0){
+                $('#custom_delete').modal({backdrop: 'static', keyboard: false});
+                $('#custom_delete').modal("show");
+            }
+        } 
     });
     $('#cm_denied_domain').change(function() { //jQuery Change Function
         var opval = $(this).val(); //Get value from select element
@@ -81,6 +106,12 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
             $('#denied_domain').modal({backdrop: 'static', keyboard: false});
             $('#denied_domain').modal("show"); //Open Modal
         }
+        else {
+            if($scope.deniedDomainList.length > 0 ){
+                $('#denied_delete').modal({backdrop: 'static', keyboard: false});
+                $('#denied_delete').modal("show");
+            }   
+        } 
     });
 
     //Modal data Show
@@ -119,10 +150,11 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
     $scope.addAccntList=function(){
         if ($scope.accountList.length > 0){
             $('#account_list').modal("hide");
+            $scope.account="";
         }
         else{
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">Fields Cannot Be Enpty.</p>',
+            message: '<p class="text-center">Fields Cannot Be Empty.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
@@ -156,6 +188,9 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         $scope.campaign.cm_account_list="No";
         $('#accnt_delete').modal("hide");
         $('#account_list').modal("hide");
+    };
+    $scope.accntNoChange=function(){
+        $scope.campaign.cm_account_list="Yes";
     };
     $scope.updateAccntList=function(){
        $('#account_list').modal("show");
@@ -196,10 +231,11 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
     $scope.addSupression=function(){
         if ($scope.supressionList.length > 0){
             $('#supression_file').modal("hide");
+            $scope.supression="";
         }
         else{
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">Fields Cannot Be Enpty.</p>',
+            message: '<p class="text-center">Fields Cannot Be Empty.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
@@ -234,6 +270,9 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         $('#supression_delete').modal("hide");
         $('#supression_file').modal("hide");
     };
+    $scope.supresNoChange=function(){
+        $scope.campaign.cm_supression_file="Yes";
+    };
 
     $scope.updateSupression=function(){
        $('#supression_file').modal("show");
@@ -264,10 +303,11 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
     $scope.addAllowDomain=function(){
         if ($scope.allowDomainList.length > 0){
             $('#allow_Domain').modal("hide");
+            $scope.allow_domain="";
         }
         else{
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">Fields Cannot Be Enpty.</p>',
+            message: '<p class="text-center">Fields Cannot Be Empty.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
@@ -302,6 +342,10 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         $('#allowed_delete').modal("hide");
         $('#allow_Domain').modal("hide");
     };
+    $scope.allowNoChange=function(){
+        $scope.campaign.cm_allow_domain="Yes";
+    };
+
 
     $scope.updateAllowDomain=function(){
        $('#allow_Domain').modal("show");
@@ -332,10 +376,11 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
     $scope.addCustomQuestion=function(){
         if ($scope.customQuestionList.length > 0){
             $('#custom_question').modal("hide");
+            $scope.custom_question=""; 
         }
         else{
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">Fields Cannot Be Enpty.</p>',
+            message: '<p class="text-center">Fields Cannot Be Empty.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
@@ -370,6 +415,9 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         $('#custom_delete').modal("hide");
         $('#custom_question').modal("hide");
     };
+    $scope.customNoChange=function(){
+        $scope.campaign.cm_custom_question="Yes";
+    };
 
     $scope.updateCustomQuestion=function(){
        $('#custom_question').modal("show");
@@ -402,10 +450,11 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
     $scope.addDeniedDomain=function(){
         if ($scope.deniedDomainList.length > 0){
             $('#denied_domain').modal("hide");
+            $scope.denied_domain="";
         }
         else{
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">Fields Cannot Be Enpty.</p>',
+            message: '<p class="text-center">Fields Cannot Be Empty.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
@@ -439,6 +488,9 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         $scope.campaign.cm_denied_domain="No";
         $('#denied_delete').modal("hide");
         $('#denied_domain').modal("hide");
+    };
+    $scope.deniedNoChange=function(){
+        $scope.campaign.cm_denied_domain="Yes";
     };
     $scope.updateDeniedDomain=function(){
        $('#denied_domain').modal("show");

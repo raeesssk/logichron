@@ -1,8 +1,5 @@
-<!-- <style type="text/css">
-  #mouse_hover:hover{
-    cursor: pointer;
-  }
-</style> -->
+
+</style>
 <div class="pcoded-content" ng-init="getAll();">
     <div class="pcoded-inner-content">
         <div class="main-body">
@@ -42,21 +39,25 @@
                                       <th>Delivery Frequency</th>
                                       <th>Campaign Name</th>
                                       <th>Restriction</th>
+
                                       <th>Account List</th>
                                       <th>Supression File</th>
                                       <th>Domain Limit</th>
                                       <th>Employee Size</th>
                                       <th>Disqualifies</th>
+
                                       <th>Title</th>
                                       <th>Lead Count</th>
                                       <th>Verticals</th>
                                       <th>Geo</th>
                                       <th>Allowed Domain</th>
+
                                       <th>Revenue</th>
                                       <th>Custom Question</th>
                                       <th>Denied Domain</th>
                                       <th>Campaign Asset</th>
                                       <th>Industry</th>
+
                                       <th>Department</th>
                                       <th>Method</th>
                                       <th>Job Function / Level</th>
@@ -71,9 +72,12 @@
                                       <td>{{campaign.cm_campaign_name}}</td>
                                       <td>{{campaign.cm_restrict}}</td>
 
-                                      <td ng-click="accntView($index)" id="mouse_hover">{{campaign.cm_account_list}}</td>
+                                      <td ng-if="campaign.cm_account_list == 'Yes'" ng-click="accntView($index)" style="cursor: pointer;">{{campaign.cm_account_list}}</td>
+                                      <td ng-if="campaign.cm_account_list == 'No'" ng-click="accntView($index)">{{campaign.cm_account_list}}</td>
 
-                                      <td ng-click="supressionView($index)">{{campaign.cm_supression_file}}</td>
+
+                                      <td ng-if="campaign.cm_supression_file == 'Yes'" ng-click="supressionView($index)" style="cursor: pointer;">{{campaign.cm_supression_file}}</td>
+                                      <td ng-if="campaign.cm_supression_file == 'No'" ng-click="supressionView($index)" >{{campaign.cm_supression_file}}</td>
 
                                       <td>{{campaign.cm_domain_limit}}</td>
                                       <td>{{campaign.cm_emp_size}}</td>
@@ -83,13 +87,16 @@
                                       <td>{{campaign.cm_vertical}}</td>
                                       <td>{{campaign.cm_geo}}</td>
 
-                                      <td ng-click="allowView($index)">{{campaign.cm_allow_domain}}</td>
+                                      <td ng-if="campaign.cm_allow_domain == 'Yes'" ng-click="allowView($index)" style="cursor: pointer;">{{campaign.cm_allow_domain}}</td>
+                                      <td ng-if="campaign.cm_allow_domain == 'No'" ng-click="allowView($index)">{{campaign.cm_allow_domain}}</td>
 
                                       <td>{{campaign.cm_revenue}}</td>
 
-                                      <td ng-click="customView($index)">{{campaign.cm_custom_question}}</td>
+                                      <td ng-if="campaign.cm_custom_question == 'Yes'" ng-click="customView($index)" style="cursor: pointer;">{{campaign.cm_custom_question}}</td>
+                                      <td ng-if="campaign.cm_custom_question == 'No'" ng-click="customView($index)">{{campaign.cm_custom_question}}</td>
 
-                                      <td ng-click="deniedView($index)">{{campaign.cm_denied_domain}}</td>
+                                      <td ng-if="campaign.cm_denied_domain == 'Yes'" ng-click="deniedView($index)" style="cursor: pointer;">{{campaign.cm_denied_domain}}</td>
+                                      <td ng-if="campaign.cm_denied_domain == 'No'" ng-click="deniedView($index)">{{campaign.cm_denied_domain}}</td>
 
                                       <td>{{campaign.cm_campaign_asset}}</td>
                                       <td>{{campaign.cm_industry}}</td>

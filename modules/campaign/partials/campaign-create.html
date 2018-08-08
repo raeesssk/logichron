@@ -1,12 +1,3 @@
-<style type="text/css">
-    .deleteposition {
-   top: 100px;
-   bottom: 50;
-   left: 10px;
-   overflow: auto;
-   opacity: 0.9;
-</style>
-
 <div class="pcoded-content">
     <div class="pcoded-inner-content">
         <div class="main-body">
@@ -22,7 +13,7 @@
                                     <a href="#/">Campaign</a>
                                 </li>
                                 <li class="active breadcrumb-item">
-                                    <a href="#/" class="active">Create Campaign</a>
+                                    <a href="#/campaign/create" class="active">Create Campaign</a>
                                 </li>
                             </ul>
                             <h3>Create New Campaign</h3>
@@ -30,13 +21,10 @@
                         </div>
                         <div class="card-block">
                             <div class="form-group row">
-
                                 <div class="col-sm-3">
                                         <label>First Delivery</label>
-                                        <input type="text" id="cm_first_dely" 
-                                        ng-model="campaign.cm_first_dely"
-                                        typeahead="obj as obj.mm_pm_name for obj in getSearch($viewValue)"
-                                        class="form-control"/>
+                                        <input type="text" id="cm_first_dely" class="form-control" ng-model="campaign.cm_first_dely" />
+                                        <br>
                                 </div>
                                 <div class="col-sm-3">
                                         <label>End Date</label>
@@ -63,7 +51,7 @@
                                     <select id="cm_account_list" class="form-control" ng-model="campaign.cm_account_list">
                                         <option value="">Select your option</option>
                                         <option data-toggle="modal" data-target="#account_list" data-backdrop="static" data-keyboard="false">Yes</option>
-                                        <option>No</option>
+                                        <option data-backdrop="static" data-keyboard="false">No</option>
                                     </select>
                                     <button style="position: absolute; margin-top: -13%; margin-left: 65%;" ng-click="updateAccntList()" ng-show="campaign.cm_account_list=='Yes'"><i class="fa fa-pencil"></i></button>
                                     <br>    
@@ -72,8 +60,8 @@
                                         <label>Supression File (Y/N)</label>
                                         <select id="cm_supression_file" class="form-control" ng-model="campaign.cm_supression_file" >
                                             <option value="">Select your option</option>
-                                            <option data-toggle="modal" data-target="#supression_file" data-backdrop="static" data-keyboard="false" >Yes</option>
-                                            <option>No</option>
+                                            <option data-toggle="modal" data-target="#supression_file" data-backdrop="static" data-keyboard="false">Yes</option>
+                                            <option data-backdrop="static" data-keyboard="false">No</option>
                                         </select>
                                         <button style="position: absolute; margin-top: -13%; margin-left:65%;" ng-click="updateSupression()" ng-show="campaign.cm_supression_file=='Yes'"><i class="fa fa-pencil"></i></button>
                                     <br>    
@@ -117,7 +105,7 @@
                                         <select id="cm_allow_domain" class="form-control" ng-model="campaign.cm_allow_domain">
                                             <option value="">Select your option</option>
                                             <option data-toggle="modal" data-target="#allow_domain" data-backdrop="static" data-keyboard="false">Yes</option>
-                                            <option>No</option>
+                                            <option data-backdrop="static" data-keyboard="false">No</option>
                                         </select>
                                         <button style="position: absolute; margin-top: -13%; margin-left: 65%;" ng-click="updateAllowDomain()" ng-show="campaign.cm_allow_domain=='Yes'"><i class="fa fa-pencil"></i></button>
                                     <br>    
@@ -132,7 +120,7 @@
                                         <select id="cm_custom_question" class="form-control" ng-model="campaign.cm_custom_question">
                                             <option value="">Select your option</option>
                                             <option data-toggle="modal" data-target="#custom_question" data-backdrop="static" data-keyboard="false">Yes</option>
-                                            <option>No</option>
+                                            <option data-backdrop="static" data-keyboard="false">No</option>
                                         </select>
                                         <button style="position: absolute; margin-top: -13%; margin-left: 65%;" ng-click="updateCustomQuestion()" ng-show="campaign.cm_custom_question=='Yes'"><i class="fa fa-pencil"></i></button>
                                     <br>    
@@ -142,7 +130,7 @@
                                         <select id="cm_denied_domain" class="form-control" ng-model="campaign.cm_denied_domain">
                                             <option value="">Select your option</option>
                                             <option data-toggle="modal" data-target="#denied_domain" data-backdrop="static" data-keyboard="false">Yes</option>
-                                            <option>No</option>
+                                            <option data-backdrop="static" data-keyboard="false">No</option>
                                         </select>
                                         <button style="position: absolute; margin-top: -13%; margin-left: 65%;" ng-click="updateDeniedDomain()" ng-show="campaign.cm_denied_domain=='Yes'"><i class="fa fa-pencil"></i></button>
                                     <br>    
@@ -472,11 +460,11 @@
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-body">
-                <p>Are You Sure You Want To Close?</p>
+                <p>Are You Sure You Want To Delete The Records?</p>
       </div>
       <div class="modal-footer">
         <button type="button" id="del" class="btn btn-danger" ng-click="accntDelConfirm()">Yes</button>
-        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="accntNoChange()">No</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -490,11 +478,11 @@
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-body">
-                <p>Are You Sure You Want To Close?</p>
+                <p>Are You Sure You Want To Delete The Records?</p>
       </div>
       <div class="modal-footer">
         <button type="button" id="del" class="btn btn-danger" ng-click="supresDelConfirm()">Yes</button>
-        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal"  ng-click="supresNoChange()">No</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -508,11 +496,11 @@
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-body">
-                <p>Are You Sure You Want To Close?</p>
+                <p>Are You Sure You Want To Delete The Records?</p>
       </div>
       <div class="modal-footer">
         <button type="button" id="del" class="btn btn-danger" ng-click="allowDelConfirm()">Yes</button>
-        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="allowNoChange()">No</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -526,11 +514,11 @@
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-body">
-                <p>Are You Sure You Want To Close?</p>
+                <p>Are You Sure You Want To Delete The Records?</p>
       </div>
       <div class="modal-footer">
         <button type="button" id="del" class="btn btn-danger" ng-click="customDelConfirm()">Yes</button>
-        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="customNoChange()">No</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -544,11 +532,11 @@
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-body">
-                <p>Are You Sure You Want To Close?</p>
+                <p>Are You Sure You Want To Delete The Records?</p>
       </div>
       <div class="modal-footer">
         <button type="button" id="del" class="btn btn-danger" ng-click="deniedDelConfirm()">Yes</button>
-        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="deniedNoChange()">No</button>
       </div>
     </div>
     <!-- /.modal-content -->

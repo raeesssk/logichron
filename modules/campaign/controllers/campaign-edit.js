@@ -25,9 +25,9 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
     $scope.removeDeniedDomain=[];
 
 	$scope.campaignId = $routeParams.campaignId;
-  $scope.apiURL = $rootScope.baseURL+'/campaign/edit/'+$scope.campaignId;
+    $scope.apiURL = $rootScope.baseURL+'/campaign/edit/'+$scope.campaignId;
 
-  $('#cm_end_date').datepicker({
+    $('#cm_end_date').datepicker({
           validateOnBlur: false,
           todayButton: false,
           timepicker: false,
@@ -258,7 +258,13 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
         if(opval=="Yes"){ //Compare it and if true
             $('#account_list').modal({backdrop: 'static', keyboard: false});
             $('#account_list').modal("show"); //Open Modal
-            $scope.oldaccountList=[];
+        }
+        else {
+            if($scope.accountList.length > 0 || $scope.oldaccountList.length > 0){
+                $('#accnt_delete').modal("show");
+                $('#accnt_delete').modal({backdrop: 'static', keyboard: false});
+                
+            }
         } 
     });
     $('#cm_supression_file').change(function() { //jQuery Change Function
@@ -267,6 +273,12 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
             $('#supression_file').modal({backdrop: 'static', keyboard: false});
             $('#supression_file').modal("show"); //Open Modal
         }
+        else {
+            if($scope.supressionList.length > 0 || $scope.oldsupressionList.length > 0){
+                $('#supression_delete').modal("show");
+                $('#supression_delete').modal({backdrop: 'static', keyboard: false});
+            }
+        } 
     });
     $('#cm_allow_domain').change(function() { //jQuery Change Function
         var opval = $(this).val(); //Get value from select element
@@ -274,6 +286,12 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
             $('#allow_Domain').modal({backdrop: 'static', keyboard: false});
             $('#allow_Domain').modal("show"); //Open Modal
         }
+        else {
+            if($scope.allowDomainList.length > 0 || $scope.oldallowDomainList.length > 0){
+                $('#allowed_delete').modal("show");
+                $('#allowed_delete').modal({backdrop: 'static', keyboard: false});
+            }
+        } 
     });
     $('#cm_custom_question').change(function() { //jQuery Change Function
         var opval = $(this).val(); //Get value from select element
@@ -281,6 +299,12 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
             $('#custom_question').modal({backdrop: 'static', keyboard: false});
             $('#custom_question').modal("show"); //Open Modal
         }
+        else {
+            if($scope.customQuestionList.length > 0 || $scope.oldcustomQuestionList.length > 0){
+                $('#custom_delete').modal("show");
+                $('#custom_delete').modal({backdrop: 'static', keyboard: false});
+            }
+        } 
     });
     $('#cm_denied_domain').change(function() { //jQuery Change Function
         var opval = $(this).val(); //Get value from select element
@@ -288,9 +312,15 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
             $('#denied_domain').modal({backdrop: 'static', keyboard: false});
             $('#denied_domain').modal("show"); //Open Modal
         }
+        else {
+            if($scope.deniedDomainList.length > 0 || $scope.olddeniedDomainList.length > 0){
+                $('#denied_delete').modal("show");
+                $('#denied_delete').modal({backdrop: 'static', keyboard: false});
+            }   
+        } 
     });
 
-    //Modal data Show
+//Modal data Show
 // 1
     $scope.accntAdd=function(){
         if($('#amcm_company').val() == undefined || $('#amcm_company').val() == ""){
@@ -324,12 +354,13 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
         $scope.accountList.splice(index,1);
     };
     $scope.addAccntList=function(){
-        if ($scope.accountList.length > 0){
+        if ($scope.accountList.length > 0 || $scope.oldaccountList.length > 0){
             $('#account_list').modal("hide");
+            $scope.account="";
         }
         else{
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">Fields Cannot Be Enpty.</p>',
+            message: '<p class="text-center">Fields Cannot Be Empty.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
@@ -339,26 +370,38 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
         }
     };
     $scope.closeAccntList=function(){
-        if ($scope.oldaccountList.length > 0 || $scope.accountList.length > 0){
+         if ($scope.accountList.length == 0 && $scope.oldaccountList.length == 0){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">Cannot Delete The Data.</p>',
+            message: '<p class="text-center">There Is No Such Data.</p>',
                 closeButton: false
             });
-            dialog.find('.modal-body').addClass("btn-danger");
+            dialog.find('.modal-body').addClass("btn-warning");
             setTimeout(function(){
                 dialog.modal('hide'); 
             }, 1500);
-        }
-        else{
-            $scope.campaign.cm_account_list="No";
+
             $('#account_list').modal("hide");
-            $scope.accountList=[];
-            $scope.account = "";
+            $scope.campaign.cm_account_list="No";
+            $scope.account="";
         }
+        else if ($scope.accountList.length > 0 || $scope.oldaccountList.length > 0){
+            $('#accnt_delete').modal("show");
+            $scope.campaign.cm_account_list="No";
+        }
+    };
+    $scope.accntDelConfirm=function(){
+        $scope.oldaccountList=[];
+        $scope.accountList=[];
+
+        $scope.campaign.cm_account_list="No";
+        $('#accnt_delete').modal("hide");
+        $('#account_list').modal("hide");
+    };
+    $scope.accntNoChange=function(){
+        $scope.campaign.cm_account_list="Yes";
     };
     $scope.updateAccntList=function(){
        $('#account_list').modal("show");
-        
     };
 
 // 2
@@ -394,12 +437,13 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
         $scope.supressionList.splice(index,1);
     };
     $scope.addSupression=function(){
-        if ($scope.supressionList.length > 0){
+        if ($scope.supressionList.length > 0 || $scope.oldsupressionList.length > 0){
             $('#supression_file').modal("hide");
+            $scope.supression="";
         }
         else{
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">Fields Cannot Be Enpty.</p>',
+            message: '<p class="text-center">Fields Cannot Be Empty.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
@@ -409,23 +453,35 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
         }
     };
     $scope.closeSupression=function(){
-        if ($scope.oldsupressionList.length > 0){
+         if ($scope.supressionList.length == 0 && $scope.oldsupressionList.length == 0){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">Cannot Delete The Data.</p>',
+            message: '<p class="text-center">There Is No Such Data.</p>',
                 closeButton: false
             });
-            dialog.find('.modal-body').addClass("btn-danger");
+            dialog.find('.modal-body').addClass("btn-warning");
             setTimeout(function(){
                 dialog.modal('hide'); 
             }, 1500);
-        }
-        else{
-            $scope.campaign.cm_supression_file="No";
+
             $('#supression_file').modal("hide");
-            $scope.supressionList=[];
-            $scope.supression = "";
+            $scope.campaign.cm_supression_file="No";
+            $scope.supression="";
+        }
+        else if ($scope.supressionList.length > 0 || $scope.oldsupressionList.length > 0){
+            $('#supression_delete').modal("show");
+            $scope.campaign.cm_supression_file="No";
         }
     };
+    $scope.supresDelConfirm=function(){
+        $scope.supressionList=[];
+        $scope.campaign.cm_supression_file="No";
+        $('#supression_delete').modal("hide");
+        $('#supression_file').modal("hide");
+    };
+    $scope.supresNoChange=function(){
+        $scope.campaign.cm_supression_file="Yes";
+    };
+
     $scope.updateSupression=function(){
        $('#supression_file').modal("show");
     };
@@ -453,12 +509,13 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
         $scope.allowDomainList.splice(index,1);
     };
     $scope.addAllowDomain=function(){
-        if ($scope.allowDomainList.length > 0){
+        if ($scope.allowDomainList.length > 0 || $scope.oldallowDomainList.length > 0){
             $('#allow_Domain').modal("hide");
+            $scope.allow_domain="";
         }
         else{
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">Fields Cannot Be Enpty.</p>',
+            message: '<p class="text-center">Fields Cannot Be Empty.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
@@ -468,23 +525,35 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
         }
     };
     $scope.closeAllowDomain=function(){
-        if ($scope.oldallowDomainList.length > 0){
+         if ($scope.allowDomainList.length == 0 && $scope.oldallowDomainList.length == 0){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">Cannot Delete The Data.</p>',
+            message: '<p class="text-center">There Is No Such Data.</p>',
                 closeButton: false
             });
-            dialog.find('.modal-body').addClass("btn-danger");
+            dialog.find('.modal-body').addClass("btn-warning");
             setTimeout(function(){
                 dialog.modal('hide'); 
             }, 1500);
-        }
-        else{
-            $scope.campaign.cm_allow_domain="No";
+
             $('#allow_Domain').modal("hide");
-            $scope.allowDomainList=[];
-            $scope.allow_domain = "";
+            $scope.campaign.cm_allow_domain="No";
+            $scope.allow_domain="";
+        }
+        else if ($scope.allowDomainList.length > 0 || $scope.oldallowDomainList.length > 0){
+            $('#allowed_delete').modal("show");
+            $scope.campaign.cm_allow_domain="No";
         }
     };
+    $scope.allowDelConfirm=function(){
+        $scope.allowDomainList=[];
+        $scope.campaign.cm_allow_domain="No";
+        $('#allowed_delete').modal("hide");
+        $('#allow_Domain').modal("hide");
+    };
+    $scope.allowNoChange=function(){
+        $scope.campaign.cm_allow_domain="Yes";
+    };
+
     $scope.updateAllowDomain=function(){
        $('#allow_Domain').modal("show");
     };
@@ -512,12 +581,13 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
         $scope.customQuestionList.splice(index,1);
     };
     $scope.addCustomQuestion=function(){
-        if ($scope.customQuestionList.length > 0){
+        if ($scope.customQuestionList.length > 0 || $scope.oldcustomQuestionList.length > 0){
             $('#custom_question').modal("hide");
+            $scope.custom_question=""; 
         }
         else{
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">Fields Cannot Be Enpty.</p>',
+            message: '<p class="text-center">Fields Cannot Be Empty.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
@@ -527,23 +597,35 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
         }
     };
     $scope.closeCustomQuestion=function(){
-        if ($scope.oldcustomQuestionList.length > 0){
+         if ($scope.customQuestionList.length == 0 && $scope.oldcustomQuestionList.length == 0){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">Cannot Delete The Data.</p>',
+            message: '<p class="text-center">There Is No Such Data.</p>',
                 closeButton: false
             });
-            dialog.find('.modal-body').addClass("btn-danger");
+            dialog.find('.modal-body').addClass("btn-warning");
             setTimeout(function(){
                 dialog.modal('hide'); 
             }, 1500);
-        }
-        else{
-            $scope.campaign.cm_custom_question="No";
+
             $('#custom_question').modal("hide");
-            $scope.customQuestionList=[];
-            $scope.custom_question = "";
+            $scope.campaign.cm_custom_question="No";
+            $scope.custom_question="";
+        }
+        else if ($scope.customQuestionList.length > 0 || $scope.oldcustomQuestionList.length > 0){
+            $('#custom_delete').modal("show");
+            $scope.campaign.cm_custom_question="No";
         }
     };
+    $scope.customDelConfirm=function(){
+        $scope.customQuestionList=[];
+        $scope.campaign.cm_custom_question="No";
+        $('#custom_delete').modal("hide");
+        $('#custom_question').modal("hide");
+    };
+    $scope.customNoChange=function(){
+        $scope.campaign.cm_custom_question="Yes";
+    };
+
     $scope.updateCustomQuestion=function(){
        $('#custom_question').modal("show");
     };
@@ -573,12 +655,13 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
         $scope.deniedDomainList.splice(index,1);
     };
     $scope.addDeniedDomain=function(){
-        if ($scope.deniedDomainList.length > 0){
+        if ($scope.deniedDomainList.length > 0 || $scope.olddeniedDomainList.length > 0){
             $('#denied_domain').modal("hide");
+            $scope.denied_domain="";
         }
         else{
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">Fields Cannot Be Enpty.</p>',
+            message: '<p class="text-center">Fields Cannot Be Empty.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
@@ -588,26 +671,39 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
         }
     };
     $scope.closeDeniedDomain=function(){
-        if ($scope.olddeniedDomainList.length > 0){
+         if ($scope.deniedDomainList.length == 0 && $scope.olddeniedDomainList.length == 0){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">Cannot Delete The Data.</p>',
+            message: '<p class="text-center">There Is No Such Data.</p>',
                 closeButton: false
             });
-            dialog.find('.modal-body').addClass("btn-danger");
+            dialog.find('.modal-body').addClass("btn-warning");
             setTimeout(function(){
                 dialog.modal('hide'); 
             }, 1500);
-        }
-        else{
-            $scope.campaign.cm_denied_domain="No";
+
             $('#denied_domain').modal("hide");
-            $scope.deniedDomainList=[];
-            $scope.denied_domain = "";
+            $scope.campaign.cm_denied_domain="No";
+            $scope.denied_domain="";
         }
+        else if ($scope.deniedDomainList.length > 0 || $scope.olddeniedDomainList.length > 0){
+            $('#denied_delete').modal("show");
+            $scope.campaign.cm_denied_domain="No";
+        }
+    };
+    $scope.deniedDelConfirm=function(){
+        $scope.deniedDomainList=[];
+        $scope.campaign.cm_denied_domain="No";
+        $('#denied_delete').modal("hide");
+        $('#denied_domain').modal("hide");
+    };
+    $scope.deniedNoChange=function(){
+        $scope.campaign.cm_denied_domain="Yes";
     };
     $scope.updateDeniedDomain=function(){
        $('#denied_domain').modal("show");
     };
+   
+
    
   $scope.updateCampaign = function () {
 
@@ -897,7 +993,7 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
 		    })
 		    .success(function(login)
 		    {
-                $('#btnsave').text("SAVE");
+                $('#btnsave').text("Update");
                 $('#btnsave').removeAttr('disabled');
 		       window.location.href = '#/campaign/';  
 		    })
@@ -908,7 +1004,7 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
 	                closeButton: false
 	            });
 	            setTimeout(function(){
-                $('#btnsave').text("SAVE");
+                $('#btnsave').text("Update");
                 $('#btnsave').removeAttr('disabled');
 	                dialog.modal('hide'); 
 	            }, 1500);            
