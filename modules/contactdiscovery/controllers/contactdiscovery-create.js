@@ -7,19 +7,115 @@ angular.module('contactdiscovery').controller('contactdiscoveryAddCtrl', functio
     $scope.answers=[];
 
 	$scope.apiURL = $rootScope.baseURL+'/contact/add';
+    $("#cdm_campaign_name").focus();
+    $("#cdm_company_name").focusout(function(){
+        $http({
+              method: 'POST',
+              url: $rootScope.baseURL+'/contact/check/accountList',
+              data : $scope.contactdiscovery,
+              headers: {'Content-Type': 'application/json',
+                      'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+            })
+            .success(function(domain)
+            {   
+                    if(domain.length > 0)
+                    {
+                        var dialog = bootbox.dialog({
+                        message: '<p class="text-center">Company Exist In Domain List.</p>',
+                            closeButton: false
+                        });
+                        dialog.find('.modal-body').addClass("btn-danger");
+                        setTimeout(function(){
+                            dialog.modal('hide'); 
+                            $('#cdm_domain').focus();
+                        }, 1500);
+                    }
+                 
+            })
+            .error(function(data) 
+            {   
+                var dialog = bootbox.dialog({
+                  message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                      closeButton: false
+                  });
+                  setTimeout(function(){
+                  $('#btnsave').text("Save");
+                  $('#btnsave').removeAttr('disabled');
+                      dialog.modal('hide'); 
+                  }, 1500);            
+            });
+    });
 
-      
+    $("#cdm_domain").focusout(function(){
+        $http({
+              method: 'POST',
+              url: $rootScope.baseURL+'/contact/check/domain',
+              data : $scope.contactdiscovery,
+              headers: {'Content-Type': 'application/json',
+                      'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+            })
+            .success(function(domain)
+            {   
+                    if(domain.length > 0)
+                    {
+                        var dialog = bootbox.dialog({
+                        message: '<p class="text-center">Domain Exist In Domain List.</p>',
+                            closeButton: false
+                        });
+                        dialog.find('.modal-body').addClass("btn-danger");
+                        setTimeout(function(){
+                            dialog.modal('hide'); 
+                            $('#cdm_domain').focus();
+                        }, 1500);
+                    }
+                 
+            })
+            .error(function(data) 
+            {   
+                var dialog = bootbox.dialog({
+                  message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                      closeButton: false
+                  });
+                  setTimeout(function(){
+                  $('#btnsave').text("Save");
+                  $('#btnsave').removeAttr('disabled');
+                      dialog.modal('hide'); 
+                  }, 1500);            
+            });
+    });
     
     $scope.addto = function() {
-        
-        $scope.answers.push($scope.obj);
-        $('#qm_questions').focus();
-        $scope.obj="";
-
+        if($('#qm_questions').val() == undefined || $('#qm_questions').val() == ""){
+            var dialog = bootbox.dialog({
+            message: '<p class="text-center">Please Enter Question.</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide'); 
+                $('#qm_questions').focus();
+            }, 1500);
+        }
+        else if($('#qm_answers').val() == undefined || $('#qm_answers').val() == ""){
+            var dialog = bootbox.dialog({
+            message: '<p class="text-center">Please Enter Answer.</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide');
+                $('#qm_answers').focus(); 
+            }, 1500);
+        }
+        else{
+            $scope.answers.push($scope.obj);
+            $('#qm_questions').focus();
+            $scope.obj="";
+        }
     };
 
-    $scope.deleteQA=function(x){
-        $scope.answers.splice(x,1);
+    $scope.deleteQA=function(index){
+        $scope.answers.splice(index,1);
         $('#qm_questions').focus();
     };
     $scope.addEntry = function () {
@@ -247,28 +343,28 @@ angular.module('contactdiscovery').controller('contactdiscoveryAddCtrl', functio
                 $('#cdm_domain').focus(); 
             }, 1500);
         }
-        // else if($('#qm_questions').val() == undefined || $('#qm_questions').val() == ""){
-        //     var dialog = bootbox.dialog({
-        //     message: '<p class="text-center">Please Enter Question?.</p>',
-        //         closeButton: false
-        //     });
-        //     dialog.find('.modal-body').addClass("btn-danger");
-        //     setTimeout(function(){
-        //         dialog.modal('hide');
-        //         $('#qm_questions').focus(); 
-        //     }, 1500);
-        // }
-        // else if($('#qm_answers').val() == undefined || $('#qm_answers').val() == ""){
-        //     var dialog = bootbox.dialog({
-        //     message: '<p class="text-center">Please Enter Answer.</p>',
-        //         closeButton: false
-        //     });
-        //     dialog.find('.modal-body').addClass("btn-danger");
-        //     setTimeout(function(){
-        //         dialog.modal('hide');
-        //         $('#qm_answers').focus(); 
-        //     }, 1500);
-        // }
+        else if($('#qm_questions').val() == undefined || $('#qm_questions').val() == ""){
+            var dialog = bootbox.dialog({
+            message: '<p class="text-center">Please Enter Question?.</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide');
+                $('#qm_questions').focus(); 
+            }, 1500);
+        }
+        else if($('#qm_answers').val() == undefined || $('#qm_answers').val() == ""){
+            var dialog = bootbox.dialog({
+            message: '<p class="text-center">Please Enter Answer.</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide');
+                $('#qm_answers').focus(); 
+            }, 1500);
+        }
 	    else{
                 $scope.objs={
                     answer:$scope.answers,

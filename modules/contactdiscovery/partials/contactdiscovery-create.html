@@ -145,6 +145,20 @@
                                 <br>
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <div class="col-sm-5">
+                                    <label>Question</label>
+                                    <input type="text" id="qm_questions" class="form-control" ng-model="obj.qm_questions">
+                                </div>
+                                <div class="col-sm-5">
+                                    <label>Answer</label>
+                                    <input type="textarea" id="qm_answers" class="form-control" ng-model="obj.qm_answers">
+                                </div>
+                                <div class="col-sm-2">
+                                    <label>&nbsp;</label>
+                                    <button class="btn-outline-success form-control" ng-click="addto()" type="submit">Add</button>
+                                </div>
+                            </div>
                             <table class="table table-hover">
                               <thead>
                                 <tr>
@@ -153,13 +167,6 @@
                                   <th style="border: 1px solid #ccc; text-align: center;">Action</th>
                                 </tr>
                               </thead>
-                              <tbody>
-                                <tr>
-                                    <td><input type="text" id="qm_questions" class="form-control" ng-model="obj.qm_questions"></td>
-                                    <td><input type="text" id="qm_answers" class="form-control" ng-model="obj.qm_answers"></td>
-                                    <td><button class="btn-outline-success form-control" ng-click="addto()" type="submit">Add</button></td>
-                                </tr>
-                              </tbody>
                               <tbody>
                                 <tr ng-repeat="question in answers track by $index">
                                     <td contenteditable="true">{{question.qm_questions}}</td>
