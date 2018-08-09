@@ -9,6 +9,19 @@ angular.module('contactdiscovery').controller('contactdiscoveryEditCtrl', functi
 	$scope.jobId = $routeParams.jobId;
   $scope.apiURL = $rootScope.baseURL+'/contact/edit/'+$scope.jobId;
 
+  $('#cm_end_date').datepicker({
+          validateOnBlur: false,
+          todayButton: false,
+          timepicker: false,
+          scrollInput: false,
+          format: 'yyyy-mm-dd',
+          autoclose: true,
+          orientation: 'bottom',
+          onChangeDateTime: function (dp, $input) {
+              $scope.campaign.cm_end_date = $('#cm_end_date').val();
+          }
+    });
+
   $("#cdm_company_name").focusout(function(){
         $http({
               method: 'POST',

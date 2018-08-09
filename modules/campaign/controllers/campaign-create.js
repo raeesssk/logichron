@@ -19,16 +19,20 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
 
 	$scope.apiURL = $rootScope.baseURL+'/campaign/add';
 
-    $('#cm_end_date').on('change', function() {
-    var newVal = $(this).val().split('-'), //renamed new_val to newVal, always stick to one naming convention
-        dateParts = {
-            year: parseInt(newVal[0], 10),
-            month: parseInt(newVal[1], 10),
-            day: parseInt(newVal[2], 10)
-        };
 
-        $scope.campaign.cm_end_date= new Date();
-
+    $('#cm_end_date').datepicker({
+        validateOnBlur: false,
+        todayButton: false,
+        timepicker: false,
+        scrollInput: false,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+        orientation: 'bottom',
+        next:   'xdsoft_next',
+        prev : 'xdsoft_prev',
+          onChangeDateTime: function (dp, $input) {
+              $scope.campaign.cm_end_date = $('#cm_end_date').val();
+          }
     });
 
     $scope.getSearch = function(vals) {
@@ -54,8 +58,8 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         }
         else {
             if($scope.accountList.length > 0){
-                $('#accnt_delete').modal({backdrop: 'static', keyboard: false});
                 $('#accnt_delete').modal("show");
+                $('#accnt_delete').modal({backdrop: 'static', keyboard: false});
                 
             }
         }  

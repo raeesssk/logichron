@@ -27,6 +27,19 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
 	$scope.campaignId = $routeParams.campaignId;
     $scope.apiURL = $rootScope.baseURL+'/campaign/edit/'+$scope.campaignId;
    
+    $('#cm_end_date').datepicker({
+          validateOnBlur: false,
+          todayButton: false,
+          timepicker: false,
+          scrollInput: false,
+          format: 'yyyy-mm-dd',
+          autoclose: true,
+          orientation: 'bottom',
+          onChangeDateTime: function (dp, $input) {
+              $scope.campaign.cm_end_date = $('#cm_end_date').val();
+          }
+    });
+
   $scope.getSearch = function(vals) {
 
       var searchTerms = {search: vals};
@@ -54,7 +67,7 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
 	    {
 
 	    	campaignObj.forEach(function (value, key) {
-                value.cm_end_date=new Date()
+                value.cm_end_date=$filter('date')(value.cm_end_date,"mediumDate");
                 $scope.campaign = value;
           });
 
