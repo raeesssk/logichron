@@ -767,7 +767,7 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
                     customQuestionList:$scope.customQuestionList,
                     deniedDomainList:$scope.deniedDomainList
                 }
-
+                
                 $('#btnsave').attr('disabled','true');
                 $('#btnsave').text("please wait...");
 

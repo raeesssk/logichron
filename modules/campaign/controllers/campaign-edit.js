@@ -987,6 +987,7 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
                     removeDeniedDomain : $scope.removeDeniedDomain
 
                 }
+                console.log($scope.campaign);
                 $('#btnsave').attr('disabled','true');
                 $('#btnsave').text("please wait...");
 		    $http({
