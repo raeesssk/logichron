@@ -20,6 +20,18 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
 	$scope.apiURL = $rootScope.baseURL+'/campaign/add';
 
 
+    $('#cm_first_dely').datepicker({
+        validateOnBlur: false,
+        todayButton: false,
+        timepicker: false,
+        scrollInput: false,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+        orientation: 'bottom',
+          onChangeDateTime: function (dp, $input) {
+              $scope.campaign.cm_first_dely = $('#cm_first_dely').val();
+          }
+    });
     $('#cm_end_date').datepicker({
         validateOnBlur: false,
         todayButton: false,
@@ -28,8 +40,6 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         format: 'yyyy-mm-dd',
         autoclose: true,
         orientation: 'bottom',
-        next:   'xdsoft_next',
-        prev : 'xdsoft_prev',
           onChangeDateTime: function (dp, $input) {
               $scope.campaign.cm_end_date = $('#cm_end_date').val();
           }
@@ -767,7 +777,7 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
                     customQuestionList:$scope.customQuestionList,
                     deniedDomainList:$scope.deniedDomainList
                 }
-                
+
                 $('#btnsave').attr('disabled','true');
                 $('#btnsave').text("please wait...");
 
