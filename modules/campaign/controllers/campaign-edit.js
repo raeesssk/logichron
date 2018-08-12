@@ -40,6 +40,21 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
           }
     });
 
+    $('#cm_first_dely').datepicker({
+        validateOnBlur: false,
+        todayButton: false,
+        timepicker: false,
+        scrollInput: false,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+        orientation: 'bottom',
+        next:   'xdsoft_next',
+        prev : 'xdsoft_prev',
+          onChangeDateTime: function (dp, $input) {
+              $scope.campaign.cm_first_dely = $('#cm_first_dely').val();
+          }
+    });
+
   $scope.getSearch = function(vals) {
 
       var searchTerms = {search: vals};
@@ -68,6 +83,8 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
 
 	    	campaignObj.forEach(function (value, key) {
                 value.cm_end_date=$filter('date')(value.cm_end_date,"mediumDate");
+
+                value.cm_first_dely=$filter('date')(value.cm_first_dely,"mediumDate");
                 $scope.campaign = value;
           });
 
@@ -987,34 +1004,33 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
                     removeDeniedDomain : $scope.removeDeniedDomain
 
                 }
-                console.log($scope.campaign);
                 $('#btnsave').attr('disabled','true');
                 $('#btnsave').text("please wait...");
-		    $http({
-		      method: 'POST',
-		      url: $scope.apiURL,
-		      data: $scope.objects,
-		      headers: {'Content-Type': 'application/json',
-	                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
-		    })
-		    .success(function(login)
-		    {
-                $('#btnsave').text("Update");
-                $('#btnsave').removeAttr('disabled');
-		       window.location.href = '#/campaign/';  
-		    })
-		    .error(function(data) 
-		    {   
-		      var dialog = bootbox.dialog({
-	            message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
-	                closeButton: false
-	            });
-	            setTimeout(function(){
-                $('#btnsave').text("Update");
-                $('#btnsave').removeAttr('disabled');
-	                dialog.modal('hide'); 
-	            }, 1500);            
-		    });
+    		    $http({
+    		      method: 'POST',
+    		      url: $scope.apiURL,
+    		      data: $scope.objects,
+    		      headers: {'Content-Type': 'application/json',
+    	                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+    		    })
+    		    .success(function(login)
+    		    {
+                    $('#btnsave').text("Update");
+                    $('#btnsave').removeAttr('disabled');
+    		       window.location.href = '#/campaign/';  
+    		    })
+    		    .error(function(data) 
+    		    {   
+    		      var dialog = bootbox.dialog({
+    	            message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+    	                closeButton: false
+    	            });
+    	            setTimeout(function(){
+                    $('#btnsave').text("Update");
+                    $('#btnsave').removeAttr('disabled');
+    	                dialog.modal('hide'); 
+    	            }, 1500);            
+    		    });
 		}
 	};
 

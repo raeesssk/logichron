@@ -35,6 +35,21 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
           }
     });
 
+    $('#cm_first_dely').datepicker({
+        validateOnBlur: false,
+        todayButton: false,
+        timepicker: false,
+        scrollInput: false,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+        orientation: 'bottom',
+        next:   'xdsoft_next',
+        prev : 'xdsoft_prev',
+          onChangeDateTime: function (dp, $input) {
+              $scope.campaign.cm_first_dely = $('#cm_first_dely').val();
+          }
+    });
+
     $scope.getSearch = function(vals) {
         var searchTerms = {search: vals};
             const httpOptions = {

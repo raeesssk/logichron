@@ -66,7 +66,7 @@
                                   </thead>
                                   <tbody>
                                     <tr ng-repeat="campaign in filteredTodos | filter : campaign">
-                                      <td>{{campaign.cm_first_dely}}</td>
+                                      <td>{{campaign.cm_first_dely | date}}</td>
                                       <td>{{campaign.cm_end_date | date}}</td>
                                       <td>{{campaign.cm_dely_frequency}}</td>
                                       <td>{{campaign.cm_campaign_name}}</td>
