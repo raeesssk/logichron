@@ -399,15 +399,7 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
     };
     $scope.closeAccntList=function(){
          if ($scope.accountList.length == 0 && $scope.oldaccountList.length == 0){
-            var dialog = bootbox.dialog({
-            message: '<p class="text-center">No Data Found.</p>',
-                closeButton: false
-            });
-            dialog.find('.modal-body').addClass("btn-success");
-            setTimeout(function(){
-                dialog.modal('hide'); 
-            }, 1500);
-
+            
             $('#account_list').modal("hide");
             $scope.campaign.cm_account_list="No";
             $scope.account="";
@@ -484,15 +476,7 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
     };
     $scope.closeSupression=function(){
          if ($scope.supressionList.length == 0 && $scope.oldsupressionList.length == 0){
-            var dialog = bootbox.dialog({
-            message: '<p class="text-center">No Data Found.</p>',
-                closeButton: false
-            });
-            dialog.find('.modal-body').addClass("btn-success");
-            setTimeout(function(){
-                dialog.modal('hide'); 
-            }, 1500);
-
+           
             $('#supression_file').modal("hide");
             $scope.campaign.cm_supression_file="No";
             $scope.supression="";
@@ -557,15 +541,7 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
     };
     $scope.closeAllowDomain=function(){
          if ($scope.allowDomainList.length == 0 && $scope.oldallowDomainList.length == 0){
-            var dialog = bootbox.dialog({
-            message: '<p class="text-center">No Data Found.</p>',
-                closeButton: false
-            });
-            dialog.find('.modal-body').addClass("btn-success");
-            setTimeout(function(){
-                dialog.modal('hide'); 
-            }, 1500);
-
+           
             $('#allow_Domain').modal("hide");
             $scope.campaign.cm_allow_domain="No";
             $scope.allow_domain="";
@@ -630,15 +606,7 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
     };
     $scope.closeCustomQuestion=function(){
          if ($scope.customQuestionList.length == 0 && $scope.oldcustomQuestionList.length == 0){
-            var dialog = bootbox.dialog({
-            message: '<p class="text-center">No Data Found.</p>',
-                closeButton: false
-            });
-            dialog.find('.modal-body').addClass("btn-success");
-            setTimeout(function(){
-                dialog.modal('hide'); 
-            }, 1500);
-
+            
             $('#custom_question').modal("hide");
             $scope.campaign.cm_custom_question="No";
             $scope.custom_question="";
@@ -705,15 +673,7 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
     };
     $scope.closeDeniedDomain=function(){
          if ($scope.deniedDomainList.length == 0 && $scope.olddeniedDomainList.length == 0){
-            var dialog = bootbox.dialog({
-            message: '<p class="text-center">No Data Found.</p>',
-                closeButton: false
-            });
-            dialog.find('.modal-body').addClass("btn-success");
-            setTimeout(function(){
-                dialog.modal('hide'); 
-            }, 1500);
-
+           
             $('#denied_domain').modal("hide");
             $scope.campaign.cm_denied_domain="No";
             $scope.denied_domain="";

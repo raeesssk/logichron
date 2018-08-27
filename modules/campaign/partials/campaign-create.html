@@ -22,19 +22,27 @@
                         <div class="card-block">
                             <div class="form-group row">
                                 <div class="col-sm-3">
-                                        <label>First Delivery</label>
-                                        <input type="text" id="cm_first_dely" class="form-control date" ng-model="campaign.cm_first_dely" />
+                                        <label>First Delivery Date</label>
+                                        <input type="text" id="cm_first_dely" class="form-control date" ng-model="campaign.cm_first_dely" readonly/>
                                         <br>
                                 </div>
                                 <div class="col-sm-3">
                                         <label>End Date</label>
-                                        <input type="text" id="cm_end_date" class="form-control date" ng-model="campaign.cm_end_date" />
+                                        <input type="text" id="cm_end_date" class="form-control date" ng-model="campaign.cm_end_date" readonly />
                                         <br>
                                 </div>
                                 <div class="col-sm-3">
                                         <label>Delivery Frequency</label>
-                                        <input type="text" id="cm_dely_frequency" class="form-control" ng-model="campaign.cm_dely_frequency" />
-                                      <br>  
+                                        <select id="cm_dely_frequency" class="form-control" ng-model="campaign.cm_dely_frequency">
+                                            <option value="">select</option>
+                                            <option value="Everyday">Everyday</option>
+                                            <option value="Everyweek">Everyweek</option>
+                                            <option value="Everymonth">Everymonth</option>
+                                            <option value="Everyquarter">Everyquarter</option>
+
+                                        </select><!-- 
+                                        <input type="text" id="cm_dely_frequency" class="form-control" ng-model="campaign.cm_dely_frequency" /> -->
+                                      <br> 
                                 </div>
 
                                 <div class="col-sm-3">

@@ -10,28 +10,97 @@ angular.module('contactdiscovery').controller('contactdiscoveryAddCtrl', functio
     $("#cdm_campaign_name").focus();
     
     $("#cdm_company_name").focusout(function(){
+
         $http({
               method: 'POST',
-              url: $rootScope.baseURL+'/contact/check/accountList',
-              data : $scope.contactdiscovery,
+              url: $rootScope.baseURL+'/contact/accountList',
+              data: $scope.contactdiscovery,
               headers: {'Content-Type': 'application/json',
                       'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
             })
-            .success(function(domain)
+            .success(function(account)
             {   
-                    if(domain.length > 0)
+                console.log('test');
+                    if(account.length>0)
                     {
-                        var dialog = bootbox.dialog({
-                        message: '<p class="text-center">Company Exist In Domain List.</p>',
+                        $http({
+                              method: 'POST',
+                              url: $rootScope.baseURL+'/contact/check/accountList',
+                              data: $scope.contactdiscovery,
+                              headers: {'Content-Type': 'application/json',
+                                      'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+                            })
+                            .success(function(account1)
+                            {  
+                                // console.log(account1);
+                                if(account1.length>0){
+                                    console.log('present');
+                                
+                                }
+                            })
+                            .error(function(data) 
+                            {   
+                                var dialog = bootbox.dialog({
+                                  message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                                      closeButton: false
+                                  });
+                                  setTimeout(function(){
+                                  $('#btnsave').text("Save");
+                                  $('#btnsave').removeAttr('disabled');
+                                      dialog.modal('hide'); 
+                                  }, 1500);            
+                            });
+
+                                
+                    }
+                    else
+                    {
+                        $http({
+                              method: 'POST',
+                              url: $rootScope.baseURL+'/contact/check/suppression',
+                              data: $scope.contactdiscovery,
+                              headers: {'Content-Type': 'application/json',
+                                      'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+                            })
+                            .success(function(suppression)
+                            {  
+                                console.log(suppression);
+                              if(suppression.length>0) {
+                                 var dialog = bootbox.dialog({
+                                    message: '<p class="text-center">Update List.</p>',
+                                        closeButton: false
+                                    });
+                                    dialog.find('.modal-body').addClass("btn-danger");
+                                    setTimeout(function(){
+                                        dialog.modal('hide'); 
+                                        // $('#cdm_company_name').focus();
+                                    }, 1500); 
+                                }
+                            })
+                            .error(function(data) 
+                            {   
+                                var dialog = bootbox.dialog({
+                                  message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                                      closeButton: false
+                                  });
+                                  setTimeout(function(){
+                                  $('#btnsave').text("Save");
+                                  $('#btnsave').removeAttr('disabled');
+                                      dialog.modal('hide'); 
+                                  }, 1500);            
+                            });
+                        
+                    }
+                    var dialog = bootbox.dialog({
+                        message: '<p class="text-center">Company Does Not Exist.</p>',
                             closeButton: false
                         });
                         dialog.find('.modal-body').addClass("btn-danger");
                         setTimeout(function(){
                             dialog.modal('hide'); 
-                            $('#cdm_domain').focus();
-                        }, 1500);
-                    }
-                 
+                            $('#cdm_company_name').focus();
+                        }, 1500); 
+
             })
             .error(function(data) 
             {   
@@ -45,31 +114,57 @@ angular.module('contactdiscovery').controller('contactdiscoveryAddCtrl', functio
                       dialog.modal('hide'); 
                   }, 1500);            
             });
+
+                        
     });
 
     $("#cdm_domain").focusout(function(){
         $http({
               method: 'POST',
-              url: $rootScope.baseURL+'/contact/check/domain',
+              url: $rootScope.baseURL+'/contact/check/AllDomain',
               data : $scope.contactdiscovery,
               headers: {'Content-Type': 'application/json',
                       'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
             })
             .success(function(domain)
             {   
-                    if(domain.length > 0)
+                console.log(domain);
+                    if(domain.length >= 0)
                     {
+                        $http({
+                          method: 'POST',
+                          url: $rootScope.baseURL+'/contact/check/Domain',
+                          data : $scope.contactdiscovery,
+                          headers: {'Content-Type': 'application/json',
+                                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+                        })
+                        .success(function(domain1)
+                        {  
+                            if(domain1.length>0){
+                            var dialog = bootbox.dialog({
+                            message: '<p class="text-center">Domain Exist In Denied List Please Update.</p>',
+                                closeButton: false
+                            });
+                            dialog.find('.modal-body').addClass("btn-danger");
+                            setTimeout(function(){
+                                dialog.modal('hide'); 
+                                $('#cdm_domain').focus();
+                            }, 1500);
+                        }
+                    })
+                    .error(function(data) 
+                    {   
                         var dialog = bootbox.dialog({
-                        message: '<p class="text-center">Domain Exist In Domain List.</p>',
-                            closeButton: false
-                        });
-                        dialog.find('.modal-body').addClass("btn-danger");
-                        setTimeout(function(){
-                            dialog.modal('hide'); 
-                            $('#cdm_domain').focus();
-                        }, 1500);
-                    }
-                 
+                          message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                              closeButton: false
+                          });
+                          setTimeout(function(){
+                          $('#btnsave').text("Save");
+                          $('#btnsave').removeAttr('disabled');
+                              dialog.modal('hide'); 
+                          }, 1500);            
+                    });     
+                 }
             })
             .error(function(data) 
             {   
