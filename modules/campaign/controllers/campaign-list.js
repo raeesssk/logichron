@@ -19,7 +19,7 @@ angular.module('campaign').controller('campaignListCtrl', function ($rootScope, 
     $scope.allowDomainList=[];
     $scope.customQuestionList=[];
     $scope.deniedDomainList=[];
-
+    $scope.leadgoal=0;
 $scope.apiURL = $rootScope.baseURL+'/campaign/campaign/total';
     
     
@@ -34,7 +34,8 @@ $scope.apiURL = $rootScope.baseURL+'/campaign/campaign/total';
     //     $(this).css("cursor", "pointer");
     //   });
     // }
-    
+   
+   
    $scope.getAll = function () {
         if ($('#searchtext').val() == undefined || $('#searchtext').val() == "") {
         $scope.limit.search = "";
@@ -101,14 +102,39 @@ $scope.apiURL = $rootScope.baseURL+'/campaign/campaign/total';
                 if (data.length > 0) {
                  
                   data.forEach(function (value, key) {
-                    
+                    $http({
+                            method: 'GET',
+                            url: $rootScope.baseURL+'/campaign/contact/goal'+value.cm_id,
+                            headers: {'Content-Type': 'application/json',
+                                      'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+                          })
+                          .success(function(campaign)
+                          {
+                             campaign.forEach(function(value,key){
+                              $scope.leadgoal=value.total;
+                             })
+                          })
+                          .error(function(data) 
+                          {   
+                            toastr.error('Oops, Something Went Wrong.', 'Error', {
+                                  closeButton: true,
+                                  progressBar: true,
+                                positionClass: "toast-top-center",
+                                timeOut: "500",
+                                extendedTimeOut: "500",
+                              });
+                          });
                     $scope.filteredTodos.push(value);
                     
                   });
+
+
                 }
                 
                       // $scope.obj_Main = $scope.vendorList;
                       $scope.loading1 = 1;
+
+                       
                       // $scope.$apply(); 
               })
               .error(function(data) 

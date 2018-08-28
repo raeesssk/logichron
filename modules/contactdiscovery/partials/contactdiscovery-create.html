@@ -39,11 +39,11 @@
                                         <label>Campaign Name</label>
                                         <input type="text"
                                             id="cdm_campaign_name"
-                                            ng-model="contactdiscovery.cdm_campaign_name"
+                                            ng-model="contactdiscovery.cdm_cm_id"
                                             typeahead="obj as obj.cm_campaign_name for obj in getSearchCampaign($viewValue)"
                                             typeahead-loading="loadingCampaignList"
                                             typeahead-no-results="noCampaignListResults"
-                                            typeahead-on-select="getCampaignDetails()"
+                                            typeahead-on-select="getCampaignDetails(index)"
                                             class="form-control">
                                         <i ng-show="loadingCampaignList" class="glyphicon glyphicon-refresh"></i>
                                         <div ng-show="noCampaignListResults">
