@@ -205,7 +205,6 @@ $scope.apiURL = $rootScope.baseURL+'/contact/contact/total';
                  
                   data.forEach(function (value, key) {
                     $scope.filteredTodos.push(value);
-                    console.log($scope.filteredTodos);
                   });
                 }
                 else{

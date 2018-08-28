@@ -104,15 +104,14 @@ $scope.apiURL = $rootScope.baseURL+'/campaign/campaign/total';
                   data.forEach(function (value, key) {
                     $http({
                             method: 'GET',
-                            url: $rootScope.baseURL+'/campaign/contact/goal'+value.cm_id,
+                            url: $rootScope.baseURL+'/campaign/contact/goal/'+value.cm_id,
                             headers: {'Content-Type': 'application/json',
                                       'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
                           })
                           .success(function(campaign)
                           {
-                             campaign.forEach(function(value,key){
-                              $scope.leadgoal=value.total;
-                             })
+                            console.log(campaign);
+                             value.targetcount=campaign[0].total;
                           })
                           .error(function(data) 
                           {   
