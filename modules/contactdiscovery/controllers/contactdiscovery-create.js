@@ -289,7 +289,7 @@ angular.module('contactdiscovery').controller('contactdiscoveryAddCtrl', functio
   		var emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	    
 
-        if($('#cdm_campaign_name').val() == undefined || $('#cdm_campaign_name').val() == ""){
+        if($('#cdm_campaign_name').val() == undefined || $('#cdm_campaign_name').val() == "" || $scope.contactdiscovery.cdm_cm_id.cm_id == undefined){
 	    	var dialog = bootbox.dialog({
             message: '<p class="text-center">Please Enter Campaign Name.</p>',
                 closeButton: false

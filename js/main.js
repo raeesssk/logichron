@@ -16,8 +16,8 @@ angular.module('logichron',
         'employee',
         'campaign',
         'contactdiscovery',
+        'contactassign',
         'telecaller',
-        'manager',
     // ]).config(cityMotorRouter);
 
 ]).config(function($routeProvider, IdleProvider, KeepaliveProvider, $controllerProvider) {

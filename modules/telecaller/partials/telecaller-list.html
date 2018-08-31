@@ -3,7 +3,7 @@
         <div class="main-body">
             <div class="page-wrapper">
                 <div class="page-body">
-                    <div class="card">
+                    <div class="card" ng-init="getAll();">
                       	<div class="card-header">
                             <ul class="breadcrumb-title pull-right">
                                 <li class="breadcrumb-item">
@@ -21,42 +21,86 @@
                       	</div>
                       	<div class="card-block">
                             <div class="form-group row">
-                                <table class="table table-responsive">
-                  	                <tr>
-                	                    <td>Name</td>
-                          						<td>Contact</td>
-                          						<td>Company</td>
-                          						<td>Job Title</td>
-                                      <td>Campaign</td>
-                          						<td>Action</td>
-                  	                </tr>
-                    	            <tbody>
-                  	                <tr ng-repeat="telecaller in filteredTodos">
-                          						<td>{{telecaller.em_name}}</td>
-                          						<td>{{telecaller.em_mobile}}</td>
-                          						<td>{{telecaller.em_address}}</td>
-                          						<td>{{telecaller.em_role}}</td>
-                                      <td>{{telecaller.em_role}}</td>
-                          						<td>
-                          							<i class="fa fa-info-circle" data-toggle="modal" data-target="#view-details" ng-click="viewEmployeeDetails1($index)"></i>
-                          							<a href="#/employee/edit/{{employee.em_id}}"><i class="fa fa-pencil"></i></a>
-                          							<i class="fa fa-trash" data-toggle="modal" data-target="#confirm-delete" ng-click="deletetelecaller(employee.em_id)"></i>
-                          						</td>
-              	                    </tr>
-                    	            </tbody>
-                      		      </table>
-                      		      <br>
-                      	            <span id="pagination_detail" ng-show="filteredTodos.lengtd > 0" class="pagination_ds">Showing {{ filterUserend }} to {{filterUser}} of {{customerList.length}} Contact's</span>
-                      			    <span id="pagination_div" align="right" ng-show="filteredTodos.lengtd > 0"
-                      			          style="float: right;margin-top: -27px;">
-                      			      <pagination
-                      			              ng-model="currentPage"
-                      			              total-items="customerList.lengtd"
-                      			              max-size="maxSize"
-                      			              boundary-links="true" data-num-pages="noOfPages"
-                      			              items-per-page="numPerPage">
-                      			      </pagination>
-                      		    	</span>
+                              <div class="col-lg-2">
+          	                    <h6>Name</h6>
+                              </div>
+                              <div class="col-lg-2">
+                                <h6>Contact</h6>
+                              </div>
+                              <div class="col-lg-2">
+                                <h6>Company</h6>
+                              </div>
+                              <div class="col-lg-2">
+                                <h6>Job Title</h6>
+                              </div>
+                              <div class="col-lg-2">
+                                <h6>Campaign</h6>
+                              </div>
+                            </div>
+                            <div class="form-group row" ng-repeat="contacts in contactList">
+                              <div class="col-lg-2">
+                                <label>{{contacts.cdm_first_name}}</label>
+                              </div>
+                              <div class="col-lg-2">
+                                <label>{{contacts.cdm_mobile}}</label>
+                              </div>
+                              <div class="col-lg-2">
+                                <label>{{contacts.cdm_company_name}}</label>
+                              </div>
+                              <div class="col-lg-2">
+                                <label>{{contacts.cdm_job_title}}</label>
+                              </div>
+                              <div class="col-lg-2">
+                                <label>{{contacts.cm_campaign_name}}</label>
+                              </div>
+                            </div>
+                            <br>
+                            <br>
+                            <div class="form-group row">
+                              <div class="col-lg-4 offset-lg-4"><h3>Followup Details</h3></div>
+                            </div>
+                            <div class="form-group row">
+                              <div class="col-sm-3" ng-show="status=='follow_up'">
+                                <label>Status</label>
+                                <select class="form-control">
+                                  <option>Lead</option>
+                                  <option>Follow Up</option>
+                                  <option>Do Not Disturb</option>
+                                  <option>Close</option>
+                                </select>
+                              </div>
+                              <div class="col-sm-3">
+                                  <label>Follow Up Date</label>
+                                  <input type="text" id="follow_up_date" ng-model="contact.follow_up_date" class="form-control date"/>
+                                </div>
+                                <div class="col-sm-3">
+                                        <label>Comment</label>
+                                        <input type="textArea" id="comment" ng-model="contact.comment" class="form-control date"/>
+                                </div>
+                                <div class="col-sm-3">
+                                        <input type="button"  class="form-control btn btn-grd-success" value="Update" style="margin-top: 12%;" />
+                                 <br><br>
+                                </div>
+                              </div>
+                                <div class="form-group row">
+                                  <div class="col-sm-12">
+                                    <table class="table table-bordered">
+                                      <thead>
+                                        <tr>
+                                          <th>Followup Date</th>
+                                          <th>Comment</th>
+                                        </tr>
+                                      </thead>
+                                       <tbody>
+                                          <tr ng-repeat='follow in followdetails'>
+                                            <td>{{}}</td>
+                                            <td>{{}}</td>
+                                          </tr>
+                                        </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+
                             </div>
              	  	      </div>
                     </div>
@@ -75,7 +119,7 @@
         <h4 class="modal-title">Confirm Delete</h4>
       </div>
       <div class="modal-body">
-        <p>You are about to delete <b><i class="title"></i></b> record, tdis procedure is irreversible.</p>
+        <p>You are about to delete <b><i class="title"></i></b> record, labelis procedure is irreversible.</p>
                 <p>Do you want to proceed?</p>
       </div>
       <div class="modal-footer">
@@ -100,64 +144,64 @@
       <div class="modal-body">
       	<table class="table">
 			<tr>
-	          <td>
+	          <label>
 	          	<div class="input-group date">
 	                <div class="input-group-addon">
 	                    <i class="fa fa-calendar"></i>
 	                </div>
 	                <input type="text" class="form-control pull-right" id="user-datepicker-from" placeholder="From Date">
                 </div>
-              </td>
-              <td>
+              </label>
+              <label>
 	          	<div class="input-group date">
 	                <div class="input-group-addon">
 	                    <i class="fa fa-calendar"></i>
 	                </div>
 	                <input type="text" class="form-control pull-right" id="user-datepicker-to" placeholder="To Date">
                 </div>
-              </td>
-	          <td><button type="button" class="btn" id="filter-user-btn" ng-click="filter()">Filter</button></td>
-	          <td><button type="button" class="btn" id="reset-user-btn" ng-click="reset()">Reset</button></td>
+              </label>
+	          <label><button type="button" class="btn" id="filter-user-btn" ng-click="filter()">Filter</button></label>
+	          <label><button type="button" class="btn" id="reset-user-btn" ng-click="reset()">Reset</button></label>
               
 	      	</tr>
 	    </table>
         <table class="table">
     		<tr>
-    			<td>Name: <strong>{{venname}}</strong></td>
-    			<td>Number: <strong>{{venno}}</strong></td>
-    			<td>Address: <strong>{{venadd}}</strong></td>
-    			<td>Credit: <strong>{{venbal}}</strong></td>
-    			<td>Debit: <strong>{{vendebit}}</strong></td>
+    			<label>Name: <strong>{{venname}}</strong></label>
+    			<label>Number: <strong>{{venno}}</strong></label>
+    			<label>Address: <strong>{{venadd}}</strong></label>
+    			<label>Credit: <strong>{{venbal}}</strong></label>
+    			<label>Debit: <strong>{{vendebit}}</strong></label>
     		</tr>
     	</table>
     	<table class="table" border="1">
-			<tdead>
+			<labelead>
 			<tr>
-				<td>Type</td>
-				<td>Invoice</td>
-				<td>Date</td>
-				<td>Debit</td>
-				<td>Credit</td>
-				<td>DR/CR</td>
-				<td>Balance</td>
+				<label>Type</label>
+				<label>Invoice</label>
+				<label>Date</label>
+				<label>Debit</label>
+				<label>Credit</label>
+				<label>DR/CR</label>
+				<label>Balance</label>
 			</tr>
-			</tdead>
+			</labelead>
 			<tbody id="content">
 			<tr ng-repeat="purchaseDetails in categoryList | filter : purchaseDetails">
-				<td style="padding:6px; border-style: none solid solid none; border-widtd:1px;">{{purchaseDetails.type}}</td>
-				<td style="padding:6px; border-style: none solid solid none; border-widtd:1px;">{{purchaseDetails.invoice}}</td>
-				<td style="padding:6px; border-style: none solid solid none; border-widtd:1px;">{{purchaseDetails.date | date : 'mediumDate'}}</td>
-				<td style="padding:6px; border-style: none solid solid none; border-widtd:1px;">{{purchaseDetails.debit}}</td>
-				<td style="padding:6px; border-style: none solid solid none; border-widtd:1px;">{{purchaseDetails.credit}}</td>
-				<td style="padding:6px; border-style: none solid solid none; border-widtd:1px;">{{purchaseDetails.drcr}}</td>
-				<td style="padding:6px; border-style: none none solid none; border-widtd:1px;">{{purchaseDetails.bal}}</td>
+				<label style="padding:6px; border-style: none solid solid none; border-widlabel:1px;">{{purchaseDetails.type}}</label>
+				<label style="padding:6px; border-style: none solid solid none; border-widlabel:1px;">{{purchaseDetails.invoice}}</label>
+				<label style="padding:6px; border-style: none solid solid none; border-widlabel:1px;">{{purchaseDetails.date | date : 'mediumDate'}}</label>
+				<label style="padding:6px; border-style: none solid solid none; border-widlabel:1px;">{{purchaseDetails.debit}}</label>
+				<label style="padding:6px; border-style: none solid solid none; border-widlabel:1px;">{{purchaseDetails.credit}}</label>
+				<label style="padding:6px; border-style: none solid solid none; border-widlabel:1px;">{{purchaseDetails.drcr}}</label>
+				<label style="padding:6px; border-style: none none solid none; border-widlabel:1px;">{{purchaseDetails.bal}}</label>
 			</tr>
 			</tbody>
 		</table>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-        <button type="button" id="del" class="btn btn-primary" ng-click="printDetails();">Print</button>
+        <button type="button" id="del" class="btn btn-primary" ng-click="prinlabeletails();">Print</button>
       </div>
     </div>
     <!-- /.modal-content -->

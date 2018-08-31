@@ -110,7 +110,6 @@ $scope.apiURL = $rootScope.baseURL+'/campaign/campaign/total';
                           })
                           .success(function(campaign)
                           {
-                            console.log(campaign);
                              value.targetcount=campaign[0].total;
                           })
                           .error(function(data) 

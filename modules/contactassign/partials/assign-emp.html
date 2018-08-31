@@ -1,0 +1,94 @@
+<div class="pcoded-content" ng-init="getAll();">
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+                    <div class="card" ng-show='loading1==1'>
+                      	<div class="card-header">
+                            <ul class="breadcrumb-title pull-right">
+                                <li class="breadcrumb-item">
+                                    <a href="#/"> <i class="fa fa-home"></i> </a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="#/">Assign</a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a class="active">Assign To Employee</a>
+                                </li>
+                            </ul>
+                            <h3>Assign To Employee</h3>
+                            <hr>
+                      	</div>
+                      	<div class="card-block">
+                            <div class="row">
+                              <div class="col-lg-6">
+                                <input type="text" class="form-control" id="searchtext" ng-model="searchtext" onkeyup="angular.element(this).scope().getSearch();" placeholder = "Search by-  Employee Name / Mobile / Designation..."/><br>
+                              </div>
+                              <div class="col-lg-4" ng-show="selectall == 1">
+                                <div class="form-group">
+                                    <input type="text"
+                                        id="cem_cm_id"
+                                        ng-model="assign.cem_cm_id"
+                                        typeahead="obj as obj.cm_campaign_name for obj in getSearchCampaign($viewValue)"
+                                        typeahead-loading="loadingCampaignList"
+                                        typeahead-no-results="noCampaignListResults"
+                                        typeahead-on-select="getCampaignDetails()"
+                                        class="form-control"
+                                        placeholder="Campaign Name">
+                                    <i ng-show="loadingCampaignList" class="glyphicon glyphicon-refresh"></i>
+                                    <div ng-show="noCampaignListResults">
+                                        <i class="glyphicon glyphicon-remove"></i> No Results Found
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="col-lg-2">
+                                <button class="btn btn-outline btn-info form-control" id="assign_to" disabled ng-click='assign($index)' data-toggle="modal" data-target="#emp-details">Assign-To</button>
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <div class="col-lg-12">
+                                <table class="table table-bordered">
+                      		        <thead>
+                  	                <tr>
+                                      <th>Select</th>
+                                      <th>sr-no</th>
+                                      <th>Employee Name</th>
+                	                    <th>Mobile</th>
+                          						<th>Address</th>
+                          						<th>Designation</th>
+                  	                </tr>
+                    	            </thead>
+                    	            <tbody>
+                  	                <tr ng-repeat="employee in filteredTodos">
+                                      <td><input type="checkbox" ng-change="checkAll(employee)" ng-model="employee.select"></td>
+                                      <td>{{$index+1}}</td>
+                                      <td>{{employee.emp_name}}</td>
+                          						<td>{{employee.emp_mobile}}</td>
+                          						<td>{{employee.emp_address}}</td>
+                          						<td>{{employee.emp_designation}}</td>
+              	                    </tr>
+                    	            </tbody>
+                      		      </table>
+                      		      <br>
+                      	            <span id="pagination_detail" ng-show="filteredTodos.length > 0" class="pagination_ds">Showing {{ filterUserend }} to {{filterUser}} of {{contactdiscoveryListcount}} Employee's</span>
+                      			    <span id="pagination_div" align="right" ng-show="filteredTodos.length > 0"
+                      			          style="float: right;margin-left: 60%;">
+                      			      <pagination
+                      			              ng-model="currentPage"
+                      			              total-items="contactdiscoveryListcount"
+                      			              max-size="maxSize"
+                      			              boundary-links="true" data-num-pages="noOfPages"
+                      			              items-per-page="numPerPage">
+                      			      </pagination>
+                      		    	</span>
+                            </div>
+                          </div>
+             	  	      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- /.modal -->

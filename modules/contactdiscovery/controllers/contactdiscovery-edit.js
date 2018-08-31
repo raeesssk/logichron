@@ -297,8 +297,7 @@ angular.module('contactdiscovery').controller('contactdiscoveryEditCtrl', functi
 	    .success(function(contactdiscoveryObj)
 	    {
 	    	contactdiscoveryObj.forEach(function (value, key) {
-	      		$scope.contactdiscovery = value;
-                console.log($scope.contactdiscovery);
+	      		$scope.contactdiscovery = value; 
               });
                 $http({
                   method: 'GET',
