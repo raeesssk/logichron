@@ -18,7 +18,14 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
 
 
 	$scope.apiURL = $rootScope.baseURL+'/campaign/add';
+    
+    var d = new Date();
+    var yyyy = d.getFullYear().toString();
+    var mm = (d.getMonth()).toString(); // getMonth() is zero-based
+    var dd  = d.getDate().toString();
+    $scope.campaign.cm_date = yyyy +"-"+ (parseInt(mm)+parseInt(1)) +"-"+ dd;
 
+    
 
     $('#cm_first_dely').datepicker({
         validateOnBlur: false,

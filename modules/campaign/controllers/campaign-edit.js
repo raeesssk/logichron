@@ -26,7 +26,26 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
 
 	$scope.campaignId = $routeParams.campaignId;
     $scope.apiURL = $rootScope.baseURL+'/campaign/edit/'+$scope.campaignId;
-   
+
+   var d = new Date();
+    var yyyy = d.getFullYear().toString();
+    var mm = (d.getMonth()).toString(); // getMonth() is zero-based
+    var dd  = d.getDate().toString();
+    $scope.campaign.cm_date = yyyy +"-"+ (parseInt(mm)+parseInt(1)) +"-"+ dd;
+
+    $('#cm_date').datepicker({
+        validateOnBlur: false,
+        todayButton: false,
+        timepicker: false,
+        scrollInput: false,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+        orientation: 'bottom',
+          onChangeDateTime: function (dp, $input) {
+              $scope.campaign.cm_date = $('#cm_first_dely').val();
+          }
+    });
+
    $('#cm_first_dely').datepicker({
         validateOnBlur: false,
         todayButton: false,
