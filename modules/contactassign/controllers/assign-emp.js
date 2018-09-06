@@ -135,7 +135,9 @@ $scope.filter = function()
     $scope.selectall=0;
     $scope.campaignassign=[];
     $scope.employeeList=[];
-
+    $scope.assign={};
+    $scope.remove=[];
+    $scope.newempList=[];
 $scope.apiURL = $rootScope.baseURL+'/assign/employee/total';
     
     
@@ -207,13 +209,9 @@ $scope.apiURL = $rootScope.baseURL+'/assign/employee/total';
                 if (data.length > 0) {
                  
                   data.forEach(function (value, key) {
-                    $scope.filteredTodos.push(value);
+                      $scope.filteredTodos.push(value);
                   });
                 }
-                else{
-                  
-                }
-                
                       // $scope.obj_Main = $scope.vendorList;
                       $scope.loading1 = 1;
                       // $scope.$apply(); 
@@ -235,7 +233,10 @@ $scope.apiURL = $rootScope.baseURL+'/assign/employee/total';
        $scope.getAll();
     };
 
+
+
     $scope.getSearchCampaign = function(vals) {
+
       var searchTerms = {search: vals};
         const httpOptions = {
             headers: {
@@ -248,49 +249,65 @@ $scope.apiURL = $rootScope.baseURL+'/assign/employee/total';
         });
     };
 
-    $scope.getCampaignDetails=function(){
-      $http({
-                method: 'GET',
-                url: $rootScope.baseURL+'/assign/campaign/view/'+$scope.assign.cem_cm_id.cm_id,
-                headers: {'Content-Type': 'application/json',
-                        'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
-              })
-              .success(function(obj)
-              {
-                  obj.forEach(function(value,key){
-                    $scope.campaignassign.push(value);
-                  });
-              })
-              .error(function(data) 
-              {   
-                  var dialog = bootbox.dialog({
-                  message: '<p class="text-center">Oops!!! Something Went Wrong.</p>',
-                      closeButton: false
-                  });
-                  dialog.find('.modal-body').addClass("btn-danger");
-                  setTimeout(function(){
-                      dialog.modal('hide'); 
-                  }, 1500); 
-              });
-    }
+     $scope.getCampaignDetails=function(){
+      $('#assign_to').removeAttr('disabled');
+      $scope.filteredTodos.forEach(function(value,key){
+
+        if($scope.assign.cem_cm_id.cm_id == value.cem_cm_id){
+          value.cem_select = true;
+          
+        }
+        else
+        {
+          value.cem_select=false;
+        }
+      });
+
+    };
     
 
     $scope.checkAll=function(employee){
-      $scope.employee=employee;
-          if(employee.select){
-            $('#assign_to').removeAttr('disabled');
-            $scope.selectall= 1;
-            $scope.employeeList.push($scope.employee);
+      $scope.filteredTodos.forEach(function(value,key){
+        if($scope.assign.cem_cm_id.cm_id == value.cem_cm_id){
+          if(value.cem_select){
+              
+            $scope.employeeList.push(value);
           }
           else
           {
-            $('#assign_to').attr('disabled',true);
-            $scope.selectall= 0;
-            $scope.employeeList.splice($scope.employee);
+            $scope.remove.push(value);
           }
+        }
+      });
+      if(employee.cem_select)
+      {
+        $scope.newempList.push(employee);
+      }
+      else
+      {
+        $scope.newempList.splice(employee);
+      }
+      $scope.newempList.forEach(function(val,key){
+            
+            if(val.cem_cm_id != undefined || val.cem_cm_id != null){
+              val.cem_select=false;
+              if(val.cem_select==false){
+                $scope.newempList.splice(employee);
+              }
+              var dialog = bootbox.dialog({
+              message: '<p class="text-center">Employee Already Assigned To Another Campaign</p>',
+                  closeButton: false
+              });
+              dialog.find('.modal-body').addClass("btn-danger");
+              setTimeout(function(){
+                  dialog.modal('hide'); 
+                  $('#cem_cm_id').focus();
+              }, 1500);
+            }
+          });
     };
 
-    $scope.assign=function(index){
+    $scope.updateAssign=function(){
       if($('#cem_cm_id').val() == undefined || $('#cem_cm_id').val() == "" || $scope.assign.cem_cm_id.cm_id == undefined){
             var dialog = bootbox.dialog({
             message: '<p class="text-center">Please Enter Campaign Name.</p>',
@@ -302,15 +319,21 @@ $scope.apiURL = $rootScope.baseURL+'/assign/employee/total';
                 $('#cem_cm_id').focus();
             }, 1500);
 
+
+
         }
         else
         {
           
-
+          $scope.obj={
+            employee : $scope.employeeList,
+            newemp : $scope.newempList,
+            remove : $scope.remove
+          }
           $http({
                 method: 'POST',
-                url: $rootScope.baseURL+'/assign/add/'+$scope.assign.cem_cm_id.cm_id,
-                data: $scope.employeeList,
+                url: $rootScope.baseURL+'/assign/edit/'+$scope.assign.cem_cm_id.cm_id,
+                data: $scope.obj,
                 headers: {'Content-Type': 'application/json',
                         'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
               })
@@ -341,8 +364,4 @@ $scope.apiURL = $rootScope.baseURL+'/assign/employee/total';
               });
         }
     };
-
-
-   
-    
 });

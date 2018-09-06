@@ -21,38 +21,50 @@
                       	</div>
                       	<div class="card-block">
                             <div class="form-group row">
-                              <div class="col-lg-2">
-          	                    <h6>Name</h6>
+                              <div class="col-lg-2 form-control">
+          	                    <h6 align="center">Name</h6>
                               </div>
-                              <div class="col-lg-2">
-                                <h6>Contact</h6>
+                              <div class="col-lg-2 form-control">
+                                <h6 align="center">Contact</h6>
                               </div>
-                              <div class="col-lg-2">
-                                <h6>Company</h6>
+                              <div class="col-lg-2 form-control">
+                                <h6 align="center">Company</h6>
                               </div>
-                              <div class="col-lg-2">
-                                <h6>Job Title</h6>
+                              <div class="col-lg-2 form-control">
+                                <h6 align="center">Job Title</h6>
                               </div>
-                              <div class="col-lg-2">
-                                <h6>Campaign</h6>
+                              <div class="col-lg-2 form-control">
+                                <h6 align="center">Campaign</h6>
+                              </div>
+                              <div class="col-lg-2 form-control">
+                                <h6 align="center">Status</h6>
                               </div>
                             </div>
                             <div class="form-group row" ng-repeat="contacts in contactList">
-                              <div class="col-lg-2">
+                              <div align="center" class="col-lg-2">
                                 <label>{{contacts.cdm_first_name}}</label>
                               </div>
-                              <div class="col-lg-2">
+                              <div align="center" class="col-lg-2">
                                 <label>{{contacts.cdm_mobile}}</label>
                               </div>
-                              <div class="col-lg-2">
+                              <div align="center" class="col-lg-2">
                                 <label>{{contacts.cdm_company_name}}</label>
                               </div>
-                              <div class="col-lg-2">
+                              <div align="center" class="col-lg-2">
                                 <label>{{contacts.cdm_job_title}}</label>
                               </div>
-                              <div class="col-lg-2">
+                              <div align="center" class="col-lg-2">
                                 <label>{{contacts.cm_campaign_name}}</label>
                               </div>
+                              <div align="center" class="col-lg-2"><select class="form-control" ng-change='contactStatus(contacts)' ng-model="contacts.call_status">
+                                  <option >open</option>
+                                  <option value="Call">Call</option>
+                                  <option value="Calling">Calling</option>
+                                  <option value="Lead">Lead</option>
+                                  <option value="Follow Up">Follow Up</option>
+                                  <option value="Do Not Disturb">Do Not Disturb</option>
+                                  <option value="Close">Close</option>
+                                </select></div>
                             </div>
                             <br>
                             <br>
@@ -60,25 +72,16 @@
                               <div class="col-lg-4 offset-lg-4"><h3>Followup Details</h3></div>
                             </div>
                             <div class="form-group row">
-                              <div class="col-sm-3" ng-show="status=='follow_up'">
-                                <label>Status</label>
-                                <select class="form-control">
-                                  <option>Lead</option>
-                                  <option>Follow Up</option>
-                                  <option>Do Not Disturb</option>
-                                  <option>Close</option>
-                                </select>
-                              </div>
                               <div class="col-sm-3">
                                   <label>Follow Up Date</label>
-                                  <input type="text" id="follow_up_date" ng-model="contact.follow_up_date" class="form-control date"/>
+                                  <input type="text" id="fm_date" ng-model="follow.fm_date" class="form-control date"/>
                                 </div>
                                 <div class="col-sm-3">
                                         <label>Comment</label>
-                                        <input type="textArea" id="comment" ng-model="contact.comment" class="form-control date"/>
+                                        <input type="textArea" id="fm_comment" ng-model="follow.fm_comment" class="form-control date"/>
                                 </div>
                                 <div class="col-sm-3">
-                                        <input type="button"  class="form-control btn btn-grd-success" value="Update" style="margin-top: 12%;" />
+                                        <input type="button"  class="form-control btn btn-grd-success" value="Update" style="margin-top: 12%;" ng-click="updateFollowup()" />
                                  <br><br>
                                 </div>
                               </div>
@@ -87,14 +90,14 @@
                                     <table class="table table-bordered">
                                       <thead>
                                         <tr>
-                                          <th>Followup Date</th>
+                                          <th>Followup-Date</th>
                                           <th>Comment</th>
                                         </tr>
                                       </thead>
                                        <tbody>
-                                          <tr ng-repeat='follow in followdetails'>
-                                            <td>{{}}</td>
-                                            <td>{{}}</td>
+                                          <tr ng-repeat='followup in followdetails'>
+                                            <td>{{followup.fm_date | date}}</td>
+                                            <td>{{followup.fm_comment}}</td>
                                           </tr>
                                         </tbody>
                                     </table>

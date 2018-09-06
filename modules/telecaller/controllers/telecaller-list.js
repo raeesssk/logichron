@@ -3,6 +3,12 @@ angular.module('telecaller').controller('telecallerListCtrl', function ($rootSco
 
 
   $scope.contactList=[];
+  $scope.follow={};
+  $scope.followdetails=[];
+
+  $('#fm_date').attr('readonly',true);
+  $('#fm_comment').attr('readonly',true);
+  $('.btn').attr('disabled',true);
 
    $scope.getAll = function () {
       $http({
@@ -12,12 +18,20 @@ angular.module('telecaller').controller('telecallerListCtrl', function ($rootSco
                   'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
       })
       .success(function(contact)
-      {
-            contact.forEach(function(value,key){
-              $scope.contactList.push(value);
-              console.log($scope.contactList);
+      { 
+         $scope.contactList.push(contact[0]);
+         if(contact[0] == null || contact[0] == undefined)
+         {
+          var dialog = bootbox.dialog({
+            message: '<p class="text-center">You Do Not Have Any Contact To Display!!!</p>',
+                closeButton: false
             });
-            
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide'); 
+                // $('#cdm_company_name').focus();
+            }, 1500);
+         }
       })
       .error(function(data) 
       {   
@@ -31,7 +45,130 @@ angular.module('telecaller').controller('telecallerListCtrl', function ($rootSco
       });
     };
 
+    $scope.contactStatus=function(contacts){
+      
+        $http({
+              method: 'POST',
+              url: $rootScope.baseURL+'/telecaller/status/'+contacts.cdm_id,
+              data: contacts,
+              headers: {'Content-Type': 'application/json',
+                        'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+            })
+            .success(function(contact)
+            {
+                  if(contact[0].call_status == 'Lead' || contact[0].call_status == 'Do Not Disturb' || contact[0].call_status == 'Close' || contact[0].call_status == 'Follow Up' || contact[0].call_status == 'open'){
+                     console.log('test');
+                      $('#fm_comment').removeAttr('readonly');
+                      $('.btn').removeAttr('disabled');
+                      if(contact[0].call_status == 'Follow Up')
+                      {
+                          $http({
+                              method: 'GET',
+                              url: $rootScope.baseURL+'/telecaller/'+contacts.cdm_id,
+                              headers: {'Content-Type': 'application/json',
+                                        'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+                            })
+                            .success(function(contact)
+                            {
+                              contact.forEach(function(value,key){
+                                $scope.followdetails.push(value)
+                              });
+                            })
+                            .error(function(data) 
+                            {   
+                              var dialog = bootbox.dialog({
+                                  message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                                      closeButton: false
+                                  });
+                                  setTimeout(function(){
+                                      dialog.modal('hide'); 
+                                  }, 1500);            
+                            });
+                          }
+                          else
+                          {
+                            $scope.followdetails=[];
+                          }
+                          $rootScope.socket.emit('status',{
+                            obj:contact[0]
+                          });
+                  }
+                  else
+                  {
+                    console.log('test1');
+                    $route.reload();
+                  }
+            })
+            .error(function(data) 
+            {   
+              var dialog = bootbox.dialog({
+                  message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                      closeButton: false
+                  });
+                  setTimeout(function(){
+                      dialog.modal('hide'); 
+                  }, 1500);            
+            });
+    };
+    var d = new Date();
+    var yyyy = d.getFullYear().toString();
+    var mm = (d.getMonth()).toString(); // getMonth() is zero-based
+    var dd  = d.getDate().toString();
+    $scope.follow.fm_date = yyyy +"-"+ (parseInt(mm)+parseInt(1)) +"-"+ dd;
+
+    $('#fm_date').datepicker({
+        validateOnBlur: false,
+        todayButton: false,
+        timepicker: false,
+        scrollInput: false,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+        orientation: 'bottom',
+          onChangeDateTime: function (dp, $input) {
+              $scope.follow.fm_date = $('#fm_date').val();
+          }
+    }).datepicker('setDate', 'today');
+    
+    $scope.updateFollowup=function(){
+      $scope.obj = {
+        contact : $scope.contactList,
+        follow : $scope.follow
+      }
+      $http({
+        method: 'POST',
+        url: $rootScope.baseURL+'/telecaller/add',
+        data:$scope.obj,
+        headers: {'Content-Type': 'application/json',
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+      })
+      .success(function(contact)
+      {
+            $scope.contactList=[];
+            contact[0].fm_date
+            $scope.followdetails.push(contact[0]);
+            $scope.follow=null;
+            var dialog = bootbox.dialog({
+            message: '<p class="text-center">Follow-Ups Updated!!!</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-success");
+            setTimeout(function(){
+                dialog.modal('hide'); 
+            }, 2000);
+           $scope.getAll();
+           $scope.followdetails=[]
+      })
+      .error(function(data) 
+      {   
+        var dialog = bootbox.dialog({
+            message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                closeButton: false
+            });
+            setTimeout(function(){
+                dialog.modal('hide'); 
+            }, 1500);            
+      });
+    };
 
    
-
 });

@@ -29,19 +29,6 @@ angular.module('contactassign', [])
                         }]
                     }
                 })
-            .when('/assign/edit',
-                {
-                    templateUrl: 'modules/contactassign/partials/assign-emp-edit.html',
-                    controller: 'assignEditCtrl',
-                    resolve: {
-                        lazy: ['$ocLazyLoad',"$q", "$location","$rootScope", function ($ocLazyLoad, $q, $location, $rootScope) {
-                            return $ocLazyLoad.load([{
-                                name: 'myApp',
-                                files: ['modules/contactassign/controllers/assign-emp-edit.js']
-                            }]);
-                        }]
-                    }
-                })
             .when('/assign',
                 {
                     templateUrl: 'modules/contactassign/partials/assign-job.html',

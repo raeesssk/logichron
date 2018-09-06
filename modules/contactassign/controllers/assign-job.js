@@ -131,9 +131,11 @@ $scope.filter = function()
     $scope.contactdiscoveryList = [];
     $scope.contactdiscoveryListcount=0;
     $scope.loading1 = 0;
+    $scope.count;
     $scope.limit={};
+    $scope.assign={};
 
-$scope.apiURL = $rootScope.baseURL+'/contact/contact/total';
+$scope.apiURL = $rootScope.baseURL+'/assign/contact/total';
     
     
     
@@ -193,7 +195,7 @@ $scope.apiURL = $rootScope.baseURL+'/contact/contact/total';
               $scope.limit.end = end;
               $http({
                 method: 'POST',
-                url: $rootScope.baseURL+'/contact/contact/limit',
+                url: $rootScope.baseURL+'/assign/contact/limit',
                 data: $scope.limit,
                 headers: {'Content-Type': 'application/json',
                           'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
@@ -204,6 +206,7 @@ $scope.apiURL = $rootScope.baseURL+'/contact/contact/total';
                 if (data.length > 0) {
                  
                   data.forEach(function (value, key) {
+                    
                     $scope.filteredTodos.push(value);
                   });
                 }
@@ -232,23 +235,85 @@ $scope.apiURL = $rootScope.baseURL+'/contact/contact/total';
        $scope.getAll();
     };
 
+    $scope.getSearchCampaign = function(vals) {
+
+      var searchTerms = {search: vals};
+        const httpOptions = {
+            headers: {
+              'Content-Type':  'application/json',
+              'Authorization': 'Bearer '+localStorage.getItem("logichron_admin_access_token")
+            }
+        };
+        return $http.post($rootScope.baseURL+'/campaign/typeahead/search', searchTerms, httpOptions).then((result) => {
+            return result.data;
+        });
+    };
+    
+    $scope.getCampaignDetails=function(){
+      $scope.contactdiscoveryList=[];
+      $('#assign_to').removeAttr('disabled');
+      $scope.filteredTodos.forEach(function(value,key){
+
+        if($scope.assign.cem_cm_id.cm_id == value.cdm_cm_id){
+          value.cem_select = true;
+          $scope.contactdiscoveryList.push(value);
+        }
+        else
+        {
+          value.cem_select=false;
+        }
+
+      });
+       $http({
+              method: 'GET',
+              url: $rootScope.baseURL+'/campaign/contact/goal/'+$scope.assign.cem_cm_id.cm_id,
+              headers: {'Content-Type': 'application/json',
+                        'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+            })
+            .success(function(campaign)
+            {
+               $scope.count=campaign[0].total;
+            })
+            .error(function(data) 
+            {   
+              toastr.error('Oops, Something Went Wrong.', 'Error', {
+                    closeButton: true,
+                    progressBar: true,
+                  positionClass: "toast-top-center",
+                  timeOut: "500",
+                  extendedTimeOut: "500",
+                });
+            });
+    };
+
+    $scope.campaignChanges=function(){
+      if($scope.assign.cem_cm_id.cm_id == null){
+          
+          $scope.count=null;
+          $scope.filteredTodos.forEach(function(val,key){
+            val.cem_select=false;
+          });
+          $('#assign_to').attr('disabled',true)
+      }
+    };
+
     $scope.checkAll=function(contact){
-          if(contact.select){
+          if(contact.cem_select){
             $('#assign_to').removeAttr('disabled');
-            $scope.contactdiscoveryList.push(contact);
+            contact.cem_select=false;
           }
           else
           {
             $('#assign_to').attr('disabled',true);
-            $scope.contactdiscoveryList.splice(contact);
+            contact.cem_select=false;
           }
     };
 
-    $scope.assign=function(){
+    $scope.assign=function(index){
       $scope.empdetails=[];
       $http({
           method: 'GET',
-          url: $rootScope.baseURL+'/assign/emp/view',
+          url: $rootScope.baseURL+'/assign/emp/view/'+$scope.assign.cem_cm_id.cm_id,
           //data: $scope.data,
           headers: {'Content-Type': 'application/json',
                   'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
@@ -273,10 +338,7 @@ $scope.apiURL = $rootScope.baseURL+'/contact/contact/total';
 
      $scope.empAssign=function(emp){
       $scope.employee=emp;
-      $scope.obj = {
-        contact : $scope.contactdiscoveryList,
-        employee : $scope.employee
-      }
+      
       $http({
           method: 'POST',
           url: $rootScope.baseURL+'/assign/assign/'+$scope.employee.emp_id,
@@ -295,7 +357,7 @@ $scope.apiURL = $rootScope.baseURL+'/contact/contact/total';
                 dialog.modal('hide'); 
             }, 1500);
             $('#emp-details').modal('hide');
-            $scope.getAll();
+            $route.reload();
         })
         .error(function(data) 
         {   
@@ -309,70 +371,7 @@ $scope.apiURL = $rootScope.baseURL+'/contact/contact/total';
             }, 1500); 
         });
     };
-    $scope.deleteEntry = function (cdm_id) {
-      $scope.cdm_id=cdm_id;
-    }  
-
-    $scope.deleteConfirm = function () {
-                $('#del').attr('disabled','true');
-                $('#del').text("please wait...");
-	     $http({
-	      method: 'POST',
-	      url: $rootScope.baseURL+'/contact/delete/'+$scope.cdm_id,
-	      headers: {'Content-Type': 'application/json',
-                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
-	    })
-	    .success(function(contactdiscoveryObj)
-	    {
-                $('#del').text("Delete");
-                $('#del').removeAttr('disabled');
-                $scope.contactdiscoveryList = [];
-                $scope.getAll();
-                $('#confirm-delete').modal('hide');
-      		  
-	    })
-	    .error(function(data) 
-	    {   
-	      var dialog = bootbox.dialog({
-            message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
-                closeButton: false
-            });
-            setTimeout(function(){
-                $('#del').text("Delete");
-                $('#del').removeAttr('disabled');
-                dialog.modal('hide'); 
-            }, 1500);            
-	    });
-	};
-
-  $scope.view = function(index){
-
-        $scope.answers=[];
-        $http({
-          method: 'GET',
-          url: $rootScope.baseURL+'/question/view/'+$scope.filteredTodos[index].cdm_id,
-          //data: $scope.data,
-          headers: {'Content-Type': 'application/json',
-                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
-        })
-        .success(function(obj)
-        {
-            obj.forEach(function(value, key){
-              $scope.answers.push(value);
-            });
-        })
-        .error(function(data) 
-        {   
-            toastr.error('Oops, Something Went Wrong.', 'Error', {
-                closeButton: true,
-                progressBar: true,
-                positionClass: "toast-top-center",
-                timeOut: "500",
-                extendedTimeOut: "500",
-            });  
-        });
-    };
-
+    
    
     
 });

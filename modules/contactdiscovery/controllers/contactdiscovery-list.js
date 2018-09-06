@@ -296,5 +296,7 @@ $scope.apiURL = $rootScope.baseURL+'/contact/contact/total';
         });
     };
     
-
+    $rootScope.socket.on('status',function(data){
+          $scope.getAll();
+      });
 });

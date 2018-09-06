@@ -24,7 +24,7 @@
                               <div class="col-lg-6">
                                 <input type="text" class="form-control" id="searchtext" ng-model="searchtext" onkeyup="angular.element(this).scope().getSearch();" placeholder = "Search by-  Employee Name / Mobile / Designation..."/><br>
                               </div>
-                              <div class="col-lg-4" ng-show="selectall == 1">
+                              <div class="col-lg-4">
                                 <div class="form-group">
                                     <input type="text"
                                         id="cem_cm_id"
@@ -42,7 +42,7 @@
                                 </div>
                               </div>
                               <div class="col-lg-2">
-                                <button class="btn btn-outline btn-info form-control" id="assign_to" disabled ng-click='assign($index)' data-toggle="modal" data-target="#emp-details">Assign-To</button>
+                                <button class="btn btn-outline btn-info form-control" id="assign_to" disabled ng-click='updateAssign()' data-toggle="modal" data-target="#emp-details">Assign-To</button>
                               </div>
                             </div>
                             <div class="form-group row">
@@ -53,20 +53,22 @@
                                       <th>Select</th>
                                       <th>sr-no</th>
                                       <th>Employee Name</th>
+                                      <th>Campaign Assigned</th>
                 	                    <th>Mobile</th>
                           						<th>Address</th>
                           						<th>Designation</th>
                   	                </tr>
                     	            </thead>
                     	            <tbody>
-                  	                <tr ng-repeat="employee in filteredTodos">
-                                      <td><input type="checkbox" ng-change="checkAll(employee)" ng-model="employee.select"></td>
+                  	                <tr  ng-repeat="employee in filteredTodos">
+                                      <td><input type="checkbox" ng-change="checkAll(employee)" ng-model="employee.cem_select"></td>
                                       <td>{{$index+1}}</td>
                                       <td>{{employee.emp_name}}</td>
-                          						<td>{{employee.emp_mobile}}</td>
-                          						<td>{{employee.emp_address}}</td>
-                          						<td>{{employee.emp_designation}}</td>
-              	                    </tr>
+                                      <td>{{employee.cm_campaign_name}}</td>
+                                      <td>{{employee.emp_mobile}}</td>
+                                      <td>{{employee.emp_address}}</td>
+                                      <td>{{employee.emp_designation}}</td>
+                                    </tr>
                     	            </tbody>
                       		      </table>
                       		      <br>
@@ -91,4 +93,3 @@
     </div>
 </div>
 
-<!-- /.modal -->

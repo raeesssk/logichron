@@ -5,7 +5,7 @@
 function LoginCtrl($scope, $location, $http, $routeParams, $rootScope) {
     
 	// $scope.apiURL = 'http://10.1.0.21:3001';
-	$scope.apiURL = 'http://localhost:3001';	
+	$scope.apiURL = 'http://localhost:3111';	
 	// $scope.apiURL = 'http://unitech.3commastechnologies.com:3001';
 	
   	$scope.admin = 0;
