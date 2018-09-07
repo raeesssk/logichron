@@ -51,6 +51,7 @@ angular.module('contactdiscovery').controller('contactdiscoveryAddCtrl', functio
                           
                           if(account1.length>0){
                               
+                          $('#cdm_address').focus();
                           
                           }
                           else
@@ -63,6 +64,7 @@ angular.module('contactdiscovery').controller('contactdiscoveryAddCtrl', functio
                             setTimeout(function(){
                                 dialog.modal('hide'); 
                                 $('#cdm_company_name').val('');
+                                $('#cdm_company_name').focus();
                             }, 1500); 
                           }
                       })
@@ -156,7 +158,7 @@ angular.module('contactdiscovery').controller('contactdiscoveryAddCtrl', functio
                   {  
                       
                       if(account1.length>0){
-                          
+                          $('#qm_questions').focus();
                       
                       }
                       else
@@ -168,7 +170,8 @@ angular.module('contactdiscovery').controller('contactdiscoveryAddCtrl', functio
                         dialog.find('.modal-body').addClass("btn-danger");
                         setTimeout(function(){
                             dialog.modal('hide'); 
-                            $('#cdm_company_name').val('');
+                                $('#cdm_domain').val('');
+                                $('#cdm_domain').focus();
                         }, 1500); 
                       }
                   })

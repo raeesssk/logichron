@@ -57,7 +57,7 @@ angular.module('telecaller').controller('telecallerListCtrl', function ($rootSco
             .success(function(contact)
             {
                   if(contact[0].call_status == 'Lead' || contact[0].call_status == 'Do Not Disturb' || contact[0].call_status == 'Close' || contact[0].call_status == 'Follow Up' || contact[0].call_status == 'open'){
-                     console.log('test');
+                     
                       $('#fm_comment').removeAttr('readonly');
                       $('.btn').removeAttr('disabled');
                       if(contact[0].call_status == 'Follow Up')
@@ -95,7 +95,6 @@ angular.module('telecaller').controller('telecallerListCtrl', function ($rootSco
                   }
                   else
                   {
-                    console.log('test1');
                     $route.reload();
                   }
             })
@@ -110,6 +109,7 @@ angular.module('telecaller').controller('telecallerListCtrl', function ($rootSco
                   }, 1500);            
             });
     };
+    
     var d = new Date();
     var yyyy = d.getFullYear().toString();
     var mm = (d.getMonth()).toString(); // getMonth() is zero-based

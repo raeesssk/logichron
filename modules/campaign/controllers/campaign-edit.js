@@ -27,37 +27,6 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
 	$scope.campaignId = $routeParams.campaignId;
     $scope.apiURL = $rootScope.baseURL+'/campaign/edit/'+$scope.campaignId;
 
-   var d = new Date();
-    var yyyy = d.getFullYear().toString();
-    var mm = (d.getMonth()).toString(); // getMonth() is zero-based
-    var dd  = d.getDate().toString();
-    $scope.campaign.cm_date = yyyy +"-"+ (parseInt(mm)+parseInt(1)) +"-"+ dd;
-
-    $('#cm_date').datepicker({
-        validateOnBlur: false,
-        todayButton: false,
-        timepicker: false,
-        scrollInput: false,
-        format: 'yyyy-mm-dd',
-        autoclose: true,
-        orientation: 'bottom',
-          onChangeDateTime: function (dp, $input) {
-              $scope.campaign.cm_date = $('#cm_first_dely').val();
-          }
-    });
-
-   $('#cm_first_dely').datepicker({
-        validateOnBlur: false,
-        todayButton: false,
-        timepicker: false,
-        scrollInput: false,
-        format: 'yyyy-mm-dd',
-        autoclose: true,
-        orientation: 'bottom',
-          onChangeDateTime: function (dp, $input) {
-              $scope.campaign.cm_first_dely = $('#cm_first_dely').val();
-          }
-    });
     $('#cm_end_date').datepicker({
           validateOnBlur: false,
           todayButton: false,
@@ -69,7 +38,7 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
           onChangeDateTime: function (dp, $input) {
               $scope.campaign.cm_end_date = $('#cm_end_date').val();
           }
-    });
+    }).datepicker('setDate', 'today');
 
     $('#cm_first_dely').datepicker({
         validateOnBlur: false,
@@ -84,7 +53,7 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
           onChangeDateTime: function (dp, $input) {
               $scope.campaign.cm_first_dely = $('#cm_first_dely').val();
           }
-    });
+    }).datepicker('setDate', 'today');
 
   $scope.getSearch = function(vals) {
 
@@ -113,6 +82,9 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
 	    {
 
 	    	campaignObj.forEach(function (value, key) {
+
+                value.cm_date=$filter('date')(value.cm_date,"mediumDate");
+
                 value.cm_end_date=$filter('date')(value.cm_end_date,"mediumDate");
 
                 value.cm_first_dely=$filter('date')(value.cm_first_dely,"mediumDate");

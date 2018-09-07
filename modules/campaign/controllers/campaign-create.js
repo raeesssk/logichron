@@ -26,7 +26,6 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
     $scope.campaign.cm_date = yyyy +"-"+ (parseInt(mm)+parseInt(1)) +"-"+ dd;
 
     
-
     $('#cm_first_dely').datepicker({
         validateOnBlur: false,
         todayButton: false,
@@ -38,7 +37,7 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
           onChangeDateTime: function (dp, $input) {
               $scope.campaign.cm_first_dely = $('#cm_first_dely').val();
           }
-    });
+    }).datepicker('setDate', 'today');
     $('#cm_end_date').datepicker({
         validateOnBlur: false,
         todayButton: false,
@@ -50,22 +49,7 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
           onChangeDateTime: function (dp, $input) {
               $scope.campaign.cm_end_date = $('#cm_end_date').val();
           }
-    });
-
-    $('#cm_first_dely').datepicker({
-        validateOnBlur: false,
-        todayButton: false,
-        timepicker: false,
-        scrollInput: false,
-        format: 'yyyy-mm-dd',
-        autoclose: true,
-        orientation: 'bottom',
-        next:   'xdsoft_next',
-        prev : 'xdsoft_prev',
-          onChangeDateTime: function (dp, $input) {
-              $scope.campaign.cm_first_dely = $('#cm_first_dely').val();
-          }
-    });
+    }).datepicker('setDate', 'today');
 
     $scope.getSearch = function(vals) {
         var searchTerms = {search: vals};
