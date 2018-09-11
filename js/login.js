@@ -50,7 +50,8 @@ function LoginCtrl($scope, $location, $http, $routeParams, $rootScope) {
 	                  'Authorization' :'Bearer '+data.access_token}
 			        })
 			        .success(function(deliverycount)
-			        {	
+			        {
+			        
 			        	$scope.rpm_add=deliverycount[0].rpm_add;
 			        	$scope.rpm_edit=deliverycount[0].rpm_edit;
 			        	$scope.rpm_delete=deliverycount[0].rpm_delete;

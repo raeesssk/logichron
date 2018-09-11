@@ -7,7 +7,8 @@ function GlobalCtrl($rootScope, $http, $scope, $timeout) {
     $rootScope.userid=localStorage.getItem("logichron_admin_username");
     $rootScope.firstname=localStorage.getItem("logichron_admin_firstname");
     $rootScope.iconimage=localStorage.getItem("logichron_admin_iconimage");
-    
+    $rootScope.role=localStorage.getItem("logichron_role_name");
+    console.log($rootScope.role);
     $rootScope.baseURL = 'http://localhost:3111';
     $rootScope.socket = io.connect($rootScope.baseURL); 
     // $rootScope.baseURL = 'http://unitech.3commastechnologies.com:3001';

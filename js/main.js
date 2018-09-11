@@ -18,6 +18,7 @@ angular.module('logichron',
         'contactdiscovery',
         'contactassign',
         'telecaller',
+        'queue',
     // ]).config(cityMotorRouter);
 
 ]).config(function($routeProvider, IdleProvider, KeepaliveProvider, $controllerProvider) {

@@ -56,7 +56,7 @@ angular.module('telecaller').controller('telecallerListCtrl', function ($rootSco
             })
             .success(function(contact)
             {
-                  if(contact[0].call_status == 'Lead' || contact[0].call_status == 'Do Not Disturb' || contact[0].call_status == 'Close' || contact[0].call_status == 'Follow Up' || contact[0].call_status == 'open'){
+                  if(contact[0].call_status == 'Call' || contact[0].call_status == 'Calling' || contact[0].call_status == 'Follow Up' || contact[0].call_status == 'open'){
                      
                       $('#fm_comment').removeAttr('readonly');
                       $('.btn').removeAttr('disabled');
