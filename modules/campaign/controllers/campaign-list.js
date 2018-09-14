@@ -21,7 +21,7 @@ angular.module('campaign').controller('campaignListCtrl', function ($rootScope, 
     $scope.deniedDomainList=[];
     $scope.leadgoal=0;
     $scope.campaign={};
-$scope.apiURL = $rootScope.baseURL+'/campaign/campaign/total';
+    $scope.apiURL = $rootScope.baseURL+'/campaign/campaign/total';
     
     
     
