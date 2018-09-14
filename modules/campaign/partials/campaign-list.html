@@ -23,18 +23,108 @@
                         </div>
                         <div class="card-block">
                             <div class="row">
-                              <div class="col-lg-11">
-                                <input type="text" class="form-control" id="searchtext" ng-model="searchtext" onkeyup="angular.element(this).scope().getSearch();" placeholder = "Search by-  Campaign Name / Title..."/><br>
+                              <div class="col-lg-2">
+                                        <label>From</label>
+                                        <input type="text" id="cm_from_date" class="form-control date"  />
+                                </div>
+                                <div class="col-lg-2">
+                                        <label>To</label>
+                                        <input type="text" id="cm_to_date" class="form-control date"  />
+                                </div>
+                                <div class="col-lg-1">
+                                  <button type="button" class="btn btn-primary" ng-click="check()" style="margin-top: 1.8em;margin-left: -.5em">Check</button>
+                                </div>
+                              <div class="col-lg-3">
+                                <input type="text" class="form-control" id="searchtext" ng-model="searchtext" onkeyup="angular.element(this).scope().getSearch();" placeholder = "Search by-  Campaign Name" style="margin-top: 2em" /><br>
+                              </div>
+                              <div class="col-lg-3">
+                                <button type="button" style="margin-top: 2em" class="btn btn-warning form-control" id="btnExport" ng-click="exportXlslist()">Export To Excel</button>
                               </div>
                               <div class="col-lg-1">
-                                <a class="btn btn-outline btn-info" href="#/campaign/create">Add</a>
+                                <a class="btn btn-outline btn-info" style="margin-top: 1.8em" href="#/campaign/create">Add</a>
                               </div>
+                            </div>
+                            <div class="form-group row" id='table'>
+                              <table class="table table-hover table-responsive" id='export'>
+                                  <thead>
+                                    <tr>
+                                      <th>First Delivery Date</th>
+                                      <th>End Date</th>
+                                      <th>Delivery Frequency</th>
+                                      <th>Campaign Name</th>
+                                      <th>Restriction</th>
+
+                                      <th>Account List</th>
+                                      <th>Supression File</th>
+                                      <th>Domain Limit</th>
+                                      <th>Employee Size</th>
+                                      <th>Disqualifies</th>
+
+                                      <th>Title</th>
+                                      <th>Lead / Target</th>
+                                      <th>Verticals</th>
+                                      <th>Geo</th>
+                                      <th>Allowed Domain</th>
+
+                                      <th>Revenue</th>
+                                      <th>Custom Question</th>
+                                      <th>Denied Domain</th>
+                                      <th>Campaign Asset</th>
+                                      <th>Industry</th>
+
+                                      <th>Department</th>
+                                      <th>Method</th>
+                                      <th>Job Function / Level</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr ng-repeat="campaign in campaignList">
+                                      <td>{{campaign.cm_first_dely | date}}</td>
+                                      <td>{{campaign.cm_end_date | date}}</td>
+                                      <td>{{campaign.cm_dely_frequency}}</td>
+                                      <td>{{campaign.cm_campaign_name}}</td>
+                                      <td>{{campaign.cm_restrict}}</td>
+
+                                      <td ng-if="campaign.cm_account_list == 'Yes'" ng-click="accntView($index)" style="cursor: pointer;">{{campaign.cm_account_list}}</td>
+                                      <td ng-if="campaign.cm_account_list == 'No'" ng-click="accntView($index)">{{campaign.cm_account_list}}</td>
+
+
+                                      <td ng-if="campaign.cm_supression_file == 'Yes'" ng-click="supressionView($index)" style="cursor: pointer;">{{campaign.cm_supression_file}}</td>
+                                      <td ng-if="campaign.cm_supression_file == 'No'" ng-click="supressionView($index)" >{{campaign.cm_supression_file}}</td>
+
+                                      <td>{{campaign.cm_domain_limit}}</td>
+                                      <td>{{campaign.cm_emp_size}}</td>
+                                      <td>{{campaign.cm_disqualifies}}</td>
+                                      <td>{{campaign.cm_title}}</td>
+                                      <td>{{campaign.cm_lead_count}} / <label style="color: green">{{campaign.targetcount}}</label></td>
+                                      <td>{{campaign.cm_vertical}}</td>
+                                      <td>{{campaign.cm_geo}}</td>
+
+                                      <td ng-if="campaign.cm_allow_domain == 'Yes'" ng-click="allowView($index)" style="cursor: pointer;">{{campaign.cm_allow_domain}}</td>
+                                      <td ng-if="campaign.cm_allow_domain == 'No'" ng-click="allowView($index)">{{campaign.cm_allow_domain}}</td>
+
+                                      <td>{{campaign.cm_revenue}}</td>
+
+                                      <td ng-if="campaign.cm_custom_question == 'Yes'" ng-click="customView($index)" style="cursor: pointer;">{{campaign.cm_custom_question}}</td>
+                                      <td ng-if="campaign.cm_custom_question == 'No'" ng-click="customView($index)">{{campaign.cm_custom_question}}</td>
+
+                                      <td ng-if="campaign.cm_denied_domain == 'Yes'" ng-click="deniedView($index)" style="cursor: pointer;">{{campaign.cm_denied_domain}}</td>
+                                      <td ng-if="campaign.cm_denied_domain == 'No'" ng-click="deniedView($index)">{{campaign.cm_denied_domain}}</td>
+
+                                      <td>{{campaign.cm_campaign_asset}}</td>
+                                      <td>{{campaign.cm_industry}}</td>
+                                      <td>{{campaign.cm_dept}}</td>
+                                      <td>{{campaign.cm_method}}</td>
+                                      <td>{{campaign.cm_job}}</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
                             </div>
                             <div class="form-group row">
                                 <table class="table table-hover table-responsive">
                                   <thead>
                                     <tr>
-                                      <th>First Delivery</th>
+                                      <th>First Delivery Date</th>
                                       <th>End Date</th>
                                       <th>Delivery Frequency</th>
                                       <th>Campaign Name</th>
@@ -65,7 +155,7 @@
                                     </tr>
                                   </thead>
                                   <tbody>
-                                    <tr ng-repeat="campaign in filteredTodos | filter : campaign">
+                                    <tr ng-repeat="campaign in filteredTodos">
                                       <td>{{campaign.cm_first_dely | date}}</td>
                                       <td>{{campaign.cm_end_date | date}}</td>
                                       <td>{{campaign.cm_dely_frequency}}</td>

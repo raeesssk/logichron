@@ -135,15 +135,84 @@ $scope.filter = function()
 
 $scope.apiURL = $rootScope.baseURL+'/contact/contact/total';
     
-    
-    
+
+    $('#cdm_from_date').datepicker({
+        validateOnBlur: false,
+        todayButton: false,
+        timepicker: false,
+        scrollInput: false,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+        orientation: 'bottom',
+          onChangeDateTime: function (dp, $input) {
+              $scope.limit.cdm_from_date = $('#cdm_from_date').val();
+          }
+    }).datepicker('setDate', 'today');
+
+    $('#cdm_to_date').datepicker({
+        validateOnBlur: false,
+        todayButton: false,
+        timepicker: false,
+        scrollInput: false,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+        orientation: 'bottom',
+          onChangeDateTime: function (dp, $input) {
+              $scope.limit.cdm_to_date = $('#cdm_to_date').val();
+          }
+    }).datepicker('setDate', 'today');
+
+    $scope.exportXlslist = function(){
+      console.log('test');
+      $("#export").table2excel({
+        exclude: ".excludeThisClass",
+        name: "contact list",
+        filename: "contact list" //do not include extension
+      });
+    };
+
+    $('#table').hide();
+   $scope.gettable=function(){
+      $http({
+        method: 'GET',
+        url: $rootScope.baseURL+'/contact',
+        headers: {'Content-Type': 'application/json',
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+      })
+      .success(function(contactobj)
+      {
+            contactobj.forEach(function(value,key){
+                           
+              $scope.contactdiscoveryList.push(value);
+            })    
+            
+      })
+      .error(function(data) 
+      {   
+        var dialog = bootbox.dialog({
+            message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                closeButton: false
+            });
+            setTimeout(function(){
+                $('#del').text("Delete");
+                $('#del').removeAttr('disabled');
+                dialog.modal('hide'); 
+            }, 1500);            
+      });
+   };
+   $scope.gettable();
+
    $scope.getAll = function () {
+    console.log('test');
         if ($('#searchtext').val() == undefined || $('#searchtext').val() == "") {
         $scope.limit.search = "";
       }
       else{
         $scope.limit.search = $scope.searchtext;
       }
+
+      $scope.limit.cdm_from_date = $('#cdm_from_date').val();
+      $scope.limit.cdm_to_date = $('#cdm_to_date').val();
       $http({
         method: 'POST',
         url: $scope.apiURL,
@@ -231,6 +300,84 @@ $scope.apiURL = $rootScope.baseURL+'/contact/contact/total';
     $scope.getSearch = function () {
        $scope.getAll();
     };
+
+    $scope.check=function(){
+      $scope.toDate = $("#cdm_to_date").val();
+    $scope.fromDate = $("#cdm_from_date").val();
+    if(angular.isUndefined($scope.fromDate) || $scope.fromDate === null || $scope.fromDate == "")
+      {
+         var dialog = bootbox.dialog({
+          message: '<p class="text-center">please select from-date.</p>',
+              closeButton: false
+          });
+          dialog.find('.modal-body').addClass("btn-danger");
+          setTimeout(function(){
+              dialog.modal('hide'); 
+          }, 1500);
+        return;
+      }
+
+      if(angular.isUndefined($scope.toDate) || $scope.toDate === null || $scope.toDate == "")
+      {
+          var dialog = bootbox.dialog({
+          message: '<p class="text-center">please select to-date.</p>',
+              closeButton: false
+          });
+          dialog.find('.modal-body').addClass("btn-danger");
+          setTimeout(function(){
+              dialog.modal('hide'); 
+          }, 1500);
+        return;
+      }
+
+      $scope.dateFilter = '&startTime='+ $scope.fromDate + '&endTime=' + $scope.toDate;
+
+      
+      $scope.fDate = new Date($scope.fromDate);
+      $scope.fDate.setHours(0,0,0,0);
+      $scope.tDate = new Date($scope.toDate);
+      $scope.tDate.setHours(0,0,0,0);
+      if($scope.fDate > $scope.tDate)
+      {
+          var dialog = bootbox.dialog({
+          message: '<p class="text-center">oops!!! to-date greater than from-date.</p>',
+              closeButton: false
+          });
+          dialog.find('.modal-body').addClass("btn-danger");
+          setTimeout(function(){
+              dialog.modal('hide'); 
+          }, 1500);
+        return;
+      }
+     $scope.getAll();
+    };
+
+    Date.prototype.setFromDate = function() {
+     var yyyy = this.getFullYear().toString();
+     var mm = (this.getMonth()).toString(); // getMonth() is zero-based
+     var dd  = this.getDate().toString();
+     if(mm == 0){
+      document.getElementById("cdm_from_date").value = yyyy-1 +"-"+ ("12") +"-"+ (dd[1]?dd:"0"+dd[0]);
+     }
+     else if(mm==2||mm==4||mm==6||mm==7||mm==9||mm==11){
+      document.getElementById("cdm_from_date").value = yyyy +"-"+ (mm[1]?mm:"0"+mm[0]) +"-"+ (dd[1]?dd-1:"0"+dd[0]);
+     }
+     else{
+      document.getElementById("cdm_from_date").value = yyyy +"-"+ (mm[1]?mm:"0"+mm[0]) +"-"+ (dd[1]?dd:"0"+dd[0]);
+     }
+    };
+
+    Date.prototype.setToDate = function() {
+     var yyyy = this.getFullYear().toString();
+     var mm = (this.getMonth()+1).toString(); // getMonth() is zero-based
+     var dd  = this.getDate().toString();
+     document.getElementById("cdm_to_date").value = yyyy +"-"+ (mm[1]?mm:"0"+mm[0]) +"-"+ (dd[1]?dd:"0"+dd[0]);
+     $scope.check();
+    };
+
+    d = new Date();
+    d.setFromDate();
+    d.setToDate();
 
     $scope.deleteEntry = function (cdm_id) {
       $scope.cdm_id=cdm_id;

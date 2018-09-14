@@ -20,22 +20,107 @@ angular.module('campaign').controller('campaignListCtrl', function ($rootScope, 
     $scope.customQuestionList=[];
     $scope.deniedDomainList=[];
     $scope.leadgoal=0;
+    $scope.campaign={};
 $scope.apiURL = $rootScope.baseURL+'/campaign/campaign/total';
     
     
-      // $('#mouse_hover').mouseover(function(){
-      //   alert("test");
-      //   $("#mouse_hover").css("cursor", "pointer");
-      // });
     
-    // if(value.cm_account_list == 'Yes'){
-    //   $('#mouse_hover').hover(function(){
-    //     alert("test");
-    //     $(this).css("cursor", "pointer");
-    //   });
-    // }
-   
-   
+    // $scope.exportData = function () {
+    //     var blob = new Blob([document.getElementById('export').innerHTML], {
+    //         type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+    //     });
+    //     saveAs(blob, "Report.xls");
+    // };
+
+    $scope.exportXlslist = function(){
+      console.log('test');
+      $("#export").table2excel({
+        exclude: ".excludeThisClass",
+        name: "Campaign list",
+        filename: "Campaign list" //do not include extension
+      });
+    };
+
+    $('#cm_from_date').datepicker({
+        validateOnBlur: false,
+        todayButton: false,
+        timepicker: false,
+        scrollInput: false,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+        orientation: 'bottom',
+          onChangeDateTime: function (dp, $input) {
+              $scope.limit.cm_from_date = $('#cm_from_date').val();
+          }
+    }).datepicker('setDate', 'today');
+
+    $('#cm_to_date').datepicker({
+        validateOnBlur: false,
+        todayButton: false,
+        timepicker: false,
+        scrollInput: false,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+        orientation: 'bottom',
+          onChangeDateTime: function (dp, $input) {
+              $scope.limit.cm_to_date = $('#cm_to_date').val();
+          }
+    }).datepicker('setDate', 'today');
+    
+    
+
+      $('#table').hide();    
+     $scope.gettable=function(){
+      $http({
+        method: 'GET',
+        url: $rootScope.baseURL+'/campaign',
+        headers: {'Content-Type': 'application/json',
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+      })
+      .success(function(campaignObj)
+      {
+            campaignObj.forEach(function(value,key){
+             $http({
+              method: 'GET',
+              url: $rootScope.baseURL+'/campaign/contact/goal/'+value.cm_id,
+              headers: {'Content-Type': 'application/json',
+                        'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+            })
+            .success(function(campaign)
+            {
+               value.targetcount=campaign[0].total;
+            })
+            .error(function(data) 
+            {   
+              toastr.error('Oops, Something Went Wrong.', 'Error', {
+                    closeButton: true,
+                    progressBar: true,
+                  positionClass: "toast-top-center",
+                  timeOut: "500",
+                  extendedTimeOut: "500",
+                });
+            });
+            $scope.campaignList.push(value);
+          });   
+            
+      })
+      .error(function(data) 
+      {   
+        var dialog = bootbox.dialog({
+            message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                closeButton: false
+            });
+            setTimeout(function(){
+                $('#del').text("Delete");
+                $('#del').removeAttr('disabled');
+                dialog.modal('hide'); 
+            }, 1500);            
+      });
+    };
+    $scope.gettable();
+
+    
+
    $scope.getAll = function () {
         if ($('#searchtext').val() == undefined || $('#searchtext').val() == "") {
         $scope.limit.search = "";
@@ -43,6 +128,9 @@ $scope.apiURL = $rootScope.baseURL+'/campaign/campaign/total';
       else{
         $scope.limit.search = $scope.searchtext;
       }
+
+      $scope.limit.cm_from_date = $('#cm_from_date').val();
+      $scope.limit.cm_to_date = $('#cm_to_date').val();
       $http({
         method: 'POST',
         url: $scope.apiURL,
@@ -151,6 +239,86 @@ $scope.apiURL = $rootScope.baseURL+'/campaign/campaign/total';
     $scope.getSearch = function () {
        $scope.getAll();
     };
+
+    $scope.check=function(){
+      $scope.toDate = $("#cm_to_date").val();
+    $scope.fromDate = $("#cm_from_date").val();
+    if(angular.isUndefined($scope.fromDate) || $scope.fromDate === null || $scope.fromDate == "")
+      {
+         var dialog = bootbox.dialog({
+          message: '<p class="text-center">please select from-date.</p>',
+              closeButton: false
+          });
+          dialog.find('.modal-body').addClass("btn-danger");
+          setTimeout(function(){
+              dialog.modal('hide'); 
+          }, 1500);
+        return;
+      }
+
+      if(angular.isUndefined($scope.toDate) || $scope.toDate === null || $scope.toDate == "")
+      {
+          var dialog = bootbox.dialog({
+          message: '<p class="text-center">please select to-date.</p>',
+              closeButton: false
+          });
+          dialog.find('.modal-body').addClass("btn-danger");
+          setTimeout(function(){
+              dialog.modal('hide'); 
+          }, 1500);
+        return;
+      }
+
+      $scope.dateFilter = '&startTime='+ $scope.fromDate + '&endTime=' + $scope.toDate;
+
+      
+      $scope.fDate = new Date($scope.fromDate);
+      $scope.fDate.setHours(0,0,0,0);
+      $scope.tDate = new Date($scope.toDate);
+      $scope.tDate.setHours(0,0,0,0);
+      if($scope.fDate > $scope.tDate)
+      {
+          var dialog = bootbox.dialog({
+          message: '<p class="text-center">oops!!! to-date greater than from-date.</p>',
+              closeButton: false
+          });
+          dialog.find('.modal-body').addClass("btn-danger");
+          setTimeout(function(){
+              dialog.modal('hide'); 
+          }, 1500);
+        return;
+      }
+      $scope.getAll();
+      
+    };
+
+    Date.prototype.setFromDate = function() {
+     var yyyy = this.getFullYear().toString();
+     var mm = (this.getMonth()).toString(); // getMonth() is zero-based
+     var dd  = this.getDate().toString();
+     if(mm == 0){
+      document.getElementById("cm_from_date").value = yyyy-1 +"-"+ ("12") +"-"+ (dd[1]?dd:"0"+dd[0]);
+     }
+     else if(mm==2||mm==4||mm==6||mm==7||mm==9||mm==11){
+      document.getElementById("cm_from_date").value = yyyy +"-"+ (mm[1]?mm:"0"+mm[0]) +"-"+ (dd[1]?dd-1:"0"+dd[0]);
+     }
+     else{
+      document.getElementById("cm_from_date").value = yyyy +"-"+ (mm[1]?mm:"0"+mm[0]) +"-"+ (dd[1]?dd:"0"+dd[0]);
+     }
+    };
+
+    Date.prototype.setToDate = function() {
+     var yyyy = this.getFullYear().toString();
+     var mm = (this.getMonth()+1).toString(); // getMonth() is zero-based
+     var dd  = this.getDate().toString();
+     document.getElementById("cm_to_date").value = yyyy +"-"+ (mm[1]?mm:"0"+mm[0]) +"-"+ (dd[1]?dd:"0"+dd[0]);
+     
+    };
+
+    d = new Date();
+    d.setFromDate();
+    d.setToDate();
+   
 
     $scope.deleteCampaign = function (cm_id) {
       $scope.cm_id=cm_id;

@@ -21,12 +21,81 @@
                       	</div>
                       	<div class="card-block">
                             <div class="row">
-                              <div class="col-lg-11">
-                                <input type="text" class="form-control" id="searchtext" ng-model="searchtext" onkeyup="angular.element(this).scope().getSearch();" placeholder = "Search by-  Campaign Name / First Name / Last Name..."/><br>
+                              <div class="col-lg-2">
+                                        <label>From</label>
+                                        <input type="text" id="cdm_from_date" class="form-control date"/>
+                                        <br>
+                                </div>
+                                <div class="col-lg-2">
+                                        <label>To</label>
+                                        <input type="text" id="cdm_to_date" class="form-control date" />
+                                        <br>
+                                </div>
+
+                              <div class="col-lg-1">
+                                <button class="btn btn-primary" style="margin-top: 1.8em;margin-left: -.8em" ng-click="check()">Check</button>
+                              </div>
+                              <div class="col-lg-3">
+                                <input type="text" class="form-control" id="searchtext" ng-model="searchtext" onkeyup="angular.element(this).scope().getSearch();" placeholder = "Search by-  Contact Name" style="margin-top: 2em" /><br>
+                              </div>
+                              <div class="col-lg-3">
+                                <button type="button" style="margin-top: 2em" class="btn btn-warning form-control" id="btnExport" ng-click="exportXlslist()">Export To Excel</button>
                               </div>
                               <div class="col-lg-1">
-                                <a class="btn btn-outline btn-info" href="#/contactdiscovery/createjob">Add</a>
+                                <a class="btn btn-outline btn-info" style="margin-top: 1.8em" href="#/contactdiscovery/createjob">Add</a>
                               </div>
+                            </div>
+                            <div class="form-group row" id="table">
+                              <table class="table table-responsive" id='export'>
+                                  <thead>
+                                    <tr>
+                                      <th>Campaign Name</th>
+                                      <th>First Name</th>
+                                      <th>Last Name</th>
+                                      <th>Job Title</th>
+                                      <th>Job Level</th>
+                                      <th>Department</th>
+                                      <th>Email-Id</th>
+                                      <th>Mobile Number</th>
+                                      <th>Company Name</th>
+                                      <th>Address</th>
+                                      <th>City</th>
+                                      <th>State</th>
+                                      <th>Postal Code</th>
+                                      <th>Countryt</th>
+                                      <th>Industry</th>
+                                      <th>Company Size</th>
+                                      <th>Revenue</th>
+                                      <th>Asset</th>
+                                      <th>Domain</th>
+                                      <th>Status</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr ng-repeat="contactdiscovery in contactdiscoveryList">
+                                      <td>{{contactdiscovery.cm_campaign_name}}</td>
+                                      <td>{{contactdiscovery.cdm_first_name}}</td>
+                                      <td>{{contactdiscovery.cdm_last_name}}</td>
+                                      <td>{{contactdiscovery.cdm_job_title}}</td>
+                                      <td>{{contactdiscovery.cdm_job_level}}</td>
+                                      <td>{{contactdiscovery.cdm_dept}}</td>
+                                      <td>{{contactdiscovery.cdm_email_id}}</td>
+                                      <td>{{contactdiscovery.cdm_mobile}}</td>
+                                      <td>{{contactdiscovery.cdm_company_name}}</td>
+                                      <td>{{contactdiscovery.cdm_address}}</td>
+                                      <td>{{contactdiscovery.cdm_city}}</td>
+                                      <td>{{contactdiscovery.cdm_state}}</td>
+                                      <td>{{contactdiscovery.cdm_postal_code}}</td>
+                                      <td>{{contactdiscovery.cdm_country}}</td>
+                                      <td>{{contactdiscovery.cdm_industry}}</td>
+                                      <td>{{contactdiscovery.cdm_company_size}}</td>
+                                      <td>{{contactdiscovery.cdm_revenue}}</td>
+                                      <td>{{contactdiscovery.cdm_asset}}</td>
+                                      <td>{{contactdiscovery.cdm_domain}}</td>
+                                      <td>{{contactdiscovery.call_status}}</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
                             </div>
                             <div class="form-group row">
                                 <table class="table table-responsive">
