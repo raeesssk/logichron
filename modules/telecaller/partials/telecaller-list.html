@@ -21,50 +21,37 @@
                       	</div>
                       	<div class="card-block">
                             <div class="form-group row">
-                              <div class="col-lg-2 form-control">
-          	                    <h6 align="center">Name</h6>
-                              </div>
-                              <div class="col-lg-2 form-control">
-                                <h6 align="center">Contact</h6>
-                              </div>
-                              <div class="col-lg-2 form-control">
-                                <h6 align="center">Company</h6>
-                              </div>
-                              <div class="col-lg-2 form-control">
-                                <h6 align="center">Job Title</h6>
-                              </div>
-                              <div class="col-lg-2 form-control">
-                                <h6 align="center">Campaign</h6>
-                              </div>
-                              <div class="col-lg-2 form-control">
-                                <h6 align="center">Status</h6>
-                              </div>
-                            </div>
-                            <div class="form-group row" ng-repeat="contacts in contactList">
-                              <div align="center" class="col-lg-2">
-                                <label>{{contacts.cdm_first_name}}</label>
-                              </div>
-                              <div align="center" class="col-lg-2">
-                                <label>{{contacts.cdm_mobile}}</label>
-                              </div>
-                              <div align="center" class="col-lg-2">
-                                <label>{{contacts.cdm_company_name}}</label>
-                              </div>
-                              <div align="center" class="col-lg-2">
-                                <label>{{contacts.cdm_job_title}}</label>
-                              </div>
-                              <div align="center" class="col-lg-2">
-                                <label>{{contacts.cm_campaign_name}}</label>
-                              </div>
-                              <div align="center" class="col-lg-2"><select class="form-control" ng-change='contactStatus(contacts)' ng-model="contacts.call_status">
-                                  <option >open</option>
-                                  <option value="Call">Call</option>
-                                  <option value="Calling">Calling</option>
-                                  <option value="Lead">Lead</option>
-                                  <option value="Follow Up">Follow Up</option>
-                                  <option value="Do Not Disturb">Do Not Disturb</option>
-                                  <option value="Close">Close</option>
-                                </select></div>
+                              <table class="table table-border" id='export'>
+                                  <thead>
+                                    <tr>
+                                      <th>Campaign_Name</th>
+                                      <th>First_Name</th>
+                                      <th>Last_Name</th>
+                                      <th>Job_Title</th>
+                                      <th>Mobile_Number</th>
+                                      <th>Status</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr ng-repeat="contacts in contactList">
+                                      <td>{{contacts.cm_campaign_name}}</td>
+                                      <td>{{contacts.cdm_first_name}}</td>
+                                      <td>{{contacts.cdm_last_name}}</td>
+                                      <td>{{contacts.cdm_job_title}}</td>
+                                      <td>{{contacts.cdm_mobile}}</td>
+                                      <td><select ng-model="contacts.call_status" ng-change=statuschange(contacts)>
+                                        <option >open</option>
+                                        <option value="Call">Call</option>
+                                        <option value="Calling">Calling</option>
+                                        <option value="Lead">Lead</option>
+                                        <option value="Follow Up">Follow Up</option>
+                                        <option value="Do Not Disturb">Do Not Disturb</option>
+                                        <option value="Close">Close</option>
+                                        </select>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
                             </div>
                             <br>
                             <br>
@@ -78,10 +65,18 @@
                                 </div>
                                 <div class="col-sm-3">
                                         <label>Comment</label>
-                                        <input type="textArea" id="fm_comment" ng-model="follow.fm_comment" class="form-control date"/>
+                                        <input type="textArea" id="fm_comment" ng-model="follow.fm_comment" class="form-control date" style="margin-left: -.7em;" />
                                 </div>
-                                <div class="col-sm-3">
-                                        <input type="button"  class="form-control btn btn-grd-success" value="Update" style="margin-top: 12%;" ng-click="updateFollowup()" />
+                                <div class="col-sm-2">
+                                  <audio id="blah" hidden controls style="height: 20px; width: 230px; margin-top: 1em;">
+                                  </audio>
+                                  <input type='file' id="cdam_audio" name="cdam_audio" style="margin-left: -1.8em; margin-top: 2em;" />
+                                </div>
+                                <div class="col-sm-2">
+                                  <button type="button" id="next" class="form-control btn btn-primary" value="Next" ng-click="contactStatus()" style="margin-top: 16%; margin-left: .5em;" >Next</button>
+                                </div>
+                                <div class="col-sm-2">
+                                        <input type="button" id="fd_btn" class="form-control btn btn-grd-success" value="Update" style="margin-top: 16%;" ng-click="updateFollowup()" />
                                  <br><br>
                                 </div>
                               </div>
@@ -113,102 +108,4 @@
     </div>
 </div>
 
-<div class="modal fade" id="confirm-delete">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Confirm Delete</h4>
-      </div>
-      <div class="modal-body">
-        <p>You are about to delete <b><i class="title"></i></b> record, labelis procedure is irreversible.</p>
-                <p>Do you want to proceed?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-        <button type="button" id="del" class="btn btn-danger" ng-click="deleteConfirm()">Delete</button>
-      </div>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-
-<div class="modal fade" id="view-details">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Employee Details</h4>
-      </div>
-      <div class="modal-body">
-      	<table class="table">
-			<tr>
-	          <label>
-	          	<div class="input-group date">
-	                <div class="input-group-addon">
-	                    <i class="fa fa-calendar"></i>
-	                </div>
-	                <input type="text" class="form-control pull-right" id="user-datepicker-from" placeholder="From Date">
-                </div>
-              </label>
-              <label>
-	          	<div class="input-group date">
-	                <div class="input-group-addon">
-	                    <i class="fa fa-calendar"></i>
-	                </div>
-	                <input type="text" class="form-control pull-right" id="user-datepicker-to" placeholder="To Date">
-                </div>
-              </label>
-	          <label><button type="button" class="btn" id="filter-user-btn" ng-click="filter()">Filter</button></label>
-	          <label><button type="button" class="btn" id="reset-user-btn" ng-click="reset()">Reset</button></label>
-              
-	      	</tr>
-	    </table>
-        <table class="table">
-    		<tr>
-    			<label>Name: <strong>{{venname}}</strong></label>
-    			<label>Number: <strong>{{venno}}</strong></label>
-    			<label>Address: <strong>{{venadd}}</strong></label>
-    			<label>Credit: <strong>{{venbal}}</strong></label>
-    			<label>Debit: <strong>{{vendebit}}</strong></label>
-    		</tr>
-    	</table>
-    	<table class="table" border="1">
-			<labelead>
-			<tr>
-				<label>Type</label>
-				<label>Invoice</label>
-				<label>Date</label>
-				<label>Debit</label>
-				<label>Credit</label>
-				<label>DR/CR</label>
-				<label>Balance</label>
-			</tr>
-			</labelead>
-			<tbody id="content">
-			<tr ng-repeat="purchaseDetails in categoryList | filter : purchaseDetails">
-				<label style="padding:6px; border-style: none solid solid none; border-widlabel:1px;">{{purchaseDetails.type}}</label>
-				<label style="padding:6px; border-style: none solid solid none; border-widlabel:1px;">{{purchaseDetails.invoice}}</label>
-				<label style="padding:6px; border-style: none solid solid none; border-widlabel:1px;">{{purchaseDetails.date | date : 'mediumDate'}}</label>
-				<label style="padding:6px; border-style: none solid solid none; border-widlabel:1px;">{{purchaseDetails.debit}}</label>
-				<label style="padding:6px; border-style: none solid solid none; border-widlabel:1px;">{{purchaseDetails.credit}}</label>
-				<label style="padding:6px; border-style: none solid solid none; border-widlabel:1px;">{{purchaseDetails.drcr}}</label>
-				<label style="padding:6px; border-style: none none solid none; border-widlabel:1px;">{{purchaseDetails.bal}}</label>
-			</tr>
-			</tbody>
-		</table>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-        <button type="button" id="del" class="btn btn-primary" ng-click="prinlabeletails();">Print</button>
-      </div>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
+<!--  -->

@@ -203,7 +203,6 @@ $scope.apiURL = $rootScope.baseURL+'/contact/contact/total';
    $scope.gettable();
 
    $scope.getAll = function () {
-    console.log('test');
         if ($('#searchtext').val() == undefined || $('#searchtext').val() == "") {
         $scope.limit.search = "";
       }

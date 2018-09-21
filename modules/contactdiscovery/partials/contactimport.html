@@ -1,0 +1,43 @@
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+                    <div class="card">
+                        <div class="card-header">
+                            <ul class="breadcrumb-title pull-right">
+                                <li class="breadcrumb-item">
+                                    <a href="#/"> <i class="fa fa-home"></i> </a>
+                                </li>
+                                <li class="breadcrumb-item">
+                                    <a href="#/">Contact Discovery</a>
+                                </li>
+                                <li class="active breadcrumb-item">
+                                    <a class="active">Import Contact</a>
+                                </li>
+                            </ul>
+                            <h3>Import Contact From Excel CSV Format</h3>
+                            <hr>
+                        </div>
+                        <div class="card-block">
+                            <div class="form-group row">
+                                <div class="col-lg-6">
+                                    <input type="file" name="file" onchange="angular.element(this).scope().loadFile(this.files)" />
+                                </div>
+                            </div>
+                            
+                            <br>
+                            <div class="form-group row">
+                                <br>
+                                <div class="col-sm-12">
+                                    <button type="button" class="btn btn-grd-danger" onclick="window.location = '#/contactdiscovery/joblist'" id="btncancel">Back</button>
+                                    <input type="button" value="Import Data" class="btn btn-success" ng-click="handleFile()" /> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

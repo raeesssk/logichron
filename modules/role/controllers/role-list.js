@@ -136,13 +136,13 @@ $scope.filteredTodos = [];
 
 $scope.apiURL = $rootScope.baseURL+'/role/role/total';
 
-  $scope.getpermission=function(){
-      if(localStorage.getItem('logichron_user_permission') == 0){
-        alert('You are not authorized');
-        window.location.href='#/';
-      }
-    };
-    $scope.getpermission();
+  // $scope.getpermission=function(){
+  //     if(localStorage.getItem('logichron_user_permission') == 0){
+  //       alert('You are not authorized');
+  //       window.location.href='#/';
+  //     }
+  //   };
+  //   $scope.getpermission();
    $scope.getAll = function () {
         if ($('#searchtext').val() == undefined || $('#searchtext').val() == "") {
         $scope.limit.search = "";
@@ -206,12 +206,14 @@ $scope.apiURL = $rootScope.baseURL+'/role/role/total';
               })
               .success(function(user)
               {
-                $scope.filteredTodos = [];
+                // $scope.filteredTodos = [];
                 if (user.length > 0) {
                  
                   user.forEach(function (value, key) {
+                    console.log(value);
                     $scope.filteredTodos.push(value);
                   });
+                  console.log($scope.filteredTodos);
                 }
                 else{
                   
@@ -239,30 +241,46 @@ $scope.apiURL = $rootScope.baseURL+'/role/role/total';
     };
 
     $scope.deleteRole = function (rm_id) {
-      $scope.rm_id=rm_id;
+      if(localStorage.getItem('logichron_roledelete_permission') == 0){
+        var dialog = bootbox.dialog({
+            message: '<p class="text-center">You Are Not Authorized</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide'); 
+            }, 1500);
+        $('#trash').removeAttr('data-target');
+
+        $('#trash').removeAttr('data-toggle');
+      }
+      else
+      {
+         $scope.rm_id=rm_id;
+      }
     }  
 
     $scope.deleteConfirm = function () {
                 $('#del').attr('disabled','true');
                 $('#del').text("please wait...");
-	     $http({
-	      method: 'POST',
-	      url: $rootScope.baseURL+'/role/delete/'+$scope.rm_id,
-	      headers: {'Content-Type': 'application/json',
+       $http({
+        method: 'POST',
+        url: $rootScope.baseURL+'/role/delete/'+$scope.rm_id,
+        headers: {'Content-Type': 'application/json',
                   'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
-	    })
-	    .success(function(roleObj)
-	    {
+      })
+      .success(function(roleObj)
+      {
                 $('#del').text("Delete");
                 $('#del').removeAttr('disabled');
                 $scope.roleList = [];
                 $scope.getAll();
                 $('#confirm-delete').modal('hide');
-      		  
-	    })
-	    .error(function(data) 
-	    {   
-	      var dialog = bootbox.dialog({
+            
+      })
+      .error(function(data) 
+      {   
+        var dialog = bootbox.dialog({
             message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
                 closeButton: false
             });
@@ -271,8 +289,8 @@ $scope.apiURL = $rootScope.baseURL+'/role/role/total';
                 $('#del').removeAttr('disabled');
                 dialog.modal('hide'); 
             }, 1500);            
-	    });
-	};
+      });
+  };
 
   $scope.getPermission = function(index){
 
@@ -289,6 +307,7 @@ $scope.apiURL = $rootScope.baseURL+'/role/role/total';
 
         
                 obj.forEach(function(value, key){
+                  console.log(value);
                     if(value.rpm_add==1){
                       value.rpm_add = true;
                     }

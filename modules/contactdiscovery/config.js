@@ -56,6 +56,19 @@ angular.module('contactdiscovery', [])
                             }]);
                         }]
                     }
+                })
+            .when('/contactdiscovery/import',
+                {
+                    templateUrl: 'modules/contactdiscovery/partials/contactimport.html',
+                    controller: 'contactimportCtrl',
+                    resolve: {
+                        lazy: ['$ocLazyLoad',"$q", "$location","$rootScope", function ($ocLazyLoad, $q, $location, $rootScope) {
+                            return $ocLazyLoad.load([{
+                                name: 'myApp',
+                                files: ['modules/contactdiscovery/controllers/contactimport.js']
+                            }]);
+                        }]
+                    }
                 });
 				
         }]);

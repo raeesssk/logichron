@@ -133,7 +133,7 @@ $scope.filter = function()
     $scope.loading1 = 0;
     $scope.limit={};
     $scope.contactdiscovery={};
-    
+    $scope.recording=[];
     
     
    $scope.getAll = function (contactdiscovery) {
@@ -146,9 +146,10 @@ $scope.filter = function()
       })
       .success(function(contact)
       { 
-        console.log(contact);
         contact.forEach(function(value,key){
+          
           $scope.filteredTodos.push(value);
+          
         })
          if(contact[0] == null || contact[0] == undefined)
          {
@@ -207,6 +208,60 @@ $scope.filter = function()
               });
             
               $route.reload();
+                  
+            })
+            .error(function(data) 
+            {   
+              var dialog = bootbox.dialog({
+                  message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                      closeButton: false
+                  });
+                  setTimeout(function(){
+                      dialog.modal('hide'); 
+                  }, 1500);            
+            });
+    };
+
+    $scope.records = function(index){
+      $scope.recording=[];
+      $http({
+              method: 'GET',
+              url: $rootScope.baseURL+'/telecaller/getaudio/'+$scope.filteredTodos[index].cdm_id,
+              headers: {'Content-Type': 'application/json',
+                        'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+            })
+            .success(function(contact2)
+            {
+              contact2.forEach(function(value,key){
+                $scope.recording.push(value);
+              });
+                  
+            })
+            .error(function(data) 
+            {   
+              var dialog = bootbox.dialog({
+                  message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                      closeButton: false
+                  });
+                  setTimeout(function(){
+                      dialog.modal('hide'); 
+                  }, 1500);            
+            });
+    };
+
+    $scope.follows = function(index){
+      $scope.followups=[];
+      $http({
+              method: 'GET',
+              url: $rootScope.baseURL+'/telecaller/getfollowups/'+$scope.filteredTodos[index].cdm_id,
+              headers: {'Content-Type': 'application/json',
+                        'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+            })
+            .success(function(contact2)
+            {
+              contact2.forEach(function(value,key){
+                $scope.followups.push(value);
+              });
                   
             })
             .error(function(data) 

@@ -1,3 +1,18 @@
+<style>
+  .fa-music{
+    margin-left: 1.4em;
+  }
+  .fa-music:hover{
+    cursor: pointer;
+  }
+  .fa-user-plus{
+    margin-left: 1em;
+  }
+  .fa-user-plus:hover{
+    cursor: pointer;
+  }
+</style>
+
 <div class="pcoded-content">
     <div class="pcoded-inner-content">
         <div class="main-body">
@@ -63,6 +78,8 @@
                                       <th>Asset</th>
                                       <th>Domain</th>
                                       <th>Status</th>
+                                      <th>Recordings</th>
+                                      <th>Follow Ups</th>
                   	                </tr>
                     	            </thead>
                     	            <tbody>
@@ -90,7 +107,10 @@
                                             <option >Lead</option>
                                             <option value="Qualify">Qualify</option>
                                           </select></td>
-                          						
+                                      <td>
+                                        <i class="fa fa-music fa-lg" data-toggle="modal" data-target="#view-recordings" ng-click="records($index)"></i></td>
+                                        <td>
+                                        <i class="fa fa-user-plus fa-lg" data-toggle="modal" data-target="#view-followup" ng-click="follows($index)"></i></td>
               	                    </tr>
                     	            </tbody>
                       		      </table>
@@ -103,47 +123,22 @@
     </div>
 </div>
 
-<div class="modal fade" id="confirm-delete">
+<div class="modal fade" id="view-recordings">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Confirm Delete</h4>
+        <h4 class="modal-title">Audio Recordings</h4>
       </div>
       <div class="modal-body">
-        <p>You are about to delete <b><i class="title"></i></b> record, this procedure is irreversible.</p>
-                <p>Do you want to proceed?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-        <button type="button" id="del" class="btn btn-danger" ng-click="deleteConfirm()">Delete</button>
-      </div>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-<!-- 
-<div class="modal fade" id="view-details">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Custom Question's</h4>
-      </div>
-      <div class="modal-body">
-      	<table class="table table-hover">
+        <table class="table table-hover">
           <thead>
             <tr>
-              <th class="" style="border: 1px solid #ccc; text-align: center;">Question</th>
-              <th class="" style="border: 1px solid #ccc; text-align: center;">Answers</th>
+              <th class="" style="border: 1px solid #ccc; text-align: center;">Recordings</th>
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="question in answers track by $index">
-                <td>{{question.qm_questions}}</td>
-                <td>{{question.qm_answers}}</td>
+            <tr ng-repeat="records in recording track by $index">
+                <td><audio ng-src="{{records.cdam_audio}}" controls controlsList="nodownload"></audio></td>
             </tr>
           </tbody>
         </table>
@@ -156,4 +151,34 @@
   </div>
   <!-- /.modal-dialog -->
 </div>
-<!-- /.modal --> -->
+
+<div class="modal fade" id="view-followup">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Contact Follow Ups</h4>
+      </div>
+      <div class="modal-body">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>FollowUp Date</th>
+              <th>Comment</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="follow in followups track by $index">
+                <td>{{follow.fm_date | date:medium}}</td>
+                <td>{{follow.fm_comment}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
