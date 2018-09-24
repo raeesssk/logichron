@@ -34,10 +34,10 @@
                                 <div class="col-lg-1">
                                   <button type="button" class="btn btn-primary" ng-click="check()" style="margin-top: 1.8em;margin-left: -.5em">Check</button>
                                 </div>
-                              <div class="col-lg-3">
+                              <div class="col-lg-3" id="searchtextbox">
                                 <input type="text" class="form-control" id="searchtext" ng-model="searchtext" onkeyup="angular.element(this).scope().getSearch();" placeholder = "Search by-  Campaign Name" style="margin-top: 2em" /><br>
                               </div>
-                              <div class="col-lg-3">
+                              <div class="col-lg-3" id="btnExportbox">
                                 <button type="button" style="margin-top: 2em" class="btn btn-warning form-control" id="btnExport" ng-click="exportXlslist()">Export To Excel</button>
                               </div>
                               <div class="col-lg-1">

@@ -137,6 +137,7 @@ $scope.filter = function()
     
     
    $scope.getAll = function (contact) {
+    $scope.contacts = contact
     $scope.filteredTodos = [];
       $http({
         method: 'GET',
@@ -161,6 +162,8 @@ $scope.filter = function()
                 // $('#cdm_company_name').focus();
             }, 1500);
          }
+
+      $scope.gettable();
       })
       .error(function(data) 
       {   
@@ -187,6 +190,46 @@ $scope.filter = function()
             return result.data;
         });
     };
+
+    $scope.exportXlslist = function(){
+
+      console.log('test');
+      $("#export").table2excel({
+        exclude: ".excludeThisClass",
+        name: "contact list",
+        filename: "contact list" //do not include extension
+      });
+    };
+
+    $('#table').hide();
+   $scope.gettable=function(){
+      $http({
+        method: 'GET',
+        url: $rootScope.baseURL+'/telecaller/postque/'+$scope.contacts.cdm_cm_id.cm_id,
+        headers: {'Content-Type': 'application/json',
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+      })
+      .success(function(contactobj)
+      {
+            contactobj.forEach(function(value,key){
+                           
+              $scope.contactdiscoveryList.push(value);
+            })    
+            
+      })
+      .error(function(data) 
+      {   
+        var dialog = bootbox.dialog({
+            message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                closeButton: false
+            });
+            setTimeout(function(){
+                $('#del').text("Delete");
+                $('#del').removeAttr('disabled');
+                dialog.modal('hide'); 
+            }, 1500);            
+      });
+   };
 
     $scope.records = function(index){
       $scope.recording=[];

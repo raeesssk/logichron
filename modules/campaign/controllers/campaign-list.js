@@ -31,6 +31,11 @@ angular.module('campaign').controller('campaignListCtrl', function ($rootScope, 
     //     });
     //     saveAs(blob, "Report.xls");
     // };
+    if(localStorage.getItem('logichron_role_name') != 'admin')
+      {
+        $('#searchtextbox').addClass('col-lg-6');
+        $('#btnExportbox').remove();
+      }
 
     $scope.exportXlslist = function(){
       console.log('test');

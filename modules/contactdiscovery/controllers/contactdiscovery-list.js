@@ -135,7 +135,11 @@ $scope.filter = function()
 
 $scope.apiURL = $rootScope.baseURL+'/contact/contact/total';
     
-
+    if(localStorage.getItem('logichron_role_name') != 'admin')
+      {
+        $('#searchbox').addClass('col-lg-6');
+        $('#btnExportbox').remove();
+      }
 
     $('#cdm_from_date').datepicker({
         validateOnBlur: false,
@@ -164,6 +168,7 @@ $scope.apiURL = $rootScope.baseURL+'/contact/contact/total';
     }).datepicker('setDate', 'today');
 
     $scope.exportXlslist = function(){
+
       console.log('test');
       $("#export").table2excel({
         exclude: ".excludeThisClass",
@@ -383,6 +388,7 @@ $scope.apiURL = $rootScope.baseURL+'/contact/contact/total';
 
       if(localStorage.getItem('logichron_contactdelete_permission') == 0)
       {
+        $('#confirm-delete').modal('hide');
         console.log(localStorage.getItem('logichron_contactdelete_permission'));
           var dialog = bootbox.dialog({
           message: '<p class="text-center">You Are Not Authorized</p>',
@@ -390,12 +396,10 @@ $scope.apiURL = $rootScope.baseURL+'/contact/contact/total';
           });
           dialog.find('.modal-body').addClass("btn-danger");
           setTimeout(function(){
-              dialog.modal('hide'); 
+              dialog.modal('hide');
           }, 1500);
         $('#trash').removeAttr('data-target');
         $('#trash').removeAttr('data-toggle');
-        $('.modal').removeClass('fade show');
-        $('#confirm-delete').modal('hide');
         window.location.href = "#/contactdiscovery/joblist";
         
       }

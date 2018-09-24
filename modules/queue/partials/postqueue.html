@@ -35,7 +35,7 @@
                       	</div>
                       	<div class="card-block">
                             <div class="row">
-                              <div class="col-lg-11">
+                              <div class="col-lg-10">
                                 <div class="form-group">
                                   <label>Campaign Name</label>
                                   <input type="text"
@@ -52,6 +52,62 @@
                                   </div>
                                 </div>
                               </div>
+                              <div class="col-lg-2" id="btnExportbox">
+                                <button type="button" style="margin-top: 2em" class="btn btn-warning form-control" id="btnExport" ng-click="exportXlslist()">Export To Excel</button>
+                              </div>
+                            </div>
+
+                            <div class="form-group row" id="table">
+                              <table class="table table-responsive" id='export'>
+                                  <thead>
+                                    <tr>
+                                      <th>Campaign_Name</th>
+                                      <th>First_Name</th>
+                                      <th>Last_Name</th>
+                                      <th>Job_Title</th>
+                                      <th>Job_Level</th>
+                                      <th>Department</th>
+                                      <th>Email_Id</th>
+                                      <th>Mobile_Number</th>
+                                      <th>Company_Name</th>
+                                      <th>Address</th>
+                                      <th>City</th>
+                                      <th>State</th>
+                                      <th>Postal_Code</th>
+                                      <th>Countryt</th>
+                                      <th>Industry</th>
+                                      <th>Company_Size</th>
+                                      <th>Revenue</th>
+                                      <th>Asset</th>
+                                      <th>Domain</th>
+                                      <th>Status</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr ng-repeat="contactdiscovery in contactdiscoveryList">
+                                      <td>{{contactdiscovery.cm_campaign_name}}</td>
+                                      <td>{{contactdiscovery.cdm_first_name}}</td>
+                                      <td>{{contactdiscovery.cdm_last_name}}</td>
+                                      <td>{{contactdiscovery.cdm_job_title}}</td>
+                                      <td>{{contactdiscovery.cdm_job_level}}</td>
+                                      <td>{{contactdiscovery.cdm_dept}}</td>
+                                      <td>{{contactdiscovery.cdm_email_id}}</td>
+                                      <td>{{contactdiscovery.cdm_mobile}}</td>
+                                      <td>{{contactdiscovery.cdm_company_name}}</td>
+                                      <td>{{contactdiscovery.cdm_address}}</td>
+                                      <td>{{contactdiscovery.cdm_city}}</td>
+                                      <td>{{contactdiscovery.cdm_state}}</td>
+                                      <td>{{contactdiscovery.cdm_postal_code}}</td>
+                                      <td>{{contactdiscovery.cdm_country}}</td>
+                                      <td>{{contactdiscovery.cdm_industry}}</td>
+                                      <td>{{contactdiscovery.cdm_company_size}}</td>
+                                      <td>{{contactdiscovery.cdm_revenue}}</td>
+                                      <td>{{contactdiscovery.cdm_asset}}</td>
+                                      <td>{{contactdiscovery.cdm_domain}}</td>
+                                      <td>{{contactdiscovery.call_status}}</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
                             </div>
                             <div class="form-group row">
                                 <table class="table table-responsive">
