@@ -136,6 +136,7 @@ $scope.filter = function()
 $scope.apiURL = $rootScope.baseURL+'/contact/contact/total';
     
 
+
     $('#cdm_from_date').datepicker({
         validateOnBlur: false,
         todayButton: false,
@@ -379,12 +380,36 @@ $scope.apiURL = $rootScope.baseURL+'/contact/contact/total';
     d.setToDate();
 
     $scope.deleteEntry = function (cdm_id) {
-      $scope.cdm_id=cdm_id;
+
+      if(localStorage.getItem('logichron_contactdelete_permission') == 0)
+      {
+        console.log(localStorage.getItem('logichron_contactdelete_permission'));
+          var dialog = bootbox.dialog({
+          message: '<p class="text-center">You Are Not Authorized</p>',
+              closeButton: false
+          });
+          dialog.find('.modal-body').addClass("btn-danger");
+          setTimeout(function(){
+              dialog.modal('hide'); 
+          }, 1500);
+        $('#trash').removeAttr('data-target');
+        $('#trash').removeAttr('data-toggle');
+        $('.modal').removeClass('fade show');
+        $('#confirm-delete').modal('hide');
+        window.location.href = "#/contactdiscovery/joblist";
+        
+      }
+      else
+      {
+        $('.modal').addClass('fade show');
+        $scope.cdm_id=cdm_id;
+      }
     }  
 
     $scope.deleteConfirm = function () {
-                $('#del').attr('disabled','true');
-                $('#del').text("please wait...");
+
+        $('#del').attr('disabled','true');
+        $('#del').text("please wait...");
 	     $http({
 	      method: 'POST',
 	      url: $rootScope.baseURL+'/contact/delete/'+$scope.cdm_id,

@@ -51,27 +51,67 @@ function LoginCtrl($scope, $location, $http, $routeParams, $rootScope) {
 			        })
 			        .success(function(deliverycount)
 			        {
-			        
-			        	$scope.rpm_add=deliverycount[0].rpm_add;
-			        	$scope.rpm_edit=deliverycount[0].rpm_edit;
-			        	$scope.rpm_delete=deliverycount[0].rpm_delete;
-			        	$scope.rpm_list=deliverycount[0].rpm_list;
-			        	$scope.rm_name=deliverycount[0].rm_name;
+
 			        	$scope.user = deliverycount[0].username;
 			        	$scope.firstname = deliverycount[0].first_name;
 			        	$scope.iconimage = deliverycount[0].icon_image;
-			        	localStorage.setItem('logichron_add',$scope.rpm_add);
-			        	localStorage.setItem('logichron_edit',$scope.rpm_edit);
-			        	localStorage.setItem('logichron_delete',$scope.rpm_delete);
-			        	localStorage.setItem('logichron_list',$scope.rpm_list);
-			        	localStorage.setItem('logichron_role_name', $scope.rm_name);
+			        	$scope.rm_name = deliverycount[0].rm_name;
 				  	 	localStorage.setItem('logichron_admin_username', $scope.user);
 				  	 	localStorage.setItem('logichron_admin_firstname', $scope.firstname);
 				  	 	localStorage.setItem('logichron_admin_iconimage', $scope.iconimage);
+				  	 	localStorage.setItem('logichron_role_name', $scope.rm_name);
 				  	 	localStorage.setItem('logichron_admin_access_token', data.access_token);
 				        localStorage.setItem('logichron_admin_expires_in', data.expires_in);
 				        localStorage.setItem('logichron_admin_refresh_token', data.refresh_token);
 				        localStorage.setItem('logichron_admin_token_type', data.token_type);
+			        	deliverycount.forEach(function(value,key){
+			        		
+			        		if(value.pm_name == 'user_master')
+			        		{
+
+			        			$scope.rpm_add = value.rpm_add;
+			        			$scope.rpm_edit = value.rpm_edit;
+			        			$scope.rpm_delete = value.rpm_delete;
+			        			$scope.rpm_list = value.rpm_list;
+			        			localStorage.setItem('logichron_useradd_permission',$scope.rpm_add);
+			        			localStorage.setItem('logichron_useredit_permission',$scope.rpm_edit);
+			        			localStorage.setItem('logichron_userdelete_permission',$scope.rpm_delete);
+			        			localStorage.setItem('logichron_userlist_permission',$scope.rpm_list);
+			        		}
+			        		 if(value.pm_name == 'role_master'){
+			        			$scope.rpm_add = value.rpm_add;
+			        			$scope.rpm_edit = value.rpm_edit;
+			        			$scope.rpm_delete = value.rpm_delete;
+			        			$scope.rpm_list = value.rpm_list;
+			        			localStorage.setItem('logichron_roleadd_permission',$scope.rpm_add);
+			        			localStorage.setItem('logichron_roleedit_permission',$scope.rpm_edit);
+			        			localStorage.setItem('logichron_roledelete_permission',$scope.rpm_delete);
+			        			localStorage.setItem('logichron_rolelist_permission',$scope.rpm_list);
+			        		}
+			        		if(value.pm_name == 'contact_master')
+			        		{
+			        			$scope.rpm_add = value.rpm_add;
+			        			$scope.rpm_edit = value.rpm_edit;
+			        			$scope.rpm_delete = value.rpm_delete;
+			        			$scope.rpm_list = value.rpm_list;
+			        			localStorage.setItem('logichron_contactadd_permission',$scope.rpm_add);
+			        			localStorage.setItem('logichron_contactedit_permission',$scope.rpm_edit);
+			        			localStorage.setItem('logichron_contactdelete_permission',$scope.rpm_delete);
+			        			localStorage.setItem('logichron_contactlist_permission',$scope.rpm_list);
+
+			        		}
+			        		if(value.pm_name == 'campaign_master')
+			        		{
+			        			$scope.rpm_add = value.rpm_add;
+			        			$scope.rpm_edit = value.rpm_edit;
+			        			$scope.rpm_delete = value.rpm_delete;
+			        			$scope.rpm_list = value.rpm_list;
+			        			localStorage.setItem('logichron_campaignadd_permission',$scope.rpm_add);
+			        			localStorage.setItem('logichron_campaignedit_permission',$scope.rpm_edit);
+			        			localStorage.setItem('logichron_campaigndelete_permission',$scope.rpm_delete);
+			        			localStorage.setItem('logichron_campaignlist_permission',$scope.rpm_list);
+							}
+			        	});
                 		$('#login').text("Login");
 				         window.location = "/logichron/";
 			        })

@@ -9,6 +9,22 @@ angular.module('contactdiscovery').controller('contactdiscoveryEditCtrl', functi
 	$scope.jobId = $routeParams.jobId;
   $scope.apiURL = $rootScope.baseURL+'/contact/edit/'+$scope.jobId;
 
+  $scope.getcontactpermission=function(){
+      if(localStorage.getItem('logichron_contactedit_permission') == 0){
+        console.log(localStorage.getItem('logichron_contactedit_permission'));
+        var dialog = bootbox.dialog({
+        message: '<p class="text-center">You Are Not Authorized</p>',
+            closeButton: false
+        });
+        dialog.find('.modal-body').addClass("btn-danger");
+        setTimeout(function(){
+            dialog.modal('hide'); 
+        }, 1500);
+        window.history.back();
+      }
+    };
+    $scope.getcontactpermission();
+
   $('#cm_end_date').datepicker({
           validateOnBlur: false,
           todayButton: false,

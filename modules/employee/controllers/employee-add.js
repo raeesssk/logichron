@@ -1,6 +1,14 @@
 // import admin
 angular.module('employee').controller('employeeAddCtrl', function ($rootScope, $http, $scope, $location, $routeParams, $route) {
 
+
+    $scope.getpermission=function(){
+      if(localStorage.getItem('logichron_role_name') != 'admin'){
+        
+        window.location.href='#/';
+      }
+    };
+    $scope.getpermission();
   
     $scope.employee = {};
     $('#emp_name').focus();

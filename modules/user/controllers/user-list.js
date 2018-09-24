@@ -96,8 +96,8 @@ $scope.filter = function()
 $scope.apiURL = $rootScope.baseURL+'/userm/user/total';
 
   $scope.getpermission=function(){
-      if(localStorage.getItem('logichron_user_permission') == 0){
-        alert('You are not authorized');
+      if(localStorage.getItem('logichron_role_name') != 'admin'){
+        
         window.location.href='#/';
       }
     };

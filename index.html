@@ -113,7 +113,7 @@
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                                <li class="pcoded-hasmenu">
+                                <li class="pcoded-hasmenu" ng-if="role == 'admin'">
                                     <a href="">
                                         <span class="pcoded-micon"><i class="ti-user"></i></span>
                                         <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">User Management</span>
@@ -150,7 +150,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="pcoded-hasmenu">
+                                <li class="pcoded-hasmenu" ng-if="role == 'admin'">
                                     <a href="">
                                         <span class="pcoded-micon"><i class="ti-id-badge"></i></span>
                                         <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Employee Management</span>

@@ -27,6 +27,22 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
 	$scope.campaignId = $routeParams.campaignId;
     $scope.apiURL = $rootScope.baseURL+'/campaign/edit/'+$scope.campaignId;
 
+    $scope.getcampaignpermission=function(){
+      if(localStorage.getItem('logichron_campaignedit_permission') == 0){
+        console.log(localStorage.getItem('logichron_campaignedit_permission'));
+        var dialog = bootbox.dialog({
+        message: '<p class="text-center">You Are Not Authorized</p>',
+            closeButton: false
+        });
+        dialog.find('.modal-body').addClass("btn-danger");
+        setTimeout(function(){
+            dialog.modal('hide'); 
+        }, 1500);
+        window.history.back();
+      }
+    };
+    $scope.getcampaignpermission();
+
     $('#cm_end_date').datepicker({
           validateOnBlur: false,
           todayButton: false,

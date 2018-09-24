@@ -16,8 +16,8 @@ angular.module('user').controller('userEditCtrl', function ($rootScope, $http, $
 }
 
 $scope.getpermission=function(){
-      if(localStorage.getItem('logichron_user_permission') == 0){
-        alert('You are not authorized');
+      if(localStorage.getItem('logichron_role_name') != 'admin'){
+        
         window.location.href='#/';
       }
     };

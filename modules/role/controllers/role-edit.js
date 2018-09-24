@@ -6,13 +6,14 @@ angular.module('role').controller('roleEditCtrl', function ($rootScope, $http, $
 	$scope.roleId = $routeParams.roleId;
   $scope.apiURL = $rootScope.baseURL+'/role/edit/'+$scope.roleId;
   
-// $scope.getpermission=function(){
-//       if(localStorage.getItem('logichron_user_permission') == 0){
-//         alert('You are not authorized');
-//         window.location.href='#/';
-//       }
-//     };
-//     $scope.getpermission();
+$scope.getpermission=function(){
+      if(localStorage.getItem('logichron_role_name') != 'admin'){
+        
+        window.location.href='#/';
+      }
+    };
+    $scope.getpermission();
+    
   $scope.getrole = function () {
 	     $http({
 	      method: 'GET',
@@ -138,7 +139,6 @@ angular.module('role').controller('roleEditCtrl', function ($rootScope, $http, $
                     role:$scope.role,
                     permission:$scope.permissionList
                 }
-                console.log($scope.permissionList);
                 $('#btnsave').attr('disabled','true');
                 $('#btnsave').text("please wait...");
 		    $http({

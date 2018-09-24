@@ -136,13 +136,14 @@ $scope.filteredTodos = [];
 
 $scope.apiURL = $rootScope.baseURL+'/role/role/total';
 
-  // $scope.getpermission=function(){
-  //     if(localStorage.getItem('logichron_user_permission') == 0){
-  //       alert('You are not authorized');
-  //       window.location.href='#/';
-  //     }
-  //   };
-  //   $scope.getpermission();
+  $scope.getpermission=function(){
+      if(localStorage.getItem('logichron_role_name') != 'admin'){
+        
+        window.location.href='#/';
+      }
+    };
+    $scope.getpermission();
+    
    $scope.getAll = function () {
         if ($('#searchtext').val() == undefined || $('#searchtext').val() == "") {
         $scope.limit.search = "";
@@ -210,10 +211,8 @@ $scope.apiURL = $rootScope.baseURL+'/role/role/total';
                 if (user.length > 0) {
                  
                   user.forEach(function (value, key) {
-                    console.log(value);
                     $scope.filteredTodos.push(value);
-                  });
-                  console.log($scope.filteredTodos);
+                  }); 
                 }
                 else{
                   
@@ -307,16 +306,34 @@ $scope.apiURL = $rootScope.baseURL+'/role/role/total';
 
         
                 obj.forEach(function(value, key){
-                  console.log(value);
+                  
                     if(value.rpm_add==1){
                       value.rpm_add = true;
                     }
+                    else
+                    {
+                      value.rpm_add=false;
+                    }
                     if(value.rpm_edit==1){
                       value.rpm_edit = true;
-                    }if(value.rpm_delete==1){
+                    }
+                    else
+                    {
+                      value.rpm_edit=false;
+                    }
+                    if(value.rpm_delete==1){
                       value.rpm_delete = true;
-                    }if(value.rpm_list==1){
+                    }
+                    else
+                    {
+                      value.rpm_delete=false;
+                    }
+                    if(value.rpm_list==1){
                       value.rpm_list = true;
+                    }
+                    else
+                    {
+                      value.rpm_list=false;
                     }
                     $scope.permissionList.push(value);
                 });
