@@ -274,82 +274,34 @@ $scope.getpermission=function(){
 	    });
 	};
 
-  $scope.viewEmployeeDetails1 = function (index) {
-      $scope.ind = index;
-    $('#user-datepicker-from').val("");
-    $('#user-datepicker-to').val("");
-    $scope.viewCustomerDetails(index);
-  };
+   $scope.viewEmployeeDetails = function(index){
 
-  $scope.viewCustomerDetails = function (index) {
-      $scope.venname = $scope.filteredTodos[index].cm_name;
-      $scope.venno = $scope.filteredTodos[index].cm_mobile;
-      $scope.venemail = $scope.filteredTodos[index].cm_email;
-      $scope.venadd = $scope.filteredTodos[index].cm_address;
-      $scope.venbal = $scope.filteredTodos[index].cm_balance;
-      $scope.vendebit = $scope.filteredTodos[index].cm_debit;
-      $scope.vencode = $scope.filteredTodos[index].cm_code;
-      $scope.cmgst = $scope.filteredTodos[index].cm_gst;
-
-      $scope.categoryList =[];
-      $http({
-        method: 'GET',
-        url: $rootScope.baseURL+'/customer/details/'+$scope.filteredTodos[index].cm_id,
-        headers: {'Content-Type': 'application/json',
-                  'Authorization' :'Bearer '+localStorage.getItem("unitech_admin_access_token")}
-      })
-      .success(function(categoryList)
-      {
-        // $scope.categoryList = angular.copy(categoryList);
-        var amount_balance = 0;
-          categoryList.forEach(function (value, key) {
-            $scope.data = new Date(value.date);
-
-            if(value.credit == 0)
-            {
-              amount_balance = parseInt(amount_balance) - parseInt(value.debit);
-            }
-            else if(value.debit == 0)
-            {
-              amount_balance = parseInt(amount_balance) + parseInt(value.credit);
-            }
-            if(amount_balance < 0)
-            {
-              Math.abs(amount_balance);
-            value.bal = Math.abs(amount_balance);
-              value.drcr="DR";
-            }
-            else{
-              value.drcr="CR";
-              value.bal = amount_balance;
-            }
-            if($scope.fDate <= $scope.data && $scope.tDate >= $scope.data)
-            {
-              $scope.categoryList.push(value);
-            }
-            else if($('#user-datepicker-from').val() == "" && $('#user-datepicker-to').val() == "")  
-            {
-              $scope.categoryList.push(value);
-            }
-          });
-        
-          $('#filter-user-btn').text("Filter");
-          $('#filter-user-btn').removeAttr('disabled');
-          $('#reset-user-btn').text("Reset");
-          $('#reset-user-btn').removeAttr('disabled');
-      })
-      .error(function(data) 
-      {
-            var dialog = bootbox.dialog({
-            message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
-                closeButton: false
+        $scope.empList=[];
+        $http({
+          method: 'GET',
+          url: $rootScope.baseURL+'/employee/view/'+$scope.filteredTodos[index].emp_id,
+          //data: $scope.data,
+          headers: {'Content-Type': 'application/json',
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+        })
+        .success(function(obj)
+        {
+            obj.forEach(function(value, key){
+              $scope.empList.push(value);
             });
-            setTimeout(function(){
-                dialog.modal('hide'); 
-            }, 1500);
-      });
-
+        })
+        .error(function(data) 
+        {   
+            toastr.error('Oops, Something Went Wrong.', 'Error', {
+                closeButton: true,
+                progressBar: true,
+                positionClass: "toast-top-center",
+                timeOut: "500",
+                extendedTimeOut: "500",
+            });  
+        });
     };
+    
 
     $scope.printDetails = function(){
       var popupWin = window.open('', 'winname','directories=0,titlebar=0,toolbar=0,location=0,status=0,menubar=0,scrollbars=no,resizable=no');

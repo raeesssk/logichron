@@ -202,7 +202,7 @@ $scope.filter = function()
       });
     };
 
-    // $('#table').hide();
+    $('#table').hide();
    $scope.gettable=function(){
       $http({
         method: 'GET',
