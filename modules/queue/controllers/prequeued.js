@@ -135,6 +135,11 @@ $scope.filter = function()
     $scope.contactdiscovery={};
     $scope.recording=[];
     
+     if(localStorage.getItem('logichron_role_name') != 'admin')
+      {
+        $('#searchbox').addClass('col-lg-11');
+        $('#btnExportbox').remove();
+      }
     
    $scope.getAll = function (contactdiscovery) {
       $scope.contactdiscovery=contactdiscovery;

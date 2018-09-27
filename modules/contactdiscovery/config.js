@@ -69,6 +69,19 @@ angular.module('contactdiscovery', [])
                             }]);
                         }]
                     }
+                })
+            .when('/contactdiscovery/unsorted',
+                {
+                    templateUrl: 'modules/contactdiscovery/partials/unsortedContact.html',
+                    controller: 'unsortedContactCtrl',
+                    resolve: {
+                        lazy: ['$ocLazyLoad',"$q", "$location","$rootScope", function ($ocLazyLoad, $q, $location, $rootScope) {
+                            return $ocLazyLoad.load([{
+                                name: 'myApp',
+                                files: ['modules/contactdiscovery/controllers/unsortedContact.js']
+                            }]);
+                        }]
+                    }
                 });
 				
         }]);
