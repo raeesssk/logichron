@@ -80,8 +80,9 @@
                   	                </tr>
                     	            </thead>
                     	            <tbody>
-                  	                <tr ng-repeat="contactdiscovery in filteredTodos">
-                                      <td><input type="checkbox" ng-change="checkAll(contactdiscovery)" ng-model="contactdiscovery.cem_select"></td>
+                  	                <tr id="table1" ng-hide="contactdiscoveryList.length>0" ng-show='contactdiscoveryList<=0'
+                                      ng-repeat="contactdiscovery in filteredTodos">
+                                      <td><input type="checkbox" ng-change="checkAll(contactdiscovery,$index)" ng-model="contactdiscovery.cem_select"></td>
                                       <td>{{$index+1}}</td>
                                       <td>{{contactdiscovery.cm_campaign_name}}</td>
                           						<td>{{contactdiscovery.cdm_first_name}}</td>
@@ -108,6 +109,34 @@
                           							<i class="fa fa-trash" data-toggle="modal" data-target="#confirm-delete" ng-click="deleteEntry(contactdiscovery.cdm_id)"></i>
                           						</td> -->
               	                    </tr>
+                                    <tr id="table2" ng-if="contactdiscoveryList.length>0" ng-repeat="contactdiscovery in contactdiscoveryList">
+                                      <td><input type="checkbox" ng-change="checkAll(contactdiscovery,$index)" ng-model="contactdiscovery.cem_select"></td>
+                                      <td>{{$index+1}}</td>
+                                      <td>{{contactdiscovery.cm_campaign_name}}</td>
+                                      <td>{{contactdiscovery.cdm_first_name}}</td>
+                                      <td>{{contactdiscovery.cdm_last_name}}</td>
+                                      <td>{{contactdiscovery.cdm_job_title}}</td>
+                                      <td>{{contactdiscovery.cdm_job_level}}</td>
+                                      <td>{{contactdiscovery.cdm_dept}}</td>
+                                      <td>{{contactdiscovery.cdm_email_id}}</td>
+                                      <td>{{contactdiscovery.cdm_mobile}}</td>
+                                      <td>{{contactdiscovery.cdm_company_name}}</td>
+                                      <td>{{contactdiscovery.cdm_address}}</td>
+                                      <td>{{contactdiscovery.cdm_city}}</td>
+                                      <td>{{contactdiscovery.cdm_state}}</td>
+                                      <td>{{contactdiscovery.cdm_postal_code}}</td>
+                                      <td>{{contactdiscovery.cdm_country}}</td>
+                                      <td>{{contactdiscovery.cdm_industry}}</td>
+                                      <td>{{contactdiscovery.cdm_company_size}}</td>
+                                      <td>{{contactdiscovery.cdm_revenue}}</td>
+                                      <td>{{contactdiscovery.cdm_asset}}</td>
+                                      <td>{{contactdiscovery.cdm_domain}}</td><!-- 
+                                      <td>
+                                        <i class="fa fa-info-circle" data-toggle="modal" data-target="#view-details" ng-click="view($index)"></i>
+                                        <a href="#/contactdiscovery/edit/{{contactdiscovery.cdm_id}}"><i class="fa fa-pencil"></i></a>
+                                        <i class="fa fa-trash" data-toggle="modal" data-target="#confirm-delete" ng-click="deleteEntry(contactdiscovery.cdm_id)"></i>
+                                      </td> -->
+                                    </tr>
                     	            </tbody>
                       		      </table>
                       		      <br>

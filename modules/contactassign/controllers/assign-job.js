@@ -134,6 +134,8 @@ $scope.filter = function()
     $scope.count;
     $scope.limit={};
     $scope.assign={};
+    $scope.newcontactdiscoveryList=[];
+    $scope.removeContactList=[];
 
 $scope.apiURL = $rootScope.baseURL+'/assign/contact/total';
     
@@ -255,18 +257,14 @@ $scope.apiURL = $rootScope.baseURL+'/assign/contact/total';
       $scope.filteredTodos.forEach(function(value,key){
 
         if($scope.assign.cem_cm_id.cm_id == value.cdm_cm_id){
-          value.cem_select = true;
+          // value.cem_select = true;
           $scope.contactdiscoveryList.push(value);
-        }
-        else
-        {
-          value.cem_select=false;
         }
 
       });
        $http({
               method: 'GET',
-              url: $rootScope.baseURL+'/campaign/contact/goal/'+$scope.assign.cem_cm_id.cm_id,
+              url: $rootScope.baseURL+'/campaign/contact/count/'+$scope.assign.cem_cm_id.cm_id,
               headers: {'Content-Type': 'application/json',
                         'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
             })
@@ -284,11 +282,40 @@ $scope.apiURL = $rootScope.baseURL+'/assign/contact/total';
                   extendedTimeOut: "500",
                 });
             });
+             $http({
+              method: 'GET',
+              url: $rootScope.baseURL+'/assign/check/emp/'+$scope.assign.cem_cm_id.cm_id,
+              headers: {'Content-Type': 'application/json',
+                        'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+            })
+            .success(function(campaign)
+            {
+              if(campaign.length>0){
+                var dialog = bootbox.dialog({
+                message: '<p class="text-center">Contact already assigned!!!</p>',
+                    closeButton: false
+                });
+                dialog.find('.modal-body').addClass("btn-success");
+                setTimeout(function(){
+                    dialog.modal('hide'); 
+                }, 1500);
+              }
+            })
+            .error(function(data) 
+            {   
+              toastr.error('Oops, Something Went Wrong.', 'Error', {
+                    closeButton: true,
+                    progressBar: true,
+                  positionClass: "toast-top-center",
+                  timeOut: "500",
+                  extendedTimeOut: "500",
+                });
+            });
+
     };
 
     $scope.campaignChanges=function(){
       if($scope.assign.cem_cm_id.cm_id == null){
-          
           $scope.count=null;
           $scope.filteredTodos.forEach(function(val,key){
             val.cem_select=false;
@@ -297,15 +324,18 @@ $scope.apiURL = $rootScope.baseURL+'/assign/contact/total';
       }
     };
 
-    $scope.checkAll=function(contact){
+    $scope.checkAll=function(contact,index){
           if(contact.cem_select){
             $('#assign_to').removeAttr('disabled');
-            contact.cem_select=false;
+            $scope.newcontactdiscoveryList.push(contact);
+            console.log($scope.newcontactdiscoveryList);
           }
           else
           {
             $('#assign_to').attr('disabled',true);
             contact.cem_select=false;
+            $scope.removeContactList.push($scope.newcontactdiscoveryList.splice(index));
+            console.log($scope.removeContactList);
           }
     };
 
@@ -342,7 +372,7 @@ $scope.apiURL = $rootScope.baseURL+'/assign/contact/total';
       $http({
           method: 'POST',
           url: $rootScope.baseURL+'/assign/assign/'+$scope.employee.emp_id,
-          data: $scope.contactdiscoveryList,
+          data: $scope.newcontactdiscoveryList,
           headers: {'Content-Type': 'application/json',
                   'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
         })

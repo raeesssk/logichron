@@ -228,12 +228,11 @@ angular.module('telecaller').controller('telecallerListCtrl', function ($rootSco
     var dd  = d.getDate().toString();
     $scope.follow.fm_date = yyyy +"-"+ (parseInt(mm)+parseInt(1)) +"-"+ dd;
 
-    $('#fm_date').datepicker({
+    $('#fm_date').datetimepicker({
         validateOnBlur: false,
         todayButton: false,
-        timepicker: false,
+        timepicker: true,
         scrollInput: false,
-        format: 'yyyy-mm-dd',
         autoclose: true,
         orientation: 'bottom',
           onChangeDateTime: function (dp, $input) {
