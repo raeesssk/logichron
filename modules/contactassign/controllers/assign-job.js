@@ -204,6 +204,7 @@ $scope.apiURL = $rootScope.baseURL+'/assign/contact/total';
               })
               .success(function(data)
               {
+
                 $scope.filteredTodos = [];
                 if (data.length > 0) {
                  
@@ -251,15 +252,41 @@ $scope.apiURL = $rootScope.baseURL+'/assign/contact/total';
         });
     };
     
-    $scope.getCampaignDetails=function(){
+    $scope.getCampaignDetails=function(index){
       $scope.contactdiscoveryList=[];
       $('#assign_to').removeAttr('disabled');
-      $scope.filteredTodos.forEach(function(value,key){
-
-        if($scope.assign.cem_cm_id.cm_id == value.cdm_cm_id){
-          // value.cem_select = true;
-          $scope.contactdiscoveryList.push(value);
-        }
+      
+        $scope.filteredTodos.forEach(function(value,key){
+          $http({
+              method: 'GET',
+              url: $rootScope.baseURL+'/assign/check/emp/'+value.cdm_id,
+              headers: {'Content-Type': 'application/json',
+                        'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+            })
+            .success(function(campaign)
+            {
+              campaign.forEach(function(val,key){
+                if(val.ecm_cdm_id == value.cdm_id){
+                  value.cem_select=true;
+                }
+              });
+                  
+            })
+            .error(function(data) 
+            {   
+              toastr.error('Oops, Something Went Wrong.', 'Error', {
+                    closeButton: true,
+                    progressBar: true,
+                  positionClass: "toast-top-center",
+                  timeOut: "500",
+                  extendedTimeOut: "500",
+                });
+            });
+             if($scope.assign.cem_cm_id.cm_id == value.cdm_cm_id ){
+                
+                 $scope.contactdiscoveryList.push(value); 
+                
+              }
 
       });
        $http({
@@ -282,35 +309,7 @@ $scope.apiURL = $rootScope.baseURL+'/assign/contact/total';
                   extendedTimeOut: "500",
                 });
             });
-             $http({
-              method: 'GET',
-              url: $rootScope.baseURL+'/assign/check/emp/'+$scope.assign.cem_cm_id.cm_id,
-              headers: {'Content-Type': 'application/json',
-                        'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
-            })
-            .success(function(campaign)
-            {
-              if(campaign.length>0){
-                var dialog = bootbox.dialog({
-                message: '<p class="text-center">Contact already assigned!!!</p>',
-                    closeButton: false
-                });
-                dialog.find('.modal-body').addClass("btn-success");
-                setTimeout(function(){
-                    dialog.modal('hide'); 
-                }, 1500);
-              }
-            })
-            .error(function(data) 
-            {   
-              toastr.error('Oops, Something Went Wrong.', 'Error', {
-                    closeButton: true,
-                    progressBar: true,
-                  positionClass: "toast-top-center",
-                  timeOut: "500",
-                  extendedTimeOut: "500",
-                });
-            });
+             
 
     };
 
@@ -334,8 +333,36 @@ $scope.apiURL = $rootScope.baseURL+'/assign/contact/total';
           {
             $('#assign_to').attr('disabled',true);
             contact.cem_select=false;
-            $scope.removeContactList.push($scope.newcontactdiscoveryList.splice(index));
-            console.log($scope.removeContactList);
+            $scope.removeContactList.push($scope.newcontactdiscoveryList[index]);
+            $scope.newcontactdiscoveryList.splice(index,1)
+             $http({
+              method: 'POST',
+              url: $rootScope.baseURL+'/assign/delete/'+contact.cdm_id,
+              data:$scope.removeContactList,
+              headers: {'Content-Type': 'application/json',
+                        'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+            })
+            .success(function(campaign)
+            {
+                var dialog = bootbox.dialog({
+              message: '<p class="text-center">Contact Unassigned!!!</p>',
+                  closeButton: false
+              });
+              dialog.find('.modal-body').addClass("btn-success");
+              setTimeout(function(){
+                  dialog.modal('hide'); 
+              }, 1500);
+            })
+            .error(function(data) 
+            {   
+              toastr.error('Oops, Something Went Wrong.', 'Error', {
+                    closeButton: true,
+                    progressBar: true,
+                  positionClass: "toast-top-center",
+                  timeOut: "500",
+                  extendedTimeOut: "500",
+                });
+            });
           }
     };
 

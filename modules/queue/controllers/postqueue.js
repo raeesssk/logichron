@@ -196,9 +196,7 @@ $scope.filter = function()
     };
 
     $scope.exportXlslist = function(){
-
-      console.log('test');
-      $("#export").table2excel({
+        $("#export").table2excel({
         exclude: ".excludeThisClass",
         name: "contact list",
         filename: "contact list" //do not include extension

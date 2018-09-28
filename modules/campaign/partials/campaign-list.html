@@ -173,7 +173,7 @@
                                       <td>{{campaign.cm_emp_size}}</td>
                                       <td>{{campaign.cm_disqualifies}}</td>
                                       <td>{{campaign.cm_title}}</td>
-                                      <td>{{campaign.cm_lead_count}} / <label style="color: green">{{campaign.targetcount}}</label></td>
+                                      <td ng-click="QualifyContact($index)">{{campaign.cm_lead_count}} / <label style="color: green;cursor: pointer;">{{campaign.targetcount}}</label></td>
                                       <td>{{campaign.cm_vertical}}</td>
                                       <td>{{campaign.cm_geo}}</td>
 
@@ -243,7 +243,75 @@
   <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-
+<div class="modal fade" id="Qualified_list">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+         <h4 class="modal-title">Qualified Contact's</h4>
+      </div>
+      <div class="modal-body">
+         <div class="form-group row" id="table">
+            <table class="table table-responsive" id='QualifyExport'>
+                <thead>
+                  <tr>
+                    <th>Campaign_Name</th>
+                    <th>First_Name</th>
+                    <th>Last_Name</th>
+                    <th>Job_Title</th>
+                    <th>Job_Level</th>
+                    <th>Department</th>
+                    <th>Email_Id</th>
+                    <th>Mobile_Number</th>
+                    <th>Company_Name</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Postal_Code</th>
+                    <th>Countryt</th>
+                    <th>Industry</th>
+                    <th>Company_Size</th>
+                    <th>Revenue</th>
+                    <th>Asset</th>
+                    <th>Domain</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="contactdiscovery in viewContact">
+                    <td style="text-align: center;">{{contactdiscovery.cm_campaign_name}}</td>
+                    <td>{{contactdiscovery.cdm_first_name}}</td>
+                    <td>{{contactdiscovery.cdm_last_name}}</td>
+                    <td>{{contactdiscovery.cdm_job_title}}</td>
+                    <td>{{contactdiscovery.cdm_job_level}}</td>
+                    <td>{{contactdiscovery.cdm_dept}}</td>
+                    <td>{{contactdiscovery.cdm_email_id}}</td>
+                    <td>{{contactdiscovery.cdm_mobile}}</td>
+                    <td>{{contactdiscovery.cdm_company_name}}</td>
+                    <td>{{contactdiscovery.cdm_address}}</td>
+                    <td>{{contactdiscovery.cdm_city}}</td>
+                    <td>{{contactdiscovery.cdm_state}}</td>
+                    <td>{{contactdiscovery.cdm_postal_code}}</td>
+                    <td>{{contactdiscovery.cdm_country}}</td>
+                    <td>{{contactdiscovery.cdm_industry}}</td>
+                    <td>{{contactdiscovery.cdm_company_size}}</td>
+                    <td>{{contactdiscovery.cdm_revenue}}</td>
+                    <td>{{contactdiscovery.cdm_asset}}</td>
+                    <td>{{contactdiscovery.cdm_domain}}</td>
+                    <td>{{contactdiscovery.call_status}}</td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-warning" id="btnExport" ng-click="export()">Export To Excel</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
 <!--1  Account List (Y/N) Modal -->
 <div class="modal fade" id="account_list">
   <div class="modal-dialog modal-md">

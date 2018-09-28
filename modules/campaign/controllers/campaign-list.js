@@ -361,7 +361,47 @@ angular.module('campaign').controller('campaignListCtrl', function ($rootScope, 
 	    });
 	};
     
+   $scope.QualifyContact = function(index){
+    $scope.viewContact=[];
+      if($scope.filteredTodos[index].targetcount > 0){
+        
+        $http({
+          method: 'GET',
+          url: $rootScope.baseURL+'/telecaller/postque/'+$scope.filteredTodos[index].cm_id,
+          //data: $scope.data,
+          headers: {'Content-Type': 'application/json',
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+        })
+        .success(function(obj)
+        {
+            obj.forEach(function(value, key){
+              $scope.viewContact.push(value);
+            });
+            $("#Qualified_list").modal("show");
 
+        })
+        .error(function(data) 
+        {   
+            toastr.error('Oops, Something Went Wrong.', 'Error', {
+                closeButton: true,
+                progressBar: true,
+                positionClass: "toast-top-center",
+                timeOut: "500",
+                extendedTimeOut: "500",
+            });  
+        });
+      }
+    }; 
+
+    //exporting table
+    $scope.export = function(){
+        $("#QualifyExport").table2excel({
+        exclude: ".excludeThisClass",
+        name: "Qualify_list",
+        filename: "Qualify_list" //do not include extension
+      });
+    };
+    /*end of export*/
 // Modal Views
 // 1
   $scope.accntView = function(index){

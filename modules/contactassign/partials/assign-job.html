@@ -80,8 +80,7 @@
                   	                </tr>
                     	            </thead>
                     	            <tbody>
-                  	                <tr id="table1" ng-hide="contactdiscoveryList.length>0" ng-show='contactdiscoveryList<=0'
-                                      ng-repeat="contactdiscovery in filteredTodos">
+                  	                <tr id="table1" ng-hide="contactdiscoveryList.length>0" ng-repeat="contactdiscovery in filteredTodos">
                                       <td><input type="checkbox" ng-change="checkAll(contactdiscovery,$index)" ng-model="contactdiscovery.cem_select"></td>
                                       <td>{{$index+1}}</td>
                                       <td>{{contactdiscovery.cm_campaign_name}}</td>
@@ -109,7 +108,7 @@
                           							<i class="fa fa-trash" data-toggle="modal" data-target="#confirm-delete" ng-click="deleteEntry(contactdiscovery.cdm_id)"></i>
                           						</td> -->
               	                    </tr>
-                                    <tr id="table2" ng-if="contactdiscoveryList.length>0" ng-repeat="contactdiscovery in contactdiscoveryList">
+                                    <tr  ng-repeat="contactdiscovery in contactdiscoveryList">
                                       <td><input type="checkbox" ng-change="checkAll(contactdiscovery,$index)" ng-model="contactdiscovery.cem_select"></td>
                                       <td>{{$index+1}}</td>
                                       <td>{{contactdiscovery.cm_campaign_name}}</td>
@@ -137,8 +136,8 @@
                                         <i class="fa fa-trash" data-toggle="modal" data-target="#confirm-delete" ng-click="deleteEntry(contactdiscovery.cdm_id)"></i>
                                       </td> -->
                                     </tr>
-                    	            </tbody>
-                      		      </table>
+                                  </tbody>
+                                </table>
                       		      <br>
                       	            <span id="pagination_detail" ng-show="filteredTodos.length > 0" class="pagination_ds">Showing {{ filterUserend }} to {{filterUser}} of {{contactdiscoveryListcount}} Contact's</span>
                       			    <span id="pagination_div" align="right" ng-show="filteredTodos.length > 0"
@@ -160,60 +159,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="confirm-delete">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Confirm Delete</h4>
-      </div>
-      <div class="modal-body">
-        <p>You are about to delete <b><i class="title"></i></b> record, this procedure is irreversible.</p>
-                <p>Do you want to proceed?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-        <button type="button" id="del" class="btn btn-danger" ng-click="deleteConfirm()">Delete</button>
-      </div>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
 
-<div class="modal fade" id="view-details">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Custom Question's</h4>
-      </div>
-      <div class="modal-body">
-      	<table class="table table-hover">
-          <thead>
-            <tr>
-              <th class="" style="border: 1px solid #ccc; text-align: center;">Question</th>
-              <th class="" style="border: 1px solid #ccc; text-align: center;">Answers</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="question in answers track by $index">
-                <td>{{question.qm_questions}}</td>
-                <td>{{question.qm_answers}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
 <!-- employee Modal -->
 <div class="modal" id="emp-details">
   <div class="modal-dialog">

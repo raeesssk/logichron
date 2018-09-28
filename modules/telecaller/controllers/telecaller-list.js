@@ -71,7 +71,6 @@ angular.module('telecaller').controller('telecallerListCtrl', function ($rootSco
           var reader = new FileReader();
 
           $scope.uploader.file = input.files[0];
-          console.log($scope.uploader.file);
           reader.onload = function (e) {
             if(input.files[0].size > 15000000)
             {
@@ -123,7 +122,6 @@ angular.module('telecaller').controller('telecallerListCtrl', function ($rootSco
         $('#next').text('Next');
 
         }
-        console.log("File is", percent.toFixed(2), "percent loaded");
     });
  
     // Do something when a file is uploaded:
@@ -191,7 +189,6 @@ angular.module('telecaller').controller('telecallerListCtrl', function ($rootSco
                       })
                       .success(function(contact)
                       {
-                        console.log(contact[0]);
                         $scope.uploader=[];
                         
                       })
@@ -226,7 +223,10 @@ angular.module('telecaller').controller('telecallerListCtrl', function ($rootSco
     var yyyy = d.getFullYear().toString();
     var mm = (d.getMonth()).toString(); // getMonth() is zero-based
     var dd  = d.getDate().toString();
-    $scope.follow.fm_date = yyyy +"-"+ (parseInt(mm)+parseInt(1)) +"-"+ dd;
+    var hh = d.getHours().toString();
+    var min = d.getMinutes().toString();
+    var sec = d.getSeconds().toString();
+    $scope.follow.fm_date = yyyy +"-"+ (parseInt(mm)+parseInt(1)) +"-"+ dd + " " + hh +":"+ min +":"+ sec;
 
     $('#fm_date').datetimepicker({
         validateOnBlur: false,
@@ -248,6 +248,7 @@ angular.module('telecaller').controller('telecallerListCtrl', function ($rootSco
         follow : $scope.follow
 
       }
+      console.log($scope.follow);
       $http({
         method: 'POST',
         url: $rootScope.baseURL+'/telecaller/add',
@@ -257,8 +258,9 @@ angular.module('telecaller').controller('telecallerListCtrl', function ($rootSco
       })
       .success(function(contact)
       {
-            $scope.contactList=[];
-            contact[0].fm_date
+            contact.forEach(function(value,key){
+
+            });
             $scope.followdetails.push(contact[0]);
             $scope.follow=null;
             var dialog = bootbox.dialog({
@@ -268,9 +270,7 @@ angular.module('telecaller').controller('telecallerListCtrl', function ($rootSco
             dialog.find('.modal-body').addClass("btn-success");
             setTimeout(function(){
                 dialog.modal('hide'); 
-            }, 2000);/*
-           $scope.getAll();
-           $scope.followdetails=[]*/
+            }, 2000);
       })
       .error(function(data) 
       {   
