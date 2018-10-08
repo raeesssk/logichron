@@ -13,7 +13,7 @@ angular.module('contactdiscovery').controller('unsortedContactCtrl', function ($
     $scope.count;
     $scope.limit={};
     $scope.assign={};
-
+    $scope.limit.userid=localStorage.getItem('logichron_userid');
 $scope.apiURL = $rootScope.baseURL+'/contact/assignCampaign/total';
     
     
@@ -116,7 +116,7 @@ $scope.apiURL = $rootScope.baseURL+'/contact/assignCampaign/total';
 
     $scope.getSearchCampaign = function(vals) {
 
-      var searchTerms = {search: vals};
+      var searchTerms = {search: vals,userid:$scope.limit.userid};
         const httpOptions = {
             headers: {
               'Content-Type':  'application/json',

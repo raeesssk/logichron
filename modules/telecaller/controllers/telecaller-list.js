@@ -7,6 +7,8 @@ angular.module('telecaller').controller('telecallerListCtrl', function ($rootSco
   $scope.uploader={};
   $scope.followdetails=[];
   $scope.contacts={};
+  $scope.contacts.userid=localStorage.getItem('logichron_userid');
+  $scope.follow.userid=localStorage.getItem('logichron_userid');
   $scope.next = 0;
   $scope.progress = 0;
   $('#fm_date').attr('readonly',true);
@@ -19,8 +21,9 @@ angular.module('telecaller').controller('telecallerListCtrl', function ($rootSco
 // document.getElementById('next').addEventListener('click', uploader.prompt, false);
    $scope.getAll = function () {
       $http({
-        method: 'GET',
+        method: 'POST',
         url: $rootScope.baseURL+'/telecaller',
+        data: $scope.contacts,
         headers: {'Content-Type': 'application/json',
                   'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
       })
@@ -177,6 +180,7 @@ angular.module('telecaller').controller('telecallerListCtrl', function ($rootSco
                     });
 
                   var fd = new FormData();
+                  fd.append('cdam_userid',$scope.contacts.userid);
                   fd.append('audioUploader', $scope.uploader.file);
 
                     $http({

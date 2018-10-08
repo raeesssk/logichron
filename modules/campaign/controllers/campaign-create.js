@@ -15,7 +15,12 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
     $scope.customQuestionList=[];
     $scope.denied_domain={};
     $scope.deniedDomainList=[];
-
+    $scope.campaign.userid=localStorage.getItem('logichron_userid');
+    $scope.account.userid=localStorage.getItem('logichron_userid');
+    $scope.supression.userid=localStorage.getItem('logichron_userid');
+    $scope.allow_domain.userid=localStorage.getItem('logichron_userid');
+    $scope.custom_question.userid=localStorage.getItem('logichron_userid');
+    $scope.denied_domain.userid=localStorage.getItem('logichron_userid');
 
 	$scope.apiURL = $rootScope.baseURL+'/campaign/add';
     

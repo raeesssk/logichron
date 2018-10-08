@@ -133,6 +133,7 @@ $scope.filter = function()
     $scope.loading1 = 0;
     $scope.limit={};
     $scope.contactdiscovery = {};
+      $scope.contactdiscovery.userid=localStorage.getItem('logichron_userid');
     
      if(localStorage.getItem('logichron_role_name') != 'admin')
       {
@@ -141,11 +142,12 @@ $scope.filter = function()
       }
     
    $scope.getAll = function (contact) {
-    $scope.contacts = contact
+    $scope.contactdiscovery = contact
     $scope.filteredTodos = [];
       $http({
-        method: 'GET',
-        url: $rootScope.baseURL+'/telecaller/postque/'+contact.cdm_cm_id.cm_id,
+        method: 'POST',
+        url: $rootScope.baseURL+'/telecaller/postque',
+        data:$scope.contactdiscovery,
         headers: {'Content-Type': 'application/json',
                   'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
       })
@@ -183,7 +185,7 @@ $scope.filter = function()
 
     $scope.getSearchCampaign = function(vals) {
 
-      var searchTerms = {search: vals};
+      var searchTerms = {search: vals,userid:$scope.contactdiscovery.userid};
         const httpOptions = {
             headers: {
               'Content-Type':  'application/json',
@@ -206,8 +208,9 @@ $scope.filter = function()
     $('#table').hide();
    $scope.gettable=function(){
       $http({
-        method: 'GET',
-        url: $rootScope.baseURL+'/telecaller/postque/'+$scope.contacts.cdm_cm_id.cm_id,
+        method: 'POST',
+        url: $rootScope.baseURL+'/telecaller/postque',
+        data: $scope.contactdiscovery,
         headers: {'Content-Type': 'application/json',
                   'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
       })

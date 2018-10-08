@@ -133,7 +133,8 @@ $scope.filteredTodos = [];
     $scope.permissionList=[];
     $scope.loading1 = 0;
     $scope.limit={};
-
+    
+    $scope.limit.userid=localStorage.getItem('logichron_userid');
 $scope.apiURL = $rootScope.baseURL+'/role/role/total';
 
   $scope.getpermission=function(){

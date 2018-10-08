@@ -3,7 +3,7 @@ angular.module('role').controller('roleAddCtrl', function ($rootScope, $http, $s
 
     $scope.role = {};
     $scope.permissionList=[];
-
+    $scope.role.userid=localStorage.getItem('logichron_userid');
 	$scope.apiURL = $rootScope.baseURL+'/role/add';
     
     $scope.getpermission=function(){
@@ -45,6 +45,7 @@ angular.module('role').controller('roleAddCtrl', function ($rootScope, $http, $s
 
     $scope.checkstatus = function() {
         $scope.permissionList.forEach(function(value, key){
+            value.userid=localStorage.getItem('logichron_userid');
             if (value.pm_add == true){
                 value.pm_add1=1;
             }

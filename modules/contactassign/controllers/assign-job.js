@@ -334,7 +334,7 @@ $scope.apiURL = $rootScope.baseURL+'/assign/contact/total';
             $('#assign_to').attr('disabled',true);
             contact.cem_select=false;
             $scope.removeContactList.push($scope.newcontactdiscoveryList[index]);
-            $scope.newcontactdiscoveryList.splice(index,1)
+            $scope.newcontactdiscoveryList.splice(index,1);
              $http({
               method: 'POST',
               url: $rootScope.baseURL+'/assign/delete/'+contact.cdm_id,

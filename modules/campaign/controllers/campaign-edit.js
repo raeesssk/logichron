@@ -23,6 +23,7 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
     $scope.deniedDomainList=[];
     $scope.olddeniedDomainList=[];
     $scope.removeDeniedDomain=[];
+    $scope.campaign.userid=localStorage.getItem('logichron_userid');
 
 	$scope.campaignId = $routeParams.campaignId;
     $scope.apiURL = $rootScope.baseURL+'/campaign/edit/'+$scope.campaignId;

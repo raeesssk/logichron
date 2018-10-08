@@ -135,6 +135,7 @@ $scope.filter = function()
     $scope.contactdiscovery={};
     $scope.recording=[];
     
+      $scope.contactdiscovery.userid=localStorage.getItem('logichron_userid');
      if(localStorage.getItem('logichron_role_name') != 'admin')
       {
         $('#searchbox').addClass('col-lg-11');
@@ -145,8 +146,9 @@ $scope.filter = function()
       $scope.contactdiscovery=contactdiscovery;
       $scope.filteredTodos = [];
       $http({
-        method: 'GET',
-        url: $rootScope.baseURL+'/telecaller/preque/'+contactdiscovery.cdm_cm_id.cm_id,
+        method: 'POST',
+        url: $rootScope.baseURL+'/telecaller/preque',
+        data:$scope.contactdiscovery,
         headers: {'Content-Type': 'application/json',
                   'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
       })
@@ -185,7 +187,7 @@ $scope.filter = function()
 
     $scope.getSearchCampaign = function(vals) {
 
-      var searchTerms = {search: vals};
+      var searchTerms = {search: vals,userid:$scope.contactdiscovery.userid};
         const httpOptions = {
             headers: {
               'Content-Type':  'application/json',
@@ -208,8 +210,9 @@ $scope.filter = function()
     $('#table').hide();
    $scope.gettable=function(){
       $http({
-        method: 'GET',
-        url: $rootScope.baseURL+'/telecaller/preque/'+$scope.contactdiscovery.cdm_cm_id.cm_id,
+        method: 'POST',
+        url: $rootScope.baseURL+'/telecaller/preque',
+        data:$scope.contactdiscovery,
         headers: {'Content-Type': 'application/json',
                   'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
       })

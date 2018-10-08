@@ -132,7 +132,7 @@ $scope.filter = function()
     $scope.contactdiscoveryListcount=0;
     $scope.loading1 = 0;
     $scope.limit={};
-
+    $scope.limit.userid=localStorage.getItem('logichron_userid');
 $scope.apiURL = $rootScope.baseURL+'/contact/contact/total';
     
     if(localStorage.getItem('logichron_role_name') != 'admin')

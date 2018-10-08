@@ -5,6 +5,7 @@ angular.module('contactdiscovery').controller('contactdiscoveryAddCtrl', functio
     $scope.contactdiscovery = {};
     $scope.obj={};
     $scope.answers=[];
+    $scope.contactdiscovery.userid=localStorage.getItem('logichron_userid');
 
 	$scope.apiURL = $rootScope.baseURL+'/contact/add';
     $("#cdm_campaign_name").focus();
@@ -12,7 +13,7 @@ angular.module('contactdiscovery').controller('contactdiscoveryAddCtrl', functio
 
     //Campaign Name list record for campaign Name input
     $scope.getSearchCampaign = function(vals) {
-      var searchTerms = {search: vals};
+      var searchTerms = {search: vals,userid:$scope.contactdiscovery.userid};
         const httpOptions = {
             headers: {
               'Content-Type':  'application/json',
@@ -250,7 +251,7 @@ angular.module('contactdiscovery').controller('contactdiscoveryAddCtrl', functio
    
 
    
-    
+    $scope.obj.userid=localStorage.getItem('logichron_userid');
     $scope.addto = function() {
         if($('#qm_questions').val() == undefined || $('#qm_questions').val() == ""){
             var dialog = bootbox.dialog({

@@ -133,7 +133,7 @@ $scope.filter = function()
     $scope.employeeListcount=0;
     $scope.loading1 = 0;
     $scope.limit={};
-
+    $scope.limit.userid=localStorage.getItem('logichron_userid');
 $scope.apiURL = $rootScope.baseURL+'/employee/employee/total';
 
 $scope.getpermission=function(){
@@ -208,7 +208,6 @@ $scope.getpermission=function(){
               {
                 $scope.filteredTodos = [];
                 if (user.length > 0) {
-                 
                   user.forEach(function (value, key) {
                     $scope.filteredTodos.push(value);
                   });

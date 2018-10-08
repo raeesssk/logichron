@@ -13,7 +13,6 @@ angular.module('campaign').controller('campaignListCtrl', function ($rootScope, 
     $scope.campaignListcount=0;
     $scope.loading1 = 1;
     $scope.limit={};
-
     $scope.accountList=[];
     $scope.supressionList=[];
     $scope.allowDomainList=[];
@@ -136,6 +135,7 @@ angular.module('campaign').controller('campaignListCtrl', function ($rootScope, 
 
       $scope.limit.cm_from_date = $('#cm_from_date').val();
       $scope.limit.cm_to_date = $('#cm_to_date').val();
+    $scope.limit.userid=localStorage.getItem('logichron_userid');
       $http({
         method: 'POST',
         url: $scope.apiURL,

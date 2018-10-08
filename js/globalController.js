@@ -4,11 +4,12 @@
 function GlobalCtrl($rootScope, $http, $scope, $timeout) {
 
     $rootScope.tokken=localStorage.getItem("logichron_admin_access_token");
-    $rootScope.userid=localStorage.getItem("logichron_admin_username");
+    $rootScope.username=localStorage.getItem("logichron_admin_username");
     $rootScope.firstname=localStorage.getItem("logichron_admin_firstname");
     $rootScope.iconimage=localStorage.getItem("logichron_admin_iconimage");
     $rootScope.role=localStorage.getItem("logichron_role_name");
-    
+    $rootScope.userid=localStorage.getItem('logichron_userid');
+    // console.log($rootScope.userid);
     $rootScope.baseURL = 'http://localhost:3111';
     $rootScope.socket = io.connect($rootScope.baseURL);
 
@@ -30,7 +31,7 @@ function GlobalCtrl($rootScope, $http, $scope, $timeout) {
         $http({
           method: 'POST',
           url: $rootScope.baseURL+'/login/isoffline',
-          data: 'username='+$rootScope.userid,
+          data: 'username='+$rootScope.username,
           headers: {'Content-Type': 'application/x-www-form-urlencoded',
           'Authorization' :'Bearer '+$rootScope.tokken}
         })

@@ -12,6 +12,7 @@ angular.module('employee').controller('employeeAddCtrl', function ($rootScope, $
   
     $scope.employee = {};
     $('#emp_name').focus();
+    $scope.employee.userid=localStorage.getItem('logichron_userid');
 
 
 	$scope.apiURL = $rootScope.baseURL+'/employee/add';
@@ -174,6 +175,7 @@ angular.module('employee').controller('employeeAddCtrl', function ($rootScope, $
                 fd.append('emp_emp_no',$scope.employee.emp_emp_no);
                 fd.append('emp_email_id',$scope.employee.emp_email_id);
                 fd.append('emp_qualification',$scope.employee.emp_qualification);
+                fd.append('emp_userid',$scope.employee.userid);
                 fd.append('imgUploader', $scope.employee.file);
                     
                     $http({

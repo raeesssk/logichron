@@ -51,11 +51,12 @@ function LoginCtrl($scope, $location, $http, $routeParams, $rootScope) {
 			        })
 			        .success(function(deliverycount)
 			        {
-
+			        	$scope.userid=deliverycount[0].id;
 			        	$scope.user = deliverycount[0].username;
 			        	$scope.firstname = deliverycount[0].first_name;
 			        	$scope.iconimage = deliverycount[0].icon_image;
 			        	$scope.rm_name = deliverycount[0].rm_name;
+				  	 	localStorage.setItem('logichron_userid', $scope.userid);
 				  	 	localStorage.setItem('logichron_admin_username', $scope.user);
 				  	 	localStorage.setItem('logichron_admin_firstname', $scope.firstname);
 				  	 	localStorage.setItem('logichron_admin_iconimage', $scope.iconimage);
