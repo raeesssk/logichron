@@ -57,7 +57,7 @@ angular.module('admin').controller('changeImageCtrl', function ($rootScope, $htt
                 
 	    	$http({
 		      method: 'POST',
-		      url: $rootScope.baseURL+'/login/profile/image/'+$rootScope.userid,
+		      url: $rootScope.baseURL+'/login/profile/image/'+$rootScope.username,
 		        data: fd,
 		        transformRequest: angular.identity,
 		      headers: {'Content-Type': undefined,

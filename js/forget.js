@@ -1,6 +1,6 @@
 function forgetCtrl($scope, $location, $http, $routeParams, $rootScope) {
-$scope.baseURL = 'http://localhost:3111';
-// $scope.baseURL = 'http://unitech.3commastechnologies.com:3111';
+// $scope.baseURL = 'http://localhost:3111';
+$scope.baseURL = 'http://unitech.3commastechnologies.com:3111';
 	$scope.user={};
 
 	$scope.forgot=function(){
