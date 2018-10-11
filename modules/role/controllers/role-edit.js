@@ -6,13 +6,7 @@ angular.module('role').controller('roleEditCtrl', function ($rootScope, $http, $
 	$scope.roleId = $routeParams.roleId;
   $scope.apiURL = $rootScope.baseURL+'/role/edit/'+$scope.roleId;
   
-$scope.getpermission=function(){
-      if(localStorage.getItem('logichron_role_name') != 'admin'){
-        
-        window.location.href='#/';
-      }
-    };
-    $scope.getpermission();
+
     
   $scope.getrole = function () {
 	     $http({

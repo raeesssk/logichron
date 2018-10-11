@@ -133,7 +133,6 @@ $scope.filter = function()
     $scope.loading1 = 0;
     $scope.limit={};
     $scope.contactdiscovery = {};
-      $scope.contactdiscovery.userid=localStorage.getItem('logichron_userid');
     
      if(localStorage.getItem('logichron_role_name') != 'admin')
       {
@@ -145,9 +144,8 @@ $scope.filter = function()
     $scope.contactdiscovery = contact
     $scope.filteredTodos = [];
       $http({
-        method: 'POST',
-        url: $rootScope.baseURL+'/telecaller/postque',
-        data:$scope.contactdiscovery,
+        method: 'GET',
+        url: $rootScope.baseURL+'/telecaller/postque/'+$scope.contactdiscovery.cdm_cm_id.cm_id,
         headers: {'Content-Type': 'application/json',
                   'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
       })
@@ -185,14 +183,14 @@ $scope.filter = function()
 
     $scope.getSearchCampaign = function(vals) {
 
-      var searchTerms = {search: vals,userid:$scope.contactdiscovery.userid};
+      var searchTerms = {search: vals};
         const httpOptions = {
             headers: {
               'Content-Type':  'application/json',
               'Authorization': 'Bearer '+localStorage.getItem("logichron_admin_access_token")
             }
         };
-        return $http.post($rootScope.baseURL+'/campaign/typeahead/search', searchTerms, httpOptions).then((result) => {
+        return $http.post($rootScope.baseURL+'/telecaller/typeahead/search', searchTerms, httpOptions).then((result) => {
             return result.data;
         });
     };
@@ -208,9 +206,8 @@ $scope.filter = function()
     $('#table').hide();
    $scope.gettable=function(){
       $http({
-        method: 'POST',
-        url: $rootScope.baseURL+'/telecaller/postque',
-        data: $scope.contactdiscovery,
+        method: 'GET',
+        url: $rootScope.baseURL+'/telecaller/postque/'+$scope.contactdiscovery.cdm_cm_id.cm_id,
         headers: {'Content-Type': 'application/json',
                   'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
       })

@@ -137,13 +137,7 @@ $scope.filteredTodos = [];
     $scope.limit.userid=localStorage.getItem('logichron_userid');
 $scope.apiURL = $rootScope.baseURL+'/role/role/total';
 
-  $scope.getpermission=function(){
-      if(localStorage.getItem('logichron_role_name') != 'admin'){
-        
-        window.location.href='#/';
-      }
-    };
-    $scope.getpermission();
+  
     
    $scope.getAll = function () {
         if ($('#searchtext').val() == undefined || $('#searchtext').val() == "") {
@@ -241,23 +235,9 @@ $scope.apiURL = $rootScope.baseURL+'/role/role/total';
     };
 
     $scope.deleteRole = function (rm_id) {
-      if(localStorage.getItem('logichron_roledelete_permission') == 0){
-        var dialog = bootbox.dialog({
-            message: '<p class="text-center">You Are Not Authorized</p>',
-                closeButton: false
-            });
-            dialog.find('.modal-body').addClass("btn-danger");
-            setTimeout(function(){
-                dialog.modal('hide'); 
-            }, 1500);
-        $('#trash').removeAttr('data-target');
-
-        $('#trash').removeAttr('data-toggle');
-      }
-      else
-      {
+      
          $scope.rm_id=rm_id;
-      }
+      
     }  
 
     $scope.deleteConfirm = function () {

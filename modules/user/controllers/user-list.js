@@ -96,13 +96,7 @@ $scope.filter = function()
     $scope.limit.userid=localStorage.getItem('logichron_userid');
 $scope.apiURL = $rootScope.baseURL+'/userm/user/total';
 
-  $scope.getpermission=function(){
-      if(localStorage.getItem('logichron_role_name') != 'admin'){
-        
-        window.location.href='#/';
-      }
-    };
-    $scope.getpermission();
+ 
   
    $scope.getAll = function () {
 

@@ -18,7 +18,7 @@
     <link rel="stylesheet" type="text/css" href="resources/css/style.css">
 </head>
 
-<body  ng-controller="forgetCtrl">
+<body  ng-controller="resetCtrl">
         <!-- Pre-loader start -->
     <div class="theme-loader">
         <div class="loader-track">
@@ -41,17 +41,21 @@
                             <div class="auth-box">
                                 <div class="row m-b-20">
                                     <div class="col-md-12">
-                                        <h3 class="text-left txt-primary">Forget Password</h3>
+                                        <h3 class="text-left txt-primary">Reset Password</h3>
                                     </div>
                                 </div>
                                 <hr/>
                                 <div class="input-group">
-                                    <input type="email" class="form-control" placeholder="Enter Email" ng-model="user.username" required>
+                                    <input type="password" class="form-control" placeholder="New Password" ng-model="pass.password">
+                                    <span class="md-line"></span>
+                                </div>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" placeholder="Confirm Password" ng-model="pass.conpassword">
                                     <span class="md-line"></span>
                                 </div>
                                 <div class="row m-t-30">
                                     <div class="col-md-12">
-                                        <button type="submit" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20" id="login" ng-click="forgot()">submit</button>
+                                        <button type="submit" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20" id="login" ng-click="reset()">RESET</button>
                                     </div>
                                 </div>
                                 <div class="row m-t-30">
@@ -100,12 +104,11 @@
 
     <!-- Controllers-->
     <script type="text/javascript" src="js/main.js"></script>
-    <script type="text/javascript" src="js/forget.js"></script>
     <script type="text/javascript" src="js/login.js"></script>
     <script type="text/javascript" src="js/globalController.js"></script>
+    <script type="text/javascript" src="js/reset.js"></script>
 
     
-    <!-- admin -->
     <!-- admin -->
     <script src="modules/admin/config.js"></script>
 

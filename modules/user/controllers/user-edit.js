@@ -15,13 +15,7 @@ angular.module('user').controller('userEditCtrl', function ($rootScope, $http, $
     });
 }
 
-$scope.getpermission=function(){
-      if(localStorage.getItem('logichron_role_name') != 'admin'){
-        
-        window.location.href='#/';
-      }
-    };
-    $scope.getpermission();
+
 
   $scope.getUser = function () {
 	     $http({

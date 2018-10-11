@@ -247,7 +247,7 @@ $scope.apiURL = $rootScope.baseURL+'/assign/contact/total';
               'Authorization': 'Bearer '+localStorage.getItem("logichron_admin_access_token")
             }
         };
-        return $http.post($rootScope.baseURL+'/campaign/typeahead/search', searchTerms, httpOptions).then((result) => {
+        return $http.post($rootScope.baseURL+'/telecaller/typeahead/search', searchTerms, httpOptions).then((result) => {
             return result.data;
         });
     };
