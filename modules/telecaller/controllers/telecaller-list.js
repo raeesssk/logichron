@@ -104,7 +104,6 @@ angular.module('telecaller').controller('telecallerListCtrl', function ($rootSco
   uploader.listenOnSubmit(document.getElementById('next'),document.getElementById('cdam_audio'));
     uploader.addEventListener('start', (event)=> {
       
-      console.log('test');
     });
 
     uploader.addEventListener("progress", function(event){

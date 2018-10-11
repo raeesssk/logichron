@@ -77,7 +77,7 @@ $scope.baseURL = 'http://localhost:3111';
 		            setTimeout(function(){
 		                dialog.modal('hide'); 
 		            }, 1500); 
-		            winow.location.href='forget.html';
+		            setTimeout(function(){ window.location.href='forget.html' }, 2000);
 		    	}
 		    	else
 		    	{
@@ -88,7 +88,7 @@ $scope.baseURL = 'http://localhost:3111';
 		            setTimeout(function(){
 		                dialog.modal('hide'); 
 		            }, 1500); 
-		            window.location.href='login.html';
+		           setTimeout(function(){ window.location.href='login.html' }, 1500);
 	    		}
 		    	           
 				    

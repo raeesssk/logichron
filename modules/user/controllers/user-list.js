@@ -167,7 +167,7 @@ $scope.apiURL = $rootScope.baseURL+'/userm/user/total';
                  
                   user.forEach(function (value, key) {
                     $scope.filteredTodos.push(value);
-                  });
+                  }); 
                 }
                 else{
                   
@@ -194,8 +194,8 @@ $scope.apiURL = $rootScope.baseURL+'/userm/user/total';
        $scope.getAll();
     };
 
-    $scope.deleteUser = function (um_id) {
-      $scope.um_id=um_id;
+    $scope.deleteUser = function (id) {
+      $scope.um_id=id;
     }  
 
     $scope.deleteConfirm = function () {

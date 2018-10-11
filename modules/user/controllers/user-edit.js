@@ -3,7 +3,7 @@ angular.module('user').controller('userEditCtrl', function ($rootScope, $http, $
 
   
   $scope.user={};
-	$scope.usermId = $routeParams.usermId;
+	$scope.usermId = $routeParams.Id;
   $scope.apiURL = $rootScope.baseURL+'/userm/edit/'+$scope.usermId;
 
   $scope.preventPaste= function() {
@@ -16,7 +16,6 @@ angular.module('user').controller('userEditCtrl', function ($rootScope, $http, $
 }
 
 
-
   $scope.getUser = function () {
 	     $http({
 	      method: 'GET',
@@ -27,11 +26,11 @@ angular.module('user').controller('userEditCtrl', function ($rootScope, $http, $
 	    .success(function(userobj)
 	    {
 	    	userobj.forEach(function (value, key) {
-                value.um_emp_id=value.emp_name;
-                value.um_user_name=value.username;
-                value.um_user_password=value.pass;
-
-                value.um_rm_id=value.rm_name;
+                value.um_emp_id = value.first_name
+                value.um_user_name =value.username;
+                value.um_user_password = value.password;
+                value.um_confirm_password = value.password;
+                value.um_rm_id = value.rm_name;
 	      		$scope.user = value;
               });
 	    })
