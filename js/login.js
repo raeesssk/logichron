@@ -65,7 +65,34 @@ function LoginCtrl($scope, $location, $http, $routeParams, $rootScope) {
 				        localStorage.setItem('logichron_admin_expires_in', data.expires_in);
 				        localStorage.setItem('logichron_admin_refresh_token', data.refresh_token);
 				        localStorage.setItem('logichron_admin_token_type', data.token_type);
-			        	
+			        	$http({
+						      method: 'GET',
+						      url: $scope.apiURL+'/login/'+deliverycount[0].role_id,
+						      headers: {'Content-Type': 'application/json',
+					                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+						    })
+						    .success(function(roleobj)
+						    {
+
+						    	$scope.role=[];
+						    	roleobj.forEach(function (value, key) {
+						    		$scope.pm_name=value.pm_name;
+						    		localStorage.setItem('permission_name',$scope.pm_name);
+						    		
+						    		$scope.role.push(value);
+					              });
+					    			
+						    })
+						    .error(function(data) 
+						    {   
+						      var dialog = bootbox.dialog({
+					            message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+					                closeButton: false
+					            });
+					            setTimeout(function(){
+					                dialog.modal('hide'); 
+					            }, 1500);            
+						    });
                 		$('#login').text("Login");
 				         window.location = "/logichron/";
 			        })
