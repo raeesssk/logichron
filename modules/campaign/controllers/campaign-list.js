@@ -340,12 +340,11 @@ angular.module('campaign').controller('campaignListCtrl', function ($rootScope, 
 	    })
 	    .success(function(campaignObj)
 	    {
-                $('#del').text("Delete");
-                $('#del').removeAttr('disabled');
-                $scope.campaignList = [];
-                $scope.getAll();
-                $('#confirm-delete').modal('hide');
-      		  
+        $('#del').text("Delete");
+        $('#del').removeAttr('disabled');
+        $scope.campaignList = [];
+        $scope.getAll();
+        $('#confirm-delete').modal('hide');	  
 	    })
 	    .error(function(data) 
 	    {   
@@ -364,7 +363,6 @@ angular.module('campaign').controller('campaignListCtrl', function ($rootScope, 
    $scope.QualifyContact = function(index){
     $scope.viewContact=[];
       if($scope.filteredTodos[index].targetcount > 0){
-        
         $http({
           method: 'GET',
           url: $rootScope.baseURL+'/telecaller/postque/'+$scope.filteredTodos[index].cm_id,

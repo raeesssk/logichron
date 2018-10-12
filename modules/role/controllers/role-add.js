@@ -20,7 +20,31 @@ angular.module('role').controller('roleAddCtrl', function ($rootScope, $http, $s
         {
 
                 obj.forEach(function(value, key){
-                    
+                     $http({
+                      method: 'GET',
+                      url: $rootScope.baseURL+'/permission/view/'+value.pm_id,
+                      //data: $scope.data,
+                      headers: {'Content-Type': 'application/json',
+                              'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+                    })
+                    .success(function(obj1)
+                    {
+                        value.subpermissions=[];
+                            obj1.forEach(function(value1, key){
+                                value.subpermissions.push(value1);
+                            });
+
+                    })
+                    .error(function(data) 
+                    {   
+                        toastr.error('Oops, Something Went Wrong.', 'Error', {
+                            closeButton: true,
+                            progressBar: true,
+                            positionClass: "toast-top-center",
+                            timeOut: "500",
+                            extendedTimeOut: "500",
+                        });  
+                    });
                     $scope.permissionList.push(value);
                 });
 
@@ -37,35 +61,18 @@ angular.module('role').controller('roleAddCtrl', function ($rootScope, $http, $s
         });
     };
 
-    $scope.checkstatus = function() {
-        $scope.permissionList.forEach(function(value, key){
-            value.userid=localStorage.getItem('logichron_userid');
-            if (value.pm_add == true){
-                value.pm_add1=1;
-            }
-            else{
-                value.pm_add1=0;
-            }
-            if (value.pm_edit == true){
-                value.pm_edit1=1;
-            }
-            else{
-                value.pm_edit1=0;
-            }
-
-            if (value.pm_delete == true){
-                value.pm_delete1=1;
-            }
-            else{
-                value.pm_delete1=0;
-            }
-            if (value.pm_list == true){
-                value.pm_list1=1;
-            }
-            else{
-                value.pm_list1=0;
-            }
-        });
+    $scope.newpermission=[];
+    $scope.removepermission=[];
+    $scope.checkstatus = function(sub,index) {
+        if(sub.psm_select)
+        {
+            $scope.newpermission.push(sub);
+        }
+        else
+        {
+            $scope.removepermission.push($scope.newpermission[index]);
+            $scope.newpermission.splice(index);
+        }
     };
     
 
@@ -98,7 +105,7 @@ angular.module('role').controller('roleAddCtrl', function ($rootScope, $http, $s
                 
                 $scope.obj={
                     role:$scope.role,
-                    permission:$scope.permissionList
+                    permission:$scope.newpermission
                 }
 
                 $('#btnsave').attr('disabled','true');

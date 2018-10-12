@@ -47,7 +47,7 @@
                               <tbody>
                                 <tr ng-repeat="permission in permissionList">
                                   <td>{{permission.pm_name}}</td>
-                                  <td><input type="checkbox"  ng-model='permission.rpm_add' ng-change="checkstatus()"> Add <input type="checkbox"  ng-model='permission.rpm_edit' ng-change="checkstatus()"> Update <input type="checkbox" ng-model='permission.rpm_delete' ng-change="checkstatus()"> Delete <input type="checkbox" ng-model='permission.rpm_list' ng-change="checkstatus()">List</td>
+                                  <td><span ng-repeat="sub in permission.subpermissions"><input type="checkbox"  ng-model='sub.psm_select' ng-change="checkstatus(sub,$index)">&nbsp;{{sub.psm_permissions}} &nbsp;</span></td>
                                 </tr>
                               </tbody>
                             </table>

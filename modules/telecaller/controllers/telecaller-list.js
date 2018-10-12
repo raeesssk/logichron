@@ -30,7 +30,7 @@ angular.module('telecaller').controller('telecallerListCtrl', function ($rootSco
       .success(function(contact)
       { 
          $scope.contactList.push(contact[0]);
-         if(contact[0] == null || contact[0] == undefined)
+         if(contact[0] == null || contact[0] == undefined || contact.lenght <= 0)
          {
           var dialog = bootbox.dialog({
             message: '<p class="text-center">You Do Not Have Any Contact To Display!!!</p>',
@@ -107,6 +107,7 @@ angular.module('telecaller').controller('telecallerListCtrl', function ($rootSco
     });
 
     uploader.addEventListener("progress", function(event){
+
         $scope.progress = 1;
         percent = event.bytesLoaded / event.file.size * 100;
         $('#next').text(percent.toFixed(2)+'%');
@@ -122,7 +123,7 @@ angular.module('telecaller').controller('telecallerListCtrl', function ($rootSco
               // $('#cdm_company_name').focus();
           }, 1500);
         $('#next').text('Next');
-
+        $scope.contactStatus();
         }
     });
  

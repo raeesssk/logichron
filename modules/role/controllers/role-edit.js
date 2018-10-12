@@ -33,10 +33,10 @@ angular.module('role').controller('roleEditCtrl', function ($rootScope, $http, $
 	    });
 	};
 
-    $scope.getPermission = function(){
+   $scope.getPermission = function(){
         $http({
           method: 'GET',
-          url: $rootScope.baseURL+'/role/permission/'+$scope.roleId,
+          url: $rootScope.baseURL+'/role',
           //data: $scope.data,
           headers: {'Content-Type': 'application/json',
                   'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
@@ -45,16 +45,34 @@ angular.module('role').controller('roleEditCtrl', function ($rootScope, $http, $
         {
 
                 obj.forEach(function(value, key){
-                    if(value.rpm_add==1){
-                      value.rpm_add = true;
-                    }
-                    if(value.rpm_edit==1){
-                      value.rpm_edit = true;
-                    }if(value.rpm_delete==1){
-                      value.rpm_delete = true;
-                    }if(value.rpm_list==1){
-                      value.rpm_list = true;
-                    }
+                     $http({
+                      method: 'GET',
+                      url: $rootScope.baseURL+'/permission/view/'+value.pm_id,
+                      //data: $scope.data,
+                      headers: {'Content-Type': 'application/json',
+                              'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+                    })
+                    .success(function(obj1)
+                    {
+                        value.subpermissions=[];
+                            obj1.forEach(function(value1, key){
+                               if(value1.psm_id == value1.rpm_psm_id){
+                            value1.psm_select = true;
+                          }
+                          value.subpermissions.push(value1);
+                        });
+
+                    })
+                    .error(function(data) 
+                    {   
+                        toastr.error('Oops, Something Went Wrong.', 'Error', {
+                            closeButton: true,
+                            progressBar: true,
+                            positionClass: "toast-top-center",
+                            timeOut: "500",
+                            extendedTimeOut: "500",
+                        });  
+                    });
                     $scope.permissionList.push(value);
                 });
 
@@ -72,35 +90,19 @@ angular.module('role').controller('roleEditCtrl', function ($rootScope, $http, $
     };
     $scope.getPermission();
 
-	/*$scope.checkstatus = function() {
-        $scope.permissionList.forEach(function(value, key){
-            if (value.rpm_add == true){
-                value.pm_add1=1;
-            }
-            else{
-                value.pm_add1=0;
-            }
-            if (value.rpm_edit == true){
-                value.pm_edit1=1;
-            }
-            else{
-                value.pm_edit1=0;
-            }
-
-            if (value.rpm_delete == true){
-                value.pm_delete1=1;
-            }
-            else{
-                value.pm_delete1=0;
-            }
-            if (value.rpm_list == true){
-                value.pm_list1=1;
-            }
-            else{
-                value.pm_list1=0;
-            }
-        });
-    };*/
+	$scope.newpermission=[];
+    $scope.removepermission=[];
+    $scope.checkstatus = function(sub,index) {
+        if(sub.psm_select)
+        {
+            $scope.newpermission.push(sub);
+        }
+        else
+        {
+            $scope.removepermission.push($scope.newpermission[index]);
+            $scope.newpermission.splice(index);
+        }
+    };
 
 
   $scope.updateRole = function () {
@@ -131,35 +133,36 @@ angular.module('role').controller('roleEditCtrl', function ($rootScope, $http, $
 	    else{
 	    		$scope.obj={
                     role:$scope.role,
-                    permission:$scope.permissionList
+                    permission:$scope.newpermission,
+                    oldpermission:$scope.removepermission
                 }
                 $('#btnsave').attr('disabled','true');
                 $('#btnsave').text("please wait...");
-		    $http({
-		      method: 'POST',
-		      url: $scope.apiURL,
-		      data: $scope.obj,
-		      headers: {'Content-Type': 'application/json',
-	                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
-		    })
-		    .success(function(login)
-		    {
-                $('#btnsave').text("SAVE");
-                $('#btnsave').removeAttr('disabled');
-		       window.location.href = '#/role';  
-		    })
-		    .error(function(data) 
-		    {   
-		      var dialog = bootbox.dialog({
-	            message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
-	                closeButton: false
-	            });
-	            setTimeout(function(){
-                $('#btnsave').text("SAVE");
-                $('#btnsave').removeAttr('disabled');
-	                dialog.modal('hide'); 
-	            }, 1500);            
-		    });
+    		    $http({
+    		      method: 'POST',
+    		      url: $scope.apiURL,
+    		      data: $scope.obj,
+    		      headers: {'Content-Type': 'application/json',
+    	                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+    		    })
+    		    .success(function(login)
+    		    {
+                    $('#btnsave').text("SAVE");
+                    $('#btnsave').removeAttr('disabled');
+    		       window.location.href = '#/role';  
+    		    })
+    		    .error(function(data) 
+    		    {   
+    		      var dialog = bootbox.dialog({
+    	            message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+    	                closeButton: false
+    	            });
+    	            setTimeout(function(){
+                    $('#btnsave').text("SAVE");
+                    $('#btnsave').removeAttr('disabled');
+    	                dialog.modal('hide'); 
+    	            }, 1500);            
+    		    });
 		}
 	};
 

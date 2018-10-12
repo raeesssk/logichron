@@ -9,9 +9,9 @@ function GlobalCtrl($rootScope, $http, $scope, $timeout) {
     $rootScope.iconimage=localStorage.getItem("logichron_admin_iconimage");
     $rootScope.userid=localStorage.getItem('logichron_userid');
     // console.log($rootScope.userid);
-    // $rootScope.baseURL = 'http://localhost:3111';
+    $rootScope.baseURL = 'http://localhost:3111';
 
-    $rootScope.baseURL = 'http://unitech.3commastechnologies.com:3111';
+    // $rootScope.baseURL = 'http://unitech.3commastechnologies.com:3111';
     // $rootScope.baseURL = 'http://10.1.0.21:3001';
     
     $rootScope.socket = io.connect($rootScope.baseURL);
