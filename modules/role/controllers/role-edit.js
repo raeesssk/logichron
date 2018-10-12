@@ -33,7 +33,9 @@ angular.module('role').controller('roleEditCtrl', function ($rootScope, $http, $
 	    });
 	};
 
-   $scope.getPermission = function(){
+   $scope.getPermission = function(index){
+
+        $scope.permissionList=[];
         $http({
           method: 'GET',
           url: $rootScope.baseURL+'/role',
@@ -43,39 +45,64 @@ angular.module('role').controller('roleEditCtrl', function ($rootScope, $http, $
         })
         .success(function(obj)
         {
-
                 obj.forEach(function(value, key){
-                     $http({
-                      method: 'GET',
-                      url: $rootScope.baseURL+'/permission/view/'+value.pm_id,
-                      //data: $scope.data,
-                      headers: {'Content-Type': 'application/json',
-                              'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
-                    })
-                    .success(function(obj1)
-                    {
+                  $http({
+                    method: 'GET',
+                    url: $rootScope.baseURL+'/role/subpermission/'+value.pm_id,
+                    //data: $scope.data,
+                    headers: {'Content-Type': 'application/json',
+                            'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+                  })
+                  .success(function(obj1)
+                  {
                         value.subpermissions=[];
-                            obj1.forEach(function(value1, key){
-                               if(value1.psm_id == value1.rpm_psm_id){
-                            value1.psm_select = true;
-                          }
-                          value.subpermissions.push(value1);
+                        obj1.forEach(function(value1,key){
+                          $http({
+                                method: 'GET',
+                                url: $rootScope.baseURL+'/role/permission/'+$scope.roleId,
+                                //data: $scope.data,
+                                headers: {'Content-Type': 'application/json',
+                                        'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+                              })
+                              .success(function(obj2)
+                              {
+                                obj2.forEach(function(value2,key){
+                                  if(value1.psm_pm_id == value2.psm_pm_id)
+                                  {
+                                    value1.psm_select=true;
+                                  }
+                                  
+                                });
+                              })
+                              .error(function(data) 
+                              {   
+                                  toastr.error('Oops, Something Went Wrong.', 'Error', {
+                                      closeButton: true,
+                                      progressBar: true,
+                                      positionClass: "toast-top-center",
+                                      timeOut: "500",
+                                      extendedTimeOut: "500",
+                                  });  
+                              });
+                              
+                             value.subpermissions.push(value1);
                         });
+                          
 
-                    })
-                    .error(function(data) 
-                    {   
-                        toastr.error('Oops, Something Went Wrong.', 'Error', {
-                            closeButton: true,
-                            progressBar: true,
-                            positionClass: "toast-top-center",
-                            timeOut: "500",
-                            extendedTimeOut: "500",
-                        });  
-                    });
-                    $scope.permissionList.push(value);
+                  })
+                  .error(function(data) 
+                  {   
+                      toastr.error('Oops, Something Went Wrong.', 'Error', {
+                          closeButton: true,
+                          progressBar: true,
+                          positionClass: "toast-top-center",
+                          timeOut: "500",
+                          extendedTimeOut: "500",
+                      });  
+                  });
+
+                $scope.permissionList.push(value);
                 });
-
         })
         .error(function(data) 
         {   
@@ -92,10 +119,22 @@ angular.module('role').controller('roleEditCtrl', function ($rootScope, $http, $
 
 	$scope.newpermission=[];
     $scope.removepermission=[];
+    $scope.removeoldpermission=[];
     $scope.checkstatus = function(sub,index) {
+        $scope.permissionList.forEach(function(val,key){
+            val.subpermissions.forEach(function(val1,key){
+                if(val1.psm_select == false)
+                {
+                    $scope.removeoldpermission.push(val1);
+                }
+                
+            });
+        });
+        console.log($scope.removeoldpermission);
         if(sub.psm_select)
         {
             $scope.newpermission.push(sub);
+            console.log($scope.newpermission);
         }
         else
         {
@@ -134,7 +173,7 @@ angular.module('role').controller('roleEditCtrl', function ($rootScope, $http, $
 	    		$scope.obj={
                     role:$scope.role,
                     permission:$scope.newpermission,
-                    oldpermission:$scope.removepermission
+                    oldpermission:$scope.removeoldpermission
                 }
                 $('#btnsave').attr('disabled','true');
                 $('#btnsave').text("please wait...");

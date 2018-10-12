@@ -284,11 +284,10 @@ $scope.apiURL = $rootScope.baseURL+'/role/role/total';
         })
         .success(function(obj)
         {
-              
                 obj.forEach(function(value, key){
                   $http({
                     method: 'GET',
-                    url: $rootScope.baseURL+'/permission/view/'+value.pm_id,
+                    url: $rootScope.baseURL+'/role/subpermission/'+value.pm_id,
                     //data: $scope.data,
                     headers: {'Content-Type': 'application/json',
                             'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
@@ -297,10 +296,36 @@ $scope.apiURL = $rootScope.baseURL+'/role/role/total';
                   {
                         value.subpermissions=[];
                         obj1.forEach(function(value1,key){
-                          if(value1.psm_id == value1.rpm_psm_id){
-                            value1.psm_select = true;
-                          }
-                          value.subpermissions.push(value1);
+                          $http({
+                                method: 'GET',
+                                url: $rootScope.baseURL+'/role/permission/'+$scope.filteredTodos[index].rm_id,
+                                //data: $scope.data,
+                                headers: {'Content-Type': 'application/json',
+                                        'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+                              })
+                              .success(function(obj2)
+                              {
+                                    console.log(obj2);
+                                    obj2.forEach(function(value2,key){
+                                      if(value1.psm_pm_id == value2.psm_pm_id)
+                                      {
+                                        value1.psm_select=true;
+                                      }
+                                      
+                                    });
+                              })
+                              .error(function(data) 
+                              {   
+                                  toastr.error('Oops, Something Went Wrong.', 'Error', {
+                                      closeButton: true,
+                                      progressBar: true,
+                                      positionClass: "toast-top-center",
+                                      timeOut: "500",
+                                      extendedTimeOut: "500",
+                                  });  
+                              });
+
+                                     value.subpermissions.push(value1);
                         });
                           
 
