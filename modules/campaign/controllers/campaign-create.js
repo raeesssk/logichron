@@ -24,9 +24,9 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
 
 	$scope.apiURL = $rootScope.baseURL+'/campaign/add';
     
-     var permission=JSON.parse(localStorage.getItem('permission'));
-  var value = '#/campaign/create';
-  var access = permission.includes(value);
+    var permission=JSON.parse(localStorage.getItem('permission'));
+    var value = '#/campaign/create';
+    var access = permission.includes(value);
     $scope.getrolepermission=function(){
       
       // for(var i=0;i<permission.length;i++)

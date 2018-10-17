@@ -58,9 +58,34 @@ angular.module('role').controller('roleAddCtrl', function ($rootScope, $http, $s
                     })
                     .success(function(obj1)
                     {
+
                         value.subpermissions=[];
                             obj1.forEach(function(value1, key){
-                                value.subpermissions.push(value1);
+                                value1.SuperSubpermissions=[];
+                                $http({
+                                      method: 'GET',
+                                      url: $rootScope.baseURL+'/permission/supersub/'+value1.psm_id,
+                                      //data: $scope.data,
+                                      headers: {'Content-Type': 'application/json',
+                                              'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+                                    })
+                                    .success(function(obj2)
+                                    {
+                                            obj2.forEach(function(value2, key){
+                                                value1.SuperSubpermissions.push(value2);
+                                            });
+                                    })
+                                    .error(function(data) 
+                                    {   
+                                        toastr.error('Oops, Something Went Wrong.', 'Error', {
+                                            closeButton: true,
+                                            progressBar: true,
+                                            positionClass: "toast-top-center",
+                                            timeOut: "500",
+                                            extendedTimeOut: "500",
+                                        });  
+                                    });
+                                    value.subpermissions.push(value1);
                             });
 
                     })
@@ -75,6 +100,7 @@ angular.module('role').controller('roleAddCtrl', function ($rootScope, $http, $s
                         });  
                     });
                     $scope.permissionList.push(value);
+
                 });
         })
         .error(function(data) 
@@ -91,17 +117,34 @@ angular.module('role').controller('roleAddCtrl', function ($rootScope, $http, $s
 
     $scope.newpermission=[];
     $scope.removepermission=[];
-    $scope.checkstatus = function(sub,index) {
+    $scope.newSuperpermission=[];
+    $scope.removeSupermission=[];
+    $scope.checksub = function(sub,index) {
         if(sub.psm_select)
         {
             $scope.newpermission.push(sub);
+            console.log($scope.newpermission);
         }
         else
         {
             $scope.removepermission.push($scope.newpermission[index]);
             $scope.newpermission.splice(index);
+            console.log($scope.newpermission);
+        }
+        if(sub.pssm_select)
+        {
+            $scope.newSuperpermission.push(sub);
+            console.log($scope.newSuperpermission);
+        }
+        else
+        {
+            $scope.removeSupermission.push($scope.newSuperpermission[index]);
+            $scope.newSuperpermission.splice(index);
+            console.log($scope.newSuperpermission);
+
         }
     };
+
     
 
     $scope.addRole = function () {
@@ -133,7 +176,8 @@ angular.module('role').controller('roleAddCtrl', function ($rootScope, $http, $s
                 
                 $scope.obj={
                     role:$scope.role,
-                    permission:$scope.newpermission
+                    permission:$scope.newpermission,
+                    supermission:$scope.newSuperpermission
                 }
                 $('#btnsave').attr('disabled','true');
                 $('#btnsave').text("please wait...");

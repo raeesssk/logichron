@@ -56,6 +56,7 @@ angular.module('role').controller('roleEditCtrl', function ($rootScope, $http, $
                   .success(function(obj1)
                   {
                         value.subpermissions=[];
+                        value.SuperSubpermissions=[];
                         obj1.forEach(function(value1,key){
                           $http({
                                 method: 'GET',
@@ -84,6 +85,29 @@ angular.module('role').controller('roleEditCtrl', function ($rootScope, $http, $
                                       extendedTimeOut: "500",
                                   });  
                               });
+                              $http({
+                                      method: 'GET',
+                                      url: $rootScope.baseURL+'/permission/supersub/'+value1.psm_id,
+                                      //data: $scope.data,
+                                      headers: {'Content-Type': 'application/json',
+                                              'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+                                    })
+                                    .success(function(obj2)
+                                    {
+                                            obj2.forEach(function(value2, key){
+                                                value.SuperSubpermissions.push(value2);
+                                            });
+                                    })
+                                    .error(function(data) 
+                                    {   
+                                        toastr.error('Oops, Something Went Wrong.', 'Error', {
+                                            closeButton: true,
+                                            progressBar: true,
+                                            positionClass: "toast-top-center",
+                                            timeOut: "500",
+                                            extendedTimeOut: "500",
+                                        });  
+                                    });
                               
                              value.subpermissions.push(value1);
                         });
