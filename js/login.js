@@ -8,7 +8,8 @@ function LoginCtrl($scope, $location, $http, $routeParams, $rootScope) {
 	$scope.apiURL = 'http://localhost:3111';	
 	// $scope.apiURL = 'http://unitech.3commastechnologies.com:3111';
 	
-  	$scope.admin = 0;
+  	$scope.role = [];
+  	var flag = 0;
   	$scope.login = function() {
   		if($scope.username == undefined || $scope.username == ""){
   			var dialog = bootbox.dialog({
@@ -30,7 +31,8 @@ function LoginCtrl($scope, $location, $http, $routeParams, $rootScope) {
                 dialog.modal('hide'); 
             }, 1500);
   		}
-  		else{
+  		else
+  		{
                 $('#login').text("please wait...");
   			$http({
 		          method: 'POST',
@@ -55,46 +57,22 @@ function LoginCtrl($scope, $location, $http, $routeParams, $rootScope) {
 			        	$scope.user = deliverycount[0].username;
 			        	$scope.firstname = deliverycount[0].first_name;
 			        	$scope.iconimage = deliverycount[0].icon_image;
-			        	$scope.rm_name = deliverycount[0].rm_name;
+			        	$scope.role_id = deliverycount[0].role_id;
 				  	 	localStorage.setItem('logichron_userid', $scope.userid);
 				  	 	localStorage.setItem('logichron_admin_username', $scope.user);
 				  	 	localStorage.setItem('logichron_admin_firstname', $scope.firstname);
 				  	 	localStorage.setItem('logichron_admin_iconimage', $scope.iconimage);
-				  	 	localStorage.setItem('logichron_role_name', $scope.rm_name);
+				  	 	localStorage.setItem('logichron_role_id', $scope.role_id);
 				  	 	localStorage.setItem('logichron_admin_access_token', data.access_token);
 				        localStorage.setItem('logichron_admin_expires_in', data.expires_in);
 				        localStorage.setItem('logichron_admin_refresh_token', data.refresh_token);
 				        localStorage.setItem('logichron_admin_token_type', data.token_type);
-			        	$http({
-						      method: 'GET',
-						      url: $scope.apiURL+'/login/'+deliverycount[0].role_id,
-						      headers: {'Content-Type': 'application/json',
-					                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
-						    })
-						    .success(function(roleobj)
-						    {
 
-						    	$scope.role=[];
-						    	roleobj.forEach(function (value, key) {
-						    		$scope.pm_name=value.pm_name;
-						    		localStorage.setItem('permission_name',$scope.pm_name);
-						    		
-						    		$scope.role.push(value);
-					              });
-					    			
-						    })
-						    .error(function(data) 
-						    {   
-						      var dialog = bootbox.dialog({
-					            message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
-					                closeButton: false
-					            });
-					            setTimeout(function(){
-					                dialog.modal('hide'); 
-					            }, 1500);            
-						    });
+						    
                 		$('#login').text("Login");
-				         window.location = "/logichron/";
+						    	// $scope.list();
+
+                    	window.location = "/logichron/";
 			        })
 			        .error(function(data) 
 			        {   
@@ -109,6 +87,7 @@ function LoginCtrl($scope, $location, $http, $routeParams, $rootScope) {
 		                $('#login').text("Login");
 		                $('#login').removeAttr('disabled');
 			        });
+
 		  	 })
 		  	 .error(function(data, status, headers, config)
 		  	 {
@@ -124,7 +103,8 @@ function LoginCtrl($scope, $location, $http, $routeParams, $rootScope) {
                 $('#login').removeAttr('disabled');
 		     });
   		}
-	}
+	};
+	
 
 }
 

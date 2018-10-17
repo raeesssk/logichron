@@ -135,11 +135,36 @@ $scope.filter = function()
     $scope.limit.userid=localStorage.getItem('logichron_userid');
 $scope.apiURL = $rootScope.baseURL+'/contact/contact/total';
     
-    if(localStorage.getItem('logichron_role_name') != 'admin')
-      {
-        $('#searchbox').addClass('col-lg-6');
-        $('#btnExportbox').remove();
-      }
+  var permission=JSON.parse(localStorage.getItem('permission'));
+  var value = '#/contactdiscovery/joblist';
+  var access = permission.includes(value);
+    $scope.getrolepermission=function(){
+      
+      // for(var i=0;i<permission.length;i++)
+      // {
+        if(access)
+        {
+          return true
+        }
+        else
+        {
+           var dialog = bootbox.dialog({
+          message: '<p class="text-center">You Are Not Authorized</p>',
+              closeButton: false
+          });
+          dialog.find('.modal-body').addClass("btn-danger");
+          setTimeout(function(){
+              dialog.modal('hide'); 
+          }, 1500);
+          $location.path('/')
+        }
+        /*
+        break;
+      }*/
+
+    };
+    $scope.getrolepermission();
+  
 
     $('#cdm_from_date').datepicker({
         validateOnBlur: false,

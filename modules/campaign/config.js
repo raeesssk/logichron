@@ -16,7 +16,7 @@ angular.module('campaign', [])
 
         $routeProvider
             
-            .when('/campaign/',
+            .when('/campaign',
                 {
                     templateUrl: 'modules/campaign/partials/campaign-list.html',
                     controller: 'campaignListCtrl',

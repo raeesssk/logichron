@@ -5,8 +5,35 @@ angular.module('user').controller('userAddCtrl', function ($rootScope, $http, $s
     $scope.roleList=[];
     $('#um_emp_id').focus();
 	$scope.apiURL = $rootScope.baseURL+'/userm/add';
+  var permission=JSON.parse(localStorage.getItem('permission'));
+  var value = '#/user/add';
+  var access = permission.includes(value);
+    $scope.getrolepermission=function(){
+      
+      // for(var i=0;i<permission.length;i++)
+      // {
+        if(access)
+        {
+          return true
+        }
+        else
+        {
+           var dialog = bootbox.dialog({
+          message: '<p class="text-center">You Are Not Authorized</p>',
+              closeButton: false
+          });
+          dialog.find('.modal-body').addClass("btn-danger");
+          setTimeout(function(){
+              dialog.modal('hide'); 
+          }, 1500);
+          $location.path('/')
+        }
+        /*
+        break;
+      }*/
 
-    
+    };
+    $scope.getrolepermission();
   
     $scope.getSearch = function(vals) {
 

@@ -99,36 +99,35 @@
                    </div>
                </div>
            </nav>
+
             <div class="pcoded-main-container" >
                 <div class="pcoded-wrapper">
                     <nav class="pcoded-navbar">
                         <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
-                        <div class="pcoded-inner-navbar main-menu">
+                        <div class="pcoded-inner-navbar main-menu" >
                             
                             <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation"></div>
+
                             <ul class="pcoded-item pcoded-left-item">
-                                <li class="active" >
-                                    <a href="#/">
-                                        <span class="pcoded-micon"><i class="ti-dashboard"></i><b>D</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Dashboard</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-                                <li class="pcoded-hasmenu" ng-show="role == 'User Management'">
-                                    <a href="">
-                                        <span class="pcoded-micon"><i class="ti-user"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">User Management</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                    <ul class="pcoded-submenu" >
-                                        <li class="">
-                                            <a href="#/user/add">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert"><i class="ti-file"></i> Add User</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
-                                        <li class=" ">
+                              
+                              <!-- dropdown-icon="style3"  -->
+                              <li class="pcoded-hasmenu" dropdown-icon="style3" subitem-icon="style7" id="{{menu.pm_id}}" ng-click="test(menu.pm_id)" ng-repeat="menu in role">
+                                <a href="" >
+                                    <span class="pcoded-micon"><i ng-class="menu.pm_class"></i></span>
+                                    <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">{{menu.pm_name}}</span>
+                                    <span class="pcoded-mcaret"></span>
+                                </a>
+                                <ul class="pcoded-submenu">
+                                    <li class="" ng-click="test2(submenu.psm_id);$event.stopPropagation()" ng-repeat="submenu in menu.subpermission">
+                                        <a ng-href="{{submenu.url}}">
+                                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                            <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs"><i ng-class="submenu.icon"></i> {{submenu.psm_permissions}}</span>
+                                            <span class="pcoded-mcaret"></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                              </li>
+                                        <!-- <li class=" ">
                                             <a href="#/user">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs"><i class="ti-view-list"></i> User List</span>
@@ -190,7 +189,7 @@
                                             </a>
                                         </li>
                                         <li class=" ">
-                                            <a href="#/campaign/">
+                                            <a href="#/campaign">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs"><i class="ti-view-list"></i> Campaign List</span>
                                                 <span class="pcoded-mcaret"></span>
@@ -298,7 +297,7 @@
                                             </a>
                                         </li>
                                     </ul>
-                                </li>
+                                </li> -->
                                 <!-- 
                                 <li class="pcoded-hasmenu" ng-hide="access!='admin'">
                                     <a href="">
@@ -387,7 +386,7 @@
 <script type="text/javascript" src="resources/js/bootstrap-growl.min.js"></script>
 
 <script type="text/javascript" src="resources/js/script.js"></script>
-<!-- <script type="text/javascript " src="resources/js/SmoothScroll.js"></script> -->
+<script type="text/javascript " src="resources/js/SmoothScroll.js"></script>
 <script src="resources/js/pcoded.min.js"></script>
 <script src="resources/js/vartical-demo.js"></script>
 <script src="resources/js/jquery.mCustomScrollbar.concat.min.js"></script>
@@ -396,7 +395,6 @@
         <!-- Controllers-->
         <script type="text/javascript" src="js/main.js"></script>
         <script type="text/javascript" src="js/globalController.js"></script>
-        <script type="text/javascript" src="js/login.js"></script>
         
         <!-- admin -->
         <script src="modules/admin/config.js"></script>
@@ -425,6 +423,45 @@
 
          <!-- queue -->
         <script src="modules/queue/config.js"></script>
+
+        <script>
+           
+//           jQuery(function ($) {
+
+//               $(".sidebar-dropdown > a").click(function() {
+//                 $(".sidebar-submenu").slideUp(200);
+//                 if (
+//                   $(this)
+//                     .parent()
+//                     .hasClass("active")
+//                 ) {
+//                   $(".sidebar-dropdown").removeClass("active");
+//                   $(this)
+//                     .parent()
+//                     .removeClass("active");
+//                 } else {
+//                   $(".sidebar-dropdown").removeClass("active");
+//                   $(this)
+//                     .next(".sidebar-submenu")
+//                     .slideDown(200);
+//                   $(this)
+//                     .parent()
+//                     .addClass("active");
+//                 }
+//               });
+
+//               $("#close-sidebar").click(function() {
+//                 $(".page-wrapper").removeClass("toggled");
+//               });
+//               $("#show-sidebar").click(function() {
+//                 $(".page-wrapper").addClass("toggled");
+//               });
+
+
+   
+   
+// });
+        </script>
 </body>
 
 </html>

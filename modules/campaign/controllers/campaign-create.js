@@ -24,6 +24,36 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
 
 	$scope.apiURL = $rootScope.baseURL+'/campaign/add';
     
+     var permission=JSON.parse(localStorage.getItem('permission'));
+  var value = '#/campaign/create';
+  var access = permission.includes(value);
+    $scope.getrolepermission=function(){
+      
+      // for(var i=0;i<permission.length;i++)
+      // {
+        if(access)
+        {
+          return true
+        }
+        else
+        {
+           var dialog = bootbox.dialog({
+          message: '<p class="text-center">You Are Not Authorized</p>',
+              closeButton: false
+          });
+          dialog.find('.modal-body').addClass("btn-danger");
+          setTimeout(function(){
+              dialog.modal('hide'); 
+          }, 1500);
+          $location.path('/')
+        }
+        /*
+        break;
+      }*/
+
+    };
+    $scope.getrolepermission();
+
     var d = new Date();
     var yyyy = d.getFullYear().toString();
     var mm = (d.getMonth()).toString(); // getMonth() is zero-based

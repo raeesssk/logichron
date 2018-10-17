@@ -3,14 +3,20 @@
  */
 function GlobalCtrl($rootScope, $http, $scope, $timeout) {
 
+    $('#11').click(function(){
+           
+              $(this).addClass('pcoded-trigger');
+              console.log('triggered');
+            
+          });
+
     $rootScope.tokken=localStorage.getItem("logichron_admin_access_token");
     $rootScope.username=localStorage.getItem("logichron_admin_username");
     $rootScope.firstname=localStorage.getItem("logichron_admin_firstname");
     $rootScope.iconimage=localStorage.getItem("logichron_admin_iconimage");
     $rootScope.userid=localStorage.getItem('logichron_userid');
     // console.log($rootScope.userid);
-    $rootScope.role=localStorage.getItem('permission_name');
-    console.log($rootScope.role);
+    $rootScope.roleId=localStorage.getItem('logichron_role_id');
     $rootScope.baseURL = 'http://localhost:3111';
 
     // $rootScope.baseURL = 'http://unitech.3commastechnologies.com:3111';
@@ -25,7 +31,75 @@ function GlobalCtrl($rootScope, $http, $scope, $timeout) {
     // $rootScope.back = function () {
     //     window.history.back();
     // };
-    
+    $scope.role=[];
+    $scope.url=[];
+      $scope.getpermission=function(){
+        $http({
+                  method: 'GET',
+                  url: $rootScope.baseURL+'/login/permission/'+$rootScope.roleId,
+                  headers: {'Content-Type': 'application/json',
+                            'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+                })
+                .success(function(permission)
+                {
+                  permission.forEach(function(val,key){
+
+                    $http({
+                        method: 'GET',
+                        url: $rootScope.baseURL+'/login/sub/'+val.pm_id,
+                        headers: {'Content-Type': 'application/json',
+                                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+                      })
+                      .success(function(sub)
+                      {
+                        val.subpermission=[];
+                        sub.forEach(function(value,key){
+                          $scope.url.push(value.url);
+                          localStorage.setItem('permission',JSON.stringify($scope.url));
+                          val.subpermission.push(value);
+                        }); 
+                        $scope.role.push(val);
+                      })
+                      .error(function(data) 
+                      {   
+                        var dialog = bootbox.dialog({
+                            message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                                closeButton: false
+                            });
+                            setTimeout(function(){
+                                dialog.modal('hide'); 
+                            }, 1500);            
+                      });
+                  });
+                })
+                .error(function(data) 
+                {   
+                  var dialog = bootbox.dialog({
+                      message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                          closeButton: false
+                      });
+                      setTimeout(function(){
+                          dialog.modal('hide'); 
+                      }, 1500);            
+                });
+                
+            };
+            $scope.getpermission();
+            
+            $scope.setpermission = function(){
+            };
+            $scope.setpermission();
+
+      $rootScope.test = function(id){
+
+          if ($("#"+id).hasClass('pcoded-trigger')) {
+              $("#"+id).removeClass('pcoded-trigger');
+          } else {
+              $("#"+id).closest('.pcoded-inner-navbar').find('li.pcoded-trigger').removeClass('pcoded-trigger');
+              $("#"+id).addClass('pcoded-trigger');
+          }
+        
+      }
      
       $rootScope.logOut = function(){
 
