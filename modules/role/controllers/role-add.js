@@ -116,32 +116,36 @@ angular.module('role').controller('roleAddCtrl', function ($rootScope, $http, $s
     };
 
     $scope.newpermission=[];
-    $scope.removepermission=[];
-    $scope.newSuperpermission=[];
-    $scope.removeSupermission=[];
-    $scope.checksub = function(sub,index) {
+    $scope.checksub = function(sub) {
         if(sub.psm_select)
         {
-            $scope.newpermission.push(sub);
-            console.log($scope.newpermission);
+          $scope.obj = {
+            psm_pm_id : sub.psm_pm_id,
+            psm_id : sub.psm_id
+          }
+            $scope.newpermission.push($scope.obj);
         }
-        else
-        {
-            $scope.removepermission.push($scope.newpermission[index]);
-            $scope.newpermission.splice(index);
-            console.log($scope.newpermission);
-        }
+        else 
         if(sub.pssm_select)
         {
-            $scope.newSuperpermission.push(sub);
-            console.log($scope.newSuperpermission);
+          $scope.obj = {
+            psm_pm_id : sub.psm_pm_id,
+            psm_id : sub.pssm_psm_id,
+            pssm_id : sub.pssm_id
+          }
+            $scope.newpermission.push($scope.obj);
         }
-        else
+        else if(sub.psm_select == false)
         {
-            $scope.removeSupermission.push($scope.newSuperpermission[index]);
-            $scope.newSuperpermission.splice(index);
-            console.log($scope.newSuperpermission);
-
+          var index = $scope.newpermission.indexOf(sub);
+          $scope.newpermission.splice(index); 
+          console.log($scope.newpermission);
+        }
+        else if(sub.pssm_select == false)
+        {
+          var index = $scope.newpermission.indexOf(sub);
+          $scope.newpermission.splice(index);
+          console.log($scope.newpermission);
         }
     };
 
@@ -171,13 +175,23 @@ angular.module('role').controller('roleAddCtrl', function ($rootScope, $http, $s
                 dialog.modal('hide'); 
             }, 1500);
 	    }
+      else if($scope.newpermission.length <= 0)
+      {
+        var dialog = bootbox.dialog({
+            message: '<p class="text-center">please define permission.</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide'); 
+            }, 1500);
+      }
 	    else{
                 
                 
                 $scope.obj={
                     role:$scope.role,
-                    permission:$scope.newpermission,
-                    supermission:$scope.newSuperpermission
+                    permission:$scope.newpermission
                 }
                 $('#btnsave').attr('disabled','true');
                 $('#btnsave').text("please wait...");

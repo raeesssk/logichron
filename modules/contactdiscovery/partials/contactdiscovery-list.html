@@ -39,7 +39,7 @@
                               <div class="col-lg-3" id='searchbox'>
                                 <input type="text" class="form-control" id="searchtext" ng-model="searchtext" onkeyup="angular.element(this).scope().getSearch();" placeholder = "Search by- Contact Name" style="margin-top: 2em" /><br>
                               </div>
-                              <div class="col-lg-3" id="btnExportbox">
+                              <div class="col-lg-3" id="btnExportbox" ng-hide="exporthide==0">
                                 <button type="button" style="margin-top: 2em" class="btn btn-warning form-control" id="btnExport" ng-click="exportXlslist()">Export To Excel</button>
                               </div>
                               <div class="col-lg-1">
@@ -122,7 +122,7 @@
                                       <th>Asset</th>
                                       <th>Domain</th>
                                       <th>Status</th>
-                          						<th>Action</th>
+                          						<th ng-hide="theadhide==0">Action</th>
                   	                </tr>
                     	            </thead>
                     	            <tbody>
@@ -148,9 +148,9 @@
                                       <td>{{contactdiscovery.cdm_domain}}</td>
                                       <td>{{contactdiscovery.call_status}}</td>
                           						<td>
-                          							<i class="fa fa-info-circle" data-toggle="modal" data-target="#view-details" ng-click="view($index)"></i>
-                          							<a href="#/contactdiscovery/edit/{{contactdiscovery.cdm_id}}"><i class="fa fa-pencil"></i></a>
-                          							<i class="fa fa-trash" id="trash" data-toggle="modal" data-target="#confirm-delete" ng-click="deleteEntry(contactdiscovery.cdm_id)"></i>
+                          							<i ng-hide="theadhide==0" class="fa fa-info-circle" data-toggle="modal" data-target="#view-details" ng-click="view($index)"></i>
+                          							<a ng-hide="edithide == 0" href="#/contactdiscovery/edit/{{contactdiscovery.cdm_id}}"><i class="fa fa-pencil"></i></a>
+                          							<i ng-hide="deletehide==0" class="fa fa-trash" id="trash" data-toggle="modal" data-target="#confirm-delete" ng-click="deleteEntry(contactdiscovery.cdm_id)"></i>
                           						</td>
               	                    </tr>
                     	            </tbody>

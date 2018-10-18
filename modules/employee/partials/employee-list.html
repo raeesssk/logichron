@@ -37,7 +37,7 @@
                           						<th>Mobile</th>
                           						<th>Address</th>
                           						<th>Role</th>
-                          						<th>Action</th>
+                          						<th ng-hide="theadhide==0">Action</th>
                   	                </tr>
                       	            </thead>
                       	            <tbody>
@@ -47,10 +47,10 @@
                             						<td>{{employee.emp_mobile}}</td>
                             						<td>{{employee.emp_address}}</td>
                             						<td>{{employee.emp_designation}}</td>
-                      						      <td>
-                                          <i class="fa fa-info-circle" data-toggle="modal" ng-click="viewEmployeeDetails($index)" data-target="#view-details"></i>
-                            							<a href="#/employee/edit/{{employee.emp_id}}"><i class="fa fa-pencil"></i></a>
-                            							<i class="fa fa-trash" data-toggle="modal" data-target="#confirm-delete" ng-click="deleteEmployee(employee.emp_id)"></i>
+                      						      <td ng-hide="theadhide==0">
+                                          <i ng-hide="theadhide==0" class="fa fa-info-circle" data-toggle="modal" ng-click="viewEmployeeDetails($index)" data-target="#view-details"></i>
+                            							<a ng-hide="edithide==0" href="#/employee/edit/{{employee.emp_id}}"><i class="fa fa-pencil"></i></a>
+                            							<i ng-hide="deletehide==0" class="fa fa-trash" data-toggle="modal" data-target="#confirm-delete" ng-click="deleteEmployee(employee.emp_id)"></i>
                             						</td>
                       	                </tr>
                       	            </tbody>

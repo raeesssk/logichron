@@ -164,6 +164,21 @@ $scope.filter = function()
 
     };
     $scope.getrolepermission();
+
+
+    var supermission=JSON.parse(localStorage.getItem('supermission'));
+    var exportvalue=13;
+    var checkexport = supermission.includes(exportvalue);
+    $scope.getsupermission=function(){
+          
+          if(checkexport == false)
+          {
+            $scope.exporthide=0;
+          }
+          
+
+      };
+      $scope.getsupermission();
     
    $scope.getAll = function (contactdiscovery) {
       $scope.contactdiscovery=contactdiscovery;

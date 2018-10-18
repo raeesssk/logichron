@@ -47,8 +47,8 @@
                               <tbody>
                                 <tr ng-repeat="permission in permissionList">
                                   <td>{{permission.pm_name}}</td>
-                                  <td><span ng-repeat="sub in permission.subpermissions"><input type="checkbox"  ng-model='sub.psm_select' ng-change="checkstatus(sub,$index)">&nbsp;{{sub.psm_permissions}} &nbsp;</span>
-                                    <span ng-repeat="supersub in permission.SuperSubpermissions"><input type="checkbox"  ng-model='supersub.psm_select' ng-change="checksub(supersub,$index)">&nbsp;{{supersub.pssm_permission}} &nbsp;</span>
+                                  <td><span ng-repeat="sub in permission.subpermissions track by $index"><input type="checkbox"  ng-model='sub.psm_select' ng-change="checkstatus(sub)">&nbsp;{{sub.psm_permissions}} &nbsp;
+                                    <span ng-repeat="supersub in sub.SuperSubpermissions track by $index"><input type="checkbox"  ng-model='supersub.pssm_select' ng-change="checkstatus(supersub)">&nbsp;{{supersub.pssm_permission}} &nbsp;</span></span>
                                   </td>
                                 </tr>
                               </tbody>

@@ -165,6 +165,30 @@ $scope.apiURL = $rootScope.baseURL+'/employee/employee/total';
 
     };
     $scope.getrolepermission();
+
+
+    var supermission=JSON.parse(localStorage.getItem('supermission'));
+    var editValue = 5;
+    var deleteValue = 6;
+    var checkedit = supermission.includes(editValue);
+    var checkdelete = supermission.includes(deleteValue);
+    $scope.getsupermission=function(){
+          if(checkedit == false)
+          {
+            $scope.edithide=0;
+          }
+          if(checkdelete == false)
+          {
+            $scope.deletehide=0;
+          }
+          if($scope.deletehide == 0 && $scope.edithide == 0)
+          {
+            $scope.theadhide = 0;
+          }
+
+      };
+      $scope.getsupermission();
+
     
    $scope.getAll = function () {
         if ($('#searchtext').val() == undefined || $('#searchtext').val() == "") {

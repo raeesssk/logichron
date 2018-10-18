@@ -34,17 +34,17 @@
                                       <tr>
                                           <th>Role name</th>
                                           <th>Role Discription</th>
-                                          <th>Action</th>
+                                          <th ng-hide="theadhide==0">Action</th>
                                       </tr>
                                   </thead>
                                   <tbody>
                                       <tr ng-repeat="role in filteredTodos">
                                         <td>{{role.rm_name}}</td>
                                         <td>{{role.rm_description}}</td>
-                                        <td>
+                                        <td ng-hide="theadhide==0">
                                           <i class="fa fa-info-circle" data-toggle="modal" data-target="#view-details" ng-click="getPermission($index)"></i>
-                                          <a href="#/role/edit/{{role.rm_id}}"><i class="fa fa-pencil"></i></a>
-                                          <i class="fa fa-trash" id='trash' data-toggle="modal" data-target="#confirm-delete" ng-click="deleteRole(role.rm_id)"></i>
+                                          <a ng-hide="edithide==0" href="#/role/edit/{{role.rm_id}}"><i class="fa fa-pencil"></i></a>
+                                          <i ng-hide="deletehide==0" class="fa fa-trash" id='trash' data-toggle="modal" data-target="#confirm-delete" ng-click="deleteRole(role.rm_id)"></i>
                                         </td>
                                       </tr>
                                   </tbody>
@@ -100,7 +100,7 @@
           <span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">Permission Details</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body table-responsive">
       <table class="table" border="1">
       <thead>
       <tr>
@@ -111,7 +111,9 @@
       <tbody id="content">
       <tr ng-repeat="permission in permissionList">
         <td>{{permission.pm_name}}</td>
-       <td><span ng-repeat="sub in permission.subpermissions"><input type="checkbox"  ng-model='sub.psm_select'>&nbsp;{{sub.psm_permissions}} &nbsp;</span></td>
+       <td><span ng-repeat="sub in permission.subpermissions"><input type="checkbox"  ng-model='sub.psm_select'>&nbsp;{{sub.psm_permissions}} &nbsp;
+        <span ng-repeat="supersub in sub.SuperSubpermissions"><input type="checkbox"  ng-model='supersub.pssm_select'>&nbsp;{{supersub.pssm_permission}} &nbsp;</span>
+       </span></td>
       </tr>
       </tbody>
     </table>

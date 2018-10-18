@@ -33,6 +33,7 @@ function GlobalCtrl($rootScope, $http, $scope, $timeout) {
     // };
     $scope.role=[];
     $scope.url=[];
+    $scope.checksupermission=[];
       $scope.getpermission=function(){
         $http({
                   method: 'GET',
@@ -82,7 +83,33 @@ function GlobalCtrl($rootScope, $http, $scope, $timeout) {
                           dialog.modal('hide'); 
                       }, 1500);            
                 });
-                
+                $http({
+                        method: 'GET',
+                        url: $rootScope.baseURL+'/login/superole/'+$rootScope.roleId,
+                        //data: $scope.data,
+                        headers: {'Content-Type': 'application/json',
+                                'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+                      })
+                      .success(function(obj3)
+                      {
+                          
+                            obj3.forEach(function(value3,key3){
+                              $scope.checksupermission.push(value3.rpm_pssm_id);
+                              localStorage.setItem('supermission',JSON.stringify($scope.checksupermission));
+                              
+                            });
+                      })  
+                      .error(function(data) 
+                      {   
+                          toastr.error('Oops, Something Went Wrong.', 'Error', {
+                              closeButton: true,
+                              progressBar: true,
+                              positionClass: "toast-top-center",
+                              timeOut: "500",
+                              extendedTimeOut: "500",
+                          });  
+                      });
+
             };
             $scope.getpermission();
             

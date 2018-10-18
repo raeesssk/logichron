@@ -37,7 +37,7 @@
                   											<th>Address</th>
                   											<th>Mobile</th>
                   											<th>Role</th>
-                  											<th>Action</th>
+                  											<th ng-hide="theadhide==0">Action</th>
           						                </tr>
             						            </thead>
             						            <tbody>
@@ -49,8 +49,8 @@
                   											<td>{{user.rm_name}}</td>
                   														
                   											<td>
-                  												<a href="#/user/edit/{{user.id}}"><i class="fa fa-pencil"></i></a>
-                  												<i class="fa fa-trash" data-toggle="modal" data-target="#confirm-delete" ng-click="deleteUser(user.id)"></i>
+                  												<a ng-hide="edithide==0" href="#/user/edit/{{user.id}}"><i class="fa fa-pencil"></i></a>
+                  												<i ng-hide="deletehide==0" class="fa fa-trash" data-toggle="modal" data-target="#confirm-delete" ng-click="deleteUser(user.id)"></i>
                   											</td>
       						                    </tr>
           						              </tbody>

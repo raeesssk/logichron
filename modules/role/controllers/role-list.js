@@ -167,6 +167,28 @@ $scope.apiURL = $rootScope.baseURL+'/role/role/total';
     };
     $scope.getrolepermission();
   
+    var supermission=JSON.parse(localStorage.getItem('supermission'));
+    var editValue = 3;
+    var deleteValue = 4;
+    var checkedit = supermission.includes(editValue);
+    var checkdelete = supermission.includes(deleteValue);
+    $scope.getsupermission=function(){
+          if(checkedit == false)
+          {
+            $scope.edithide=0;
+          }
+          if(checkdelete == false)
+          {
+            $scope.deletehide=0;
+          }
+          if($scope.deletehide == 0 && $scope.edithide == 0)
+          {
+            $scope.theadhide = 0;
+          }
+
+      };
+      $scope.getsupermission();
+    
     
    $scope.getAll = function () {
         if ($('#searchtext').val() == undefined || $('#searchtext').val() == "") {
@@ -324,36 +346,61 @@ $scope.apiURL = $rootScope.baseURL+'/role/role/total';
                   .success(function(obj1)
                   {
                         value.subpermissions=[];
-                        obj1.forEach(function(value1,key){
-                          $http({
-                                method: 'GET',
-                                url: $rootScope.baseURL+'/role/permission/'+$scope.filteredTodos[index].rm_id,
-                                //data: $scope.data,
-                                headers: {'Content-Type': 'application/json',
-                                        'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
-                              })
-                              .success(function(obj2)
-                              {
-                                    obj2.forEach(function(value2,key){
-                                      if(value1.psm_pm_id == value2.psm_pm_id)
-                                      {
-                                        value1.psm_select=true;
-                                      }
-                                      
-                                    });
-                              })
-                              .error(function(data) 
-                              {   
-                                  toastr.error('Oops, Something Went Wrong.', 'Error', {
-                                      closeButton: true,
-                                      progressBar: true,
-                                      positionClass: "toast-top-center",
-                                      timeOut: "500",
-                                      extendedTimeOut: "500",
-                                  });  
-                              });
+                        obj1.forEach(function(value1,key1){
+                              value1.SuperSubpermissions=[];
+                                $http({
+                                      method: 'GET',
+                                      url: $rootScope.baseURL+'/permission/supersub/'+value1.psm_id,
+                                      //data: $scope.data,
+                                      headers: {'Content-Type': 'application/json',
+                                              'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+                                    })
+                                    .success(function(obj2)
+                                    {
+                                            obj2.forEach(function(value2, key2){
+                                              $http({
+                                                    method: 'GET',
+                                                    url: $rootScope.baseURL+'/role/permission/'+$scope.filteredTodos[index].rm_id,
+                                                    //data: $scope.data,
+                                                    headers: {'Content-Type': 'application/json',
+                                                            'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+                                                  })
+                                                  .success(function(obj3)
+                                                  {
+                                                        obj3.forEach(function(value3,key3){
+                                                          
+                                                          if(value2.pssm_id === value3.rpm_pssm_id)
+                                                          {
+                                                            value2.pssm_select = true;
+                                                          }
+                                                          
+                                                        });
+                                                  })
+                                                  .error(function(data) 
+                                                  {   
+                                                      toastr.error('Oops, Something Went Wrong.', 'Error', {
+                                                          closeButton: true,
+                                                          progressBar: true,
+                                                          positionClass: "toast-top-center",
+                                                          timeOut: "500",
+                                                          extendedTimeOut: "500",
+                                                      });  
+                                                  });
 
-                                     value.subpermissions.push(value1);
+                                                value1.SuperSubpermissions.push(value2);
+                                            });
+                                    })
+                                    .error(function(data) 
+                                    {   
+                                        toastr.error('Oops, Something Went Wrong.', 'Error', {
+                                            closeButton: true,
+                                            progressBar: true,
+                                            positionClass: "toast-top-center",
+                                            timeOut: "500",
+                                            extendedTimeOut: "500",
+                                        });  
+                                    });
+                            value.subpermissions.push(value1);
                         });
                           
 
@@ -370,7 +417,45 @@ $scope.apiURL = $rootScope.baseURL+'/role/role/total';
                   });
                   $scope.permissionList.push(value);
                 });
-
+                 $http({
+                        method: 'GET',
+                        url: $rootScope.baseURL+'/role/permission/'+$scope.filteredTodos[index].rm_id,
+                        //data: $scope.data,
+                        headers: {'Content-Type': 'application/json',
+                                'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+                      })
+                      .success(function(obj3)
+                      {
+                            obj3.forEach(function(value3,key3){
+                              $scope.permissionList.forEach(function(value4,key4){
+                                value4.subpermissions.forEach(function(val,key){
+                                  if(value3.rpm_psm_id ==  val.psm_id)
+                                  {
+                                    val.psm_select=true;
+                                  }
+                                });
+                              });
+                              // if(value1.psm_id === value3.rpm_psm_id)
+                              // {
+                              //   value1.psm_select = true;
+                              // }
+                              // if(value2.pssm_id === value3.rpm_pssm_id)
+                              // {
+                              //   value2.pssm_select = true;
+                              // }
+                              
+                            });
+                      })
+                      .error(function(data) 
+                      {   
+                          toastr.error('Oops, Something Went Wrong.', 'Error', {
+                              closeButton: true,
+                              progressBar: true,
+                              positionClass: "toast-top-center",
+                              timeOut: "500",
+                              extendedTimeOut: "500",
+                          });  
+                      });
         })
         .error(function(data) 
         {   

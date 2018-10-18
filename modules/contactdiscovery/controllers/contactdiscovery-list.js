@@ -164,6 +164,34 @@ $scope.apiURL = $rootScope.baseURL+'/contact/contact/total';
 
     };
     $scope.getrolepermission();
+
+    var supermission=JSON.parse(localStorage.getItem('supermission'));
+    var editValue = 10;
+    var deleteValue = 11;
+    var exportvalue = 12;
+    var checkedit = supermission.includes(editValue);
+    var checkdelete = supermission.includes(deleteValue);
+    var checkexport = supermission.includes(exportvalue);
+    $scope.getsupermission=function(){
+          if(checkedit == false)
+          {
+            $scope.edithide=0;
+          }
+          if(checkdelete == false)
+          {
+            $scope.deletehide=0;
+          }
+          if(checkexport == false)
+          {
+            $scope.exporthide=0;
+          }
+          if($scope.deletehide == 0 && $scope.edithide == 0)
+          {
+            $scope.theadhide = 0;
+          }
+
+      };
+      $scope.getsupermission();
   
 
     $('#cdm_from_date').datepicker({
