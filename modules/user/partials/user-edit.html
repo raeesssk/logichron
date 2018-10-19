@@ -25,13 +25,13 @@
                                   <label>Employee Name</label>
                                   <input type="text"
                                         id="um_emp_id"
-                                        ng-model="user.um_emp_id"
+                                        ng-model="user.first_name"
                                         class="form-control" disabled>
                                 </div>
                                   <div class="col-lg-6">
                                     <div class="form-group">
                                       <label>Username</label>
-                                      <input type="text" id="um_user_name" class="form-control" ng-model="user.um_user_name" disabled/>
+                                      <input type="text" id="um_user_name" class="form-control" ng-model="user.username" disabled/>
                                     </div>
                                   </div>
                               </div>
@@ -39,13 +39,13 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Password</label>
-                                        <input type="password" id="um_user_password" class="form-control" ng-model="user.um_user_password"  />
+                                        <input type="password" id="um_user_password" class="form-control" ng-model="user.pass"  />
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Confirm Password</label>
-                                        <input type="password" id="um_confirm_password" class="form-control" ng-model="user.um_confirm_password" />
+                                        <input type="password" id="um_confirm_password" class="form-control" ng-model="user.pass" />
                                     </div>
                                 </div>
                               </div>
@@ -53,7 +53,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Assign Roles</label>
-                                        <input type="text" id="um_rm_id" class="form-control" ng-model="user.um_rm_id" disabled/>
+                                        <input type="text" id="um_rm_id" class="form-control" ng-model="user.um_rm"  typeahead="state as state.rm_name for state in getrole($viewValue)"/>
                                     </div>
                                 </div>
                                 <br>  

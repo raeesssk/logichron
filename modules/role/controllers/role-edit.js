@@ -199,6 +199,7 @@ angular.module('role').controller('roleEditCtrl', function ($rootScope, $http, $
             });
           });
         });
+        console.log($scope.removeoldpermission);
         if(sub.psm_select)
         {
           $scope.obj = {

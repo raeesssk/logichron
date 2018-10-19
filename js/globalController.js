@@ -23,10 +23,10 @@ function GlobalCtrl($rootScope, $http, $scope, $timeout) {
     // $rootScope.baseURL = 'http://10.1.0.21:3001';
     
     $rootScope.socket = io.connect($rootScope.baseURL);
-    if(localStorage.getItem("logichron_admin_access_token") === null)
+    /*if(localStorage.getItem("logichron_admin_access_token") === null)
       {
           window.location = 'login.html';
-      }
+      }*/
 
     // $rootScope.back = function () {
     //     window.history.back();
@@ -43,11 +43,16 @@ function GlobalCtrl($rootScope, $http, $scope, $timeout) {
                 })
                 .success(function(permission)
                 {
-                  permission.forEach(function(val,key){
 
+                  permission.forEach(function(val,key){
+                    $scope.obj={
+                      roleid : $rootScope.roleId,
+                      pm_id : val.pm_id
+                    }
                     $http({
-                        method: 'GET',
-                        url: $rootScope.baseURL+'/login/sub/'+val.pm_id,
+                        method: 'POST',
+                        url: $rootScope.baseURL+'/login/sub',
+                        data: $scope.obj,
                         headers: {'Content-Type': 'application/json',
                                   'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
                       })

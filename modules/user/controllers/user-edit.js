@@ -5,31 +5,7 @@ angular.module('user').controller('userEditCtrl', function ($rootScope, $http, $
   $scope.user={};
 	$scope.usermId = $routeParams.Id;
   $scope.apiURL = $rootScope.baseURL+'/userm/edit/'+$scope.usermId;
-/*
-  var permission=JSON.parse(localStorage.getItem('permission'));
-  var value = '#/user/'+$scope.usermId;
-  var access = permission.includes(value);
 
-    $scope.getrolepermission=function(){
-        if(access)
-        {
-          return true;
-        }
-        else
-        {
-          var dialog = bootbox.dialog({
-          message: '<p class="text-center">You Are Not Authorized</p>',
-              closeButton: false
-          });
-          dialog.find('.modal-body').addClass("btn-danger");
-          setTimeout(function(){
-              dialog.modal('hide'); 
-          }, 1500);
-          $location.path('/');
-
-          }
-    };
-    $scope.getrolepermission();*/
 
   $scope.preventPaste= function() {
  $('#um_user_password').bind('cut copy paste', function (e) {
@@ -40,7 +16,7 @@ angular.module('user').controller('userEditCtrl', function ($rootScope, $http, $
     });
 }
 
-
+  
   $scope.getUser = function () {
 	     $http({
 	      method: 'GET',
@@ -51,12 +27,29 @@ angular.module('user').controller('userEditCtrl', function ($rootScope, $http, $
 	    .success(function(userobj)
 	    {
 	    	userobj.forEach(function (value, key) {
-                value.um_emp_id = value.first_name
-                value.um_user_name =value.username;
-                value.um_user_password = value.password;
-                value.um_confirm_password = value.password;
-                value.um_rm_id = value.rm_name;
-	      		$scope.user = value;
+              $http({
+                    method: 'GET',
+                    url: $rootScope.baseURL+'/role/'+value.role_id,
+                    headers: {'Content-Type': 'application/json',
+                              'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+                  })
+                  .success(function(roleobj)
+                  {
+                    roleobj.forEach(function (value1, key) {
+                            value.um_rm = value1;
+                      });
+                    $scope.user=value;
+                  })
+                  .error(function(data) 
+                  {   
+                    var dialog = bootbox.dialog({
+                        message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                            closeButton: false
+                        });
+                        setTimeout(function(){
+                            dialog.modal('hide'); 
+                        }, 1500);            
+                  });
               });
 	    })
 	    .error(function(data) 
@@ -71,6 +64,23 @@ angular.module('user').controller('userEditCtrl', function ($rootScope, $http, $
 	    });
 	};
 
+
+  $scope.getrole = function(vals) {
+
+      var searchTerms = {search: vals};
+      
+        const httpOptions = {
+          headers: {
+            'Content-Type':  'application/json',
+            'Authorization': 'Bearer '+localStorage.getItem("logichron_admin_access_token")
+          }
+        };
+        return $http.post($rootScope.baseURL+'/role/typeahead/search', searchTerms, httpOptions).then((result) => {
+          
+          return result.data;
+      });
+        console.log($scope.user);
+  };
 
   $scope.updateUser = function () {
 

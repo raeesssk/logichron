@@ -23,16 +23,43 @@ angular.module('campaign').controller('campaignListCtrl', function ($rootScope, 
     $scope.apiURL = $rootScope.baseURL+'/campaign/campaign/total';
     
     
+    $scope.url = 'Tried to enter campaign Page';
+
+    $scope.gethistory=function(){
+      $scope.history={
+        user_id : $rootScope.userid,
+        url : $scope.url
+      }
+      $http({
+            method: 'POST',
+            url: $rootScope.baseURL+'/history/add',
+            data: $scope.history,
+            headers: {'Content-Type': 'application/json',
+                    'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+          })
+          .success(function(login)
+          {
+              
+          })
+          .error(function(data) 
+          {   
+            var dialog = bootbox.dialog({
+              message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                  closeButton: false
+              });
+              setTimeout(function(){
+              $('#btnsave').text("SAVE");
+              $('#btnsave').removeAttr('disabled');
+                  dialog.modal('hide'); 
+            }, 1500);            
+        });
+    };
+    $scope.gethistory();
     
-    // $scope.exportData = function () {
-    //     var blob = new Blob([document.getElementById('export').innerHTML], {
-    //         type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
-    //     });
-    //     saveAs(blob, "Report.xls");
-    // };
+    
     var permission=JSON.parse(localStorage.getItem('permission'));
-  var value = '#/campaign';
-  var access = permission.includes(value);
+    var value = '#/campaign';
+    var access = permission.includes(value);
     $scope.getrolepermission=function(){
       
       // for(var i=0;i<permission.length;i++)
@@ -51,7 +78,8 @@ angular.module('campaign').controller('campaignListCtrl', function ($rootScope, 
           setTimeout(function(){
               dialog.modal('hide'); 
           }, 1500);
-          $location.path('/')
+          $location.path('/');
+          $scope.gethistory();
         }
         /*
         break;
@@ -78,7 +106,12 @@ angular.module('campaign').controller('campaignListCtrl', function ($rootScope, 
           }
           if(checkexport == false)
           {
+            $('#btnExport').removeAttr('onclick');
             $scope.exporthide=0;
+          }
+          else
+          {
+             $('#btnExport').attr('onclick','exportXlslist()');
           }
           if($scope.deletehide == 0 && $scope.edithide == 0)
           {
@@ -89,8 +122,7 @@ angular.module('campaign').controller('campaignListCtrl', function ($rootScope, 
       $scope.getsupermission();
 
 
-    $scope.exportXlslist = function(){
-      console.log('test');
+    exportXlslist = function(){
       $("#export").table2excel({
         exclude: ".excludeThisClass",
         name: "Campaign list",

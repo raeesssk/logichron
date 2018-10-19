@@ -139,9 +139,43 @@ $scope.filter = function()
 
 $scope.apiURL = $rootScope.baseURL+'/assign/contact/total';
     
-     var permission=JSON.parse(localStorage.getItem('permission'));
-  var value = '#/assign';
-  var access = permission.includes(value);
+
+    $scope.url = 'Tried to enter assign job Page';
+
+    $scope.gethistory=function(){
+      $scope.history={
+        user_id : $rootScope.userid,
+        url : $scope.url
+      }
+      $http({
+            method: 'POST',
+            url: $rootScope.baseURL+'/history/add',
+            data: $scope.history,
+            headers: {'Content-Type': 'application/json',
+                    'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+          })
+          .success(function(login)
+          {
+              
+          })
+          .error(function(data) 
+          {   
+            var dialog = bootbox.dialog({
+              message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                  closeButton: false
+              });
+              setTimeout(function(){
+              $('#btnsave').text("SAVE");
+              $('#btnsave').removeAttr('disabled');
+                  dialog.modal('hide'); 
+            }, 1500);            
+        });
+    };
+    $scope.gethistory();
+
+    var permission=JSON.parse(localStorage.getItem('permission'));
+    var value = '#/assign';
+    var access = permission.includes(value);
     $scope.getrolepermission=function(){
       
       // for(var i=0;i<permission.length;i++)
@@ -160,7 +194,8 @@ $scope.apiURL = $rootScope.baseURL+'/assign/contact/total';
           setTimeout(function(){
               dialog.modal('hide'); 
           }, 1500);
-          $location.path('/')
+          $location.path('/');
+          $scope.gethistory();
         }
         /*
         break;
@@ -169,7 +204,7 @@ $scope.apiURL = $rootScope.baseURL+'/assign/contact/total';
     };
     $scope.getrolepermission();
     
-   $scope.getAll = function () {
+    $scope.getAll = function () {
         if ($('#searchtext').val() == undefined || $('#searchtext').val() == "") {
         $scope.limit.search = "";
       }

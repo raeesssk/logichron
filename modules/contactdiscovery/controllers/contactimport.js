@@ -4,6 +4,39 @@ angular.module('contactdiscovery').controller('contactimportCtrl', function ($ro
    $scope.selectedFile = null;  
     $scope.msg = "";  
     
+    $scope.url = 'Tried to enter contact import Page';
+
+    $scope.gethistory=function(){
+      $scope.history={
+        user_id : $rootScope.userid,
+        url : $scope.url
+      }
+      $http({
+            method: 'POST',
+            url: $rootScope.baseURL+'/history/add',
+            data: $scope.history,
+            headers: {'Content-Type': 'application/json',
+                    'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+          })
+          .success(function(login)
+          {
+              
+          })
+          .error(function(data) 
+          {   
+            var dialog = bootbox.dialog({
+              message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                  closeButton: false
+              });
+              setTimeout(function(){
+              $('#btnsave').text("SAVE");
+              $('#btnsave').removeAttr('disabled');
+                  dialog.modal('hide'); 
+            }, 1500);            
+        });
+    };
+    $scope.gethistory();
+
     var permission=JSON.parse(localStorage.getItem('permission'));
   var value = '#/contactdiscovery/import';
   var access = permission.includes(value);
@@ -25,7 +58,8 @@ angular.module('contactdiscovery').controller('contactimportCtrl', function ($ro
           setTimeout(function(){
               dialog.modal('hide'); 
           }, 1500);
-          $location.path('/')
+          $location.path('/');
+          $scope.gethistory();
         }
         /*
         break;

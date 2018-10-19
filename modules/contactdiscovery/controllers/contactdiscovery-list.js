@@ -135,9 +135,42 @@ $scope.filter = function()
     $scope.limit.userid=localStorage.getItem('logichron_userid');
 $scope.apiURL = $rootScope.baseURL+'/contact/contact/total';
     
-  var permission=JSON.parse(localStorage.getItem('permission'));
-  var value = '#/contactdiscovery/joblist';
-  var access = permission.includes(value);
+    $scope.url = 'Tried to enter contact discovery list Page';
+
+    $scope.gethistory=function(){
+      $scope.history={
+        user_id : $rootScope.userid,
+        url : $scope.url
+      }
+      $http({
+            method: 'POST',
+            url: $rootScope.baseURL+'/history/add',
+            data: $scope.history,
+            headers: {'Content-Type': 'application/json',
+                    'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+          })
+          .success(function(login)
+          {
+              
+          })
+          .error(function(data) 
+          {   
+            var dialog = bootbox.dialog({
+              message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                  closeButton: false
+              });
+              setTimeout(function(){
+              $('#btnsave').text("SAVE");
+              $('#btnsave').removeAttr('disabled');
+                  dialog.modal('hide'); 
+            }, 1500);            
+        });
+    };
+    $scope.gethistory();
+
+    var permission=JSON.parse(localStorage.getItem('permission'));
+    var value = '#/contactdiscovery/joblist';
+    var access = permission.includes(value);
     $scope.getrolepermission=function(){
       
       // for(var i=0;i<permission.length;i++)
@@ -156,7 +189,8 @@ $scope.apiURL = $rootScope.baseURL+'/contact/contact/total';
           setTimeout(function(){
               dialog.modal('hide'); 
           }, 1500);
-          $location.path('/')
+          $location.path('/');
+          $scope.gethistory();
         }
         /*
         break;
@@ -183,7 +217,12 @@ $scope.apiURL = $rootScope.baseURL+'/contact/contact/total';
           }
           if(checkexport == false)
           {
+            $('#btnExport').removeAttr('onclick');
             $scope.exporthide=0;
+          }
+          else
+          {
+             $('#btnExport').attr('onclick','exportXlslist()');
           }
           if($scope.deletehide == 0 && $scope.edithide == 0)
           {
@@ -220,7 +259,7 @@ $scope.apiURL = $rootScope.baseURL+'/contact/contact/total';
           }
     }).datepicker('setDate', 'today');
 
-    $scope.exportXlslist = function(){
+    exportXlslist = function(){
 
       console.log('test');
       $("#export").table2excel({

@@ -61,25 +61,6 @@ $scope.filter = function()
 
   //};
 
-  // Date.prototype.setFromDate = function() {
-  //  var yyyy = this.getFullYear().toString();
-  //  var mm = (this.getMonth()).toString(); // getMonth() is zero-based
-  //  var dd  = this.getDate().toString();
-  //  document.getElementById("user-datepicker-from").value = yyyy +"-"+ (mm[1]?mm:"0"+mm[0]) +"-"+ (dd[1]?dd:"0"+dd[0]);
-  // };
-
-  // Date.prototype.setToDate = function() {
-  //  var yyyy = this.getFullYear().toString();
-  //  var mm = (this.getMonth()+1).toString(); // getMonth() is zero-based
-  //  var dd  = this.getDate().toString();
-  //  document.getElementById("user-datepicker-to").value = yyyy +"-"+ (mm[1]?mm:"0"+mm[0]) +"-"+ (dd[1]?dd:"0"+dd[0]);
-  // $scope.filter();
-  // };
-
-  // d = new Date();
-  // d.setFromDate();
-  // d.setToDate();
-
     $scope.filteredTodos = [];
     $scope.currentPage = 1;
     $scope.maxSize = 5;
@@ -92,9 +73,48 @@ $scope.filter = function()
     $scope.userListcount=0;
     $scope.loading1 = 0;
     $scope.limit={};
-
+    $scope.useractivity={};
     $scope.limit.userid=localStorage.getItem('logichron_userid');
-$scope.apiURL = $rootScope.baseURL+'/userm/user/total';
+    $scope.apiURL = $rootScope.baseURL+'/userm/user/total';
+
+
+
+  
+
+
+    $scope.url = 'Tried to enter user list Page';
+
+    $scope.gethistory=function(){
+      $scope.history={
+        user_id : $rootScope.userid,
+        url : $scope.url
+      }
+      $http({
+            method: 'POST',
+            url: $rootScope.baseURL+'/history/add',
+            data: $scope.history,
+            headers: {'Content-Type': 'application/json',
+                    'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+          })
+          .success(function(login)
+          {
+              
+          })
+          .error(function(data) 
+          {   
+            var dialog = bootbox.dialog({
+              message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                  closeButton: false
+              });
+              setTimeout(function(){
+              $('#btnsave').text("SAVE");
+              $('#btnsave').removeAttr('disabled');
+                  dialog.modal('hide'); 
+            }, 1500);            
+        });
+    };
+    $scope.gethistory();
+
 
  var permission=JSON.parse(localStorage.getItem('permission'));
   var value = '#/user';
@@ -115,7 +135,7 @@ $scope.apiURL = $rootScope.baseURL+'/userm/user/total';
               dialog.modal('hide'); 
           }, 1500);
           $location.path('/');
-
+          $scope.gethistory();
         }
           
     };
@@ -275,81 +295,141 @@ $scope.apiURL = $rootScope.baseURL+'/userm/user/total';
 	    });
 	};
 
-  $scope.viewUserDetails1 = function (index) {
-      $scope.ind = index;
-    $('#user-datepicker-from').val("");
-    $('#user-datepicker-to').val("");
-    $scope.viewCustomerDetails(index);
-  };
 
-  $scope.viewUserDetails = function (index) {
-      $scope.venname = $scope.filteredTodos[index].cm_name;
-      $scope.venno = $scope.filteredTodos[index].cm_mobile;
-      $scope.venemail = $scope.filteredTodos[index].cm_email;
-      $scope.venadd = $scope.filteredTodos[index].cm_address;
-      $scope.venbal = $scope.filteredTodos[index].cm_balance;
-      $scope.vendebit = $scope.filteredTodos[index].cm_debit;
-      $scope.vencode = $scope.filteredTodos[index].cm_code;
-      $scope.cmgst = $scope.filteredTodos[index].cm_gst;
+  $('#um_from_date').datepicker({
+        validateOnBlur: false,
+        todayButton: false,
+        timepicker: false,
+        scrollInput: false,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+        orientation: 'bottom',
+          onChangeDateTime: function (dp, $input) {
+              $scope.useractivity.um_from_date = $('#um_from_date').val();
+          }
+    }).datepicker('setDate', 'today');
 
-      $scope.categoryList =[];
-      $http({
-        method: 'GET',
-        url: $rootScope.baseURL+'/user/details/'+$scope.filteredTodos[index].cm_id,
-        headers: {'Content-Type': 'application/json',
-                  'Authorization' :'Bearer '+localStorage.getItem("unitech_admin_access_token")}
-      })
-      .success(function(categoryList)
-      {
-        // $scope.categoryList = angular.copy(categoryList);
-        var amount_balance = 0;
-          categoryList.forEach(function (value, key) {
-            $scope.data = new Date(value.date);
+    $('#um_to_date').datepicker({
+        validateOnBlur: false,
+        todayButton: false,
+        timepicker: false,
+        scrollInput: false,
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+        orientation: 'bottom',
+          onChangeDateTime: function (dp, $input) {
+              $scope.useractivity.um_to_date = $('#um_to_date').val();
+          }
+    }).datepicker('setDate', 'today');
 
-            if(value.credit == 0)
-            {
-              amount_balance = parseInt(amount_balance) - parseInt(value.debit);
-            }
-            else if(value.debit == 0)
-            {
-              amount_balance = parseInt(amount_balance) + parseInt(value.credit);
-            }
-            if(amount_balance < 0)
-            {
-              Math.abs(amount_balance);
-            value.bal = Math.abs(amount_balance);
-              value.drcr="DR";
-            }
-            else{
-              value.drcr="CR";
-              value.bal = amount_balance;
-            }
-            if($scope.fDate <= $scope.data && $scope.tDate >= $scope.data)
-            {
-              $scope.categoryList.push(value);
-            }
-            else if($('#user-datepicker-from').val() == "" && $('#user-datepicker-to').val() == "")  
-            {
-              $scope.categoryList.push(value);
-            }
-          });
-        
-          $('#filter-user-btn').text("Filter");
-          $('#filter-user-btn').removeAttr('disabled');
-          $('#reset-user-btn').text("Reset");
-          $('#reset-user-btn').removeAttr('disabled');
-      })
-      .error(function(data) 
-      {
-            var dialog = bootbox.dialog({
-            message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
-                closeButton: false
+
+    Date.prototype.setFromDate = function() {
+     var yyyy = this.getFullYear().toString();
+     var mm = (this.getMonth()).toString(); // getMonth() is zero-based
+     var dd  = this.getDate().toString();
+     if(mm == 0){
+      document.getElementById("um_from_date").value = yyyy-1 +"-"+ ("12") +"-"+ (dd[1]?dd:"0"+dd[0]);
+     }
+     else if(mm==2||mm==4||mm==6||mm==7||mm==9||mm==11){
+      document.getElementById("um_from_date").value = yyyy +"-"+ (mm[1]?mm:"0"+mm[0]) +"-"+ (dd[1]?dd-1:"0"+dd[0]);
+     }
+     else{
+      document.getElementById("um_from_date").value = yyyy +"-"+ (mm[1]?mm:"0"+mm[0]) +"-"+ (dd[1]?dd:"0"+dd[0]);
+     }
+     $scope.useractivity.um_from_date = $('#um_from_date').val();
+    };
+
+    Date.prototype.setToDate = function() {
+     var yyyy = this.getFullYear().toString();
+     var mm = (this.getMonth()+1).toString(); // getMonth() is zero-based
+     var dd  = this.getDate().toString();
+     document.getElementById("um_to_date").value = yyyy +"-"+ (mm[1]?mm:"0"+mm[0]) +"-"+ (dd[1]?dd:"0"+dd[0]);
+      $scope.useractivity.um_to_date = $('#um_to_date').val();
+    };
+
+    $scope.viewUserActivity = function(index){
+      $scope.user_id=index;
+      $scope.activities=[];
+      d = new Date(); 
+      d.setFromDate();
+      d.setToDate();
+        $http({
+          method: 'POST',
+          url: $rootScope.baseURL+'/userm/view/'+$scope.filteredTodos[index].id,
+          data: $scope.useractivity,
+          headers: {'Content-Type': 'application/json',
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+        })
+        .success(function(obj)
+        { 
+            obj.forEach(function(value, key){
+              $scope.activities.push(value);
             });
-            setTimeout(function(){
-                dialog.modal('hide'); 
-            }, 1500);
-      });
+        })
+        .error(function(data) 
+        {   
+            toastr.error('Oops, Something Went Wrong.', 'Error', {
+                closeButton: true,
+                progressBar: true,
+                positionClass: "toast-top-center",
+                timeOut: "500",
+                extendedTimeOut: "500",
+            });  
+        });
+        
+    };
 
+
+
+  $scope.check=function(){
+    $scope.toDate = $("#um_to_date").val();
+    $scope.fromDate = $("#um_from_date").val();
+    if(angular.isUndefined($scope.fromDate) || $scope.fromDate === null || $scope.fromDate == "")
+      {
+         var dialog = bootbox.dialog({
+          message: '<p class="text-center">please select from-date.</p>',
+              closeButton: false
+          });
+          dialog.find('.modal-body').addClass("btn-danger");
+          setTimeout(function(){
+              dialog.modal('hide'); 
+          }, 1500);
+        return;
+      }
+
+      if(angular.isUndefined($scope.toDate) || $scope.toDate === null || $scope.toDate == "")
+      {
+          var dialog = bootbox.dialog({
+          message: '<p class="text-center">please select to-date.</p>',
+              closeButton: false
+          });
+          dialog.find('.modal-body').addClass("btn-danger");
+          setTimeout(function(){
+              dialog.modal('hide'); 
+          }, 1500);
+        return;
+      }
+
+      $scope.dateFilter = '&startTime='+ $scope.fromDate + '&endTime=' + $scope.toDate;
+
+      
+      $scope.fDate = new Date($scope.fromDate);
+      $scope.fDate.setHours(0,0,0,0);
+      $scope.tDate = new Date($scope.toDate);
+      $scope.tDate.setHours(0,0,0,0);
+      if($scope.fDate > $scope.tDate)
+      {
+          var dialog = bootbox.dialog({
+          message: '<p class="text-center">oops!!! to-date greater than from-date.</p>',
+              closeButton: false
+          });
+          dialog.find('.modal-body').addClass("btn-danger");
+          setTimeout(function(){
+              dialog.modal('hide'); 
+          }, 1500);
+        return;
+      }
+      $scope.viewUserActivity($scope.user_id);
     };
 
     $scope.printDetails = function(){

@@ -20,7 +20,6 @@ $scope.baseURL = 'http://localhost:3111';
 	};
 	var tech = getUrlParameter('token');
 	console.log(tech);
-	$scope.tokenId = $routeParams.tokenId;
 	$scope.pass={};
 	$scope.reset=function(){
 		if($scope.pass.password == undefined || $scope.pass.password == ""){
