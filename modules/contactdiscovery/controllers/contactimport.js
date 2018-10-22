@@ -79,8 +79,7 @@ angular.module('contactdiscovery').controller('contactimportCtrl', function ($ro
   
     }  
   
-        $scope.handleFile = function () {  
-      console.log('test');
+      $scope.handleFile = function () {
         var file = $scope.selectedFile;  
   
         if (file) {  
@@ -97,7 +96,6 @@ angular.module('contactdiscovery').controller('contactimportCtrl', function ($ro
   
                 var dataObjects = XLSX.utils.sheet_to_json(workbook.Sheets[first_sheet_name]);  
                 
-  
                 if (dataObjects.length > 0) {  
   
                       
@@ -125,13 +123,17 @@ angular.module('contactdiscovery').controller('contactimportCtrl', function ($ro
        value.no = value.mobile_number.toString();
        value.post = value.Postal_Code;
        value.postal_code = value.post.toString();
-       console.log(value.postal_code);
       });
-
+      
+      $scope.obj={
+        userid : $rootScope.userid,
+        contact : data
+      }
+      console.log($scope.obj);
         $http({  
             method: "POST",  
             url: $rootScope.baseURL+'/contact/import',  
-            data: JSON.stringify(data),  
+            data: $scope.obj,  
             headers: {  
                 'Content-Type': 'application/json'  
             }  
