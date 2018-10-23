@@ -111,7 +111,7 @@
                             <ul class="pcoded-item pcoded-left-item">
                               
                               <!-- dropdown-icon="style3"  -->
-                              <li class="pcoded-hasmenu" dropdown-icon="style3" subitem-icon="style7" id="{{menu.pm_id}}" ng-click="test(menu.pm_id)" ng-repeat="menu in role">
+                              <li class="pcoded-hasmenu" dropdown-icon="style3" subitem-icon="style7" id="{{menu.pm_id}}" ng-click="test(menu.pm_id)" ng-repeat="menu in role | orderBy:menu.pm_id track by $index"">
                                 <a href="" >
                                     <span class="pcoded-micon"><i ng-class="menu.pm_class"></i></span>
                                     <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">{{menu.pm_name}}</span>

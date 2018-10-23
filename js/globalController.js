@@ -6,7 +6,7 @@ function GlobalCtrl($rootScope, $http, $scope, $timeout) {
     $('#11').click(function(){
            
               $(this).addClass('pcoded-trigger');
-              console.log('triggered');
+              
             
           });
 
@@ -17,16 +17,16 @@ function GlobalCtrl($rootScope, $http, $scope, $timeout) {
     $rootScope.userid=localStorage.getItem('logichron_userid');
     // console.log($rootScope.userid);
     $rootScope.roleId=localStorage.getItem('logichron_role_id');
-    $rootScope.baseURL = 'http://localhost:3111';
+    // $rootScope.baseURL = 'http://localhost:3111';
 
-    // $rootScope.baseURL = 'http://unitech.3commastechnologies.com:3111';
+    $rootScope.baseURL = 'http://unitech.3commastechnologies.com:3111';
     // $rootScope.baseURL = 'http://10.1.0.21:3001';
     
     $rootScope.socket = io.connect($rootScope.baseURL);
-    /*if(localStorage.getItem("logichron_admin_access_token") === null)
+    if(localStorage.getItem("logichron_admin_access_token") === null)
       {
           window.location = 'login.html';
-      }*/
+      }
 
     // $rootScope.back = function () {
     //     window.history.back();
@@ -118,9 +118,6 @@ function GlobalCtrl($rootScope, $http, $scope, $timeout) {
             };
             $scope.getpermission();
             
-            $scope.setpermission = function(){
-            };
-            $scope.setpermission();
 
       $rootScope.test = function(id){
 
