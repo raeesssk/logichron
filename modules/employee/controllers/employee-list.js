@@ -355,30 +355,8 @@ $scope.apiURL = $rootScope.baseURL+'/employee/employee/total';
 
    $scope.viewEmployeeDetails = function(index){
 
-        $scope.empList=[];
-        $http({
-          method: 'GET',
-          url: $rootScope.baseURL+'/employee/view/'+$scope.filteredTodos[index].emp_id,
-          //data: $scope.data,
-          headers: {'Content-Type': 'application/json',
-                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
-        })
-        .success(function(obj)
-        {
-            obj.forEach(function(value, key){
-              $scope.empList.push(value);
-            });
-        })
-        .error(function(data) 
-        {   
-            toastr.error('Oops, Something Went Wrong.', 'Error', {
-                closeButton: true,
-                progressBar: true,
-                positionClass: "toast-top-center",
-                timeOut: "500",
-                extendedTimeOut: "500",
-            });  
-        });
+        $scope.empList=$scope.filteredTodos[index];
+        
     };
     
 

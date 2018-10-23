@@ -98,71 +98,71 @@
 </div>
 <!-- /.modal -->
 <div class="modal fade" id="view-details">
-  <div class="modal-dialog">
-    <div class="modal-content" ng-repeat="employee in empList track by $index">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
       <div class="modal-header">
+        <span class="pull-left" style="margin-right: 35px;"><b>Employee ID: {{empList.emp_emp_no}}</b></span>
+        <h4 class="modal-title" style="text-align: center; margin-left: -15%;">Employee Details</h4>
         <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title pull-left">Employee Details</h4>
-        <span class="pull-left" style="margin-right: 35px;"><b>Employee ID: {{employee.emp_emp_no}}</b></span>
       </div>
       <div class="modal-body">
         <div class="row">
                       <div class="col-lg-4">
                           <div class="">
                               <label>Employee Name</label>
-                              <label class="form-control">{{employee.emp_name}} </label>
+                              <label class="form-control">{{empList.emp_name}} </label>
                           </div>
                       </div>
                       
                       <div class="col-lg-4">
                           <div class="form-group">
                               <label>Contact Number</label>
-                              <label class="form-control">{{employee.emp_mobile}} </label>
+                              <label class="form-control">{{empList.emp_mobile}} </label>
                           </div>
                       </div> 
                       <div class="col-lg-4">
                           <div class="form-group">
                               <label>Email</label>
-                              <label class="form-control">{{employee.emp_email_id}}</label>
+                              <label class="form-control">{{empList.emp_email_id}}</label>
                           </div>
                       </div>        
                       <div class="col-lg-4">
                           <div class="form-group">
                               <label>Designation</label>
-                              <label class="form-control">{{employee.emp_designation}} </label>
+                              <label class="form-control">{{empList.emp_designation}} </label>
                           </div>
                       </div>
 
                       <div class="col-lg-4">
                           <div class="form-group">
                               <label>Qualification</label>
-                              <label class="form-control">{{employee.emp_qualification}}</label>
+                              <label class="form-control">{{empList.emp_qualification}}</label>
                           </div>
                       </div>
                       <div class="col-lg-6">
                           <div class="form-group">
                               <label>Residential Address</label>
-                              <label class="form-control">{{employee.emp_address}} </label>
+                              <label class="form-control">{{empList.emp_address}} </label>
                           </div>
                       </div>
                       <div class="col-lg-6">
                           <div class="form-group">
                               <label>Correspondence Address</label>
-                              <label class="form-control">{{employee.emp_correspondence_address}} </label>
+                              <label class="form-control">{{empList.emp_correspondence_address}} </label>
                           </div>
                       </div>
                       <div class="col-lg-6">
                           <div class="form-group">
                               <label>Aadhar Number</label>
-                              <label class="form-control">{{employee.emp_aadhar_no}} </label>
+                              <label class="form-control">{{empList.emp_aadhar_no}} </label>
                           </div>
                       </div>
 
                       <div class="col-lg-6">
                           <div class="form-group">
                               <label>PAN Number</label>
-                              <label class="form-control">{{employee.emp_pancard_no}} </label>
+                              <label class="form-control">{{empList.emp_pancard_no}} </label>
                           </div>
                       </div>
         </div>
