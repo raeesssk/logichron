@@ -107,11 +107,13 @@ angular.module('campaign').controller('campaignListCtrl', function ($rootScope, 
           if(checkexport == false)
           {
             $('#btnExport').removeAttr('onclick');
+            $('#modalExport').removeAttr('onclick');
             $scope.exporthide=0;
           }
           else
           {
              $('#btnExport').attr('onclick','exportXlslist()');
+             $('#modalExport').attr('onclick','exportfn()');
           }
           if($scope.deletehide == 0 && $scope.edithide == 0)
           {
@@ -477,7 +479,7 @@ angular.module('campaign').controller('campaignListCtrl', function ($rootScope, 
     }; 
 
     //exporting table
-    $scope.export = function(){
+    exportfn = function(){
         $("#QualifyExport").table2excel({
         exclude: ".excludeThisClass",
         name: "Qualify_list",
