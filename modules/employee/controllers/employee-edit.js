@@ -14,7 +14,23 @@ angular.module('employee').controller('employeeEditCtrl', function ($rootScope, 
 
               $scope.employee.file = input.files[0];
           reader.onload = function (e) {
+              if(input.files[0].size > 200000)
+            {
+              var dialog = bootbox.dialog({
+              message: '<p class="text-center">File Size Too Big To Upload!!!</p>',
+                  closeButton: false
+              });
+              dialog.find('.modal-body').addClass("btn-danger");
+              setTimeout(function(){
+                  dialog.modal('hide'); 
+              }, 2000);
+              $('#next').attr('disabled',true);
+            }
+            else
+            { 
+              
               $('#blah').attr('src', e.target.result);
+            }
           }
           reader.readAsDataURL(input.files[0]);
 

@@ -142,7 +142,7 @@ angular.module('telecaller').controller('telecallerListCtrl', function ($rootSco
 
           $scope.uploader.file = input.files[0];
           reader.onload = function (e) {
-            if(input.files[0].size > 15000000)
+            if(input.files[0].size > 2000000)
             {
               var dialog = bootbox.dialog({
               message: '<p class="text-center">File Size Too Big To Upload!!!</p>',

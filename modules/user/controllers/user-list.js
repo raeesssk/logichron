@@ -261,6 +261,7 @@ $scope.filter = function()
 
     $scope.deleteUser = function (id) {
       $scope.um_id=id;
+      $('#confirm-delete').modal('show');
     }  
 
     $scope.deleteConfirm = function () {
@@ -323,36 +324,12 @@ $scope.filter = function()
     }).datepicker('setDate', 'today');
 
 
-    Date.prototype.setFromDate = function() {
-     var yyyy = this.getFullYear().toString();
-     var mm = (this.getMonth()).toString(); // getMonth() is zero-based
-     var dd  = this.getDate().toString();
-     if(mm == 0){
-      document.getElementById("um_from_date").value = yyyy-1 +"-"+ ("12") +"-"+ (dd[1]?dd:"0"+dd[0]);
-     }
-     else if(mm==2||mm==4||mm==6||mm==7||mm==9||mm==11){
-      document.getElementById("um_from_date").value = yyyy +"-"+ (mm[1]?mm:"0"+mm[0]) +"-"+ (dd[1]?dd-1:"0"+dd[0]);
-     }
-     else{
-      document.getElementById("um_from_date").value = yyyy +"-"+ (mm[1]?mm:"0"+mm[0]) +"-"+ (dd[1]?dd:"0"+dd[0]);
-     }
-     $scope.useractivity.um_from_date = $('#um_from_date').val();
-    };
-
-    Date.prototype.setToDate = function() {
-     var yyyy = this.getFullYear().toString();
-     var mm = (this.getMonth()+1).toString(); // getMonth() is zero-based
-     var dd  = this.getDate().toString();
-     document.getElementById("um_to_date").value = yyyy +"-"+ (mm[1]?mm:"0"+mm[0]) +"-"+ (dd[1]?dd:"0"+dd[0]);
-      $scope.useractivity.um_to_date = $('#um_to_date').val();
-    };
-
     $scope.viewUserActivity = function(index){
+      $scope.useractivity.um_from_date = $('#um_from_date').val();
+      $scope.useractivity.um_to_date = $('#um_to_date').val();
       $scope.user_id=index;
       $scope.activities=[];
-      d = new Date(); 
-      d.setFromDate();
-      d.setToDate();
+      
         $http({
           method: 'POST',
           url: $rootScope.baseURL+'/userm/view/'+$scope.filteredTodos[index].id,
@@ -363,8 +340,11 @@ $scope.filter = function()
         .success(function(obj)
         { 
             obj.forEach(function(value, key){
+
               $scope.activities.push(value);
             });
+
+              $('#view-detail').modal('show');
         })
         .error(function(data) 
         {   
@@ -379,11 +359,14 @@ $scope.filter = function()
         
     };
 
-
+    $scope.modalclose=function(){
+      $('#view-detail').modal('hide');
+    };
 
   $scope.check=function(){
     $scope.toDate = $("#um_to_date").val();
     $scope.fromDate = $("#um_from_date").val();
+    console.log($scope.toDate+" "+$scope.fromDate);
     if(angular.isUndefined($scope.fromDate) || $scope.fromDate === null || $scope.fromDate == "")
       {
          var dialog = bootbox.dialog({
@@ -431,6 +414,34 @@ $scope.filter = function()
       }
       $scope.viewUserActivity($scope.user_id);
     };
+
+
+    Date.prototype.setFromDate = function() {
+     var yyyy = this.getFullYear().toString();
+     var mm = (this.getMonth()).toString(); // getMonth() is zero-based
+     var dd  = this.getDate().toString();
+     if(mm == 0){
+      document.getElementById("um_from_date").value = yyyy-1 +"-"+ ("12") +"-"+ (dd[1]?dd:"0"+dd[0]);
+     }
+     else if(mm==2||mm==4||mm==6||mm==7||mm==9||mm==11){
+      document.getElementById("um_from_date").value = yyyy +"-"+ (mm[1]?mm:"0"+mm[0]) +"-"+ (dd[1]?dd-1:"0"+dd[0]);
+     }
+     else{
+      document.getElementById("um_from_date").value = yyyy +"-"+ (mm[1]?mm:"0"+mm[0]) +"-"+ (dd[1]?dd:"0"+dd[0]);
+     }
+     $scope.useractivity.um_from_date = $('#um_from_date').val();
+    };
+
+    Date.prototype.setToDate = function() {
+     var yyyy = this.getFullYear().toString();
+     var mm = (this.getMonth()+1).toString(); // getMonth() is zero-based
+     var dd  = this.getDate().toString();
+     document.getElementById("um_to_date").value = yyyy +"-"+ (mm[1]?mm:"0"+mm[0]) +"-"+ (dd[1]?dd:"0"+dd[0]);
+      $scope.useractivity.um_to_date = $('#um_to_date').val();
+    };
+    d = new Date(); 
+      d.setFromDate();
+      d.setToDate();
 
     $scope.printDetails = function(){
       var popupWin = window.open('', 'winname','directories=0,titlebar=0,toolbar=0,location=0,status=0,menubar=0,scrollbars=no,resizable=no');
