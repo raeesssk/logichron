@@ -329,7 +329,8 @@ $scope.filter = function()
       $scope.useractivity.um_to_date = $('#um_to_date').val();
       $scope.user_id=index;
       $scope.activities=[];
-      
+      /*
+        $('#view-details').modal('show');*/
         $http({
           method: 'POST',
           url: $rootScope.baseURL+'/userm/view/'+$scope.filteredTodos[index].id,
@@ -344,7 +345,6 @@ $scope.filter = function()
               $scope.activities.push(value);
             });
 
-              $('#view-detail').modal('show');
         })
         .error(function(data) 
         {   
@@ -359,9 +359,6 @@ $scope.filter = function()
         
     };
 
-    $scope.modalclose=function(){
-      $('#view-detail').modal('hide');
-    };
 
   $scope.check=function(){
     $scope.toDate = $("#um_to_date").val();
