@@ -1,7 +1,7 @@
 function resetCtrl($scope, $location, $http, $routeParams, $rootScope) {
 // $scope.baseURL = 'http://localhost:3111';
 
-$scope.baseURL = 'http://unitech.3commastechnologies.com:3111';
+$scope.baseURL = 'http://logichron.3commastechnologies.com:3111';
 	 //window.location.href
 	
 	var getUrlParameter = function getUrlParameter(sParam) {

@@ -19,7 +19,7 @@ function GlobalCtrl($rootScope, $http, $scope, $timeout) {
     $rootScope.roleId=localStorage.getItem('logichron_role_id');
     // $rootScope.baseURL = 'http://localhost:3111';
 
-    $rootScope.baseURL = 'http://unitech.3commastechnologies.com:3111';
+    $rootScope.baseURL = 'http://logichron.3commastechnologies.com:3111';
     // $rootScope.baseURL = 'http://10.1.0.21:3001';
     
     $rootScope.socket = io.connect($rootScope.baseURL);
