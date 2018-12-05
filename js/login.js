@@ -72,7 +72,7 @@ function LoginCtrl($scope, $location, $http, $routeParams, $rootScope) {
                 		$('#login').text("Login");
 						    	// $scope.list();
 
-                    	window.location = "/logichron/";
+                    	window.location = "/";
 			        })
 			        .error(function(data) 
 			        {   
