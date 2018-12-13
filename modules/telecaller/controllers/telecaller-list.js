@@ -152,11 +152,9 @@ angular.module('telecaller').controller('telecallerListCtrl', function ($rootSco
               setTimeout(function(){
                   dialog.modal('hide'); 
               }, 2000);
-              $('#next').attr('disabled',true);
             }
             else
             { 
-              
               $('#blah').attr('src', e.target.result);
             }
           }
@@ -319,7 +317,6 @@ angular.module('telecaller').controller('telecallerListCtrl', function ($rootSco
         follow : $scope.follow
 
       }
-      console.log($scope.follow);
       $http({
         method: 'POST',
         url: $rootScope.baseURL+'/telecaller/add',

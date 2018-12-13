@@ -553,7 +553,7 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
 	    
         if($('#cm_first_dely').val() == undefined || $('#cm_first_dely').val() == ""){
 	    	var dialog = bootbox.dialog({
-            message: '<p class="text-center">Please Enter The First Name.</p>',
+            message: '<p class="text-center">Please Enter The First Delivery Date.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
@@ -564,7 +564,7 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
 	    }
 	    else if($('#cm_end_date').val() == undefined || $('#cm_end_date').val() == ""){
 	    	var dialog = bootbox.dialog({
-            message: '<p class="text-center">Please Enter End Date.</p>',
+            message: '<p class="text-center">Please Enter End Delivery Date.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
@@ -608,7 +608,7 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         }
         else if($('#cm_account_list').val() == undefined || $('#cm_account_list').val() == ""){
             var dialog = bootbox.dialog({
-                message: '<p class="text-center">Please Enter Account List.</p>',
+                message: '<p class="text-center">Please Select Account List.</p>',
                     closeButton: false
                 });
                 dialog.find('.modal-body').addClass("btn-danger");
@@ -619,7 +619,7 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         }
         else if($('#cm_supression_file').val() == undefined || $('#cm_supression_file').val() == ""){
             var dialog = bootbox.dialog({
-                message: '<p class="text-center">Please Enter Supression File.</p>',
+                message: '<p class="text-center">Please Select Supression File.</p>',
                     closeButton: false
                 });
                 dialog.find('.modal-body').addClass("btn-danger");
@@ -707,7 +707,7 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         }
         else if($('#cm_allow_domain').val() == undefined || $('#cm_allow_domain').val() == ""){
             var dialog = bootbox.dialog({
-                message: '<p class="text-center">Please Enter Allowed Domain.</p>',
+                message: '<p class="text-center">Please Select Allowed Domain.</p>',
                     closeButton: false
                 });
                 dialog.find('.modal-body').addClass("btn-danger");
@@ -729,7 +729,7 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         }
         else if($('#cm_custom_question').val() == undefined || $('#cm_custom_question').val() == ""){
             var dialog = bootbox.dialog({
-                message: '<p class="text-center">Please Enter Custom Question.</p>',
+                message: '<p class="text-center">Please Select Custom Question.</p>',
                     closeButton: false
                 });
                 dialog.find('.modal-body').addClass("btn-danger");
@@ -740,7 +740,7 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         }
         else if($('#cm_denied_domain').val() == undefined || $('#cm_denied_domain').val() == ""){
             var dialog = bootbox.dialog({
-                message: '<p class="text-center">Please Enter Denied Domain.</p>',
+                message: '<p class="text-center">Please Select Denied Domain.</p>',
                     closeButton: false
                 });
                 dialog.find('.modal-body').addClass("btn-danger");

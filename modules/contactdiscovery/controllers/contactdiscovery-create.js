@@ -526,7 +526,7 @@ angular.module('contactdiscovery').controller('contactdiscoveryAddCtrl', functio
         }
         else if($('#cdm_company_size').val() == undefined || $('#cdm_company_size').val() == ""){
             var dialog = bootbox.dialog({
-            message: '<p class="text-center">Please Enter Company Size.</p>',
+            message: '<p class="text-center">Please Select Company Size.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");
