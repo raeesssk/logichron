@@ -22,7 +22,9 @@ function GlobalCtrl($rootScope, $http, $scope, $timeout) {
     $rootScope.baseURL = 'http://logichron.3commastechnologies.com:3111';
     // $rootScope.baseURL = 'http://10.1.0.21:3001';
     
-    $rootScope.socket = io.connect($rootScope.baseURL);
+    $rootScope.socket = io.connect($rootScope.baseURL,{transports: ['websocket']});
+    $rootScope.socket.on('connect',function(){
+     })
     if(localStorage.getItem("logichron_admin_access_token") === null)
       {
           window.location = 'login.html';
