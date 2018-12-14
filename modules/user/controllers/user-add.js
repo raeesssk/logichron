@@ -133,6 +133,16 @@ angular.module('user').controller('userAddCtrl', function ($rootScope, $http, $s
                 dialog.modal('hide'); 
             }, 1500);
 	    }
+      else if(!emailRegex.test($scope.user.um_user_name)){
+        var dialog = bootbox.dialog({
+            message: '<p class="text-center">Please Enter Valid Email Address.</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide'); 
+            }, 1500); 
+      }
       else if($('#um_user_password').val() == undefined || $('#um_user_password').val() == ""){
         var dialog = bootbox.dialog({
             message: '<p class="text-center">please enter Password.</p>',
