@@ -4,7 +4,10 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
   
     $scope.campaign = {};
     $scope.obj={};
-
+    $scope.titles={};
+    $scope.titleList=[];
+    $scope.industry={};
+    $scope.industryList=[];
     $scope.account={};
     $scope.accountList=[];
     $scope.supression={};
@@ -203,8 +206,89 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         } 
     });
 
+    $('#cim_industry').change(function() { //jQuery Change Function
+        var opval = $(this).val(); //Get value from select element
+        if(opval=="Yes"){ //Compare it and if true
+            $('#industry_list').modal({backdrop: 'static', keyboard: false});
+            $('#industry_list').modal("show"); //Open Modal
+        }
+        else {
+            if($scope.industryList.length > 0){
+                $('#industry_delete').modal("show");
+                $('#industry_delete').modal({backdrop: 'static', keyboard: false});
+                
+            }
+        }  
+    });$('#ctm_title').change(function() { //jQuery Change Function
+        var opval = $(this).val(); //Get value from select element
+        if(opval=="Yes"){ //Compare it and if true
+            $('#title_list').modal({backdrop: 'static', keyboard: false});
+            $('#title_list').modal("show"); //Open Modal
+        }
+        else {
+            if($scope.titleList.length > 0){
+                $('#title_delete').modal("show");
+                $('#title_delete').modal({backdrop: 'static', keyboard: false});
+                
+            }
+        }  
+    });
+
     //Modal data Show
 // 1
+
+$scope.loadFile = function (files) {  
+  
+        $scope.$apply(function () {  
+  
+            $scope.selectedFile = files[0];  
+  
+        })  
+  
+    }  
+  
+      $scope.handleFile = function () {
+        var file = $scope.selectedFile;  
+  
+        if (file) {  
+  
+            var reader = new FileReader();  
+  
+            reader.onload = function (e) {  
+  
+                var data = e.target.result;  
+                
+                var workbook = XLSX.read(data, { type: 'binary' });  
+                
+                var first_sheet_name = workbook.SheetNames[0];  
+  
+                var dataObjects = XLSX.utils.sheet_to_json(workbook.Sheets[first_sheet_name]);  
+                
+                if (dataObjects.length > 0) {  
+  
+                      
+                    $scope.save(dataObjects);  
+  
+  
+                } else {  
+                    $scope.msg = "Error : Something Wrong !";  
+                }  
+  
+            }  
+  
+            reader.onerror = function (ex) {  
+  
+            }  
+  
+            reader.readAsBinaryString(file);  
+        }  
+    }  
+
+    $scope.save = function(data){
+        data.forEach(function(value,key){
+         $scope.accountList.push(value);
+        })
+    };
     $scope.accntAdd=function(){
         if($('#amcm_company').val() == undefined || $('#amcm_company').val() == ""){
             var dialog = bootbox.dialog({
@@ -278,6 +362,59 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
     };
 
 // 2
+    $scope.loadSuppFile = function (files) {  
+  
+        $scope.$apply(function () {  
+  
+            $scope.selectedFile = files[0];  
+  
+        })  
+  
+    }  
+  
+      $scope.handleSuppFile = function () {
+        var file = $scope.selectedFile;  
+  
+        if (file) {  
+  
+            var reader = new FileReader();  
+  
+            reader.onload = function (e) {  
+  
+                var data = e.target.result;  
+                
+                var workbook = XLSX.read(data, { type: 'binary' });  
+                
+                var first_sheet_name = workbook.SheetNames[0];  
+  
+                var dataObjects = XLSX.utils.sheet_to_json(workbook.Sheets[first_sheet_name]);  
+                
+                if (dataObjects.length > 0) {  
+  
+                      
+                    $scope.saveSupp(dataObjects);  
+  
+  
+                } else {  
+                    $scope.msg = "Error : Something Wrong !";  
+                }  
+  
+            }  
+  
+            reader.onerror = function (ex) {  
+  
+            }  
+  
+            reader.readAsBinaryString(file);  
+        }  
+    }  
+
+    $scope.saveSupp = function(data){
+        data.forEach(function(value,key){
+         $scope.supressionList.push(value);
+        })
+    };
+
     $scope.supressionAdd=function(){
         if($('#scm_company').val() == undefined || $('#scm_company').val() == ""){
             var dialog = bootbox.dialog({
@@ -545,7 +682,232 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
        $('#denied_domain').modal("show");
     };
    
+    //title
+    $scope.loadtitleFile = function (files) {  
+  
+        $scope.$apply(function () {  
+  
+            $scope.selectedFile = files[0];  
+  
+        })  
+  
+    }  
+  
+      $scope.handletitleFile = function () {
+        var file = $scope.selectedFile;  
+  
+        if (file) {  
+  
+            var reader = new FileReader();  
+  
+            reader.onload = function (e) {  
+  
+                var data = e.target.result;  
+                
+                var workbook = XLSX.read(data, { type: 'binary' });  
+                
+                var first_sheet_name = workbook.SheetNames[0];  
+  
+                var dataObjects = XLSX.utils.sheet_to_json(workbook.Sheets[first_sheet_name]);  
+                
+                if (dataObjects.length > 0) {  
+  
+                      
+                    $scope.savetitle(dataObjects);  
+  
+  
+                } else {  
+                    $scope.msg = "Error : Something Wrong !";  
+                }  
+  
+            }  
+  
+            reader.onerror = function (ex) {  
+  
+            }  
+  
+            reader.readAsBinaryString(file);  
+        }  
+    }  
 
+    $scope.savetitle = function(data){
+        data.forEach(function(value,key){
+         $scope.titleList.push(value);
+        })
+    };
+    $scope.titleAdd=function(){
+        if($('#ctm_title').val() == undefined || $('#ctm_title').val() == ""){
+            var dialog = bootbox.dialog({
+            message: '<p class="text-center">Please Enter The Company.</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide');
+                $('#amcm_company').focus(); 
+            }, 1500);
+        }
+        else{
+        $scope.titleList.push($scope.titles);
+        $scope.titles="";
+        }
+    }; 
+    $scope.deleteTitleList=function(index){
+        $scope.titleList.splice(index,1);
+    };
+    $scope.addtitleList=function(){
+        if ($scope.titleList.length > 0){
+            $('#title_list').modal("hide");
+            $scope.titles="";
+        }
+        else{
+            var dialog = bootbox.dialog({
+            message: '<p class="text-center">Fields Cannot Be Empty.</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide'); 
+            }, 1500);
+        }
+    };
+    $scope.closetitleList=function(){
+         if ($scope.titleList.length == 0){
+            
+            $('#title_list').modal("hide");
+            $scope.campaign.cm_title="No";
+            $scope.titles="";
+        }
+        else if ($scope.titleList.length > 0){
+            $('#title_delete').modal("show");
+            $scope.campaign.cm_title="No";
+        }
+    };
+    $scope.titleDelConfirm=function(){
+        $scope.titleList=[];
+        $scope.campaign.cm_title="No";
+        $('#title_delete').modal("hide");
+        $('#title_list').modal("hide");
+    };
+    $scope.titleNoChange=function(){
+        $scope.campaign.cm_title="Yes";
+    };
+    $scope.updateTitleList=function(){
+       $('#title_list').modal("show");
+    };
+
+    $scope.loadindustryFile = function (files) {  
+  
+        $scope.$apply(function () {  
+  
+            $scope.selectedFile = files[0];  
+  
+        })  
+  
+    }  
+  
+      $scope.handleindustryFile = function () {
+        var file = $scope.selectedFile;  
+  
+        if (file) {  
+  
+            var reader = new FileReader();  
+  
+            reader.onload = function (e) {  
+  
+                var data = e.target.result;  
+                
+                var workbook = XLSX.read(data, { type: 'binary' });  
+                
+                var first_sheet_name = workbook.SheetNames[0];  
+  
+                var dataObjects = XLSX.utils.sheet_to_json(workbook.Sheets[first_sheet_name]);  
+                
+                if (dataObjects.length > 0) {  
+  
+                      
+                    $scope.saveindustry(dataObjects);  
+  
+  
+                } else {  
+                    $scope.msg = "Error : Something Wrong !";  
+                }  
+  
+            }  
+  
+            reader.onerror = function (ex) {  
+  
+            }  
+  
+            reader.readAsBinaryString(file);  
+        }  
+    }  
+
+    $scope.saveindustry = function(data){
+        data.forEach(function(value,key){
+         $scope.industryList.push(value);
+        })
+    };
+    $scope.industryAdd=function(){
+        if($('#cim_industry').val() == undefined || $('#cim_industry').val() == ""){
+            var dialog = bootbox.dialog({
+            message: '<p class="text-center">Please Enter The Company.</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide');
+                $('#cim_industry').focus(); 
+            }, 1500);
+        }
+        else{
+        $scope.industryList.push($scope.industry);
+        $scope.industry="";
+        }
+    }; 
+    $scope.deleteindustryList=function(index){
+        $scope.industryList.splice(index,1);
+    };
+    $scope.addindustryList=function(){
+        if ($scope.industryList.length > 0){
+            $('#industry_list').modal("hide");
+            $scope.account="";
+        }
+        else{
+            var dialog = bootbox.dialog({
+            message: '<p class="text-center">Fields Cannot Be Empty.</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide'); 
+            }, 1500);
+        }
+    };
+    $scope.closeindustryList=function(){
+         if ($scope.industryList.length == 0){
+            
+            $('#industry_list').modal("hide");
+            $scope.campaign.cm_industry="No";
+            $scope.titles="";
+        }
+        else if ($scope.industryList.length > 0){
+            $('#industry_delete').modal("show");
+            $scope.campaign.cm_industry="No";
+        }
+    };
+    $scope.industryDelConfirm=function(){
+        $scope.titleList=[];
+        $scope.campaign.cm_industry="No";
+        $('#industry_delete').modal("hide");
+        $('#industry_list').modal("hide");
+    };
+    $scope.industryNoChange=function(){
+        $scope.campaign.cm_industry="Yes";
+    };
+    $scope.updateIndustryList=function(){
+       $('#industry_list').modal("show");
+    };
     // $('#cm_first_dely').focus();
     $scope.addEntry = function () { 
 		var nameRegex = /^\d+$/;

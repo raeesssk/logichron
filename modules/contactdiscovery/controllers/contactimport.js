@@ -129,7 +129,6 @@ angular.module('contactdiscovery').controller('contactimportCtrl', function ($ro
         userid : $rootScope.userid,
         contact : data
       }
-      console.log($scope.obj);
         $http({  
             method: "POST",  
             url: $rootScope.baseURL+'/contact/import',  
