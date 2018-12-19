@@ -43,7 +43,7 @@
                                             typeahead="obj as obj.cm_campaign_name for obj in getSearchCampaign($viewValue)"
                                             typeahead-loading="loadingCampaignList"
                                             typeahead-no-results="noCampaignListResults"
-                                            typeahead-on-select="getCampaignDetails(index)"
+                                            typeahead-on-select="getCampaignDetails()"
                                             class="form-control">
                                         <i ng-show="loadingCampaignList" class="glyphicon glyphicon-refresh"></i>
                                         <div ng-show="noCampaignListResults">
@@ -90,7 +90,7 @@
                                 </div>
                                 
                                 <div class="col-sm-4">
-                                        <label>Mobile Number</label>
+                                        <label>Direct Number / Landline Number</label>
                                         <input type="text" id="cdm_mobile" class="form-control" ng-model="contactdiscovery.cdm_mobile" />
                                         <br>
                                 </div>
@@ -158,36 +158,52 @@
                                 <br>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <div class="col-sm-5">
-                                    <label>Question</label>
-                                    <input type="text" id="qm_questions" class="form-control" ng-model="obj.qm_questions">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <table class="table table-hover">
+                                      <thead>
+                                        <tr>
+                                          <th class="" style="border: 1px solid #ccc; text-align: center;">Question</th>
+                                          <th class="" style="border: 1px solid #ccc; text-align: center;">Answers</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr ng-repeat="question in questionans track by $index">
+                                            <td>{{question.cmcm_question}}</td>
+                                            <td>{{question.cmcm_answer}}</td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
                                 </div>
-                                <div class="col-sm-5">
-                                    <label>Answer</label>
-                                    <input type="textarea" id="qm_answers" class="form-control" ng-model="obj.qm_answers">
+                                <div class="col-lg-3">
+                                    <table class="table table-hover">
+                                      <thead>
+                                        <tr>
+                                          <th class="" style="border: 1px solid #ccc; text-align: center;">Supression List of Company</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr ng-repeat="supp in suppList track by $index">
+                                            <td>{{supp.scm_company}}</td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
                                 </div>
-                                <div class="col-sm-2">
-                                    <label>&nbsp;</label>
-                                    <button class="btn-outline-success form-control" ng-click="addto()" type="submit">Add</button>
+                                <div class="col-lg-3">
+                                    <table class="table table-hover">
+                                      <thead>
+                                        <tr>
+                                          <th class="" style="border: 1px solid #ccc; text-align: center;">Denied Domain Website</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr ng-repeat="deny in denydomain track by $index">
+                                            <td>{{deny.ddcm_website}}</td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
                                 </div>
                             </div>
-                            <table class="table table-hover">
-                              <thead>
-                                <tr>
-                                  <th class="" style="border: 1px solid #ccc; text-align: center;">Question</th>
-                                  <th class="" style="border: 1px solid #ccc; text-align: center;">Answers</th>
-                                  <th style="border: 1px solid #ccc; text-align: center;">Action</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr ng-repeat="question in answers track by $index">
-                                    <td contenteditable="true">{{question.qm_questions}}</td>
-                                    <td contenteditable="true">{{question.qm_answers}}</td>
-                                    <td><button class="form-control" ng-click="deleteQA()"><i class="fa fa-trash" ></button></i></td>
-                                </tr>
-                              </tbody>
-                            </table>
                             <br>
                             <div class="form-group row">
                                 <br>

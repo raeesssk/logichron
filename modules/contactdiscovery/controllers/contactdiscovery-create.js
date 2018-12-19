@@ -6,7 +6,9 @@ angular.module('contactdiscovery').controller('contactdiscoveryAddCtrl', functio
     $scope.obj={};
     $scope.answers=[];
     $scope.contactdiscovery.userid=localStorage.getItem('logichron_userid');
-
+    $scope.questionans=[];
+    $scope.suppList=[];
+    $scope.denydomain=[];
 	$scope.apiURL = $rootScope.baseURL+'/contact/add';
 
     $scope.url = 'Tried to enter contact discovery add Page';
@@ -92,8 +94,77 @@ angular.module('contactdiscovery').controller('contactdiscoveryAddCtrl', functio
     };
 
      $scope.getCampaignDetails=function(){
+      
+    $scope.questionans=[];
+    $scope.suppList=[];
+    $scope.denydomain=[];
         // $scope.personalDetails=[];
-        
+          $http({
+            method: 'GET',
+            url: $rootScope.baseURL+'/contact/questionans/'+$scope.contactdiscovery.cdm_cm_id.cm_id,
+            headers: {'Content-Type': 'application/json',
+                    'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+          })
+          .success(function(obj)
+          {  
+            obj.forEach(function(val,key){
+              $scope.questionans.push(val);
+            });
+          })
+          .error(function(data) 
+          {   
+              var dialog = bootbox.dialog({
+                message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                    closeButton: false
+                });
+                setTimeout(function(){
+                    dialog.modal('hide'); 
+                }, 1500);            
+          });
+          $http({
+            method: 'GET',
+            url: $rootScope.baseURL+'/contact/supp/'+$scope.contactdiscovery.cdm_cm_id.cm_id,
+            headers: {'Content-Type': 'application/json',
+                    'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+          })
+          .success(function(obj)
+          {  
+            obj.forEach(function(val,key){
+              $scope.suppList.push(val);
+            });
+          })
+          .error(function(data) 
+          {   
+              var dialog = bootbox.dialog({
+                message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                    closeButton: false
+                });
+                setTimeout(function(){
+                    dialog.modal('hide'); 
+                }, 1500);            
+          });
+          $http({
+            method: 'GET',
+            url: $rootScope.baseURL+'/contact/denydomain/'+$scope.contactdiscovery.cdm_cm_id.cm_id,
+            headers: {'Content-Type': 'application/json',
+                    'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+          })
+          .success(function(obj)
+          {  
+            obj.forEach(function(val,key){
+              $scope.denydomain.push(val);
+            });
+          })
+          .error(function(data) 
+          {   
+              var dialog = bootbox.dialog({
+                message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                    closeButton: false
+                });
+                setTimeout(function(){
+                    dialog.modal('hide'); 
+                }, 1500);            
+          });
          $("#cdm_company_name").focusout(function(){
             $http({
                   method: 'GET',

@@ -153,8 +153,13 @@
                                 </div>
                                 <div class="col-sm-3">
                                         <label>Revenue</label>
-                                        <input type="text" id="cm_revenue" class="form-control" ng-model="campaign.cm_revenue">
-                                    <br> 
+                                        <select id="cm_revenue" class="form-control" ng-model="campaign.cm_revenue">
+                                            <option value="">Select your option</option>
+                                            <option data-toggle="modal" data-target="#revenue" data-backdrop="static" data-keyboard="false">Yes</option>
+                                            <option data-backdrop="static" data-keyboard="false">No</option>
+                                        </select>
+                                        <button style="position: absolute; margin-top: -13%; margin-left: 65%;" ng-click="updateRevenue()" ng-show="campaign.cm_revenue=='Yes'"><i class="fa fa-pencil"></i></button>
+                                    <br>    
                                 </div>
                                 <div class="col-sm-3">
                                         <label>Custom Question</label>
@@ -217,9 +222,14 @@
                                     <br>    
                                 </div>
                                 <div class="col-sm-3">
-                                        <label>Job Function / Level</label>
-                                        <input type="text" id="cm_job" class="form-control" ng-model="campaign.cm_job" >
-                                    <br>
+                                    <label>Job Function/Level (Y/N)</label>
+                                    <select id="cm_job" class="form-control" ng-model="campaign.cm_job">
+                                        <option value="">Select your option</option>
+                                        <option data-toggle="modal" data-target="#level" data-backdrop="static" data-keyboard="false">Yes</option>
+                                        <option data-backdrop="static" data-keyboard="false">No</option>
+                                    </select>
+                                    <button style="position: absolute; margin-top: -13%; margin-left: 65%;" ng-click="updatelevel()" ng-show="campaign.cm_job=='Yes'"><i class="fa fa-pencil"></i></button>
+                                    <br>    
                                 </div>
                             </div>
                             <br>
@@ -236,6 +246,120 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="modal fade" id="level">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Campaign Job Function/level List</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-4">
+                    <label>Job function / Level</label><br>
+                    <input type="text" class="form-control" id="cjlm_job_level" ng-model="JobLevel.job_level">
+                </div>
+                <div class="col-sm-2">
+                    <br>
+                    <button class="btn btn-primary btn-block" ng-click="levelAdd()">Add</button>
+                </div>
+                <div class="col-sm-4">
+                    <label>Upload</label><br>
+                    <input type="file" name="file" onchange="angular.element(this).scope().loadlevelFile(this.files)" />
+                </div>
+                <div class="col-sm-2"><br>
+                    <button class="btn btn-warning btn-block" ng-click="handlelevelFile()">Import</button>
+                </div>
+            </div>
+        </div><br>
+
+        <div class="box-body table-responsive no-padding">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Job Function / level's</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="list in levelList">
+                    <td>{{list.job_level}}</td>
+                    <td>
+                        <i class="fa fa-trash" ng-click="deletelevelList($index)"></i>
+                    </td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+    </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" ng-click="closelevelList()">Close</button>
+        <button type="submit" class="btn btn-success pull-right" ng-click="addlevelList()">Save & Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="revenue">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Campaign Revenue List</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-4">
+                    <label>Revenue</label><br>
+                    <input type="text" class="form-control" id="crem_revenue" ng-model="Revenue.revenues">
+                </div>
+                <div class="col-sm-2">
+                    <br>
+                    <button class="btn btn-primary btn-block" ng-click="revenueAdd()">Add</button>
+                </div>
+                <div class="col-sm-4">
+                    <label>Upload</label><br>
+                    <input type="file" name="file" onchange="angular.element(this).scope().loadrevenueFile(this.files)" />
+                </div>
+                <div class="col-sm-2"><br>
+                    <button class="btn btn-warning btn-block" ng-click="handlerevenueFile()">Import</button>
+                </div>
+            </div>
+        </div><br>
+
+        <div class="box-body table-responsive no-padding">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Revenue's</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="list in revenueList">
+                    <td>{{list.revenues}}</td>
+                    <td>
+                        <i class="fa fa-trash" ng-click="deleterevenueList($index)"></i>
+                    </td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+    </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" ng-click="closerevenueList()">Close</button>
+        <button type="submit" class="btn btn-success pull-right" ng-click="addrevenueList()">Save & Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
 </div>
 
 <div class="modal fade" id="vertical">
@@ -1380,6 +1504,38 @@
       <div class="modal-footer">
         <button type="button" id="del" class="btn btn-danger" ng-click="methodDelConfirm()">Yes</button>
         <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="methodNoChange()">No</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade deleteposition" id="revenue_delete">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+                <p>Are You Sure You Want To Delete The Records?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="del" class="btn btn-danger" ng-click="revenueDelConfirm()">Yes</button>
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="revenueNoChange()">No</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade deleteposition" id="level_delete">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+                <p>Are You Sure You Want To Delete The Records?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="del" class="btn btn-danger" ng-click="levelDelConfirm()">Yes</button>
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="levelNoChange()">No</button>
       </div>
     </div>
     <!-- /.modal-content -->

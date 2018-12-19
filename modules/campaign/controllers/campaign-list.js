@@ -941,4 +941,64 @@ angular.module('campaign').controller('campaignListCtrl', function ($rootScope, 
       }
     };
 
+    $scope.revenueView = function(index){
+    $scope.revenueList=[];
+      if($scope.filteredTodos[index].cm_revenue == 'Yes'){
+        $http({
+          method: 'GET',
+          url: $rootScope.baseURL+'/campaign/revenueview/'+$scope.filteredTodos[index].cm_id,
+          //data: $scope.data,
+          headers: {'Content-Type': 'application/json',
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+        })
+        .success(function(obj)
+        {
+            obj.forEach(function(value, key){
+              $scope.revenueList.push(value);
+            });
+            $("#revenue").modal("show");
+        })
+        .error(function(data) 
+        {   
+            toastr.error('Oops, Something Went Wrong.', 'Error', {
+                closeButton: true,
+                progressBar: true,
+                positionClass: "toast-top-center",
+                timeOut: "500",
+                extendedTimeOut: "500",
+            });  
+        });
+      }
+    };
+
+    $scope.levelView = function(index){
+    $scope.levelList=[];
+      if($scope.filteredTodos[index].cm_job == 'Yes'){
+        $http({
+          method: 'GET',
+          url: $rootScope.baseURL+'/campaign/levelview/'+$scope.filteredTodos[index].cm_id,
+          //data: $scope.data,
+          headers: {'Content-Type': 'application/json',
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+        })
+        .success(function(obj)
+        {
+            obj.forEach(function(value, key){
+              $scope.levelList.push(value);
+            });
+            $("#level").modal("show");
+        })
+        .error(function(data) 
+        {   
+            toastr.error('Oops, Something Went Wrong.', 'Error', {
+                closeButton: true,
+                progressBar: true,
+                positionClass: "toast-top-center",
+                timeOut: "500",
+                extendedTimeOut: "500",
+            });  
+        });
+      }
+    };
+
 });

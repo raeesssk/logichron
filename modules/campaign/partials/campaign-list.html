@@ -188,7 +188,8 @@
                                       <td ng-if="campaign.cm_allow_domain == 'Yes'" ng-click="allowView($index)" style="cursor: pointer;">{{campaign.cm_allow_domain}}</td>
                                       <td ng-if="campaign.cm_allow_domain == 'No'" ng-click="allowView($index)">{{campaign.cm_allow_domain}}</td>
 
-                                      <td>{{campaign.cm_revenue}}</td>
+                                      <td ng-if="campaign.cm_revenue == 'Yes'" ng-click="revenueView($index)" style="cursor: pointer;">{{campaign.cm_revenue}}</td>
+                                      <td ng-if="campaign.cm_revenue == 'No'" ng-click="revenueView($index)">{{campaign.cm_revenue}}</td>
 
                                       <td ng-if="campaign.cm_custom_question == 'Yes'" ng-click="customView($index)" style="cursor: pointer;">{{campaign.cm_custom_question}}</td>
                                       <td ng-if="campaign.cm_custom_question == 'No'" ng-click="customView($index)">{{campaign.cm_custom_question}}</td>
@@ -204,7 +205,8 @@
                                       <td ng-if="campaign.cm_dept == 'No'" ng-click="deptView($index)">{{campaign.cm_dept}}</td>
                                       <td ng-if="campaign.cm_method == 'Yes'" ng-click="methodView($index)" style="cursor: pointer;">{{campaign.cm_method}}</td>
                                       <td ng-if="campaign.cm_method == 'No'" ng-click="methodView($index)">{{campaign.cm_method}}</td>
-                                      <td>{{campaign.cm_job}}</td>
+                                      <td ng-if="campaign.cm_job == 'Yes'" ng-click="levelView($index)" style="cursor: pointer;">{{campaign.cm_job}}</td>
+                                      <td ng-if="campaign.cm_job == 'No'" ng-click="levelView($index)">{{campaign.cm_job}}</td>
                                       <td>
                                         <a ng-hide="edithide==0" href="#/campaign/edit/{{campaign.cm_id}}"><i class="fa fa-pencil"></i></a>
                                         <i ng-hide="deletehide==0" class="fa fa-trash" data-toggle="modal" data-target="#confirm-delete" ng-click="deleteCampaign(campaign.cm_id)"></i>
@@ -764,6 +766,64 @@
               <tbody>
                 <tr ng-repeat="list in methodList track by $index">
                     <td>{{list.cmm_method}}</td>
+                </tr>
+              </tbody>
+            </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="revenue">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Campaign Revenue List</h4>
+      </div>
+      <div class="modal-body">
+          <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Revenue's</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="list in revenueList track by $index">
+                    <td>{{list.crem_revenue}}</td>
+                </tr>
+              </tbody>
+            </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="level">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Campaign Job Function/Level</h4>
+      </div>
+      <div class="modal-body">
+          <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Job Level's</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="list in levelList track by $index">
+                    <td>{{list.cjlm_job_level}}</td>
                 </tr>
               </tbody>
             </table>

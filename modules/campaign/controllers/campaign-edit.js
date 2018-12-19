@@ -63,6 +63,14 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
     $scope.methodList=[];
     $scope.oldmethodList=[];
     $scope.removemethod=[];
+    $scope.Revenue={};
+    $scope.revenueList=[];
+    $scope.oldrevenueList=[];
+    $scope.removerevenue=[];
+    $scope.JobLevel={};
+    $scope.levelList=[];
+    $scope.oldlevelList=[];
+    $scope.removelevel=[];
 
     $scope.campaign.userid=localStorage.getItem('logichron_userid');
 
@@ -659,6 +667,72 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
     };
 
 
+    $scope.getrevenue = function () {
+         $http({
+          method: 'GET',
+          url: $rootScope.baseURL+'/campaign/revenue/'+$scope.campaignId,
+          headers: {'Content-Type': 'application/json',
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+        })
+        .success(function(campaignObj)
+        {
+            campaignObj.forEach(function (value, key) {
+                $scope.oldrevenueList.push(value);
+              });
+                
+              
+        })
+        .error(function(data) 
+        {   
+          var dialog = bootbox.dialog({
+            message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                closeButton: false
+            });
+            setTimeout(function(){
+                dialog.modal('hide'); 
+            }, 1500);            
+        });
+    };
+    $scope.getrevenue();
+
+    $scope.deleteOldrevenue = function(index){
+      $scope.removerevenue.push($scope.oldrevenueList[index]);
+      $scope.oldrevenueList.splice(index,1);
+    };
+
+    $scope.getlevel = function () {
+         $http({
+          method: 'GET',
+          url: $rootScope.baseURL+'/campaign/level/'+$scope.campaignId,
+          headers: {'Content-Type': 'application/json',
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+        })
+        .success(function(campaignObj)
+        {
+            campaignObj.forEach(function (value, key) {
+                $scope.oldlevelList.push(value);
+              });
+                
+              
+        })
+        .error(function(data) 
+        {   
+          var dialog = bootbox.dialog({
+            message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                closeButton: false
+            });
+            setTimeout(function(){
+                dialog.modal('hide'); 
+            }, 1500);            
+        });
+    };
+    $scope.getlevel();
+
+    $scope.deleteOldlevel = function(index){
+      $scope.removelevel.push($scope.oldlevelList[index]);
+      $scope.oldlevelList.splice(index,1);
+    };
+
 
 
     // Show Modal on click of yes
@@ -867,6 +941,34 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
             }
         }  
     });
+    $('#cm_revenue').change(function() { //jQuery Change Function
+        var opval = $(this).val(); //Get value from select element
+        if(opval=="Yes"){ //Compare it and if true
+            $('#revenue').modal({backdrop: 'static', keyboard: false});
+            $('#revenue').modal("show"); //Open Modal
+        }
+        else {
+            if($scope.revenueList.length > 0){
+                $('#revenue_delete').modal("show");
+                $('#revenue_delete').modal({backdrop: 'static', keyboard: false});
+                
+            }
+        }  
+    });
+    $('#cm_job').change(function() { //jQuery Change Function
+        var opval = $(this).val(); //Get value from select element
+        if(opval=="Yes"){ //Compare it and if true
+            $('#level').modal({backdrop: 'static', keyboard: false});
+            $('#level').modal("show"); //Open Modal
+        }
+        else {
+            if($scope.levelList.length > 0){
+                $('#level_delete').modal("show");
+                $('#level_delete').modal({backdrop: 'static', keyboard: false});
+                
+            }
+        }  
+    });
 
 //Modal data Show
 // 1
@@ -965,7 +1067,7 @@ $scope.loadrestFile = function (files) {
             $scope.campaign.cm_restrict="No";
             $scope.restrict="";
         }
-        else if ($scope.restrictList.length > 0){
+        else if ($scope.restrictList.length > 0 || $scope.oldrestrictList.length > 0){
             $('#restrict_delete').modal("show");
             $scope.campaign.cm_restrict="No";
         }
@@ -1080,7 +1182,7 @@ $scope.loadomainLimitFile = function (files) {
             $scope.campaign.cm_domain_limit="No";
             $scope.domain_limit="";
         }
-        else if ($scope.domainList.length > 0){
+        else if ($scope.domainList.length > 0 || $scope.olddlimitList.length > 0){
             $('#domain_limit_delete').modal("show");
             $scope.campaign.cm_domain_limit="No";
         }
@@ -1195,6 +1297,11 @@ $scope.loadempSizeFile = function (files) {
             $scope.Employee_sizes="";
         }
         else if ($scope.empsizeList.length > 0){
+            $('#employee_size_delete').modal("show");
+            $scope.campaign.cm_emp_size="No";
+        }
+        else if($scope.oldempsizeList.length > 0){
+
             $('#employee_size_delete').modal("show");
             $scope.campaign.cm_emp_size="No";
         }
@@ -1915,7 +2022,7 @@ $scope.loadenydomainFile = function (files) {
             $scope.campaign.cm_title="No";
             $scope.titled="";
         }
-        else if ($scope.titleList.length > 0){
+        else if ($scope.titleList.length > 0 || $scope.oldtitleList.length > 0){
             $('#title_delete').modal("show");
             $scope.campaign.cm_title="No";
         }
@@ -2028,7 +2135,7 @@ $scope.loadenydomainFile = function (files) {
             $scope.campaign.cm_industry="No";
             $scope.industry="";
         }
-        else if ($scope.industryList.length > 0){
+        else if ($scope.industryList.length > 0 || $scope.oldindustryList.length > 0){
             $('#industry_delete').modal("show");
             $scope.campaign.cm_industry="No";
         }
@@ -2142,7 +2249,7 @@ $scope.loadenydomainFile = function (files) {
             $scope.campaign.cm_vertical="No";
             $scope.Vertical="";
         }
-        else if ($scope.VerticalList.length > 0){
+        else if ($scope.VerticalList.length > 0 || $scope.oldverticalList.length > 0){
             $('#vertical_delete').modal("show");
             $scope.campaign.cm_vertical="No";
         }
@@ -2256,7 +2363,7 @@ $scope.loadenydomainFile = function (files) {
             $scope.campaign.cm_geo="No";
             $scope.geos="";
         }
-        else if ($scope.geoList.length > 0){
+        else if ($scope.geoList.length > 0 || $scope.oldgeoList.length > 0){
             $('#geo_delete').modal("show");
             $scope.campaign.cm_geo="No";
         }
@@ -2370,7 +2477,7 @@ $scope.loadenydomainFile = function (files) {
             $scope.campaign.cm_campaign_asset="No";
             $scope.campAsset="";
         }
-        else if ($scope.campAssetList.length > 0){
+        else if ($scope.campAssetList.length > 0 || $scope.oldassetList.length > 0){
             $('#asset_delete').modal("show");
             $scope.campaign.cm_campaign_asset="No";
         }
@@ -2484,7 +2591,7 @@ $scope.loadenydomainFile = function (files) {
             $scope.campaign.cm_dept="No";
             $scope.departments="";
         }
-        else if ($scope.departmentList.length > 0){
+        else if ($scope.departmentList.length > 0 || $scope.olddeptList.length > 0){
             $('#department_delete').modal("show");
             $scope.campaign.cm_dept="No";
         }
@@ -2598,7 +2705,7 @@ $scope.loadenydomainFile = function (files) {
             $scope.campaign.cm_method="No";
             $scope.methods="";
         }
-        else if ($scope.methodList.length > 0){
+        else if ($scope.methodList.length > 0 || $scope.oldmethodList.length > 0){
             $('#method_delete').modal("show");
             $scope.campaign.cm_method="No";
         }
@@ -2615,6 +2722,234 @@ $scope.loadenydomainFile = function (files) {
     };
     $scope.updateMethod=function(){
        $('#method').modal("show");
+    };
+
+
+    $scope.loadlevelFile = function (files) {  
+  
+        $scope.$apply(function () {  
+  
+            $scope.selectedFile = files[0];  
+  
+        })  
+  
+    }  
+  
+      $scope.handlelevelFile = function () {
+        var file = $scope.selectedFile;  
+  
+        if (file) {  
+  
+            var reader = new FileReader();  
+  
+            reader.onload = function (e) {  
+  
+                var data = e.target.result;  
+                
+                var workbook = XLSX.read(data, { type: 'binary' });  
+                
+                var first_sheet_name = workbook.SheetNames[0];  
+  
+                var dataObjects = XLSX.utils.sheet_to_json(workbook.Sheets[first_sheet_name]);  
+                
+                if (dataObjects.length > 0) {  
+  
+                      
+                    $scope.savelevel(dataObjects);  
+  
+  
+                } else {  
+                    $scope.msg = "Error : Something Wrong !";  
+                }  
+  
+            }  
+  
+            reader.onerror = function (ex) {  
+  
+            }  
+  
+            reader.readAsBinaryString(file);  
+        }  
+    }  
+
+    $scope.savelevel = function(data){
+        data.forEach(function(value,key){
+         $scope.levelList.push(value);
+        })
+    };
+    $scope.levelAdd=function(){
+        if($('#cjlm_job_level').val() == undefined || $('#cjlm_job_level').val() == ""){
+            var dialog = bootbox.dialog({
+            message: '<p class="text-center">Please Enter The Job Level.</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide');
+                $('#cjlm_job_level').focus(); 
+            }, 1500);
+        }
+        else{
+        $scope.levelList.push($scope.JobLevel);
+        $scope.JobLevel="";
+        }
+    }; 
+    $scope.deletelevelList=function(index){
+        $scope.levelList.splice(index,1);
+    };
+    $scope.addlevelList=function(){
+        if ($scope.levelList.length > 0){
+            $('#level').modal("hide");
+            $scope.JobLevel="";
+        }
+        else{
+            var dialog = bootbox.dialog({
+            message: '<p class="text-center">Fields Cannot Be Empty.</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide'); 
+            }, 1500);
+        }
+    };
+    $scope.closelevelList=function(){
+         if ($scope.levelList.length == 0){
+            
+            $('#level').modal("hide");
+            $scope.campaign.cm_job="No";
+            $scope.JobLevel="";
+        }
+        else if ($scope.levelList.length > 0 || $scope.oldlevelList.length > 0){
+            $('#level_delete').modal("show");
+            $scope.campaign.cm_job="No";
+        }
+    };
+    $scope.levelDelConfirm=function(){
+        $scope.levelList=[];
+        $scope.campaign.cm_job="No";
+        $('#level_delete').modal("hide");
+        $('#level').modal("hide");
+    };
+    $scope.levelNoChange=function(){
+        $scope.campaign.cm_job="Yes";
+    };
+    $scope.updatelevel=function(){
+       $('#level').modal("show");
+    };
+
+
+    $scope.loadrevenueFile = function (files) {  
+  
+        $scope.$apply(function () {  
+  
+            $scope.selectedFile = files[0];  
+  
+        })  
+  
+    }  
+  
+      $scope.handlerevenueFile = function () {
+        var file = $scope.selectedFile;  
+  
+        if (file) {  
+  
+            var reader = new FileReader();  
+  
+            reader.onload = function (e) {  
+  
+                var data = e.target.result;  
+                
+                var workbook = XLSX.read(data, { type: 'binary' });  
+                
+                var first_sheet_name = workbook.SheetNames[0];  
+  
+                var dataObjects = XLSX.utils.sheet_to_json(workbook.Sheets[first_sheet_name]);  
+                
+                if (dataObjects.length > 0) {  
+  
+                      
+                    $scope.saverevenue(dataObjects);  
+  
+  
+                } else {  
+                    $scope.msg = "Error : Something Wrong !";  
+                }  
+  
+            }  
+  
+            reader.onerror = function (ex) {  
+  
+            }  
+  
+            reader.readAsBinaryString(file);  
+        }  
+    }  
+
+    $scope.saverevenue = function(data){
+        data.forEach(function(value,key){
+         $scope.revenueList.push(value);
+        })
+    };
+    $scope.revenueAdd=function(){
+        if($('#crem_revenue').val() == undefined || $('#crem_revenue').val() == ""){
+            var dialog = bootbox.dialog({
+            message: '<p class="text-center">Please Enter The Revenue.</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide');
+                $('#crem_revenue').focus(); 
+            }, 1500);
+        }
+        else{
+        $scope.revenueList.push($scope.Revenue);
+        $scope.Revenue="";
+        }
+    }; 
+    $scope.deleterevenueList=function(index){
+        $scope.revenueList.splice(index,1);
+    };
+    $scope.addrevenueList=function(){
+        if ($scope.revenueList.length > 0){
+            $('#revenue').modal("hide");
+            $scope.Revenue="";
+        }
+        else{
+            var dialog = bootbox.dialog({
+            message: '<p class="text-center">Fields Cannot Be Empty.</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide'); 
+            }, 1500);
+        }
+    };
+    $scope.closerevenueList=function(){
+         if ($scope.revenueList.length == 0){
+            
+            $('#revenue').modal("hide");
+            $scope.campaign.cm_revenue="No";
+            $scope.Revenue="";
+        }
+        else if ($scope.revenueList.length > 0 || $scope.oldrevenueList.length > 0){
+            $('#revenue_delete').modal("show");
+            $scope.campaign.cm_revenue="No";
+        }
+    };
+    $scope.revenueDelConfirm=function(){
+        $scope.revenueList=[];
+        $scope.campaign.cm_revenue="No";
+        $('#revenue_delete').modal("hide");
+        $('#revenue').modal("hide");
+    };
+    $scope.revenueNoChange=function(){
+        $scope.campaign.cm_revenue="Yes";
+    };
+    $scope.updateRevenue=function(){
+       $('#revenue').modal("show");
     };
 
    
@@ -2893,6 +3228,8 @@ $scope.loadenydomainFile = function (files) {
                     campAssetList : $scope.campAssetList,
                     departmentList : $scope.departmentList,
                     methodList : $scope.methodList,
+                    revenueList : $scope.revenueList,
+                    levelList : $scope.levelList,
                     oldaccountList: $scope.oldaccountList,
                     oldsupressionList: $scope.oldsupressionList,
                     oldallowDomainList : $scope.oldallowDomainList,
@@ -2908,6 +3245,8 @@ $scope.loadenydomainFile = function (files) {
                     oldassetList : $scope.oldassetList,
                     olddeptList : $scope.olddeptList,
                     oldmethodList : $scope.oldmethodList,
+                    oldrevenueList : $scope.oldrevenueList,
+                    oldlevelList : $scope.oldlevelList,
                     removeAccount : $scope.removeAccount,
                     removesuppressionList : $scope.removesuppressionList,
                     removeAllowedDomain : $scope.removeAllowedDomain,
@@ -2922,7 +3261,9 @@ $scope.loadenydomainFile = function (files) {
                     removegeo : $scope.removegeo,
                     removeasset : $scope.removeasset,
                     removdept : $scope.removdept,
-                    removemethod : $scope.removemethod
+                    removemethod : $scope.removemethod,
+                    removerevenue : $scope.removerevenue,
+                    removelevel : $scope.removelevel
 
 
                 }

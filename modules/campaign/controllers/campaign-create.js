@@ -34,6 +34,10 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
     $scope.departmentList=[];
     $scope.methods={};
     $scope.methodList=[];
+    $scope.Revenue={};
+    $scope.revenueList=[];
+    $scope.JobLevel={};
+    $scope.levelList=[];
     $scope.campaign.userid=localStorage.getItem('logichron_userid');
     $scope.account.userid=localStorage.getItem('logichron_userid');
     $scope.supression.userid=localStorage.getItem('logichron_userid');
@@ -358,6 +362,34 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
             if($scope.methodList.length > 0){
                 $('#method_delete').modal("show");
                 $('#method_delete').modal({backdrop: 'static', keyboard: false});
+                
+            }
+        }  
+    });
+    $('#cm_revenue').change(function() { //jQuery Change Function
+        var opval = $(this).val(); //Get value from select element
+        if(opval=="Yes"){ //Compare it and if true
+            $('#revenue').modal({backdrop: 'static', keyboard: false});
+            $('#revenue').modal("show"); //Open Modal
+        }
+        else {
+            if($scope.revenueList.length > 0){
+                $('#revenue_delete').modal("show");
+                $('#revenue_delete').modal({backdrop: 'static', keyboard: false});
+                
+            }
+        }  
+    });
+    $('#cm_job').change(function() { //jQuery Change Function
+        var opval = $(this).val(); //Get value from select element
+        if(opval=="Yes"){ //Compare it and if true
+            $('#level').modal({backdrop: 'static', keyboard: false});
+            $('#level').modal("show"); //Open Modal
+        }
+        else {
+            if($scope.levelList.length > 0){
+                $('#level_delete').modal("show");
+                $('#level_delete').modal({backdrop: 'static', keyboard: false});
                 
             }
         }  
@@ -2120,6 +2152,236 @@ $scope.loadenydomainFile = function (files) {
     $scope.updateMethod=function(){
        $('#method').modal("show");
     };
+
+
+    $scope.loadlevelFile = function (files) {  
+  
+        $scope.$apply(function () {  
+  
+            $scope.selectedFile = files[0];  
+  
+        })  
+  
+    }  
+  
+      $scope.handlelevelFile = function () {
+        var file = $scope.selectedFile;  
+  
+        if (file) {  
+  
+            var reader = new FileReader();  
+  
+            reader.onload = function (e) {  
+  
+                var data = e.target.result;  
+                
+                var workbook = XLSX.read(data, { type: 'binary' });  
+                
+                var first_sheet_name = workbook.SheetNames[0];  
+  
+                var dataObjects = XLSX.utils.sheet_to_json(workbook.Sheets[first_sheet_name]);  
+                
+                if (dataObjects.length > 0) {  
+  
+                      
+                    $scope.savelevel(dataObjects);  
+  
+  
+                } else {  
+                    $scope.msg = "Error : Something Wrong !";  
+                }  
+  
+            }  
+  
+            reader.onerror = function (ex) {  
+  
+            }  
+  
+            reader.readAsBinaryString(file);  
+        }  
+    }  
+
+    $scope.savelevel = function(data){
+        data.forEach(function(value,key){
+         $scope.levelList.push(value);
+        })
+    };
+    $scope.levelAdd=function(){
+        if($('#cjlm_job_level').val() == undefined || $('#cjlm_job_level').val() == ""){
+            var dialog = bootbox.dialog({
+            message: '<p class="text-center">Please Enter The Job Level.</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide');
+                $('#cjlm_job_level').focus(); 
+            }, 1500);
+        }
+        else{
+        $scope.levelList.push($scope.JobLevel);
+        $scope.JobLevel="";
+        }
+    }; 
+    $scope.deletelevelList=function(index){
+        $scope.levelList.splice(index,1);
+    };
+    $scope.addlevelList=function(){
+        if ($scope.levelList.length > 0){
+            $('#level').modal("hide");
+            $scope.JobLevel="";
+        }
+        else{
+            var dialog = bootbox.dialog({
+            message: '<p class="text-center">Fields Cannot Be Empty.</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide'); 
+            }, 1500);
+        }
+    };
+    $scope.closelevelList=function(){
+         if ($scope.levelList.length == 0){
+            
+            $('#level').modal("hide");
+            $scope.campaign.cm_job="No";
+            $scope.JobLevel="";
+        }
+        else if ($scope.levelList.length > 0){
+            $('#level_delete').modal("show");
+            $scope.campaign.cm_job="No";
+        }
+    };
+    $scope.levelDelConfirm=function(){
+        $scope.levelList=[];
+        $scope.campaign.cm_job="No";
+        $('#level_delete').modal("hide");
+        $('#level').modal("hide");
+    };
+    $scope.levelNoChange=function(){
+        $scope.campaign.cm_job="Yes";
+    };
+    $scope.updatelevel=function(){
+       $('#level').modal("show");
+    };
+
+
+    $scope.loadrevenueFile = function (files) {  
+  
+        $scope.$apply(function () {  
+  
+            $scope.selectedFile = files[0];  
+  
+        })  
+  
+    }  
+  
+      $scope.handlerevenueFile = function () {
+        var file = $scope.selectedFile;  
+  
+        if (file) {  
+  
+            var reader = new FileReader();  
+  
+            reader.onload = function (e) {  
+  
+                var data = e.target.result;  
+                
+                var workbook = XLSX.read(data, { type: 'binary' });  
+                
+                var first_sheet_name = workbook.SheetNames[0];  
+  
+                var dataObjects = XLSX.utils.sheet_to_json(workbook.Sheets[first_sheet_name]);  
+                
+                if (dataObjects.length > 0) {  
+  
+                      
+                    $scope.saverevenue(dataObjects);  
+  
+  
+                } else {  
+                    $scope.msg = "Error : Something Wrong !";  
+                }  
+  
+            }  
+  
+            reader.onerror = function (ex) {  
+  
+            }  
+  
+            reader.readAsBinaryString(file);  
+        }  
+    }  
+
+    $scope.saverevenue = function(data){
+        data.forEach(function(value,key){
+         $scope.revenueList.push(value);
+        })
+    };
+    $scope.revenueAdd=function(){
+        if($('#crem_revenue').val() == undefined || $('#crem_revenue').val() == ""){
+            var dialog = bootbox.dialog({
+            message: '<p class="text-center">Please Enter The Revenue.</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide');
+                $('#crem_revenue').focus(); 
+            }, 1500);
+        }
+        else{
+        $scope.revenueList.push($scope.Revenue);
+        $scope.Revenue="";
+        }
+    }; 
+    $scope.deleterevenueList=function(index){
+        $scope.revenueList.splice(index,1);
+    };
+    $scope.addrevenueList=function(){
+        if ($scope.revenueList.length > 0){
+            $('#revenue').modal("hide");
+            $scope.Revenue="";
+        }
+        else{
+            var dialog = bootbox.dialog({
+            message: '<p class="text-center">Fields Cannot Be Empty.</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide'); 
+            }, 1500);
+        }
+    };
+    $scope.closerevenueList=function(){
+         if ($scope.revenueList.length == 0){
+            
+            $('#revenue').modal("hide");
+            $scope.campaign.cm_revenue="No";
+            $scope.Revenue="";
+        }
+        else if ($scope.revenueList.length > 0 ){
+            $('#revenue_delete').modal("show");
+            $scope.campaign.cm_revenue="No";
+        }
+    };
+    $scope.revenueDelConfirm=function(){
+        $scope.revenueList=[];
+        $scope.campaign.cm_revenue="No";
+        $('#revenue_delete').modal("hide");
+        $('#revenue').modal("hide");
+    };
+    $scope.revenueNoChange=function(){
+        $scope.campaign.cm_revenue="Yes";
+    };
+    $scope.updateRevenue=function(){
+       $('#revenue').modal("show");
+    };
+
+
     // $('#cm_first_dely').focus();
     $scope.addEntry = function () { 
 		var nameRegex = /^\d+$/;
@@ -2395,7 +2657,9 @@ $scope.loadenydomainFile = function (files) {
                     geoList : $scope.geoList,
                     campAssetList : $scope.campAssetList,
                     departmentList : $scope.departmentList,
-                    methodList : $scope.methodList
+                    methodList : $scope.methodList,
+                    revenueList : $scope.revenueList,
+                    levelList : $scope.levelList
                 }
 
                 $('#btnsave').attr('disabled','true');
