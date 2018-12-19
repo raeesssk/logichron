@@ -95,7 +95,8 @@
                                       <td>{{campaign.cm_domain_limit}}</td>
                                       <td>{{campaign.cm_emp_size}}</td>
                                       <td>{{campaign.cm_disqualifies}}</td>
-                                      <td>{{campaign.cm_title}}</td>
+                                      <td ng-if="campaign.cm_title == 'Yes'" ng-click="titleView($index)" style="cursor: pointer;">{{campaign.cm_title}}</td>
+                                      <td ng-if="campaign.cm_title == 'No'" ng-click="titleView($index)">{{campaign.cm_title}}</td>
                                       <td>{{campaign.cm_lead_count}} / <label style="color: green">{{campaign.targetcount}}</label></td>
                                       <td>{{campaign.cm_vertical}}</td>
                                       <td>{{campaign.cm_geo}}</td>
@@ -112,7 +113,8 @@
                                       <td ng-if="campaign.cm_denied_domain == 'No'" ng-click="deniedView($index)">{{campaign.cm_denied_domain}}</td>
 
                                       <td>{{campaign.cm_campaign_asset}}</td>
-                                      <td>{{campaign.cm_industry}}</td>
+                                      <td ng-if="campaign.cm_industry == 'Yes'" ng-click="industryView($index)" style="cursor: pointer;">{{campaign.cm_industry}}</td>
+                                      <td ng-if="campaign.cm_industry == 'No'" ng-click="industryView($index)">{{campaign.cm_industry}}</td>
                                       <td>{{campaign.cm_dept}}</td>
                                       <td>{{campaign.cm_method}}</td>
                                       <td>{{campaign.cm_job}}</td>
@@ -160,7 +162,8 @@
                                       <td>{{campaign.cm_end_date | date}}</td>
                                       <td>{{campaign.cm_dely_frequency}}</td>
                                       <td>{{campaign.cm_campaign_name}}</td>
-                                      <td>{{campaign.cm_restrict}}</td>
+                                      <td ng-if="campaign.cm_restrict == 'Yes'" ng-click="restView($index)" style="cursor: pointer;">{{campaign.cm_restrict}}</td>
+                                      <td ng-if="campaign.cm_restrict == 'No'" ng-click="restView($index)">{{campaign.cm_restrict}}</td>
 
                                       <td ng-if="campaign.cm_account_list == 'Yes'" ng-click="accntView($index)" style="cursor: pointer;">{{campaign.cm_account_list}}</td>
                                       <td ng-if="campaign.cm_account_list == 'No'" ng-click="accntView($index)">{{campaign.cm_account_list}}</td>
@@ -169,13 +172,18 @@
                                       <td ng-if="campaign.cm_supression_file == 'Yes'" ng-click="supressionView($index)" style="cursor: pointer;">{{campaign.cm_supression_file}}</td>
                                       <td ng-if="campaign.cm_supression_file == 'No'" ng-click="supressionView($index)" >{{campaign.cm_supression_file}}</td>
 
-                                      <td>{{campaign.cm_domain_limit}}</td>
-                                      <td>{{campaign.cm_emp_size}}</td>
+                                      <td ng-if="campaign.cm_domain_limit == 'Yes'" ng-click="dlimitView($index)" style="cursor: pointer;">{{campaign.cm_domain_limit}}</td>
+                                      <td ng-if="campaign.cm_domain_limit == 'No'" ng-click="dlimitView($index)">{{campaign.cm_domain_limit}}</td>
+                                      <td ng-if="campaign.cm_emp_size == 'Yes'" ng-click="empsizeView($index)" style="cursor: pointer;">{{campaign.cm_emp_size}}</td>
+                                      <td ng-if="campaign.cm_emp_size == 'No'" ng-click="empsizeView($index)">{{campaign.cm_emp_size}}</td>
                                       <td>{{campaign.cm_disqualifies}}</td>
-                                      <td>{{campaign.cm_title}}</td>
+                                      <td ng-if="campaign.cm_title == 'Yes'" ng-click="titleView($index)" style="cursor: pointer;">{{campaign.cm_title}}</td>
+                                      <td ng-if="campaign.cm_title == 'No'" ng-click="titleView($index)">{{campaign.cm_title}}</td>
                                       <td ng-click="QualifyContact($index)">{{campaign.cm_lead_count}} / <label style="color: green;cursor: pointer;">{{campaign.targetcount}}</label></td>
-                                      <td>{{campaign.cm_vertical}}</td>
-                                      <td>{{campaign.cm_geo}}</td>
+                                      <td ng-if="campaign.cm_vertical == 'Yes'" ng-click="verticalView($index)" style="cursor: pointer;">{{campaign.cm_vertical}}</td>
+                                      <td ng-if="campaign.cm_vertical == 'No'" ng-click="verticalView($index)">{{campaign.cm_vertical}}</td>
+                                      <td ng-if="campaign.cm_geo == 'Yes'" ng-click="geoView($index)" style="cursor: pointer;">{{campaign.cm_geo}}</td>
+                                      <td ng-if="campaign.cm_geo == 'No'" ng-click="geoView($index)">{{campaign.cm_geo}}</td>
 
                                       <td ng-if="campaign.cm_allow_domain == 'Yes'" ng-click="allowView($index)" style="cursor: pointer;">{{campaign.cm_allow_domain}}</td>
                                       <td ng-if="campaign.cm_allow_domain == 'No'" ng-click="allowView($index)">{{campaign.cm_allow_domain}}</td>
@@ -188,10 +196,14 @@
                                       <td ng-if="campaign.cm_denied_domain == 'Yes'" ng-click="deniedView($index)" style="cursor: pointer;">{{campaign.cm_denied_domain}}</td>
                                       <td ng-if="campaign.cm_denied_domain == 'No'" ng-click="deniedView($index)">{{campaign.cm_denied_domain}}</td>
 
-                                      <td>{{campaign.cm_campaign_asset}}</td>
-                                      <td>{{campaign.cm_industry}}</td>
-                                      <td>{{campaign.cm_dept}}</td>
-                                      <td>{{campaign.cm_method}}</td>
+                                      <td ng-if="campaign.cm_campaign_asset == 'Yes'" ng-click="assetView($index)" style="cursor: pointer;">{{campaign.cm_campaign_asset}}</td>
+                                      <td ng-if="campaign.cm_campaign_asset == 'No'" ng-click="assetView($index)">{{campaign.cm_campaign_asset}}</td>
+                                      <td ng-if="campaign.cm_industry == 'Yes'" ng-click="industryView($index)" style="cursor: pointer;">{{campaign.cm_industry}}</td>
+                                      <td ng-if="campaign.cm_industry == 'No'" ng-click="industryView($index)">{{campaign.cm_industry}}</td>
+                                      <td ng-if="campaign.cm_dept == 'Yes'" ng-click="deptView($index)" style="cursor: pointer;">{{campaign.cm_dept}}</td>
+                                      <td ng-if="campaign.cm_dept == 'No'" ng-click="deptView($index)">{{campaign.cm_dept}}</td>
+                                      <td ng-if="campaign.cm_method == 'Yes'" ng-click="methodView($index)" style="cursor: pointer;">{{campaign.cm_method}}</td>
+                                      <td ng-if="campaign.cm_method == 'No'" ng-click="methodView($index)">{{campaign.cm_method}}</td>
                                       <td>{{campaign.cm_job}}</td>
                                       <td>
                                         <a ng-hide="edithide==0" href="#/campaign/edit/{{campaign.cm_id}}"><i class="fa fa-pencil"></i></a>
@@ -422,11 +434,13 @@
               <thead>
                 <tr>
                   <th>Question</th>
+                  <th>Answer's</th>
                 </tr>
               </thead>
               <tbody>
                 <tr ng-repeat="list in customQuestionList track by $index">
                     <td>{{list.cmcm_question}}</td>
+                    <td>{{list.cmcm_answer}}</td>
                 </tr>
               </tbody>
             </table>
@@ -458,6 +472,298 @@
               <tbody>
                 <tr ng-repeat="list in deniedDomainList track by $index">
                     <td>{{list.ddcm_website}}</td>
+                </tr>
+              </tbody>
+            </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<!--5 Denied Domain Modal -->
+<div class="modal fade" id="title_list">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Job title's</h4>
+      </div>
+      <div class="modal-body">
+          <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Titles</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="list in titleList track by $index">
+                    <td>{{list.ctm_title}}</td>
+                </tr>
+              </tbody>
+            </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<!--5 Denied Domain Modal -->
+<div class="modal fade" id="industry_list">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Industries</h4>
+      </div>
+      <div class="modal-body">
+          <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Industries</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="list in industryList track by $index">
+                    <td>{{list.cim_industries}}</td>
+                </tr>
+              </tbody>
+            </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="restriction">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Restrictions</h4>
+      </div>
+      <div class="modal-body">
+          <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Restrictions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="list in restList track by $index">
+                    <td>{{list.crm_restriction}}</td>
+                </tr>
+              </tbody>
+            </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="domain_limit">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Domain Limit</h4>
+      </div>
+      <div class="modal-body">
+          <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Domain Limit's</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="list in dlimitList track by $index">
+                    <td>{{list.cdlm_domainlimit}}</td>
+                </tr>
+              </tbody>
+            </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="emp_size">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Employee Size</h4>
+      </div>
+      <div class="modal-body">
+          <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Employee Size's</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="list in empsizeList track by $index">
+                    <td>{{list.cesm_employee_size}}</td>
+                </tr>
+              </tbody>
+            </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="vertical">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Vertical</h4>
+      </div>
+      <div class="modal-body">
+          <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Verticals</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="list in verticalList track by $index">
+                    <td>{{list.cvm_verticals}}</td>
+                </tr>
+              </tbody>
+            </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="geo">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Geo</h4>
+      </div>
+      <div class="modal-body">
+          <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Geo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="list in geoList track by $index">
+                    <td>{{list.cgm_geo}}</td>
+                </tr>
+              </tbody>
+            </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="asset">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Campaign Asset</h4>
+      </div>
+      <div class="modal-body">
+          <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Campaign Asset's</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="list in assetList track by $index">
+                    <td>{{list.cam_campaign_asset}}</td>
+                </tr>
+              </tbody>
+            </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="department">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Department</h4>
+      </div>
+      <div class="modal-body">
+          <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Department's</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="list in deptList track by $index">
+                    <td>{{list.cdm_department}}</td>
+                </tr>
+              </tbody>
+            </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="method">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Method</h4>
+      </div>
+      <div class="modal-body">
+          <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Method's</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="list in methodList track by $index">
+                    <td>{{list.cmm_method}}</td>
                 </tr>
               </tbody>
             </table>

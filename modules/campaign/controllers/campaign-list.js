@@ -143,7 +143,7 @@ angular.module('campaign').controller('campaignListCtrl', function ($rootScope, 
           onChangeDateTime: function (dp, $input) {
               $scope.limit.cm_from_date = $('#cm_from_date').val();
           }
-    }).datepicker('setDate', 'today');
+    });
 
     $('#cm_to_date').datepicker({
         validateOnBlur: false,
@@ -156,7 +156,7 @@ angular.module('campaign').controller('campaignListCtrl', function ($rootScope, 
           onChangeDateTime: function (dp, $input) {
               $scope.limit.cm_to_date = $('#cm_to_date').val();
           }
-    }).datepicker('setDate', 'today');
+    });
     
     
 
@@ -641,7 +641,304 @@ angular.module('campaign').controller('campaignListCtrl', function ($rootScope, 
       }
     };
 
+    $scope.titleView = function(index){
+    $scope.titleList=[];
+      if($scope.filteredTodos[index].cm_title == 'Yes'){
+        $http({
+          method: 'GET',
+          url: $rootScope.baseURL+'/campaign/titleview/'+$scope.filteredTodos[index].cm_id,
+          //data: $scope.data,
+          headers: {'Content-Type': 'application/json',
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+        })
+        .success(function(obj)
+        {
+            obj.forEach(function(value, key){
+              $scope.titleList.push(value);
+            });
+            $("#title_list").modal("show");
+        })
+        .error(function(data) 
+        {   
+            toastr.error('Oops, Something Went Wrong.', 'Error', {
+                closeButton: true,
+                progressBar: true,
+                positionClass: "toast-top-center",
+                timeOut: "500",
+                extendedTimeOut: "500",
+            });  
+        });
+      }
+    };
 
+    $scope.industryView = function(index){
+    $scope.industryList=[];
+      if($scope.filteredTodos[index].cm_industry == 'Yes'){
+        $http({
+          method: 'GET',
+          url: $rootScope.baseURL+'/campaign/industryview/'+$scope.filteredTodos[index].cm_id,
+          //data: $scope.data,
+          headers: {'Content-Type': 'application/json',
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+        })
+        .success(function(obj)
+        {
+            obj.forEach(function(value, key){
+              $scope.industryList.push(value);
+            });
+            $("#industry_list").modal("show");
+        })
+        .error(function(data) 
+        {   
+            toastr.error('Oops, Something Went Wrong.', 'Error', {
+                closeButton: true,
+                progressBar: true,
+                positionClass: "toast-top-center",
+                timeOut: "500",
+                extendedTimeOut: "500",
+            });  
+        });
+      }
+    };
 
+    $scope.restView = function(index){
+    $scope.restList=[];
+      if($scope.filteredTodos[index].cm_restrict == 'Yes'){
+        $http({
+          method: 'GET',
+          url: $rootScope.baseURL+'/campaign/restview/'+$scope.filteredTodos[index].cm_id,
+          //data: $scope.data,
+          headers: {'Content-Type': 'application/json',
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+        })
+        .success(function(obj)
+        {
+            obj.forEach(function(value, key){
+              $scope.restList.push(value);
+            });
+            $("#restriction").modal("show");
+        })
+        .error(function(data) 
+        {   
+            toastr.error('Oops, Something Went Wrong.', 'Error', {
+                closeButton: true,
+                progressBar: true,
+                positionClass: "toast-top-center",
+                timeOut: "500",
+                extendedTimeOut: "500",
+            });  
+        });
+      }
+    };
+
+    $scope.dlimitView = function(index){
+    $scope.dlimitList=[];
+      if($scope.filteredTodos[index].cm_domain_limit == 'Yes'){
+        $http({
+          method: 'GET',
+          url: $rootScope.baseURL+'/campaign/dlimitview/'+$scope.filteredTodos[index].cm_id,
+          //data: $scope.data,
+          headers: {'Content-Type': 'application/json',
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+        })
+        .success(function(obj)
+        {
+            obj.forEach(function(value, key){
+              $scope.dlimitList.push(value);
+            });
+            $("#domain_limit").modal("show");
+        })
+        .error(function(data) 
+        {   
+            toastr.error('Oops, Something Went Wrong.', 'Error', {
+                closeButton: true,
+                progressBar: true,
+                positionClass: "toast-top-center",
+                timeOut: "500",
+                extendedTimeOut: "500",
+            });  
+        });
+      }
+    };
+
+    $scope.empsizeView = function(index){
+    $scope.empsizeList=[];
+      if($scope.filteredTodos[index].cm_emp_size == 'Yes'){
+        $http({
+          method: 'GET',
+          url: $rootScope.baseURL+'/campaign/empsizeview/'+$scope.filteredTodos[index].cm_id,
+          //data: $scope.data,
+          headers: {'Content-Type': 'application/json',
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+        })
+        .success(function(obj)
+        {
+            obj.forEach(function(value, key){
+              $scope.empsizeList.push(value);
+            });
+            $("#emp_size").modal("show");
+        })
+        .error(function(data) 
+        {   
+            toastr.error('Oops, Something Went Wrong.', 'Error', {
+                closeButton: true,
+                progressBar: true,
+                positionClass: "toast-top-center",
+                timeOut: "500",
+                extendedTimeOut: "500",
+            });  
+        });
+      }
+    };
+
+    $scope.verticalView = function(index){
+    $scope.verticalList=[];
+      if($scope.filteredTodos[index].cm_vertical == 'Yes'){
+        $http({
+          method: 'GET',
+          url: $rootScope.baseURL+'/campaign/verticalview/'+$scope.filteredTodos[index].cm_id,
+          //data: $scope.data,
+          headers: {'Content-Type': 'application/json',
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+        })
+        .success(function(obj)
+        {
+            obj.forEach(function(value, key){
+              $scope.verticalList.push(value);
+            });
+            $("#vertical").modal("show");
+        })
+        .error(function(data) 
+        {   
+            toastr.error('Oops, Something Went Wrong.', 'Error', {
+                closeButton: true,
+                progressBar: true,
+                positionClass: "toast-top-center",
+                timeOut: "500",
+                extendedTimeOut: "500",
+            });  
+        });
+      }
+    };
+
+    $scope.geoView = function(index){
+    $scope.geoList=[];
+      if($scope.filteredTodos[index].cm_geo == 'Yes'){
+        $http({
+          method: 'GET',
+          url: $rootScope.baseURL+'/campaign/geoview/'+$scope.filteredTodos[index].cm_id,
+          //data: $scope.data,
+          headers: {'Content-Type': 'application/json',
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+        })
+        .success(function(obj)
+        {
+            obj.forEach(function(value, key){
+              $scope.geoList.push(value);
+            });
+            $("#geo").modal("show");
+        })
+        .error(function(data) 
+        {   
+            toastr.error('Oops, Something Went Wrong.', 'Error', {
+                closeButton: true,
+                progressBar: true,
+                positionClass: "toast-top-center",
+                timeOut: "500",
+                extendedTimeOut: "500",
+            });  
+        });
+      }
+    };
+
+    $scope.assetView = function(index){
+    $scope.assetList=[];
+      if($scope.filteredTodos[index].cm_campaign_asset == 'Yes'){
+        $http({
+          method: 'GET',
+          url: $rootScope.baseURL+'/campaign/assetview/'+$scope.filteredTodos[index].cm_id,
+          //data: $scope.data,
+          headers: {'Content-Type': 'application/json',
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+        })
+        .success(function(obj)
+        {
+            obj.forEach(function(value, key){
+              $scope.assetList.push(value);
+            });
+            $("#asset").modal("show");
+        })
+        .error(function(data) 
+        {   
+            toastr.error('Oops, Something Went Wrong.', 'Error', {
+                closeButton: true,
+                progressBar: true,
+                positionClass: "toast-top-center",
+                timeOut: "500",
+                extendedTimeOut: "500",
+            });  
+        });
+      }
+    };
+
+    $scope.deptView = function(index){
+    $scope.deptList=[];
+      if($scope.filteredTodos[index].cm_dept == 'Yes'){
+        $http({
+          method: 'GET',
+          url: $rootScope.baseURL+'/campaign/deptview/'+$scope.filteredTodos[index].cm_id,
+          //data: $scope.data,
+          headers: {'Content-Type': 'application/json',
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+        })
+        .success(function(obj)
+        {
+            obj.forEach(function(value, key){
+              $scope.deptList.push(value);
+            });
+            $("#department").modal("show");
+        })
+        .error(function(data) 
+        {   
+            toastr.error('Oops, Something Went Wrong.', 'Error', {
+                closeButton: true,
+                progressBar: true,
+                positionClass: "toast-top-center",
+                timeOut: "500",
+                extendedTimeOut: "500",
+            });  
+        });
+      }
+    };
+
+    $scope.methodView = function(index){
+    $scope.methodList=[];
+      if($scope.filteredTodos[index].cm_method == 'Yes'){
+        $http({
+          method: 'GET',
+          url: $rootScope.baseURL+'/campaign/methodview/'+$scope.filteredTodos[index].cm_id,
+          //data: $scope.data,
+          headers: {'Content-Type': 'application/json',
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+        })
+        .success(function(obj)
+        {
+            obj.forEach(function(value, key){
+              $scope.methodList.push(value);
+            });
+            $("#method").modal("show");
+        })
+        .error(function(data) 
+        {   
+            toastr.error('Oops, Something Went Wrong.', 'Error', {
+                closeButton: true,
+                progressBar: true,
+                positionClass: "toast-top-center",
+                timeOut: "500",
+                extendedTimeOut: "500",
+            });  
+        });
+      }
+    };
 
 });
