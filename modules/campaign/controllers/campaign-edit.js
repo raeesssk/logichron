@@ -1045,7 +1045,7 @@ $scope.loadrestFile = function (files) {
         $scope.restrictList.splice(index,1);
     };
     $scope.addrestrictList=function(){
-        if ($scope.restrictList.length > 0){
+        if ($scope.restrictList.length > 0 || $scope.oldrestrictList.length > 0){
             $('#restriction_list').modal("hide");
             $scope.restrict="";
         }
@@ -1061,7 +1061,7 @@ $scope.loadrestFile = function (files) {
         }
     };
     $scope.closerestrictList=function(){
-         if ($scope.restrictList.length == 0){
+         if ($scope.restrictList.length == 0 && $scope.oldrestrictList.length == 0){
             
             $('#restriction_list').modal("hide");
             $scope.campaign.cm_restrict="No";
@@ -1160,7 +1160,7 @@ $scope.loadomainLimitFile = function (files) {
         $scope.domainList.splice(index,1);
     };
     $scope.adddomainlimitList=function(){
-        if ($scope.domainList.length > 0){
+        if ($scope.domainList.length > 0 || $scope.olddlimitList.length > 0){
             $('#domain_limit').modal("hide");
             $scope.domain_limit="";
         }
@@ -1176,7 +1176,7 @@ $scope.loadomainLimitFile = function (files) {
         }
     };
     $scope.closedomainLimitList=function(){
-         if ($scope.domainList.length == 0){
+         if ($scope.domainList.length == 0 && $scope.olddlimitList.length == 0){
             
             $('#domain_limit').modal("hide");
             $scope.campaign.cm_domain_limit="No";
@@ -1274,7 +1274,7 @@ $scope.loadempSizeFile = function (files) {
         $scope.empsizeList.splice(index,1);
     };
     $scope.addEmpSize=function(){
-        if ($scope.empsizeList.length > 0){
+        if ($scope.empsizeList.length > 0 || $scope.oldempsizeList.length > 0){
             $('#employee_size').modal("hide");
             $scope.Employee_sizes="";
         }
@@ -1290,21 +1290,17 @@ $scope.loadempSizeFile = function (files) {
         }
     };
     $scope.closeEmpSize=function(){
-         if ($scope.empsizeList.length == 0){
+         if ($scope.empsizeList.length == 0 && $scope.oldempsizeList.length == 0 ){
             
             $('#employee_size').modal("hide");
             $scope.campaign.cm_emp_size="No";
             $scope.Employee_sizes="";
         }
-        else if ($scope.empsizeList.length > 0){
+        else if ($scope.empsizeList.length > 0 || $scope.oldempsizeList.length > 0){
             $('#employee_size_delete').modal("show");
             $scope.campaign.cm_emp_size="No";
         }
-        else if($scope.oldempsizeList.length > 0){
-
-            $('#employee_size_delete').modal("show");
-            $scope.campaign.cm_emp_size="No";
-        }
+       
     };
     $scope.empsizeDelConfirm=function(){
         $scope.empsizeList=[];
@@ -2000,7 +1996,7 @@ $scope.loadenydomainFile = function (files) {
         $scope.titleList.splice(index,1);
     };
     $scope.addtitleList=function(){
-        if ($scope.titleList.length > 0){
+        if ($scope.titleList.length > 0 || $scope.oldtitleList.length > 0){
             $('#title_list').modal("hide");
             $scope.titled="";
         }
@@ -2016,7 +2012,7 @@ $scope.loadenydomainFile = function (files) {
         }
     };
     $scope.closetitleList=function(){
-         if ($scope.titleList.length == 0){
+         if ($scope.titleList.length == 0 && $scope.oldtitleList.length == 0){
             
             $('#title_list').modal("hide");
             $scope.campaign.cm_title="No";
@@ -2113,7 +2109,7 @@ $scope.loadenydomainFile = function (files) {
         $scope.industryList.splice(index,1);
     };
     $scope.addindustryList=function(){
-        if ($scope.industryList.length > 0){
+        if ($scope.industryList.length > 0 || $scope.oldindustryList.length > 0){
             $('#industry_list').modal("hide");
             $scope.industry="";
         }
@@ -2129,7 +2125,7 @@ $scope.loadenydomainFile = function (files) {
         }
     };
     $scope.closeindustryList=function(){
-         if ($scope.industryList.length == 0){
+         if ($scope.industryList.length == 0 && $scope.oldindustryList.length == 0){
             
             $('#industry_list').modal("hide");
             $scope.campaign.cm_industry="No";
@@ -2227,7 +2223,7 @@ $scope.loadenydomainFile = function (files) {
         $scope.VerticalList.splice(index,1);
     };
     $scope.addverticalList=function(){
-        if ($scope.VerticalList.length > 0){
+        if ($scope.VerticalList.length > 0 || $scope.oldverticalList.length > 0){
             $('#vertical').modal("hide");
             $scope.Vertical="";
         }
@@ -2243,7 +2239,7 @@ $scope.loadenydomainFile = function (files) {
         }
     };
     $scope.closeverticalList=function(){
-         if ($scope.VerticalList.length == 0){
+         if ($scope.VerticalList.length == 0 && $scope.oldverticalList.length == 0){
             
             $('#vertical').modal("hide");
             $scope.campaign.cm_vertical="No";
@@ -2341,7 +2337,7 @@ $scope.loadenydomainFile = function (files) {
         $scope.geoList.splice(index,1);
     };
     $scope.addgeoList=function(){
-        if ($scope.geoList.length > 0){
+        if ($scope.geoList.length > 0 || $scope.oldgeoList.length > 0){
             $('#geo').modal("hide");
             $scope.geos="";
         }
@@ -2357,7 +2353,7 @@ $scope.loadenydomainFile = function (files) {
         }
     };
     $scope.closegeoList=function(){
-         if ($scope.geoList.length == 0){
+         if ($scope.geoList.length == 0 && $scope.oldgeoList.length == 0){
             
             $('#geo').modal("hide");
             $scope.campaign.cm_geo="No";
@@ -2455,7 +2451,7 @@ $scope.loadenydomainFile = function (files) {
         $scope.campAssetList.splice(index,1);
     };
     $scope.addassetList=function(){
-        if ($scope.campAssetList.length > 0){
+        if ($scope.campAssetList.length > 0 || $scope.oldassetList.length > 0){
             $('#asset').modal("hide");
             $scope.campAsset="";
         }
@@ -2471,7 +2467,7 @@ $scope.loadenydomainFile = function (files) {
         }
     };
     $scope.closeassetList=function(){
-         if ($scope.campAssetList.length == 0){
+         if ($scope.campAssetList.length == 0 && $scope.oldassetList.length == 0){
             
             $('#asset').modal("hide");
             $scope.campaign.cm_campaign_asset="No";
@@ -2569,7 +2565,7 @@ $scope.loadenydomainFile = function (files) {
         $scope.departmentList.splice(index,1);
     };
     $scope.adddepartmentList=function(){
-        if ($scope.departmentList.length > 0){
+        if ($scope.departmentList.length > 0 || $scope.olddeptList.length > 0){
             $('#department').modal("hide");
             $scope.departments="";
         }
@@ -2585,7 +2581,7 @@ $scope.loadenydomainFile = function (files) {
         }
     };
     $scope.closedepartmentList=function(){
-         if ($scope.departmentList.length == 0){
+         if ($scope.departmentList.length == 0 && $scope.olddeptList.length == 0){
             
             $('#department').modal("hide");
             $scope.campaign.cm_dept="No";
@@ -2683,7 +2679,7 @@ $scope.loadenydomainFile = function (files) {
         $scope.methodList.splice(index,1);
     };
     $scope.addmethodList=function(){
-        if ($scope.methodList.length > 0){
+        if ($scope.methodList.length > 0 || $scope.oldmethodList.length > 0){
             $('#method').modal("hide");
             $scope.methods="";
         }
@@ -2699,7 +2695,7 @@ $scope.loadenydomainFile = function (files) {
         }
     };
     $scope.closemethodList=function(){
-         if ($scope.methodList.length == 0){
+         if ($scope.methodList.length == 0 && $scope.oldmethodList.length == 0){
             
             $('#method').modal("hide");
             $scope.campaign.cm_method="No";
@@ -2798,7 +2794,7 @@ $scope.loadenydomainFile = function (files) {
         $scope.levelList.splice(index,1);
     };
     $scope.addlevelList=function(){
-        if ($scope.levelList.length > 0){
+        if ($scope.levelList.length > 0 || $scope.oldlevelList.length > 0){
             $('#level').modal("hide");
             $scope.JobLevel="";
         }
@@ -2814,7 +2810,7 @@ $scope.loadenydomainFile = function (files) {
         }
     };
     $scope.closelevelList=function(){
-         if ($scope.levelList.length == 0){
+         if ($scope.levelList.length == 0 && $scope.oldlevelList.length == 0){
             
             $('#level').modal("hide");
             $scope.campaign.cm_job="No";
@@ -2912,7 +2908,7 @@ $scope.loadenydomainFile = function (files) {
         $scope.revenueList.splice(index,1);
     };
     $scope.addrevenueList=function(){
-        if ($scope.revenueList.length > 0){
+        if ($scope.revenueList.length > 0 || $scope.oldrevenueList.length > 0){
             $('#revenue').modal("hide");
             $scope.Revenue="";
         }
@@ -2928,7 +2924,7 @@ $scope.loadenydomainFile = function (files) {
         }
     };
     $scope.closerevenueList=function(){
-         if ($scope.revenueList.length == 0){
+         if ($scope.revenueList.length == 0 && $scope.oldrevenueList.length == 0){
             
             $('#revenue').modal("hide");
             $scope.campaign.cm_revenue="No";
