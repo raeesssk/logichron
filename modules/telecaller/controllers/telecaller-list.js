@@ -7,6 +7,7 @@ angular.module('telecaller').controller('telecallerListCtrl', function ($rootSco
   $scope.uploader={};
   $scope.followdetails=[];
   $scope.contacts={};
+  $scope.questionans=[];
   $scope.contacts.userid=localStorage.getItem('logichron_userid');
   $scope.follow.userid=localStorage.getItem('logichron_userid');
   $scope.next = 0;
@@ -87,6 +88,7 @@ angular.module('telecaller').controller('telecallerListCtrl', function ($rootSco
    
 // document.getElementById('next').addEventListener('click', uploader.prompt, false);
    $scope.getAll = function () {
+    $scope.questionans=[];
       $http({
         method: 'POST',
         url: $rootScope.baseURL+'/telecaller',
@@ -97,6 +99,30 @@ angular.module('telecaller').controller('telecallerListCtrl', function ($rootSco
       .success(function(contact)
       { 
          $scope.contactList.push(contact[0]);
+         if(contact[0].cm_custom_question == "Yes"){
+          $http({
+            method: 'GET',
+            url: $rootScope.baseURL+'/contact/questionans/'+contact[0].cdm_cm_id,
+            headers: {'Content-Type': 'application/json',
+                    'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+          })
+          .success(function(obj)
+          {  
+            obj.forEach(function(val,key){
+              $scope.questionans.push(val);
+            });
+          })
+          .error(function(data) 
+          {   
+              var dialog = bootbox.dialog({
+                message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                    closeButton: false
+                });
+                setTimeout(function(){
+                    dialog.modal('hide'); 
+                }, 1500);            
+          });
+        }
          if(contact[0] == null || contact[0] == undefined || contact.lenght <= 0)
          {
           var dialog = bootbox.dialog({
@@ -152,10 +178,13 @@ angular.module('telecaller').controller('telecallerListCtrl', function ($rootSco
               setTimeout(function(){
                   dialog.modal('hide'); 
               }, 2000);
+              $("#next").attr('disabled',true);
             }
             else
             { 
               $('#blah').attr('src', e.target.result);
+
+              $("#next").removeAttr('disabled');
             }
           }
           reader.readAsDataURL(input.files[0]);

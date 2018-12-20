@@ -69,24 +69,27 @@
 
                                 <div class="col-sm-4">
                                         <label>Job Title</label>
-                                        <select id='cdm_job_title' class="form-control" name="right" ng-model="contactdiscovery.titles" ng-init="contactdiscovery.titles = titleList[0]" ng-options="title as title.ctm_title for title in titleList">
+                                        <select id='cdm_job_title' ng-if="contactdiscovery.cdm_cm_id.cm_title == 'Yes'" class="form-control" ng-model="contactdiscovery.titles" ng-init="contactdiscovery.titles = titleList[0]" ng-options="title as title.ctm_title for title in titleList">
                                             <option value="">select</option>
                                         </select>
+                                        <input type="text" id="cdm_job_title" ng-if="contactdiscovery.cdm_cm_id.cm_title == 'No'" class="form-control" ng-model="contactdiscovery.titles.ctm_title" />
                                         <br>
                                 </div>
                                 <div class="col-sm-4">
                                         <label>Job Level</label>
-                                        <select id='cdm_job_level' class="form-control" name="right" ng-model="contactdiscovery.levels" ng-init="contactdiscovery.levels = levelList[0]" ng-options="level as level.cjlm_job_level for level in levelList">
+                                        <select id='cdm_job_level' ng-if="contactdiscovery.cdm_cm_id.cm_job == 'Yes'" class="form-control" name="right" ng-model="contactdiscovery.levels" ng-init="contactdiscovery.levels = levelList[0]" ng-options="level as level.cjlm_job_level for level in levelList">
                                             <option value="">select</option>
                                         </select>
+                                        <input type="text" id="cdm_job_level" ng-if="contactdiscovery.cdm_cm_id.cm_job == 'No'" class="form-control" ng-model="contactdiscovery.levels.cjlm_job_level" />
                                         
                                 </div>
 
                                 <div class="col-sm-4">
                                         <label>Department</label>
-                                        <select id='cdm_dept' class="form-control" name="right" ng-model="contactdiscovery.departments" ng-init="contactdiscovery.departments = deptList[0]" ng-options="dept as dept.cdm_department for dept in deptList">
+                                        <select id='cdm_dept' ng-if="contactdiscovery.cdm_cm_id.cm_dept == 'Yes'" class="form-control" name="right" ng-model="contactdiscovery.departments" ng-init="contactdiscovery.departments = deptList[0]" ng-options="dept as dept.cdm_dept for dept in deptList">
                                             <option value="">select</option>
                                         </select>
+                                        <input type="text" id="cdm_dept" ng-if="contactdiscovery.cdm_cm_id.cm_dept == 'No'" class="form-control" ng-model="contactdiscovery.departments.cdm_department" />
                                        <br> 
                                 </div>
                                 <div class="col-sm-4">
@@ -102,9 +105,10 @@
                                 </div>
                                 <div class="col-sm-4">
                                         <label>Company Name</label>
-                                        <select id='cdm_company_name' class="form-control" name="right" ng-model="contactdiscovery.companies" ng-init="contactdiscovery.companies = companyList[0]" ng-options="company as company.amcm_company for company in companyList">
+                                        <select id='cdm_company_name' ng-if="contactdiscovery.cdm_cm_id.cm_account_list == 'Yes'" class="form-control" name="right" ng-model="contactdiscovery.companies" ng-init="contactdiscovery.companies = companyList[0]" ng-options="company as company.amcm_company for company in companyList">
                                             <option value="">select</option>
                                         </select>
+                                        <input type="text" id="cdm_company_name" ng-if="contactdiscovery.cdm_cm_id.cm_account_list == 'No'" class="form-control" ng-model="contactdiscovery.companies.amcm_company"/>
                                 
                                 </div>
 
@@ -136,37 +140,43 @@
                                 </div>
                                 <div class="col-sm-4">
                                         <label>Industry</label>
-                                        <select id='cdm_industry' class="form-control" name="right" ng-model="contactdiscovery.industries" ng-init="contactdiscovery.industries = industryList[0]" ng-options="industry as industry.cim_industries for industry in industryList">
+                                        <select id='cdm_industry' ng-if="contactdiscovery.cdm_cm_id.cm_industry == 'Yes'" class="form-control" name="right" ng-model="contactdiscovery.industries" ng-init="contactdiscovery.industries = industryList[0]" ng-options="industry as industry.cim_industries for industry in industryList">
                                             <option value="">select</option>
                                         </select>
+                                        <input type="text" id="cdm_industry" ng-if="contactdiscovery.cdm_cm_id.cm_industry == 'No'" class="form-control" ng-model="contactdiscovery.industries.cim_industries">
                                 
                                 </div>
                                 <div class="col-sm-4">
                                         <label>Company Size</label>
-                                        <select id='cdm_company_size' class="form-control" name="right" ng-model="contactdiscovery.sizes" ng-init="contactdiscovery.sizes = sizeList[0]" ng-options="size as size.cesm_employee_size for size in sizeList">
+                                        <select id='cdm_company_size' ng-if="contactdiscovery.cdm_cm_id.cm_emp_size == 'Yes'" class="form-control" name="right" ng-model="contactdiscovery.sizes" ng-init="contactdiscovery.sizes = sizeList[0]" ng-options="size as size.cesm_employee_size for size in sizeList">
                                             <option value="">select</option>
                                         </select>
+                                        <input type="text" id="cdm_company_size" ng-if="contactdiscovery.cdm_cm_id.cm_emp_size == 'No'" class="form-control" ng-model="contactdiscovery.cdm_company_size">
+
                                     <br>    
                                 </div>
                                 <div class="col-sm-4">
                                         <label>Revenue</label>
-                                        <select id='cdm_revenue' class="form-control" name="right" ng-model="contactdiscovery.revenues" ng-init="contactdiscovery.revenues = revenueList[0]" ng-options="revenue as revenue.crem_revenue for revenue in revenueList">
+                                        <select id='cdm_revenue' ng-if="contactdiscovery.cdm_cm_id.cm_revenue == 'Yes'" class="form-control" name="right" ng-model="contactdiscovery.revenues" ng-init="contactdiscovery.revenues = revenueList[0]" ng-options="revenue as revenue.crem_revenue for revenue in revenueList">
                                             <option value="">select</option>
                                         </select>
+                                        <input type="text" id="cdm_revenue" ng-if="contactdiscovery.cdm_cm_id.cm_revenue == 'No'" class="form-control" ng-model="contactdiscovery.revenues.crem_revenue" />
                                 
                                 </div>
                                 <div class="col-sm-4">
                                         <label>Asset</label>
-                                        <select id='cdm_asset' class="form-control" name="right" ng-model="contactdiscovery.assets" ng-init="contactdiscovery.assets = assetList[0]" ng-options="asset as asset.cam_campaign_asset for asset in assetList">
+                                        <select id='cdm_asset' ng-if="contactdiscovery.cdm_cm_id.cm_campaign_asset == 'Yes'" class="form-control" name="right" ng-model="contactdiscovery.assets" ng-init="contactdiscovery.assets = assetList[0]" ng-options="asset as asset.cam_campaign_asset for asset in assetList">
                                             <option value="">select</option>
                                         </select>
+                                        <input type="text" id="cdm_asset" ng-if="contactdiscovery.cdm_cm_id.cm_campaign_asset == 'No'" class="form-control" ng-model="contactdiscovery.assets.cam_campaign_asset" />
                                     <br>    
                                 </div>
                                 <div class="col-sm-4">
                                         <label>Domain</label>
-                                        <select id='cdm_domain' class="form-control" name="right" ng-model="contactdiscovery.domains" ng-init="contactdiscovery.domains = aldomainList[0]" ng-options="domain as domain.adcm_website for domain in aldomainList">
+                                        <select id='cdm_domain' ng-if="contactdiscovery.cdm_cm_id.cm_allow_domain == 'Yes'" class="form-control" name="right" ng-model="contactdiscovery.domains" ng-init="contactdiscovery.domains = aldomainList[0]" ng-options="domain as domain.adcm_website for domain in aldomainList">
                                             <option value="">select</option>
                                         </select>
+                                        <input type="text" id="cdm_domain" ng-if="contactdiscovery.cdm_cm_id.cm_allow_domain == 'No'" class="form-control" ng-model="contactdiscovery.domains.adcm_website" />
                                 <br>
                                 </div>
                             </div>

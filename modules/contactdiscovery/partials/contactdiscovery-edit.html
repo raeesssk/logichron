@@ -44,18 +44,27 @@
 
                                 <div class="col-sm-4">
                                         <label>Job Title</label>
-                                        <input type="text" id="cdm_job_title" class="form-control" ng-model="contactdiscovery.cdm_job_title" />
+                                        <select id='cdm_job_title' ng-if="contactdiscovery.cm_title == 'Yes'" class="form-control" ng-model="contactdiscovery.titles" ng-init="contactdiscovery.titles = titleList[0]" ng-options="title as title.ctm_title for title in titleList">
+                                            <option value="">select</option>
+                                        </select>
+                                        <input type="text" id="cdm_job_title" ng-if="contactdiscovery.cm_title == 'No'" class="form-control" ng-model="contactdiscovery.titles.ctm_title" />
                                         <br>
                                 </div>
                                 <div class="col-sm-4">
                                         <label>Job Level</label>
-                                        <input type="text" id="cdm_job_level" class="form-control" ng-model="contactdiscovery.cdm_job_level" />
+                                        <select id='cdm_job_level' ng-if="contactdiscovery.cm_job == 'Yes'" class="form-control" name="right" ng-model="contactdiscovery.levels" ng-init="contactdiscovery.levels = levelList[0]" ng-options="level as level.cjlm_job_level for level in levelList">
+                                            <option value="">select</option>
+                                        </select>
+                                        <input type="text" id="cdm_job_level" ng-if="contactdiscovery.cm_job == 'No'" class="form-control" ng-model="contactdiscovery.levels.cjlm_job_level" />
                                         
                                 </div>
 
                                 <div class="col-sm-4">
                                         <label>Department</label>
-                                        <input type="text" id="cdm_dept" class="form-control" ng-model="contactdiscovery.cdm_dept" />
+                                        <select id='cdm_dept' ng-if="contactdiscovery.cm_dept == 'Yes'" class="form-control" name="right" ng-model="contactdiscovery.cdm_dept" ng-init="contactdiscovery.departments = deptList[0].cdm_department" ng-options="dept as dept.cdm_department for dept in deptList">
+                                            <option value="">select</option>
+                                        </select>
+                                        <input type="text" id="cdm_dept" ng-if="contactdiscovery.cm_dept == 'No'" class="form-control" ng-model="contactdiscovery.departments.cdm_department" />
                                        <br> 
                                 </div>
                                 <div class="col-sm-4">
@@ -65,13 +74,16 @@
                                 </div>
                                 
                                 <div class="col-sm-4">
-                                        <label>Mobile Number</label>
+                                        <label>Direct Number / Landline Number</label>
                                         <input type="text" id="cdm_mobile" class="form-control" ng-model="contactdiscovery.cdm_mobile" />
                                         <br>
                                 </div>
                                 <div class="col-sm-4">
                                         <label>Company Name</label>
-                                        <input type="text" id="cdm_company_name" class="form-control" ng-model="contactdiscovery.cdm_company_name"/>
+                                        <select id='cdm_company_name' ng-if="contactdiscovery.cm_account_list == 'Yes'" class="form-control" name="right" ng-model="contactdiscovery.companies" ng-init="contactdiscovery.companies = companyList[0]" ng-options="company as company.amcm_company for company in companyList">
+                                            <option value="">select</option>
+                                        </select>
+                                        <input type="text" id="cdm_company_name" ng-if="contactdiscovery.cm_account_list == 'No'" class="form-control" ng-model="contactdiscovery.companies.amcm_company"/>
                                 
                                 </div>
 
@@ -101,73 +113,94 @@
                                         <input type="text" id="cdm_country" class="form-control" ng-model="contactdiscovery.cdm_country" />
                                     <br>    
                                 </div>
-                                <div class="col-sm-4">
+                                 <div class="col-sm-4">
                                         <label>Industry</label>
-                                        <input type="text" id="cdm_industry" class="form-control" ng-model="contactdiscovery.cdm_industry">
+                                        <select id='cdm_industry' ng-if="contactdiscovery.cm_industry == 'Yes'" class="form-control" name="right" ng-model="contactdiscovery.industries" ng-init="contactdiscovery.industries = industryList[0]" ng-options="industry as industry.cim_industries for industry in industryList">
+                                            <option value="">select</option>
+                                        </select>
+                                        <input type="text" id="cdm_industry" ng-if="contactdiscovery.cm_industry == 'No'" class="form-control" ng-model="contactdiscovery.industries.cim_industries">
                                 
                                 </div>
                                 <div class="col-sm-4">
                                         <label>Company Size</label>
-                                        <select id="cdm_company_size" class="form-control" ng-model="contactdiscovery.cdm_company_size">
-                                            <option>N/A</option>
-                                            <option>0-100</option>
-                                            <option>101-500</option>
-                                            <option>501-1000</option>
-                                            <option>1000-10000</option>
+                                        <select id='cdm_company_size' ng-if="contactdiscovery.cm_emp_size == 'Yes'" class="form-control" name="right" ng-model="contactdiscovery.sizes" ng-init="contactdiscovery.sizes = sizeList[0]" ng-options="size as size.cesm_employee_size for size in sizeList">
+                                            <option value="">select</option>
                                         </select>
+                                        <input type="text" id="cdm_company_size" ng-if="contactdiscovery.cm_emp_size == 'No'" class="form-control" ng-model="contactdiscovery.cdm_company_size">
+
                                     <br>    
                                 </div>
                                 <div class="col-sm-4">
                                         <label>Revenue</label>
-                                        <input type="text" id="cdm_revenue" class="form-control" ng-model="contactdiscovery.cdm_revenue" />
+                                        <select id='cdm_revenue' ng-if="contactdiscovery.cm_revenue == 'Yes'" class="form-control" name="right" ng-model="contactdiscovery.revenues" ng-init="contactdiscovery.revenues = revenueList[0]" ng-options="revenue as revenue.crem_revenue for revenue in revenueList">
+                                            <option value="">select</option>
+                                        </select>
+                                        <input type="text" id="cdm_revenue" ng-if="contactdiscovery.cm_revenue == 'No'" class="form-control" ng-model="contactdiscovery.revenues.crem_revenue" />
                                 
                                 </div>
                                 <div class="col-sm-4">
                                         <label>Asset</label>
-                                        <input type="text" id="cdm_asset" class="form-control" ng-model="contactdiscovery.cdm_asset" />
+                                        <select id='cdm_asset' ng-if="contactdiscovery.cm_campaign_asset == 'Yes'" class="form-control" name="right" ng-model="contactdiscovery.assets" ng-init="contactdiscovery.assets = assetList[0]" ng-options="asset as asset.cam_campaign_asset for asset in assetList">
+                                            <option value="">select</option>
+                                        </select>
+                                        <input type="text" id="cdm_asset" ng-if="contactdiscovery.cm_campaign_asset == 'No'" class="form-control" ng-model="contactdiscovery.assets.cam_campaign_asset" />
                                     <br>    
                                 </div>
                                 <div class="col-sm-4">
                                         <label>Domain</label>
-                                        <input type="text" id="cdm_domain" class="form-control" ng-model="contactdiscovery.cdm_domain" />
+                                        <select id='cdm_domain' ng-if="contactdiscovery.cm_allow_domain == 'Yes'" class="form-control" name="right" ng-model="contactdiscovery.domains" ng-init="contactdiscovery.domains = aldomainList[0]" ng-options="domain as domain.adcm_website for domain in aldomainList">
+                                            <option value="">select</option>
+                                        </select>
+                                        <input type="text" id="cdm_domain" ng-if="contactdiscovery.cm_allow_domain == 'No'" class="form-control" ng-model="contactdiscovery.domains.adcm_website" />
                                 <br>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <div class="col-sm-5">
-                                    <label>Question</label>
-                                    <input type="text" id="qm_questions" class="form-control" ng-model="obj.qm_questions">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <table class="table table-hover">
+                                      <thead>
+                                        <tr>
+                                          <th class="" style="border: 1px solid #ccc; text-align: center;">Question</th>
+                                          <th class="" style="border: 1px solid #ccc; text-align: center;">Answers</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr ng-repeat="question in questionans track by $index">
+                                            <td>{{question.cmcm_question}}</td>
+                                            <td>{{question.cmcm_answer}}</td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
                                 </div>
-                                <div class="col-sm-5">
-                                    <label>Answer</label>
-                                    <input type="textarea" id="qm_answers" class="form-control" ng-model="obj.qm_answers">
+                                <div class="col-lg-3">
+                                    <table class="table table-hover">
+                                      <thead>
+                                        <tr>
+                                          <th class="" style="border: 1px solid #ccc; text-align: center;">Supression List of Company</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr ng-repeat="supp in suppList track by $index">
+                                            <td>{{supp.scm_company}}</td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
                                 </div>
-                                <div class="col-sm-2">
-                                    <label>&nbsp;</label>
-                                    <button class="btn-outline-success form-control" ng-click="addto()" type="submit">Add</button>
+                                <div class="col-lg-3">
+                                    <table class="table table-hover">
+                                      <thead>
+                                        <tr>
+                                          <th class="" style="border: 1px solid #ccc; text-align: center;">Denied Domain Website</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr ng-repeat="deny in denydomain track by $index">
+                                            <td>{{deny.ddcm_website}}</td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
                                 </div>
                             </div>
-                            <table class="table table-hover">
-                              <thead>
-                                <tr>
-                                  <th class="" style="border: 1px solid #ccc; text-align: center;">Question</th>
-                                  <th class="" style="border: 1px solid #ccc; text-align: center;">Answers</th>
-                                  <th style="border: 1px solid #ccc; text-align: center;">Action</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr ng-repeat="question in answers track by $index">
-                                    <td>{{question.qm_questions}}</td>
-                                    <td>{{question.qm_answers}}</td>
-                                    <td><button class="form-control" ng-click="deleteQA($index)"><i class="fa fa-trash" ></button></i></td>
-                                </tr>
-                                <tr ng-repeat="ans in answersadd track by $index">
-                                    <td>{{ans.qm_questions}}</td>
-                                    <td>{{ans.qm_answers}}</td>
-                                    <td><button class="form-control" ng-click="deleteQA($index)"><i class="fa fa-trash" ></button></i></td>
-                                </tr>
-                              </tbody>
-                            </table>
                             <br>
                             <div class="form-group row">
                                 <br>

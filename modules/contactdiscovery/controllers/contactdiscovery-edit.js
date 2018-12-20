@@ -6,24 +6,21 @@ angular.module('contactdiscovery').controller('contactdiscoveryEditCtrl', functi
     $scope.answers=[];
     $scope.answersadd=[];
     $scope.ansremove=[];
+    $scope.questionans=[];
+    $scope.suppList=[];
+    $scope.denydomain=[];
+    $scope.titleList=[];
+    $scope.levelList=[];
+    $scope.deptList=[];
+    $scope.companyList=[];
+    $scope.industryList=[];
+    $scope.sizeList=[];
+    $scope.revenueList=[];
+    $scope.assetList=[];
+    $scope.aldomainList=[];
 	$scope.jobId = $routeParams.jobId;
   $scope.apiURL = $rootScope.baseURL+'/contact/edit/'+$scope.jobId;
 
-  $scope.getcontactpermission=function(){
-      if(localStorage.getItem('logichron_contactedit_permission') == 0){
-        console.log(localStorage.getItem('logichron_contactedit_permission'));
-        var dialog = bootbox.dialog({
-        message: '<p class="text-center">You Are Not Authorized</p>',
-            closeButton: false
-        });
-        dialog.find('.modal-body').addClass("btn-danger");
-        setTimeout(function(){
-            dialog.modal('hide'); 
-        }, 1500);
-        window.history.back();
-      }
-    };
-    $scope.getcontactpermission();
 
   $('#cm_end_date').datepicker({
           validateOnBlur: false,
@@ -102,7 +99,6 @@ angular.module('contactdiscovery').controller('contactdiscoveryEditCtrl', functi
                         })
                         .success(function(suppression)
                         {  
-                            console.log(suppression);
                           if(suppression.length>0) {
                              var dialog = bootbox.dialog({
                                 message: '<p class="text-center">Update List.</p>',
@@ -304,6 +300,18 @@ angular.module('contactdiscovery').controller('contactdiscoveryEditCtrl', functi
   };
     
   $scope.getEntry = function () {
+    $scope.questionans=[];
+    $scope.suppList=[];
+    $scope.denydomain=[];
+    $scope.titleList=[];
+    $scope.levelList=[];
+    $scope.deptList=[];
+    $scope.companyList=[];
+    $scope.industryList=[];
+    $scope.sizeList=[];
+    $scope.revenueList=[];
+    $scope.assetList=[];
+    $scope.aldomainList=[];
 	     $http({
 	      method: 'GET',
 	      url: $rootScope.baseURL+'/contact/'+$scope.jobId,
@@ -313,23 +321,29 @@ angular.module('contactdiscovery').controller('contactdiscoveryEditCtrl', functi
 	    .success(function(contactdiscoveryObj)
 	    {
 	    	contactdiscoveryObj.forEach(function (value, key) {
-	      		$scope.contactdiscovery = value; 
-              });
-                $http({
-                  method: 'GET',
-                  url: $rootScope.baseURL+'/contact/question/'+$scope.jobId,
-                  headers: {'Content-Type': 'application/json',
-                          'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
-                })
-                .success(function(dataObj)
-                {
-                    dataObj.forEach(function (value, key) {
+          console.log(value);
 
-                        $scope.answers.push(value);
-                      });
-                })
-                .error(function(data) 
-                {   
+            $scope.contactdiscovery = value; 
+              if(value.cm_dept == "Yes"){
+              $http({
+                method: 'GET',
+                url: $rootScope.baseURL+'/contact/dept/'+value.cdm_cm_id,
+                headers: {'Content-Type': 'application/json',
+                        'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+              })
+              .success(function(obj)
+              {  
+                obj.forEach(function(val,key){
+                    if(value.cdm_dept == val.cdm_department)
+                    {
+                      $scope.contactdiscovery.departments=value.cdm_dept;
+                    }
+                    $scope.deptList.push(val);
+                });
+                
+              })
+              .error(function(data) 
+              {   
                   var dialog = bootbox.dialog({
                     message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
                         closeButton: false
@@ -337,7 +351,274 @@ angular.module('contactdiscovery').controller('contactdiscoveryEditCtrl', functi
                     setTimeout(function(){
                         dialog.modal('hide'); 
                     }, 1500);            
+              });
+            }
+        });
+                if($scope.contactdiscovery.cm_custom_question == "Yes"){
+          $http({
+            method: 'GET',
+            url: $rootScope.baseURL+'/contact/questionans/'+$scope.contactdiscovery.cdm_cm_id,
+            headers: {'Content-Type': 'application/json',
+                    'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+          })
+          .success(function(obj)
+          {  
+            obj.forEach(function(val,key){
+              $scope.questionans.push(val);
+            });
+          })
+          .error(function(data) 
+          {   
+              var dialog = bootbox.dialog({
+                message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                    closeButton: false
                 });
+                setTimeout(function(){
+                    dialog.modal('hide'); 
+                }, 1500);            
+          });
+        }
+        if($scope.contactdiscovery.cm_supression_file == "Yes"){
+          $http({
+            method: 'GET',
+            url: $rootScope.baseURL+'/contact/supp/'+$scope.contactdiscovery.cdm_cm_id,
+            headers: {'Content-Type': 'application/json',
+                    'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+          })
+          .success(function(obj)
+          {  
+            obj.forEach(function(val,key){
+              $scope.suppList.push(val);
+            });
+          })
+          .error(function(data) 
+          {   
+              var dialog = bootbox.dialog({
+                message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                    closeButton: false
+                });
+                setTimeout(function(){
+                    dialog.modal('hide'); 
+                }, 1500);            
+          });
+        }
+        if($scope.contactdiscovery.cm_denied_domain == "Yes"){
+          $http({
+            method: 'GET',
+            url: $rootScope.baseURL+'/contact/denydomain/'+$scope.contactdiscovery.cdm_cm_id,
+            headers: {'Content-Type': 'application/json',
+                    'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+          })
+          .success(function(obj)
+          {  
+            obj.forEach(function(val,key){
+              $scope.denydomain.push(val);
+            });
+          })
+          .error(function(data) 
+          {   
+              var dialog = bootbox.dialog({
+                message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                    closeButton: false
+                });
+                setTimeout(function(){
+                    dialog.modal('hide'); 
+                }, 1500);            
+          });
+        }
+        if($scope.contactdiscovery.cm_title == "Yes"){
+          $http({
+            method: 'GET',
+            url: $rootScope.baseURL+'/contact/jobtitle/'+$scope.contactdiscovery.cdm_cm_id,
+            headers: {'Content-Type': 'application/json',
+                    'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+          })
+          .success(function(obj)
+          {  
+            obj.forEach(function(val,key){
+              $scope.titleList.push(val);
+            });
+          })
+          .error(function(data) 
+          {   
+              var dialog = bootbox.dialog({
+                message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                    closeButton: false
+                });
+                setTimeout(function(){
+                    dialog.modal('hide'); 
+                }, 1500);            
+          });
+        }
+        if($scope.contactdiscovery.cm_job == "Yes"){
+          $http({
+            method: 'GET',
+            url: $rootScope.baseURL+'/contact/joblevel/'+$scope.contactdiscovery.cdm_cm_id,
+            headers: {'Content-Type': 'application/json',
+                    'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+          })
+          .success(function(obj)
+          {  
+            obj.forEach(function(val,key){
+              $scope.levelList.push(val);
+            });
+          })
+          .error(function(data) 
+          {   
+              var dialog = bootbox.dialog({
+                message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                    closeButton: false
+                });
+                setTimeout(function(){
+                    dialog.modal('hide'); 
+                }, 1500);            
+          });
+        }
+        
+        if($scope.contactdiscovery.cm_account_list == "Yes"){
+          $http({
+            method: 'GET',
+            url: $rootScope.baseURL+'/contact/company/'+$scope.contactdiscovery.cdm_cm_id,
+            headers: {'Content-Type': 'application/json',
+                    'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+          })
+          .success(function(obj)
+          {  
+            obj.forEach(function(val,key){
+              $scope.companyList.push(val);
+            });
+          })
+          .error(function(data) 
+          {   
+              var dialog = bootbox.dialog({
+                message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                    closeButton: false
+                });
+                setTimeout(function(){
+                    dialog.modal('hide'); 
+                }, 1500);            
+          });
+        }
+        if($scope.contactdiscovery.cm_industry == "Yes"){
+          $http({
+            method: 'GET',
+            url: $rootScope.baseURL+'/contact/industry/'+$scope.contactdiscovery.cdm_cm_id,
+            headers: {'Content-Type': 'application/json',
+                    'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+          })
+          .success(function(obj)
+          {  
+            obj.forEach(function(val,key){
+              $scope.industryList.push(val);
+            });
+          })
+          .error(function(data) 
+          {   
+              var dialog = bootbox.dialog({
+                message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                    closeButton: false
+                });
+                setTimeout(function(){
+                    dialog.modal('hide'); 
+                }, 1500);            
+          });
+        }
+        if($scope.contactdiscovery.cm_emp_size == "Yes"){
+          $http({
+            method: 'GET',
+            url: $rootScope.baseURL+'/contact/size/'+$scope.contactdiscovery.cdm_cm_id,
+            headers: {'Content-Type': 'application/json',
+                    'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+          })
+          .success(function(obj)
+          {  
+            obj.forEach(function(val,key){
+              $scope.sizeList.push(val);
+            });
+          })
+          .error(function(data) 
+          {   
+              var dialog = bootbox.dialog({
+                message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                    closeButton: false
+                });
+                setTimeout(function(){
+                    dialog.modal('hide'); 
+                }, 1500);            
+          });
+        }
+        if($scope.contactdiscovery.cm_revenue == "Yes"){
+          $http({
+            method: 'GET',
+            url: $rootScope.baseURL+'/contact/revenue/'+$scope.contactdiscovery.cdm_cm_id,
+            headers: {'Content-Type': 'application/json',
+                    'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+          })
+          .success(function(obj)
+          {  
+            obj.forEach(function(val,key){
+              $scope.revenueList.push(val);
+            });
+          })
+          .error(function(data) 
+          {   
+              var dialog = bootbox.dialog({
+                message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                    closeButton: false
+                });
+                setTimeout(function(){
+                    dialog.modal('hide'); 
+                }, 1500);            
+          });
+        }
+        if($scope.contactdiscovery.cm_campaign_asset == "Yes"){
+          $http({
+            method: 'GET',
+            url: $rootScope.baseURL+'/contact/asset/'+$scope.contactdiscovery.cdm_cm_id,
+            headers: {'Content-Type': 'application/json',
+                    'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+          })
+          .success(function(obj)
+          {  
+            obj.forEach(function(val,key){
+              $scope.assetList.push(val);
+            });
+          })
+          .error(function(data) 
+          {   
+              var dialog = bootbox.dialog({
+                message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                    closeButton: false
+                });
+                setTimeout(function(){
+                    dialog.modal('hide'); 
+                }, 1500);            
+          });
+        }
+        if($scope.contactdiscovery.cm_allow_domain == "Yes"){
+          $http({
+            method: 'GET',
+            url: $rootScope.baseURL+'/contact/allowdomain/'+$scope.contactdiscovery.cdm_cm_id,
+            headers: {'Content-Type': 'application/json',
+                    'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+          })
+          .success(function(obj)
+          {  
+            obj.forEach(function(val,key){
+              $scope.aldomainList.push(val);
+            });
+          })
+          .error(function(data) 
+          {   
+              var dialog = bootbox.dialog({
+                message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                    closeButton: false
+                });
+                setTimeout(function(){
+                    dialog.modal('hide'); 
+                }, 1500);            
+          });
+        }
       		  
 	    })
 	    .error(function(data) 
@@ -588,38 +869,36 @@ angular.module('contactdiscovery').controller('contactdiscoveryEditCtrl', functi
         // }
 	    else{
                 $scope.objects={
-                    contact:$scope.contactdiscovery,
-                    answers:$scope.answers,
-                    answersadd:$scope.answersadd,
-                    remove:$scope.ansremove
+                    contact:$scope.contactdiscovery
                 }
-                $('#btnsave').attr('disabled','true');
-                $('#btnsave').text("please wait...");
-		    $http({
-		      method: 'POST',
-		      url: $scope.apiURL,
-		      data: $scope.objects,
-		      headers: {'Content-Type': 'application/json',
-	                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
-		    })
-		    .success(function(login)
-		    {
-                $('#btnsave').text("Update");
-                $('#btnsave').removeAttr('disabled');
-		       window.location.href = '#/contactdiscovery/joblist';  
-		    })
-		    .error(function(data) 
-		    {   
-		      var dialog = bootbox.dialog({
-	            message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
-	                closeButton: false
-	            });
-	            setTimeout(function(){
-                $('#btnsave').text("Update");
-                $('#btnsave').removeAttr('disabled');
-	                dialog.modal('hide'); 
-	            }, 1500);            
-		    });
+                console.log($scope.objects);
+      //           $('#btnsave').attr('disabled','true');
+      //           $('#btnsave').text("please wait...");
+		    // $http({
+		    //   method: 'POST',
+		    //   url: $scope.apiURL,
+		    //   data: $scope.objects,
+		    //   headers: {'Content-Type': 'application/json',
+	     //              'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+		    // })
+		    // .success(function(login)
+		    // {
+      //           $('#btnsave').text("Update");
+      //           $('#btnsave').removeAttr('disabled');
+		    //    window.location.href = '#/contactdiscovery/joblist';  
+		    // })
+		    // .error(function(data) 
+		    // {   
+		    //   var dialog = bootbox.dialog({
+	     //        message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+	     //            closeButton: false
+	     //        });
+	     //        setTimeout(function(){
+      //           $('#btnsave').text("Update");
+      //           $('#btnsave').removeAttr('disabled');
+	     //            dialog.modal('hide'); 
+	     //        }, 1500);            
+		    // });
 		}
 	};
 

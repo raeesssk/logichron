@@ -540,7 +540,7 @@ $scope.apiURL = $rootScope.baseURL+'/contact/contact/total';
         $scope.answers=[];
         $http({
           method: 'GET',
-          url: $rootScope.baseURL+'/question/view/'+$scope.filteredTodos[index].cdm_id,
+          url: $rootScope.baseURL+'/question/view/'+$scope.filteredTodos[index].cdm_cm_id,
           //data: $scope.data,
           headers: {'Content-Type': 'application/json',
                   'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
