@@ -1,4 +1,4 @@
-<div class="pcoded-content" ng-init="getEntry();">
+<div class="pcoded-content">
     <div class="pcoded-inner-content">
         <div class="main-body">
             <div class="page-wrapper">
@@ -52,17 +52,18 @@
                                 </div>
                                 <div class="col-sm-4">
                                         <label>Job Level</label>
-                                        <select id='cdm_job_level' ng-if="contactdiscovery.cm_job == 'Yes'" class="form-control" name="right" ng-model="contactdiscovery.levels" ng-init="contactdiscovery.levels = levelList[0]" ng-options="level as level.cjlm_job_level for level in levelList">
+                                        <select id='cdm_job_level' ng-if="contactdiscovery.cm_job == 'Yes'" class="form-control" name="right" ng-model="contactdiscovery.levels" ng-init="contactdiscovery.levels = levelList[0].cjlm_job_level" ng-options="level as level.cjlm_job_level for level in levelList">
                                             <option value="">select</option>
                                         </select>
-                                        <input type="text" id="cdm_job_level" ng-if="contactdiscovery.cm_job == 'No'" class="form-control" ng-model="contactdiscovery.levels.cjlm_job_level" />
-                                        
+                                        <input type="text" id="cdm_job_level" ng-if="contactdiscovery.cm_job == 'No'" class="form-control" ng-model="contactdiscovery.levels.cjlm_job_level"/>
                                 </div>
 
                                 <div class="col-sm-4">
                                         <label>Department</label>
-                                        <select id='cdm_dept' ng-if="contactdiscovery.cm_dept == 'Yes'" class="form-control" name="right" ng-model="contactdiscovery.cdm_dept" ng-init="contactdiscovery.departments = deptList[0].cdm_department" ng-options="dept as dept.cdm_department for dept in deptList">
-                                            <option value="">select</option>
+                                        <select id='cdm_dept' ng-if="contactdiscovery.cm_dept == 'Yes'" class="form-control" name="right" ng-model="contactdiscovery.departments">
+                                            <option ng-repeat="item in deptlist" value="{{item.cdm_id}}">
+                                                {{item.cdm_department}}
+                                            </option>
                                         </select>
                                         <input type="text" id="cdm_dept" ng-if="contactdiscovery.cm_dept == 'No'" class="form-control" ng-model="contactdiscovery.departments.cdm_department" />
                                        <br> 
@@ -126,7 +127,7 @@
                                         <select id='cdm_company_size' ng-if="contactdiscovery.cm_emp_size == 'Yes'" class="form-control" name="right" ng-model="contactdiscovery.sizes" ng-init="contactdiscovery.sizes = sizeList[0]" ng-options="size as size.cesm_employee_size for size in sizeList">
                                             <option value="">select</option>
                                         </select>
-                                        <input type="text" id="cdm_company_size" ng-if="contactdiscovery.cm_emp_size == 'No'" class="form-control" ng-model="contactdiscovery.cdm_company_size">
+                                        <input type="text" id="cdm_company_size" ng-if="contactdiscovery.cm_emp_size == 'No'" class="form-control" ng-model="contactdiscovery.sizes.cesm_employee_size">
 
                                     <br>    
                                 </div>

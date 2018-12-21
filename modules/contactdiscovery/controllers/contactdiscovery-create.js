@@ -244,7 +244,8 @@ angular.module('contactdiscovery').controller('contactdiscoveryAddCtrl', functio
                     'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
           })
           .success(function(obj)
-          {  
+          { 
+          console.log(obj); 
             obj.forEach(function(val,key){
               $scope.deptList.push(val);
             });

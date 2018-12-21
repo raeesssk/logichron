@@ -795,7 +795,7 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
             $('#industry_list').modal("show"); //Open Modal
         }
         else {
-            if($scope.industryList.length > 0){
+            if($scope.industryList.length > 0 || $scope.oldindustryList.length > 0){
                 $('#industry_delete').modal("show");
                 $('#industry_delete').modal({backdrop: 'static', keyboard: false});
                 
@@ -808,7 +808,7 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
             $('#title_list').modal("show"); //Open Modal
         }
         else {
-            if($scope.titleList.length > 0){
+            if($scope.titleList.length > 0 || $scope.oldtitleList.length > 0){
                 $('#title_delete').modal("show");
                 $('#title_delete').modal({backdrop: 'static', keyboard: false});
                 
@@ -822,7 +822,7 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
             $('#restriction_list').modal("show"); //Open Modal
         }
         else {
-            if($scope.restrictList.length > 0){
+            if($scope.restrictList.length > 0 || $scope.oldrestrictList.length > 0){
                 $('#restrict_delete').modal("show");
                 $('#restrict_delete').modal({backdrop: 'static', keyboard: false});
                 
@@ -836,7 +836,7 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
             $('#domain_limit').modal("show"); //Open Modal
         }
         else {
-            if($scope.domainList.length > 0){
+            if($scope.domainList.length > 0 || $scope.olddlimitList.length > 0){
                 $('#domain_limit_delete').modal("show");
                 $('#domain_limit_delete').modal({backdrop: 'static', keyboard: false});
                 
@@ -850,7 +850,7 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
             $('#employee_size').modal("show"); //Open Modal
         }
         else {
-            if($scope.empsizeList.length > 0){
+            if($scope.empsizeList.length > 0 || $scope.oldempsizeList.length > 0){
                 $('#employee_size_delete').modal("show");
                 $('#employee_size_delete').modal({backdrop: 'static', keyboard: false});
                 
@@ -864,7 +864,7 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
             $('#vertical').modal("show"); //Open Modal
         }
         else {
-            if($scope.VerticalList.length > 0){
+            if($scope.VerticalList.length > 0 || $scope.oldverticalList.length > 0){
                 $('#vertical_delete').modal("show");
                 $('#vertical_delete').modal({backdrop: 'static', keyboard: false});
                 
@@ -878,7 +878,7 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
             $('#geo').modal("show"); //Open Modal
         }
         else {
-            if($scope.geoList.length > 0){
+            if($scope.geoList.length > 0 || $scope.oldgeoList.length > 0){
                 $('#geo_delete').modal("show");
                 $('#geo_delete').modal({backdrop: 'static', keyboard: false});
                 
@@ -892,7 +892,7 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
             $('#asset').modal("show"); //Open Modal
         }
         else {
-            if($scope.campAssetList.length > 0){
+            if($scope.campAssetList.length > 0 || $scope.oldassetList.length > 0){
                 $('#asset_delete').modal("show");
                 $('#asset_delete').modal({backdrop: 'static', keyboard: false});
                 
@@ -906,7 +906,7 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
             $('#department').modal("show"); //Open Modal
         }
         else {
-            if($scope.departmentList.length > 0){
+            if($scope.departmentList.length > 0 || $scope.olddeptList.length > 0){
                 $('#department_delete').modal("show");
                 $('#department_delete').modal({backdrop: 'static', keyboard: false});
                 
@@ -920,7 +920,7 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
             $('#method').modal("show"); //Open Modal
         }
         else {
-            if($scope.methodList.length > 0){
+            if($scope.methodList.length > 0 || $scope.oldmethodList.length > 0){
                 $('#method_delete').modal("show");
                 $('#method_delete').modal({backdrop: 'static', keyboard: false});
                 
@@ -934,7 +934,7 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
             $('#revenue').modal("show"); //Open Modal
         }
         else {
-            if($scope.revenueList.length > 0){
+            if($scope.revenueList.length > 0 || $scope.oldrevenueList.length > 0){
                 $('#revenue_delete').modal("show");
                 $('#revenue_delete').modal({backdrop: 'static', keyboard: false});
                 
@@ -948,7 +948,7 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
             $('#level').modal("show"); //Open Modal
         }
         else {
-            if($scope.levelList.length > 0){
+            if($scope.levelList.length > 0 || $scope.oldlevelList.length > 0){
                 $('#level_delete').modal("show");
                 $('#level_delete').modal({backdrop: 'static', keyboard: false});
                 
@@ -1061,6 +1061,9 @@ $scope.loadrestFile = function (files) {
     $scope.restDelConfirm=function(){
         $scope.restrictList=[];
         $scope.campaign.cm_restrict="No";
+        // if($scope.oldrestrictList.length > 0){
+        //   $scope.campaign.cm_restrict="Yes";
+        // }
         $('#restrict_delete').modal("hide");
         $('#restriction_list').modal("hide");
     };
@@ -2693,7 +2696,6 @@ $scope.loadenydomainFile = function (files) {
         }
     };
     $scope.methodDelConfirm=function(){
-        console.log('test');
         $scope.methodList=[];
         $scope.campaign.cm_method="No";
         $('#method_delete').modal("hide");

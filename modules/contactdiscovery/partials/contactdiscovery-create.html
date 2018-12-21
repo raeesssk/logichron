@@ -86,7 +86,7 @@
 
                                 <div class="col-sm-4">
                                         <label>Department</label>
-                                        <select id='cdm_dept' ng-if="contactdiscovery.cdm_cm_id.cm_dept == 'Yes'" class="form-control" name="right" ng-model="contactdiscovery.departments" ng-init="contactdiscovery.departments = deptList[0]" ng-options="dept as dept.cdm_dept for dept in deptList">
+                                        <select id='cdm_dept' ng-if="contactdiscovery.cdm_cm_id.cm_dept == 'Yes'" class="form-control" name="right" ng-model="contactdiscovery.departments" ng-init="contactdiscovery.departments = deptList[0]" ng-options="dept as dept.cdm_department for dept in deptList">
                                             <option value="">select</option>
                                         </select>
                                         <input type="text" id="cdm_dept" ng-if="contactdiscovery.cdm_cm_id.cm_dept == 'No'" class="form-control" ng-model="contactdiscovery.departments.cdm_department" />
