@@ -25,68 +25,68 @@ angular.module('campaign').controller('campaignListCtrl', function ($rootScope, 
     
     $scope.url = 'Tried to enter campaign Page';
 
-    $scope.gethistory=function(){
-      $scope.history={
-        user_id : $rootScope.userid,
-        url : $scope.url
-      }
-      $http({
-            method: 'POST',
-            url: $rootScope.baseURL+'/history/add',
-            data: $scope.history,
-            headers: {'Content-Type': 'application/json',
-                    'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
-          })
-          .success(function(login)
-          {
+    // $scope.gethistory=function(){
+    //   $scope.history={
+    //     user_id : $rootScope.userid,
+    //     url : $scope.url
+    //   }
+    //   $http({
+    //         method: 'POST',
+    //         url: $rootScope.baseURL+'/history/add',
+    //         data: $scope.history,
+    //         headers: {'Content-Type': 'application/json',
+    //                 'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+    //       })
+    //       .success(function(login)
+    //       {
               
-          })
-          .error(function(data) 
-          {   
-            var dialog = bootbox.dialog({
-              message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
-                  closeButton: false
-              });
-              setTimeout(function(){
-              $('#btnsave').text("SAVE");
-              $('#btnsave').removeAttr('disabled');
-                  dialog.modal('hide'); 
-            }, 1500);            
-        });
-    };
-    $scope.gethistory();
+    //       })
+    //       .error(function(data) 
+    //       {   
+    //         var dialog = bootbox.dialog({
+    //           message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+    //               closeButton: false
+    //           });
+    //           setTimeout(function(){
+    //           $('#btnsave').text("SAVE");
+    //           $('#btnsave').removeAttr('disabled');
+    //               dialog.modal('hide'); 
+    //         }, 1500);            
+    //     });
+    // };
+    // $scope.gethistory();
     
     
-    var permission=JSON.parse(localStorage.getItem('permission'));
-    var value = '#/campaign';
-    var access = permission.includes(value);
-    $scope.getrolepermission=function(){
+    // var permission=JSON.parse(localStorage.getItem('permission'));
+    // var value = '#/campaign';
+    // var access = permission.includes(value);
+    // $scope.getrolepermission=function(){
       
-      // for(var i=0;i<permission.length;i++)
-      // {
-        if(access)
-        {
-          return true
-        }
-        else
-        {
-           var dialog = bootbox.dialog({
-          message: '<p class="text-center">You Are Not Authorized</p>',
-              closeButton: false
-          });
-          dialog.find('.modal-body').addClass("btn-danger");
-          setTimeout(function(){
-              dialog.modal('hide'); 
-          }, 1500);
-          $location.path('/');
-          $scope.gethistory();
-        }
-        /*
-        break;
-      }*/
+    //   // for(var i=0;i<permission.length;i++)
+    //   // {
+    //     if(access)
+    //     {
+    //       return true
+    //     }
+    //     else
+    //     {
+    //        var dialog = bootbox.dialog({
+    //       message: '<p class="text-center">You Are Not Authorized</p>',
+    //           closeButton: false
+    //       });
+    //       dialog.find('.modal-body').addClass("btn-danger");
+    //       setTimeout(function(){
+    //           dialog.modal('hide'); 
+    //       }, 1500);
+    //       $location.path('/');
+    //       $scope.gethistory();
+    //     }
+    //     /*
+    //     break;
+    //   }*/
 
-    };
-    $scope.getrolepermission();
+    // };
+    // $scope.getrolepermission();
 
     var supermission=JSON.parse(localStorage.getItem('supermission'));
     var editValue = 7;
@@ -171,26 +171,26 @@ angular.module('campaign').controller('campaignListCtrl', function ($rootScope, 
       .success(function(campaignObj)
       {
             campaignObj.forEach(function(value,key){
-             $http({
-              method: 'GET',
-              url: $rootScope.baseURL+'/campaign/contact/goal/'+value.cm_id,
-              headers: {'Content-Type': 'application/json',
-                        'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
-            })
-            .success(function(campaign)
-            {
-               value.targetcount=campaign[0].total;
-            })
-            .error(function(data) 
-            {   
-              toastr.error('Oops, Something Went Wrong.', 'Error', {
-                    closeButton: true,
-                    progressBar: true,
-                  positionClass: "toast-top-center",
-                  timeOut: "500",
-                  extendedTimeOut: "500",
-                });
-            });
+            //  $http({
+            //   method: 'GET',
+            //   url: $rootScope.baseURL+'/campaign/contact/goal/'+value.cm_id,
+            //   headers: {'Content-Type': 'application/json',
+            //             'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+            // })
+            // .success(function(campaign)
+            // {
+            //    value.targetcount=campaign[0].total;
+            // })
+            // .error(function(data) 
+            // {   
+            //   toastr.error('Oops, Something Went Wrong.', 'Error', {
+            //         closeButton: true,
+            //         progressBar: true,
+            //       positionClass: "toast-top-center",
+            //       timeOut: "500",
+            //       extendedTimeOut: "500",
+            //     });
+            // });
             $scope.campaignList.push(value);
           });   
             
@@ -208,7 +208,7 @@ angular.module('campaign').controller('campaignListCtrl', function ($rootScope, 
             }, 1500);            
       });
     };
-    $scope.gettable();
+    // $scope.gettable();
 
     
 
@@ -282,26 +282,26 @@ angular.module('campaign').controller('campaignListCtrl', function ($rootScope, 
                 if (data.length > 0) {
                  
                   data.forEach(function (value, key) {
-                    $http({
-                            method: 'GET',
-                            url: $rootScope.baseURL+'/campaign/contact/goal/'+value.cm_id,
-                            headers: {'Content-Type': 'application/json',
-                                      'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
-                          })
-                          .success(function(campaign)
-                          {
-                             value.targetcount=campaign[0].total;
-                          })
-                          .error(function(data) 
-                          {   
-                            toastr.error('Oops, Something Went Wrong.', 'Error', {
-                                  closeButton: true,
-                                  progressBar: true,
-                                positionClass: "toast-top-center",
-                                timeOut: "500",
-                                extendedTimeOut: "500",
-                              });
-                          });
+                    // $http({
+                    //         method: 'GET',
+                    //         url: $rootScope.baseURL+'/campaign/contact/goal/'+value.cm_id,
+                    //         headers: {'Content-Type': 'application/json',
+                    //                   'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+                    //       })
+                    //       .success(function(campaign)
+                    //       {
+                    //          value.targetcount=campaign[0].total;
+                    //       })
+                    //       .error(function(data) 
+                    //       {   
+                    //         toastr.error('Oops, Something Went Wrong.', 'Error', {
+                    //               closeButton: true,
+                    //               progressBar: true,
+                    //             positionClass: "toast-top-center",
+                    //             timeOut: "500",
+                    //             extendedTimeOut: "500",
+                    //           });
+                    //       });
                     $scope.filteredTodos.push(value);
                     
                   });

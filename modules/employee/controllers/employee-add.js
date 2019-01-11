@@ -109,9 +109,11 @@ angular.module('employee').controller('employeeAddCtrl', function ($rootScope, $
 
     
     $scope.addEmployee = function () {
-		var nameRegex = /^\d+$/;
-  		var emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-	    
+  		var nameRegex = /^\d+$/;
+      var emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      var numRegex = /^\d+(\.\d{1,2})?$/;
+      var passwordRegex = /^((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})/;
+
         if($('#emp_name').val() == undefined || $('#emp_name').val() == ""){
 	    	var dialog = bootbox.dialog({
             message: '<p class="text-center">Please Enter Employee Name.</p>',
@@ -123,7 +125,7 @@ angular.module('employee').controller('employeeAddCtrl', function ($rootScope, $
                 $('#emp_name').focus();
             }, 1500);
         }
-	    else if($('#emp_mobile').val() == undefined || $('#emp_mobile').val() == ""){
+	     else if($('#emp_mobile').val() == undefined || $('#emp_mobile').val() == ""){
 	    	var dialog = bootbox.dialog({
             message: '<p class="text-center">Please Enter Mobile Number.</p>',
                 closeButton: false
@@ -135,6 +137,18 @@ angular.module('employee').controller('employeeAddCtrl', function ($rootScope, $
             }, 1500);
             
 	    }
+      else if(!numRegex.test($scope.employee.emp_mobile)){
+
+            var dialog = bootbox.dialog({
+            message: '<p class="text-center">Please Enter A Valid Mobile-Number.</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide'); 
+                $('#emp_mobile').focus();  
+            }, 1500);
+      }
       else if($('#emp_address').val() == undefined || $('#emp_address').val() == ""){
         var dialog = bootbox.dialog({
             message: '<p class="text-center">Please Enter Residential Address.</p>',
@@ -169,6 +183,18 @@ angular.module('employee').controller('employeeAddCtrl', function ($rootScope, $
                 $('#emp_aadhar_no').focus(); 
             }, 1500);
         }
+        else if(!numRegex.test($scope.employee.emp_aadhar_no)){
+
+            var dialog = bootbox.dialog({
+            message: '<p class="text-center">Please Enter A Valid Aadhar-Number.</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide'); 
+                $('#emp_aadhar_no').focus();  
+            }, 1500);
+      }
         else if($('#emp_pancard_no').val() == undefined || $('#emp_pancard_no').val() == ""){
             var dialog = bootbox.dialog({
             message: '<p class="text-center">Please Enter Pan Card.</p>',
@@ -205,6 +231,18 @@ angular.module('employee').controller('employeeAddCtrl', function ($rootScope, $
         else if($('#emp_email_id').val() == undefined || $('#emp_email_id').val() == ""){
             var dialog = bootbox.dialog({
             message: '<p class="text-center">Please Enter Email-Address.</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide'); 
+                $('#emp_email_id').focus();  
+            }, 1500);
+        }
+        else if(!emailRegex.test($scope.employee.emp_email_id)){
+
+            var dialog = bootbox.dialog({
+            message: '<p class="text-center">Please Enter A Valid Email-Address.</p>',
                 closeButton: false
             });
             dialog.find('.modal-body').addClass("btn-danger");

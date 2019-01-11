@@ -39,7 +39,7 @@
                                 <div class="col-sm-3">
                                         <label>Delivery Frequency</label>
                                         <select id="cm_dely_frequency" class="form-control" ng-model="campaign.cm_dely_frequency">
-                                            <option value="">select</option>
+                                            <option value="">Select</option>
                                             <option value="Everyday">Everyday</option>
                                             <option value="Everyweek">Everyweek</option>
                                             <option value="Everymonth">Everymonth</option>
@@ -55,7 +55,7 @@
                                         <input type="text" id="cm_campaign_name" class="form-control" ng-model="campaign.cm_campaign_name" />
                                 </div>
                                 <div class="col-sm-3">
-                                    <label>Restriction (Y/N)</label>
+                                    <label>Restriction List (Y/N)</label>
                                     <select id="cm_restriction" class="form-control" ng-model="campaign.cm_restriction">
                                         <option value="">Select your option</option>
                                         <option data-toggle="modal" data-target="#restriction_list" data-backdrop="static" data-keyboard="false">Yes</option>
@@ -75,7 +75,7 @@
                                     <br>    
                                 </div>
                                 <div class="col-sm-3">
-                                        <label>Supression File (Y/N)</label>
+                                        <label>Supression List (Y/N)</label>
                                         <select id="cm_supression_file" class="form-control" ng-model="campaign.cm_supression_file" >
                                             <option value="">Select your option</option>
                                             <option data-toggle="modal" data-target="#supression_file" data-backdrop="static" data-keyboard="false">Yes</option>
@@ -85,7 +85,12 @@
                                     <br>    
                                 </div>
                                 <div class="col-sm-3">
-                                    <label>Domain Limit (Y/N)</label>
+                                        <label>Disqualifies</label>
+                                        <input type="text" id="cm_disqualifies" class="form-control" ng-model="campaign.cm_disqualifies"/>
+                                        <br>
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>Domain Limit List (Y/N)</label>
                                     <select id="cm_domain_limit" class="form-control" ng-model="campaign.cm_domain_limit">
                                         <option value="">Select your option</option>
                                         <option data-toggle="modal" data-target="#domain_limit" data-backdrop="static" data-keyboard="false">Yes</option>
@@ -95,7 +100,7 @@
                                     <br>    
                                 </div>
                                 <div class="col-sm-3">
-                                    <label>Employee Size (Y/N)</label>
+                                    <label>Employee Size List (Y/N)</label>
                                     <select id="cm_emp_size" class="form-control" ng-model="campaign.cm_emp_size">
                                         <option value="">Select your option</option>
                                         <option data-toggle="modal" data-target="#employee_size" data-backdrop="static" data-keyboard="false">Yes</option>
@@ -105,16 +110,11 @@
                                     <br>    
                                 </div>
                                 <div class="col-sm-3">
-                                        <label>Disqualifies</label>
-                                        <input type="text" id="cm_disqualifies" class="form-control" ng-model="campaign.cm_disqualifies"/>
-                                        <br>
-                                </div>
-                                <div class="col-sm-3">
-                                    <label>Job Title (Y/N)</label>
+                                    <label>Job Title List(Y/N)</label>
                                     <select id="ctm_title" class="form-control" ng-model="campaign.cm_title">
                                         <option value="">Select your option</option>
                                         <option data-toggle="modal" data-target="#title_list" data-backdrop="static" data-keyboard="false">Yes</option>
-                                        <option data-backdrop="static" data-keyboard="false">No</option>
+                                        <option data-backdrop="static" data-keyboard="false" >No</option>
                                     </select>
                                     <button style="position: absolute; margin-top: -13%; margin-left: 65%;" ng-click="updateTitleList()" ng-show="campaign.cm_title=='Yes'"><i class="fa fa-pencil"></i></button>   
                                 </div>
@@ -124,7 +124,7 @@
                                     <br>
                                 </div>
                                 <div class="col-sm-3">
-                                    <label>Verticals (Y/N)</label>
+                                    <label>Verticals List (Y/N)</label>
                                     <select id="cm_vertical" class="form-control" ng-model="campaign.cm_vertical">
                                         <option value="">Select your option</option>
                                         <option data-toggle="modal" data-target="#vertical" data-backdrop="static" data-keyboard="false">Yes</option>
@@ -133,7 +133,7 @@
                                     <button style="position: absolute; margin-top: -13%; margin-left: 65%;" ng-click="updateVerticalList()" ng-show="campaign.cm_vertical=='Yes'"><i class="fa fa-pencil"></i></button>   
                                 </div>
                                  <div class="col-sm-3">
-                                    <label>Geo (Y/N)</label>
+                                    <label>Geo List (Y/N)</label>
                                     <select id="cm_geo" class="form-control" ng-model="campaign.cm_geo">
                                         <option value="">Select your option</option>
                                         <option data-toggle="modal" data-target="#geo" data-backdrop="static" data-keyboard="false">Yes</option>
@@ -142,7 +142,7 @@
                                     <button style="position: absolute; margin-top: -13%; margin-left: 65%;" ng-click="updateGeoList()" ng-show="campaign.cm_geo=='Yes'"><i class="fa fa-pencil"></i></button>   
                                 </div>
                                 <div class="col-sm-3">
-                                        <label>Allowed Domain</label>
+                                        <label>Allowed Domain List (Y/N)</label>
                                         <select id="cm_allow_domain" class="form-control" ng-model="campaign.cm_allow_domain">
                                             <option value="">Select your option</option>
                                             <option data-toggle="modal" data-target="#allow_domain" data-backdrop="static" data-keyboard="false">Yes</option>
@@ -152,7 +152,7 @@
                                     <br>    
                                 </div>
                                 <div class="col-sm-3">
-                                        <label>Revenue</label>
+                                        <label>Revenue List (Y/N)</label>
                                         <select id="cm_revenue" class="form-control" ng-model="campaign.cm_revenue">
                                             <option value="">Select your option</option>
                                             <option data-toggle="modal" data-target="#revenue" data-backdrop="static" data-keyboard="false">Yes</option>
@@ -162,7 +162,7 @@
                                     <br>    
                                 </div>
                                 <div class="col-sm-3">
-                                        <label>Custom Question</label>
+                                        <label>Custom Question List (Y/N)</label>
                                         <select id="cm_custom_question" class="form-control" ng-model="campaign.cm_custom_question">
                                             <option value="">Select your option</option>
                                             <option data-toggle="modal" data-target="#custom_question" data-backdrop="static" data-keyboard="false">Yes</option>
@@ -172,7 +172,7 @@
                                     <br>    
                                 </div>
                                 <div class="col-sm-3">
-                                        <label>Denied Domain</label>
+                                        <label>Denied Domain List (Y/N)</label>
                                         <select id="cm_denied_domain" class="form-control" ng-model="campaign.cm_denied_domain">
                                             <option value="">Select your option</option>
                                             <option data-toggle="modal" data-target="#denied_domain" data-backdrop="static" data-keyboard="false">Yes</option>
@@ -182,7 +182,7 @@
                                     <br>    
                                 </div>
                                 <div class="col-sm-3">
-                                        <label>Campaign Assets</label>
+                                        <label>Campaign Assets List (Y/N)</label>
                                         <select id="cm_campaign_asset" class="form-control" ng-model="campaign.cm_campaign_asset">
                                             <option value="">Select your option</option>
                                             <option data-toggle="modal" data-target="#asset" data-backdrop="static" data-keyboard="false">Yes</option>
@@ -192,7 +192,7 @@
                                     <br>    
                                 </div>
                                 <div class="col-sm-3">
-                                    <label>Industry (Y/N)</label>
+                                    <label>Industry List (Y/N)</label>
                                     <select id="cim_industry" class="form-control" ng-model="campaign.cm_industry">
                                         <option value="">Select your option</option>
                                         <option data-toggle="modal" data-target="#industry_list" data-backdrop="static" data-keyboard="false">Yes</option>
@@ -202,7 +202,7 @@
                                     <br>    
                                 </div>
                                 <div class="col-sm-3">
-                                    <label>Department (Y/N)</label>
+                                    <label>Department List (Y/N)</label>
                                     <select id="cm_dept" class="form-control" ng-model="campaign.cm_dept">
                                         <option value="">Select your option</option>
                                         <option data-toggle="modal" data-target="#department" data-backdrop="static" data-keyboard="false">Yes</option>
@@ -212,7 +212,7 @@
                                     <br>    
                                 </div>
                                 <div class="col-sm-3">
-                                    <label>Method (Y/N)</label>
+                                    <label>Method List (Y/N)</label>
                                     <select id="cm_method" class="form-control" ng-model="campaign.cm_method">
                                         <option value="">Select your option</option>
                                         <option data-toggle="modal" data-target="#method" data-backdrop="static" data-keyboard="false">Yes</option>
@@ -222,7 +222,7 @@
                                     <br>    
                                 </div>
                                 <div class="col-sm-3">
-                                    <label>Job Function/Level (Y/N)</label>
+                                    <label>Job Function/Level List (Y/N)</label>
                                     <select id="cm_job" class="form-control" ng-model="campaign.cm_job">
                                         <option value="">Select your option</option>
                                         <option data-toggle="modal" data-target="#level" data-backdrop="static" data-keyboard="false">Yes</option>
@@ -248,423 +248,21 @@
     </div>
 </div>
 
-<div class="modal fade" id="level">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Campaign Job Function/level List</h4>
-      </div>
-      <div class="modal-body">
 
-        <div class="col-sm-12">
-            <div class="row">
-                <div class="col-sm-4">
-                    <label>Job function / Level</label><br>
-                    <input type="text" class="form-control" id="cjlm_job_level" ng-model="JobLevel.job_level">
-                </div>
-                <div class="col-sm-2">
-                    <br>
-                    <button class="btn btn-primary btn-block" ng-click="levelAdd()">Add</button>
-                </div>
-                <div class="col-sm-4">
-                    <label>Upload</label><br>
-                    <input type="file" name="file" onchange="angular.element(this).scope().loadlevelFile(this.files)" />
-                </div>
-                <div class="col-sm-2"><br>
-                    <button class="btn btn-warning btn-block" ng-click="handlelevelFile()">Import</button>
-                </div>
-            </div>
-        </div><br>
-
-        <div class="box-body table-responsive no-padding">
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th>Job Function / level's</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr ng-repeat="list in levelList">
-                    <td>{{list.job_level}}</td>
-                    <td>
-                        <i class="fa fa-trash" ng-click="deletelevelList($index)"></i>
-                    </td>
-                </tr>
-              </tbody>
-            </table>
-        </div>
-    </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger pull-left" ng-click="closelevelList()">Close</button>
-        <button type="submit" class="btn btn-success pull-right" ng-click="addlevelList()">Save & Close</button>
-      </div>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div>
-
-<div class="modal fade" id="revenue">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Campaign Revenue List</h4>
-      </div>
-      <div class="modal-body">
-
-        <div class="col-sm-12">
-            <div class="row">
-                <div class="col-sm-4">
-                    <label>Revenue</label><br>
-                    <input type="text" class="form-control" id="crem_revenue" ng-model="Revenue.revenues">
-                </div>
-                <div class="col-sm-2">
-                    <br>
-                    <button class="btn btn-primary btn-block" ng-click="revenueAdd()">Add</button>
-                </div>
-                <div class="col-sm-4">
-                    <label>Upload</label><br>
-                    <input type="file" name="file" onchange="angular.element(this).scope().loadrevenueFile(this.files)" />
-                </div>
-                <div class="col-sm-2"><br>
-                    <button class="btn btn-warning btn-block" ng-click="handlerevenueFile()">Import</button>
-                </div>
-            </div>
-        </div><br>
-
-        <div class="box-body table-responsive no-padding">
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th>Revenue's</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr ng-repeat="list in revenueList">
-                    <td>{{list.revenues}}</td>
-                    <td>
-                        <i class="fa fa-trash" ng-click="deleterevenueList($index)"></i>
-                    </td>
-                </tr>
-              </tbody>
-            </table>
-        </div>
-    </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger pull-left" ng-click="closerevenueList()">Close</button>
-        <button type="submit" class="btn btn-success pull-right" ng-click="addrevenueList()">Save & Close</button>
-      </div>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div>
-
-<div class="modal fade" id="vertical">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Campaign Vertical List</h4>
-      </div>
-      <div class="modal-body">
-
-        <div class="col-sm-12">
-            <div class="row">
-                <div class="col-sm-4">
-                    <label>Verticals</label><br>
-                    <input type="text" class="form-control" id="cvm_vertical" ng-model="Vertical.verticals">
-                </div>
-                <div class="col-sm-2">
-                    <br>
-                    <button class="btn btn-primary btn-block" ng-click="verticalAdd()">Add</button>
-                </div>
-                <div class="col-sm-4">
-                    <label>Upload</label><br>
-                    <input type="file" name="file" onchange="angular.element(this).scope().loadverticalFile(this.files)" />
-                </div>
-                <div class="col-sm-2"><br>
-                    <button class="btn btn-warning btn-block" ng-click="handleverticalFile()">Import</button>
-                </div>
-            </div>
-        </div><br>
-
-        <div class="box-body table-responsive no-padding">
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th>Verticals</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr ng-repeat="list in VerticalList">
-                    <td>{{list.verticals}}</td>
-                    <td>
-                        <i class="fa fa-trash" ng-click="deleteverticalList($index)"></i>
-                    </td>
-                </tr>
-              </tbody>
-            </table>
-        </div>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger pull-left" ng-click="closeverticalList()">Close</button>
-        <button type="submit" class="btn btn-success pull-right" ng-click="addverticalList()">Save & Close</button>
-      </div>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div>
-
-<div class="modal fade" id="geo">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Campaign Geo List</h4>
-      </div>
-      <div class="modal-body">
-
-        <div class="col-sm-12">
-            <div class="row">
-                <div class="col-sm-4">
-                    <label>Geo</label><br>
-                    <input type="text" class="form-control" id="cgm_geo" ng-model="geos.geo">
-                </div>
-                <div class="col-sm-2">
-                    <br>
-                    <button class="btn btn-primary btn-block" ng-click="geoAdd()">Add</button>
-                </div>
-                <div class="col-sm-4">
-                    <label>Upload</label><br>
-                    <input type="file" name="file" onchange="angular.element(this).scope().loadgeoFile(this.files)" />
-                </div>
-                <div class="col-sm-2"><br>
-                    <button class="btn btn-warning btn-block" ng-click="handlegeoFile()">Import</button>
-                </div>
-            </div>
-        </div><br>
-
-        <div class="box-body table-responsive no-padding">
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th>Geo</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr ng-repeat="list in geoList">
-                    <td>{{list.geo}}</td>
-                    <td>
-                        <i class="fa fa-trash" ng-click="deletegeoList($index)"></i>
-                    </td>
-                </tr>
-              </tbody>
-            </table>
-        </div>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger pull-left" ng-click="closegeoList()">Close</button>
-        <button type="submit" class="btn btn-success pull-right" ng-click="addgeoList()">Save & Close</button>
-      </div>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div>
-
-<div class="modal fade" id="asset">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Campaign Asset List</h4>
-      </div>
-      <div class="modal-body">
-
-        <div class="col-sm-12">
-            <div class="row">
-                <div class="col-sm-4">
-                    <label>Assets</label><br>
-                    <input type="text" class="form-control" id="cam_campaign_asset" ng-model="campAsset.asset">
-                </div>
-                <div class="col-sm-2">
-                    <br>
-                    <button class="btn btn-primary btn-block" ng-click="assetAdd()">Add</button>
-                </div>
-                <div class="col-sm-4">
-                    <label>Upload</label><br>
-                    <input type="file" name="file" onchange="angular.element(this).scope().loadassetFile(this.files)" />
-                </div>
-                <div class="col-sm-2"><br>
-                    <button class="btn btn-warning btn-block" ng-click="handleassetFile()">Import</button>
-                </div>
-            </div>
-        </div><br>
-
-        <div class="box-body table-responsive no-padding">
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th>Campaign Assets</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr ng-repeat="list in campAssetList">
-                    <td>{{list.asset}}</td>
-                    <td>
-                        <i class="fa fa-trash" ng-click="deleteassetList($index)"></i>
-                    </td>
-                </tr>
-              </tbody>
-            </table>
-        </div>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger pull-left" ng-click="closeassetList()">Close</button>
-        <button type="submit" class="btn btn-success pull-right" ng-click="addassetList()">Save & Close</button>
-      </div>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div>
-
-<div class="modal fade" id="department">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Campaign Department List</h4>
-      </div>
-      <div class="modal-body">
-
-        <div class="col-sm-12">
-            <div class="row">
-                <div class="col-sm-4">
-                    <label>Departments</label><br>
-                    <input type="text" class="form-control" id="cdm_department" ng-model="departments.department">
-                </div>
-                <div class="col-sm-2">
-                    <br>
-                    <button class="btn btn-primary btn-block" ng-click="departmentAdd()">Add</button>
-                </div>
-                <div class="col-sm-4">
-                    <label>Upload</label><br>
-                    <input type="file" name="file" onchange="angular.element(this).scope().loaddepartmentFile(this.files)" />
-                </div>
-                <div class="col-sm-2"><br>
-                    <button class="btn btn-warning btn-block" ng-click="handledepartmentFile()">Import</button>
-                </div>
-            </div>
-        </div><br>
-
-        <div class="box-body table-responsive no-padding">
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th>Departments</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr ng-repeat="list in departmentList">
-                    <td>{{list.department}}</td>
-                    <td>
-                        <i class="fa fa-trash" ng-click="deletedepartmentList($index)"></i>
-                    </td>
-                </tr>
-              </tbody>
-            </table>
-        </div>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger pull-left" ng-click="closedepartmentList()">Close</button>
-        <button type="submit" class="btn btn-success pull-right" ng-click="adddepartmentList()">Save & Close</button>
-      </div>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div>
-
-<div class="modal fade" id="method">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Campaign Method List</h4>
-      </div>
-      <div class="modal-body">
-
-        <div class="col-sm-12">
-            <div class="row">
-                <div class="col-sm-4">
-                    <label>Methods</label><br>
-                    <input type="text" class="form-control" id="cmm_method" ng-model="methods.methodss">
-                </div>
-                <div class="col-sm-2">
-                    <br>
-                    <button class="btn btn-primary btn-block" ng-click="methodAdd()">Add</button>
-                </div>
-                <div class="col-sm-4">
-                    <label>Upload</label><br>
-                    <input type="file" name="file" onchange="angular.element(this).scope().loadmethodFile(this.files)" />
-                </div>
-                <div class="col-sm-2"><br>
-                    <button class="btn btn-warning btn-block" ng-click="handlemethodFile()">Import</button>
-                </div>
-            </div>
-        </div><br>
-
-        <div class="box-body table-responsive no-padding">
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th>Methods</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr ng-repeat="list in methodList">
-                    <td>{{list.methodss}}</td>
-                    <td>
-                        <i class="fa fa-trash" ng-click="deletemethodList($index)"></i>
-                    </td>
-                </tr>
-              </tbody>
-            </table>
-        </div>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger pull-left" ng-click="closemethodList()">Close</button>
-        <button type="submit" class="btn btn-success pull-right" ng-click="addmethodList()">Save & Close</button>
-      </div>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div>
-
-
+<!-- 1. Restriction List (Y/N) Modal -->
 <div class="modal fade" id="restriction_list">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Campaign Restriction List</h4>
+        <h4 class="modal-title">Restrictions List</h4>
+        <a href="resources/logichron_sample_excel_sheet/1_Restriction.xlsx"><i class="fa fa-download fa-2x" data-toggle="tooltip" title="Download Sample Excel Sheet!"></i></a>
       </div>
       <div class="modal-body">
 
         <div class="col-sm-12">
             <div class="row">
                 <div class="col-sm-4">
-                    <label>Restrictions</label><br>
+                    <label>Restriction</label><br>
                     <input type="text" class="form-control" id="crm_restriction" ng-model="restrict.restriction">
                 </div>
                 <div class="col-sm-2">
@@ -673,7 +271,7 @@
                 </div>
                 <div class="col-sm-4">
                     <label>Upload</label><br>
-                    <input type="file" name="file" onchange="angular.element(this).scope().loadrestFile(this.files)" />
+                    <input type="file" id="filerest" name="file" onchange="angular.element(this).scope().loadrestFile(this.files)" />
                 </div>
                 <div class="col-sm-2"><br>
                     <button class="btn btn-warning btn-block" ng-click="handlerestFile()">Import</button>
@@ -681,16 +279,23 @@
             </div>
         </div><br>
 
-        <div class="box-body table-responsive no-padding">
+        <div class="box-body table-responsive no-padding" style="height: 300px">
             <table class="table table-hover">
               <thead>
                 <tr>
+
                   <th>Restrictions</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="list in restrictList">
+                <tr ng-repeat="list in oldrestrictList track by $index">
+                    <td>{{list.restriction}}</td>
+                    <td>
+                        <i class="fa fa-trash" ng-click="deletedoldRestrictList($index)"></i>
+                    </td>
+                </tr>
+                <tr ng-repeat="list in restrictList track by $index">
                     <td>{{list.restriction}}</td>
                     <td>
                         <i class="fa fa-trash" ng-click="deleteRestrictList($index)"></i>
@@ -710,12 +315,15 @@
   </div>
   <!-- /.modal-dialog -->
 </div>
-<!--1  Account List (Y/N) Modal -->
+<!-- END Restriction List (Y/N) Modal -->
+
+<!--2.  Account List (Y/N) Modal -->
 <div class="modal fade" id="account_list">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Campaign Account List</h4>
+        <h4 class="modal-title">Account List</h4>
+        <a href="resources/logichron_sample_excel_sheet/2_Account_List.xlsx"><i class="fa fa-download fa-2x" data-toggle="tooltip" title="Download Sample Excel Sheet!"></i></a>
       </div>
       <div class="modal-body">
 
@@ -737,7 +345,7 @@
             <div class="row">
                 <div class="col-sm-5">
                     <label>Upload</label><br>
-                    <input type="file" name="file" onchange="angular.element(this).scope().loadFile(this.files)" />
+                    <input type="file" id="fileacclist" name="file" onchange="angular.element(this).scope().loadFile(this.files)" />
                 </div>
                 <div class="col-sm-2"><br>
                     <button class="btn btn-warning btn-block" ng-click="handleFile()">Import</button>
@@ -745,7 +353,7 @@
             </div>
         </div><br>
 
-        <div class="box-body table-responsive no-padding">
+        <div class="box-body table-responsive no-padding" style="height: 300px">
             <table class="table table-hover">
               <thead>
                 <tr>
@@ -755,7 +363,14 @@
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="list in accountList">
+                <tr ng-repeat="list in oldaccountList track by $index">
+                    <td>{{list.company}}</td>
+                    <td>{{list.website}}</td>
+                    <td>
+                        <i class="fa fa-trash" ng-click="deleteoldAccntList($index)"></i>
+                    </td>
+                </tr>
+                <tr ng-repeat="list in accountList track by $index">
                     <td>{{list.company}}</td>
                     <td>{{list.website}}</td>
                     <td>
@@ -778,12 +393,13 @@
 </div>
 <!-- END Account List (Y/N) Modal -->
 
-<!--2 Supression File (Y/N) Modal -->
+<!--3. Supression File (Y/N) Modal -->
 <div class="modal fade" id="supression_file">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Campaign Suppression List</h4>
+        <h4 class="modal-title">Suppression List</h4>
+        <a href="resources/logichron_sample_excel_sheet/3_Suppression_List.xlsx"><i class="fa fa-download fa-2x" data-toggle="tooltip" title="Download Sample Excel Sheet!"></i></a>
       </div>
       <div class="modal-body">
 
@@ -805,7 +421,7 @@
             <div class="row">
                 <div class="col-sm-5">
                     <label>Upload</label><br>
-                    <input type="file" name="file" onchange="angular.element(this).scope().loadSuppFile(this.files)" />
+                    <input type="file" id="filesupplist" name="file" onchange="angular.element(this).scope().loadSuppFile(this.files)" />
                 </div>
                 <div class="col-sm-2"><br>
                     <button class="btn btn-warning btn-block" ng-click="handleSuppFile()">Import</button>
@@ -813,7 +429,7 @@
             </div>
         </div><br>
 
-        <div class="box-body table-responsive no-padding">
+        <div class="box-body table-responsive no-padding" style="height: 300px">
             <table class="table table-hover">
               <thead>
                 <tr>
@@ -823,6 +439,13 @@
                 </tr>
               </thead>
               <tbody>
+                <tr ng-repeat="list in oldsupressionList track by $index">
+                    <td>{{list.company}}</td>
+                    <td>{{list.website}}</td>
+                    <td>
+                        <i class="fa fa-trash" ng-click="deleteoldSupression($index)"></i>
+                    </td>
+                </tr>
                 <tr ng-repeat="list in supressionList track by $index">
                     <td>{{list.company}}</td>
                     <td>{{list.website}}</td>
@@ -845,11 +468,14 @@
   <!-- /.modal-dialog -->
 </div>
 <!-- END Supression File (Y/N) Modal -->
+
+<!--4. Domain Limit (Y/N) Modal -->
 <div class="modal fade" id="domain_limit">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Campaign Domain Limit</h4>
+        <h4 class="modal-title">Domain Limit List</h4>
+        <a href="resources/logichron_sample_excel_sheet/4_Domain_Limit.xlsx"><i class="fa fa-download fa-2x" data-toggle="tooltip" title="Download Sample Excel Sheet!"></i></a>
       </div>
       <div class="modal-body">
 
@@ -865,7 +491,7 @@
                 </div>
                 <div class="col-sm-4">
                     <label>Upload</label><br>
-                    <input type="file" name="file" onchange="angular.element(this).scope().loadomainLimitFile(this.files)" />
+                    <input type="file" id="filedomainlimit" name="file" onchange="angular.element(this).scope().loadomainLimitFile(this.files)" />
                 </div>
                 <div class="col-sm-2"><br>
                     <button class="btn btn-warning btn-block" ng-click="handleDomainlimitFile()">Import</button>
@@ -873,7 +499,7 @@
             </div>
         </div><br>
 
-        <div class="box-body table-responsive no-padding">
+        <div class="box-body table-responsive no-padding" style="height: 300px">
             <table class="table table-hover">
               <thead>
                 <tr>
@@ -882,7 +508,13 @@
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="list in domainList">
+                <tr ng-repeat="list in olddomainList track by $index">
+                    <td>{{list.cdlm_domainlimit}}</td>
+                    <td>
+                        <i class="fa fa-trash" ng-click="deleteolddomainLimitList($index)"></i>
+                    </td>
+                </tr>
+                <tr ng-repeat="list in domainList track by $index">
                     <td>{{list.cdlm_domainlimit}}</td>
                     <td>
                         <i class="fa fa-trash" ng-click="deletedomainLimitList($index)"></i>
@@ -902,12 +534,16 @@
   </div>
   <!-- /.modal-dialog -->
 </div>
-<!--3 Allowed Domain Modal -->
+<!-- END Domain Limit (Y/N) Modal -->
+
+
+<!--5 Employee Size (Y/N) Modal -->
 <div class="modal fade" id="employee_size">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Campaign Employee Size</h4>
+        <h4 class="modal-title">Employee Size List</h4>
+        <a href="resources/logichron_sample_excel_sheet/5_Employee_Size.xlsx"><i class="fa fa-download fa-2x" data-toggle="tooltip" title="Download Sample Excel Sheet!"></i></a>
       </div>
       <div class="modal-body">
 
@@ -915,14 +551,14 @@
             <div class="row">
                 <div class="col-sm-3-offset">
                     <label>Employee Size</label><br>
-                    <input type="text" id="cesm_employee_size" ng-model="Employee_sizes.employee_size">
+                    <input type="text" id="cesm_employee_size" class="form-control" ng-model="Employee_sizes.employee_size">
                 </div>
                 <div class="col-sm-2"><br>
                     <button class="btn btn-primary" ng-click="empSizeAdd()">Add</button>
                 </div>
                 <div class="col-sm-4">
                     <label>Upload</label><br>
-                    <input type="file" name="file" onchange="angular.element(this).scope().loadempSizeFile(this.files)" />
+                    <input type="file" id="fileempsize" name="file" onchange="angular.element(this).scope().loadempSizeFile(this.files)" />
                 </div>
                 <div class="col-sm-2"><br>
                     <button class="btn btn-warning btn-block" ng-click="handleempSizeFile()">Import</button>
@@ -930,7 +566,7 @@
             </div>
         </div><br>
 
-        <div class="box-body table-responsive no-padding">
+        <div class="box-body table-responsive no-padding" style="height: 300px">
             <table class="table table-hover">
               <thead>
                 <tr>
@@ -939,6 +575,12 @@
                 </tr>
               </thead>
               <tbody>
+                <tr ng-repeat="list in oldempsizeList track by $index">
+                    <td>{{list.employee_size}}</td>
+                    <td>
+                        <i class="fa fa-trash" ng-click="deleteoldEmpSize($index)"></i>
+                    </td>
+                </tr>
                 <tr ng-repeat="list in empsizeList track by $index">
                     <td>{{list.employee_size}}</td>
                     <td>
@@ -959,12 +601,217 @@
   </div>
   <!-- /.modal-dialog -->
 </div>
-<!-- END Allowed Domain Modal -->
+<!-- END mployee Size Modal -->
+
+<!--6. Job Title List Modal -->
+<div class="modal fade" id="title_list">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Job Title List</h4>
+        <a href="resources/logichron_sample_excel_sheet/6_Job_Title.xlsx"><i class="fa fa-download fa-2x" data-toggle="tooltip" title="Download Sample Excel Sheet!"></i></a>
+      </div>
+      <div class="modal-body">
+
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-4">
+                    <label>Job Title</label><br>
+                    <input type="text" class="form-control" id="ctm_title1" ng-model="titled.titles">
+                </div>
+                <div class="col-sm-2 "><br>
+                    <button class="btn btn-primary btn-block" ng-click="titleAdd()">Add</button>
+                </div>
+                <div class="col-sm-4">
+                    <label>Upload</label><br>
+                    <input type="file" id="filejobtitle"  name="file" onchange="angular.element(this).scope().loadtitleFile(this.files)" />
+                </div>
+                <div class="col-sm-2"><br>
+                    <button class="btn btn-warning btn-block" ng-click="handletitleFile()">Import</button>
+                </div>
+            </div>
+        </div><br>
+
+        <div class="box-body table-responsive no-padding" style="height: 300px">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Job Titles</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="list in oldtitleList track by $index">
+                    <td>{{list.titles}}</td>
+                    <td>
+                        <i class="fa fa-trash" ng-click="deleteoldTitleList($index)"></i>
+                    </td>
+                </tr>
+                <tr ng-repeat="list in titleList track by $index">
+                    <td>{{list.titles}}</td>
+                    <td>
+                        <i class="fa fa-trash" ng-click="deleteTitleList($index)"></i>
+                    </td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" ng-click="closetitleList()">Close</button>
+        <button type="submit" class="btn btn-success pull-right" ng-click="addtitleList()">Save & Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- END Job Title List Modal -->
+
+
+<!--7. Vertical List Modal -->
+<div class="modal fade" id="vertical">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Verticals List</h4>
+        <a href="resources/logichron_sample_excel_sheet/7_Verticals.xlsx"><i class="fa fa-download fa-2x" data-toggle="tooltip" title="Download Sample Excel Sheet!"></i></a>
+      </div>
+      <div class="modal-body">
+
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-4">
+                    <label>Vertical</label><br>
+                    <input type="text" class="form-control" id="cvm_vertical" ng-model="Vertical.verticals">
+                </div>
+                <div class="col-sm-2">
+                    <br>
+                    <button class="btn btn-primary btn-block" ng-click="verticalAdd()">Add</button>
+                </div>
+                <div class="col-sm-4">
+                    <label>Upload</label><br>
+                    <input type="file" id="fileverticallist" name="file" onchange="angular.element(this).scope().loadverticalFile(this.files)" />
+                </div>
+                <div class="col-sm-2"><br>
+                    <button class="btn btn-warning btn-block" ng-click="handleverticalFile()">Import</button>
+                </div>
+            </div>
+        </div><br>
+
+        <div class="box-body table-responsive no-padding" style="height: 300px">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Verticals</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="list in oldverticalList track by $index">
+                    <td>{{list.verticals}}</td>
+                    <td>
+                        <i class="fa fa-trash" ng-click="deleteoldverticalList($index)"></i>
+                    </td>
+                </tr>
+                <tr ng-repeat="list in verticalList track by $index">
+                    <td>{{list.verticals}}</td>
+                    <td>
+                        <i class="fa fa-trash" ng-click="deleteverticalList($index)"></i>
+                    </td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" ng-click="closeverticalList()">Close</button>
+        <button type="submit" class="btn btn-success pull-right" ng-click="addverticalList()">Save & Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- END Vertical List Modal -->
+
+
+<!--8. Geo List Modal -->
+<div class="modal fade" id="geo">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Geo List</h4>
+        <a href="resources/logichron_sample_excel_sheet/8_Geo.xlsx"><i class="fa fa-download fa-2x" data-toggle="tooltip" title="Download Sample Excel Sheet!"></i></a>
+      </div>
+      <div class="modal-body">
+
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-4">
+                    <label>Geo</label><br>
+                    <input type="text" class="form-control" id="cgm_geo" ng-model="geos.geo">
+                </div>
+                <div class="col-sm-2">
+                    <br>
+                    <button class="btn btn-primary btn-block" ng-click="geoAdd()">Add</button>
+                </div>
+                <div class="col-sm-4">
+                    <label>Upload</label><br>
+                    <input type="file" id="filegeo" name="file" onchange="angular.element(this).scope().loadgeoFile(this.files)" />
+                </div>
+                <div class="col-sm-2"><br>
+                    <button class="btn btn-warning btn-block" ng-click="handlegeoFile()">Import</button>
+                </div>
+            </div>
+        </div><br>
+
+        <div class="box-body table-responsive no-padding" style="height: 300px">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Geo</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="list in oldgeoList track by $index">
+                    <td>{{list.geo}}</td>
+                    <td>
+                        <i class="fa fa-trash" ng-click="deleteoldgeoList($index)"></i>
+                    </td>
+                </tr>
+                <tr ng-repeat="list in geoList track by $index">
+                    <td>{{list.geo}}</td>
+                    <td>
+                        <i class="fa fa-trash" ng-click="deletegeoList($index)"></i>
+                    </td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" ng-click="closegeoList()">Close</button>
+        <button type="submit" class="btn btn-success pull-right" ng-click="addgeoList()">Save & Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- END Geo List Modal -->
+
+<!--9. Allow Domain Modal -->
 <div class="modal fade" id="allow_Domain">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Domain Account List</h4>
+        <h4 class="modal-title">Allow Domain List</h4>
+        <a href="resources/logichron_sample_excel_sheet/9_Allow_Domain.xlsx"><i class="fa fa-download fa-2x" data-toggle="tooltip" title="Download Sample Excel Sheet!"></i></a>
       </div>
       <div class="modal-body">
 
@@ -972,14 +819,14 @@
             <div class="row">
                 <div class="col-sm-3-offset">
                     <label>Website</label><br>
-                    <input type="text" id="adcm_website" ng-model="allow_domain.adcm_website">
+                    <input type="text" class="form-control" id="adcm_website" ng-model="allow_domain.adcm_website">
                 </div>
                 <div class="col-sm-2"><br>
                     <button class="btn btn-primary" ng-click="allowDomainAdd()">Add</button>
                 </div>
                 <div class="col-sm-4">
                     <label>Upload</label><br>
-                    <input type="file" name="file" onchange="angular.element(this).scope().loadomainFile(this.files)" />
+                    <input type="file" id="fileallowdomain" name="file" onchange="angular.element(this).scope().loadomainFile(this.files)" />
                 </div>
                 <div class="col-sm-2"><br>
                     <button class="btn btn-warning btn-block" ng-click="handledomainFile()">Import</button>
@@ -987,7 +834,7 @@
             </div>
         </div><br>
 
-        <div class="box-body table-responsive no-padding">
+        <div class="box-body table-responsive no-padding" style="height: 300px">
             <table class="table table-hover">
               <thead>
                 <tr>
@@ -996,6 +843,12 @@
                 </tr>
               </thead>
               <tbody>
+                <tr ng-repeat="list in oldallowDomainList track by $index">
+                    <td>{{list.adcm_website}}</td>
+                    <td>
+                        <i class="fa fa-trash" ng-click="deleteoldAllowDomain($index)"></i>
+                    </td>
+                </tr>
                 <tr ng-repeat="list in allowDomainList track by $index">
                     <td>{{list.adcm_website}}</td>
                     <td>
@@ -1016,12 +869,83 @@
   </div>
   <!-- /.modal-dialog -->
 </div>
-<!--4 Custom Question Modal -->
+<!-- END Allow Domain  Modal -->
+
+
+
+<!--10. Revenue List Modal -->
+<div class="modal fade" id="revenue">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Revenue's List</h4>
+        <a href="resources/logichron_sample_excel_sheet/10_Revenue.xlsx"><i class="fa fa-download fa-2x" data-toggle="tooltip" title="Download Sample Excel Sheet!"></i></a>
+      </div>
+      <div class="modal-body">
+
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-4">
+                    <label>Revenue</label><br>
+                    <input type="text" class="form-control" id="crem_revenue" ng-model="Revenue.revenues">
+                </div>
+                <div class="col-sm-2">
+                    <br>
+                    <button class="btn btn-primary btn-block" ng-click="revenueAdd()">Add</button>
+                </div>
+                <div class="col-sm-4">
+                    <label>Upload</label><br>
+                    <input type="file" id="filerevenue" name="file" onchange="angular.element(this).scope().loadrevenueFile(this.files)" />
+                </div>
+                <div class="col-sm-2"><br>
+                    <button class="btn btn-warning btn-block" ng-click="handlerevenueFile()">Import</button>
+                </div>
+            </div>
+        </div><br>
+
+        <div class="box-body table-responsive no-padding" style="height: 300px">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Revenue's</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="list in oldrevenueList track by $index">
+                    <td>{{list.revenues}}</td>
+                    <td>
+                        <i class="fa fa-trash" ng-click="deleteoldrevenueList($index)"></i>
+                    </td>
+                </tr>
+                <tr ng-repeat="list in revenueList track by $index">
+                    <td>{{list.revenues}}</td>
+                    <td>
+                        <i class="fa fa-trash" ng-click="deleterevenueList($index)"></i>
+                    </td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+    </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" ng-click="closerevenueList()">Close</button>
+        <button type="submit" class="btn btn-success pull-right" ng-click="addrevenueList()">Save & Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- END Revenue List Modal -->
+
+<!--11. custom Question Modal -->
 <div class="modal fade" id="custom_question">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Question Campaign Account List</h4>
+        <h4 class="modal-title">Custom Question List</h4>
+        <a href="resources/logichron_sample_excel_sheet/11_Custom_Question.xlsx"><i class="fa fa-download fa-2x" data-toggle="tooltip" title="Download Sample Excel Sheet!"></i></a>
       </div>
       <div class="modal-body">
         
@@ -1042,7 +966,7 @@
             <div class="row">
                 <div class="col-sm-5">
                     <label>Upload</label><br>
-                    <input type="file" name="file" onchange="angular.element(this).scope().loadquestFile(this.files)" />
+                    <input type="file" id="filecustomquestion"  name="file" onchange="angular.element(this).scope().loadquestFile(this.files)" />
                 </div>
                 <div class="col-sm-2"><br>
                     <button class="btn btn-warning btn-block" ng-click="handlequestFile()">Import</button>
@@ -1050,7 +974,7 @@
             </div>
         </div><br>
 
-        <div class="box-body table-responsive no-padding">
+        <div class="box-body table-responsive no-padding" style="height: 300px">
             <table class="table table-hover">
               <thead>
                 <tr>
@@ -1060,6 +984,13 @@
                 </tr>
               </thead>
               <tbody>
+                <tr ng-repeat="list in oldcustomQuestionList track by $index">
+                    <td>{{list.question}}</td>
+                    <td>{{list.answer}}</td>
+                    <td>
+                        <i class="fa fa-trash" ng-click="deleteoldCustomQuestion($index)"></i>
+                    </td>
+                </tr>
                 <tr ng-repeat="list in customQuestionList track by $index">
                     <td>{{list.question}}</td>
                     <td>{{list.answer}}</td>
@@ -1083,12 +1014,14 @@
 </div>
 <!-- END Custom Question Modal -->
 
-<!--5 Denied Domain Modal -->
+
+<!--12. Denied Domain Modal -->
 <div class="modal fade" id="denied_domain">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Denied Domain Account List</h4>
+        <h4 class="modal-title">Denied Domain List</h4>
+        <a href="resources/logichron_sample_excel_sheet/12_Denied_Domain.xlsx"><i class="fa fa-download fa-2x" data-toggle="tooltip" title="Download Sample Excel Sheet!"></i></a>
       </div>
       <div class="modal-body">
 
@@ -1096,14 +1029,14 @@
             <div class="row">
                 <div class="col-sm-3-offset">
                     <label>Website</label><br>
-                    <input type="text" id="ddcm_website" ng-model="denied_domain.ddcm_website">
+                    <input type="text" class="form-control" id="ddcm_website" ng-model="denied_domain.ddcm_website">
                 </div>
                 <div class="col-sm-2"><br>
                     <button class="btn btn-primary" ng-click="deniedDomainAdd()">Add</button>
                 </div>
                 <div class="col-sm-4">
                     <label>Upload</label><br>
-                    <input type="file" name="file" onchange="angular.element(this).scope().loadenydomainFile(this.files)" />
+                    <input type="file"  id="filedenieddomain" name="file" onchange="angular.element(this).scope().loadenydomainFile(this.files)" />
                 </div>
                 <div class="col-sm-2"><br>
                     <button class="btn btn-warning btn-block" ng-click="handledenydomainFile()">Import</button>
@@ -1111,7 +1044,7 @@
             </div>
         </div><br>
 
-        <div class="box-body table-responsive no-padding">
+        <div class="box-body table-responsive no-padding" style="height: 300px">
             <table class="table table-hover">
               <thead>
                 <tr>
@@ -1120,6 +1053,12 @@
                 </tr>
               </thead>
               <tbody>
+                <tr ng-repeat="list in olddeniedDomainList track by $index">
+                    <td>{{list.ddcm_website}}</td>
+                    <td>
+                        <i class="fa fa-trash" ng-click="deleteoldDeniedDomain($index)"></i>
+                    </td>
+                </tr>
                 <tr ng-repeat="list in deniedDomainList track by $index">
                     <td>{{list.ddcm_website}}</td>
                     <td>
@@ -1142,46 +1081,55 @@
 </div>
 <!-- END Denied Domain  Modal -->
 
-<div class="modal fade" id="title_list">
+<!--13 Asset List Modal -->
+<div class="modal fade" id="asset">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Campaign Job Title List</h4>
+        <h4 class="modal-title">Campaign Assets List</h4>
+        <a href="resources/logichron_sample_excel_sheet/13_Campaign_Assets.xlsx"><i class="fa fa-download fa-2x" data-toggle="tooltip" title="Download Sample Excel Sheet!"></i></a>
       </div>
       <div class="modal-body">
 
         <div class="col-sm-12">
             <div class="row">
                 <div class="col-sm-4">
-                    <label>Title</label><br>
-                    <input type="text" class="form-control" id="ctm_title" ng-model="titled.titles">
+                    <label>Asset</label><br>
+                    <input type="text" class="form-control" id="cam_campaign_asset" ng-model="campAsset.asset">
                 </div>
-                <div class="col-sm-2 "><br>
-                    <button class="btn btn-primary btn-block" ng-click="titleAdd()">Add</button>
+                <div class="col-sm-2">
+                    <br>
+                    <button class="btn btn-primary btn-block" ng-click="assetAdd()">Add</button>
                 </div>
                 <div class="col-sm-4">
                     <label>Upload</label><br>
-                    <input type="file" name="file" onchange="angular.element(this).scope().loadtitleFile(this.files)" />
+                    <input type="file" id="fileasset" name="file" onchange="angular.element(this).scope().loadassetFile(this.files)" />
                 </div>
                 <div class="col-sm-2"><br>
-                    <button class="btn btn-warning btn-block" ng-click="handletitleFile()">Import</button>
+                    <button class="btn btn-warning btn-block" ng-click="handleassetFile()">Import</button>
                 </div>
             </div>
         </div><br>
 
-        <div class="box-body table-responsive no-padding">
+        <div class="box-body table-responsive no-padding" style="height: 300px">
             <table class="table table-hover">
               <thead>
                 <tr>
-                  <th>Job Titles</th>
+                  <th>Campaign Assets</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="list in titleList">
-                    <td>{{list.titles}}</td>
+                <tr ng-repeat="list in oldcampAssetList track by $index">
+                    <td>{{list.asset}}</td>
                     <td>
-                        <i class="fa fa-trash" ng-click="deleteTitleList($index)"></i>
+                        <i class="fa fa-trash" ng-click="deleteoldassetList($index)"></i>
+                    </td>
+                </tr>
+                <tr ng-repeat="list in campAssetList track by $index">
+                    <td>{{list.asset}}</td>
+                    <td>
+                        <i class="fa fa-trash" ng-click="deleteassetList($index)"></i>
                     </td>
                 </tr>
               </tbody>
@@ -1190,20 +1138,24 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger pull-left" ng-click="closetitleList()">Close</button>
-        <button type="submit" class="btn btn-success pull-right" ng-click="addtitleList()">Save & Close</button>
+        <button type="button" class="btn btn-danger pull-left" ng-click="closeassetList()">Close</button>
+        <button type="submit" class="btn btn-success pull-right" ng-click="addassetList()">Save & Close</button>
       </div>
     </div>
     <!-- /.modal-content -->
   </div>
   <!-- /.modal-dialog -->
 </div>
+<!-- END Asset List Modal -->
 
+
+<!--14 Industries List Modal -->
 <div class="modal fade" id="industry_list">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Campaign Industries List</h4>
+        <h4 class="modal-title">Industries List</h4>
+        <a href="resources/logichron_sample_excel_sheet/14_Industry.xlsx"><i class="fa fa-download fa-2x" data-toggle="tooltip" title="Download Sample Excel Sheet!"></i></a>
       </div>
       <div class="modal-body">
 
@@ -1219,7 +1171,7 @@
                 </div>
                 <div class="col-sm-4">
                     <label>Upload</label><br>
-                    <input type="file" name="file" onchange="angular.element(this).scope().loadindustryFile(this.files)" />
+                    <input type="file" id="fileindustry" name="file" onchange="angular.element(this).scope().loadindustryFile(this.files)" />
                 </div>
                 <div class="col-sm-2"><br>
                     <button class="btn btn-warning btn-block" ng-click="handleindustryFile()">Import</button>
@@ -1227,7 +1179,7 @@
             </div>
         </div><br>
 
-        <div class="box-body table-responsive no-padding">
+        <div class="box-body table-responsive no-padding" style="height: 300px">
             <table class="table table-hover">
               <thead>
                 <tr>
@@ -1236,7 +1188,13 @@
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="list in industryList">
+                <tr ng-repeat="list in oldindustryList track by $index">
+                    <td>{{list.industries}}</td>
+                    <td>
+                        <i class="fa fa-trash" ng-click="deleteoldindustryList($index)"></i>
+                    </td>
+                </tr>
+                <tr ng-repeat="list in industryList track by $index">
                     <td>{{list.industries}}</td>
                     <td>
                         <i class="fa fa-trash" ng-click="deleteindustryList($index)"></i>
@@ -1256,39 +1214,212 @@
   </div>
   <!-- /.modal-dialog -->
 </div>
-<!-- Delete CLose -->
-<div class="modal fade deleteposition" id="industry_delete">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-body">
-                <p>Are You Sure You Want To Delete The Records?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" id="del" class="btn btn-danger" ng-click="industryDelConfirm()">Yes</button>
-        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="industryNoChange()">No</button>
-      </div>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div>
-<!-- 1. -->
-<div class="modal fade deleteposition" id="title_delete">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-body">
-                <p>Are You Sure You Want To Delete The Records?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" id="del" class="btn btn-danger" ng-click="titleDelConfirm()">Yes</button>
-        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="titleNoChange()">No</button>
-      </div>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div>
+<!-- END Industries List Modal -->
 
+<!--15 Department List Modal -->
+<div class="modal fade" id="department">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Departments List</h4>
+        <a href="resources/logichron_sample_excel_sheet/15_Department.xlsx"><i class="fa fa-download fa-2x" data-toggle="tooltip" title="Download Sample Excel Sheet!"></i></a>
+      </div>
+      <div class="modal-body">
+
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-4">
+                    <label>Department</label><br>
+                    <input type="text" class="form-control" id="cdm_department" ng-model="departments.department">
+                </div>
+                <div class="col-sm-2">
+                    <br>
+                    <button class="btn btn-primary btn-block" ng-click="departmentAdd()">Add</button>
+                </div>
+                <div class="col-sm-4">
+                    <label>Upload</label><br>
+                    <input type="file" id="filedepartment" name="file" onchange="angular.element(this).scope().loaddepartmentFile(this.files)" />
+                </div>
+                <div class="col-sm-2"><br>
+                    <button class="btn btn-warning btn-block" ng-click="handledepartmentFile()">Import</button>
+                </div>
+            </div>
+        </div><br>
+
+        <div class="box-body table-responsive no-padding" style="height: 300px">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Departments</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="list in olddepartmentList track by $index">
+                    <td>{{list.department}}</td>
+                    <td>
+                        <i class="fa fa-trash" ng-click="deleteolddepartmentList($index)"></i>
+                    </td>
+                </tr>
+                <tr ng-repeat="list in departmentList track by $index">
+                    <td>{{list.department}}</td>
+                    <td>
+                        <i class="fa fa-trash" ng-click="deletedepartmentList($index)"></i>
+                    </td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" ng-click="closedepartmentList()">Close</button>
+        <button type="submit" class="btn btn-success pull-right" ng-click="adddepartmentList()">Save & Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- END Department List Modal -->
+
+
+<!--16 Method List Modal -->
+<div class="modal fade" id="method">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Methods List</h4>
+        <a href="resources/logichron_sample_excel_sheet/16_Method.xlsx"><i class="fa fa-download fa-2x" data-toggle="tooltip" title="Download Sample Excel Sheet!"></i></a>
+      </div>
+      <div class="modal-body">
+
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-4">
+                    <label>Method</label><br>
+                    <input type="text" class="form-control" id="cmm_method" ng-model="methods.methodss">
+                </div>
+                <div class="col-sm-2">
+                    <br>
+                    <button class="btn btn-primary btn-block" ng-click="methodAdd()">Add</button>
+                </div>
+                <div class="col-sm-4">
+                    <label>Upload</label><br>
+                    <input type="file" id="filemethod" name="file" onchange="angular.element(this).scope().loadmethodFile(this.files)" />
+                </div>
+                <div class="col-sm-2"><br>
+                    <button class="btn btn-warning btn-block" ng-click="handlemethodFile()">Import</button>
+                </div>
+            </div>
+        </div><br>
+
+        <div class="box-body table-responsive no-padding" style="height: 300px">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Methods</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="list in oldmethodList track by $index">
+                    <td>{{list.methodss}}</td>
+                    <td>
+                        <i class="fa fa-trash" ng-click="deleteoldmethodList($index)"></i>
+                    </td>
+                </tr>
+                <tr ng-repeat="list in methodList track by $index">
+                    <td>{{list.methodss}}</td>
+                    <td>
+                        <i class="fa fa-trash" ng-click="deletemethodList($index)"></i>
+                    </td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" ng-click="closemethodList()">Close</button>
+        <button type="submit" class="btn btn-success pull-right" ng-click="addmethodList()">Save & Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- END Method List Modal -->
+
+<!--17 Job Function/level Modal -->
+<div class="modal fade" id="level">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Job Function / Level's List</h4>
+        <a href="resources/logichron_sample_excel_sheet/17_Job_FunctionLevel.xlsx"><i class="fa fa-download fa-2x" data-toggle="tooltip" title="Download Sample Excel Sheet!"></i></a>
+      </div>
+      <div class="modal-body">
+
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-4">
+                    <label>Job function / Level</label><br>
+                    <input type="text" class="form-control" id="cjlm_job_level" ng-model="JobLevel.job_level">
+                </div>
+                <div class="col-sm-2">
+                    <br>
+                    <button class="btn btn-primary btn-block" ng-click="levelAdd()">Add</button>
+                </div>
+                <div class="col-sm-4">
+                    <label>Upload</label><br>
+                    <input type="file" id="filejoblevel" name="file" onchange="angular.element(this).scope().loadlevelFile(this.files)" />
+                </div>
+                <div class="col-sm-2"><br>
+                    <button class="btn btn-warning btn-block" ng-click="handlelevelFile()">Import</button>
+                </div>
+            </div>
+        </div><br>
+
+        <div class="box-body table-responsive no-padding" style="height: 300px">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Job Function / level's</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="list in oldlevelList track by $index">
+                    <td>{{list.job_level}}</td>
+                    <td>
+                        <i class="fa fa-trash" ng-click="deleteoldlevelList($index)"></i>
+                    </td>
+                </tr>
+                <tr ng-repeat="list in levelList track by $index">
+                    <td>{{list.job_level}}</td>
+                    <td>
+                        <i class="fa fa-trash" ng-click="deletelevelList($index)"></i>
+                    </td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+    </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" ng-click="closelevelList()">Close</button>
+        <button type="submit" class="btn btn-success pull-right" ng-click="addlevelList()">Save & Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- END  Job Function/level Modal -->
+
+
+
+<!--1 Delete CLose -->
 <div class="modal fade deleteposition" id="restrict_delete">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
@@ -1300,11 +1431,25 @@
         <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="restNoChange()">No</button>
       </div>
     </div>
-    <!-- /.modal-content -->
   </div>
-  <!-- /.modal-dialog -->
 </div>
-<!-- 1. -->
+
+<div class="modal fade deleteposition" id="no_restrict_delete">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+                <p>Are You Sure You Want To Delete The Records?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="del" class="btn btn-danger" ng-click="no_restrictDelConfirm()">Yes</button>
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="no_restrictNoChange()">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--1 END Delete CLose -->
+
+<!--2 Delete CLose -->
 <div class="modal fade deleteposition" id="accnt_delete">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
@@ -1316,13 +1461,25 @@
         <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="accntNoChange()">No</button>
       </div>
     </div>
-    <!-- /.modal-content -->
   </div>
-  <!-- /.modal-dialog -->
 </div>
-<!-- /.modal -->
 
-<!-- 2 -->
+<div class="modal fade deleteposition" id="no_accnt_delete">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+                <p>Are You Sure You Want To Delete The Records?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="del" class="btn btn-danger" ng-click="no_accntDelConfirm()">Yes</button>
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="no_accntNoChange()">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--2 END Delete CLose -->
+
+<!--3 Delete CLose -->
 <div class="modal fade deleteposition" id="supression_delete">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
@@ -1334,66 +1491,25 @@
         <button type="button" class="btn btn-default pull-left" data-dismiss="modal"  ng-click="supresNoChange()">No</button>
       </div>
     </div>
-    <!-- /.modal-content -->
   </div>
-  <!-- /.modal-dialog -->
 </div>
-<!-- /.modal -->
 
-<!-- 3 -->
-<div class="modal fade deleteposition" id="allowed_delete">
+<div class="modal fade deleteposition" id="no_supp_delete">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-body">
                 <p>Are You Sure You Want To Delete The Records?</p>
       </div>
       <div class="modal-footer">
-        <button type="button" id="del" class="btn btn-danger" ng-click="allowDelConfirm()">Yes</button>
-        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="allowNoChange()">No</button>
+        <button type="button" id="del" class="btn btn-danger" ng-click="no_suppDelConfirm()">Yes</button>
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="no_suppNoChange()">No</button>
       </div>
     </div>
-    <!-- /.modal-content -->
   </div>
-  <!-- /.modal-dialog -->
 </div>
-<!-- /.modal -->
+<!--3 END Delete CLose -->
 
-<!-- 4 -->
-<div class="modal fade deleteposition" id="custom_delete">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-body">
-                <p>Are You Sure You Want To Delete The Records?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" id="del" class="btn btn-danger" ng-click="customDelConfirm()">Yes</button>
-        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="customNoChange()">No</button>
-      </div>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-
-<!-- 5 -->
-<div class="modal fade deleteposition" id="denied_delete">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-body">
-                <p>Are You Sure You Want To Delete The Records?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" id="del" class="btn btn-danger" ng-click="deniedDelConfirm()">Yes</button>
-        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="deniedNoChange()">No</button>
-      </div>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
-
+<!--4 Delete CLose -->
 <div class="modal fade deleteposition" id="domain_limit_delete">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
@@ -1405,11 +1521,25 @@
         <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="DomainlimitNoChange()">No</button>
       </div>
     </div>
-    <!-- /.modal-content -->
   </div>
-  <!-- /.modal-dialog -->
 </div>
 
+<div class="modal fade deleteposition" id="no_domain_limit_delete">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+                <p>Are You Sure You Want To Delete The Records?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="del" class="btn btn-danger" ng-click="no_domain_limit_DelConfirm()">Yes</button>
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="no_domain_limit_NoChange()">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--4 END Delete CLose -->
+
+<!--5 Delete CLose -->
 <div class="modal fade deleteposition" id="employee_size_delete">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
@@ -1421,12 +1551,55 @@
         <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="EmpsizeNoChange()">No</button>
       </div>
     </div>
-    <!-- /.modal-content -->
   </div>
-  <!-- /.modal-dialog -->
 </div>
 
+<div class="modal fade deleteposition" id="no_emp_size_delete">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+                <p>Are You Sure You Want To Delete The Records?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="del" class="btn btn-danger" ng-click="no_emp_size_DelConfirm()">Yes</button>
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="no_emp_size_NoChange()">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--5 END Delete CLose -->
 
+<!--6 Delete CLose -->
+<div class="modal fade deleteposition" id="title_delete">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+                <p>Are You Sure You Want To Delete The Records?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="del" class="btn btn-danger" ng-click="titleDelConfirm()">Yes</button>
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="titleNoChange()">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade deleteposition" id="no_title_delete">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+                <p>Are You Sure You Want To Delete The Records?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="del" class="btn btn-danger" ng-click="no_title_DelConfirm()">Yes</button>
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="no_title_NoChange()">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--6 END Delete CLose -->
+
+<!--7 Delete CLose -->
 <div class="modal fade deleteposition" id="vertical_delete">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
@@ -1438,12 +1611,25 @@
         <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="verticalNoChange()">No</button>
       </div>
     </div>
-    <!-- /.modal-content -->
   </div>
-  <!-- /.modal-dialog -->
 </div>
 
+<div class="modal fade deleteposition" id="no_vertical_delete">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+                <p>Are You Sure You Want To Delete The Records?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="del" class="btn btn-danger" ng-click="no_vertical_DelConfirm()">Yes</button>
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="no_vertical_NoChange()">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--7 END Delete CLose -->
 
+<!--8 Delete CLose -->
 <div class="modal fade deleteposition" id="geo_delete">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
@@ -1455,62 +1641,55 @@
         <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="geoNoChange()">No</button>
       </div>
     </div>
-    <!-- /.modal-content -->
   </div>
-  <!-- /.modal-dialog -->
 </div>
 
-
-<div class="modal fade deleteposition" id="asset_delete">
+<div class="modal fade deleteposition" id="no_geo_delete">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-body">
                 <p>Are You Sure You Want To Delete The Records?</p>
       </div>
       <div class="modal-footer">
-        <button type="button" id="del" class="btn btn-danger" ng-click="assetDelConfirm()">Yes</button>
-        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="assetNoChange()">No</button>
+        <button type="button" id="del" class="btn btn-danger" ng-click="no_geo_DelConfirm()">Yes</button>
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="no_geo_NoChange()">No</button>
       </div>
     </div>
-    <!-- /.modal-content -->
   </div>
-  <!-- /.modal-dialog -->
 </div>
+<!--8 END Delete CLose -->
 
-
-<div class="modal fade deleteposition" id="department_delete">
+<!--9 Delete CLose -->
+<div class="modal fade deleteposition" id="allowed_delete">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-body">
                 <p>Are You Sure You Want To Delete The Records?</p>
       </div>
       <div class="modal-footer">
-        <button type="button" id="del" class="btn btn-danger" ng-click="deptDelConfirm()">Yes</button>
-        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="deptNoChange()">No</button>
+        <button type="button" id="del" class="btn btn-danger" ng-click="allowDelConfirm()">Yes</button>
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="allowNoChange()">No</button>
       </div>
     </div>
-    <!-- /.modal-content -->
   </div>
-  <!-- /.modal-dialog -->
 </div>
 
-
-<div class="modal fade deleteposition" id="method_delete">
+<div class="modal fade deleteposition" id="no_allowed_delete">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-body">
                 <p>Are You Sure You Want To Delete The Records?</p>
       </div>
       <div class="modal-footer">
-        <button type="button" id="del" class="btn btn-danger" ng-click="methodDelConfirm()">Yes</button>
-        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="methodNoChange()">No</button>
+        <button type="button" id="del" class="btn btn-danger" ng-click="no_allowed_DelConfirm()">Yes</button>
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="no_allowed_NoChange()">No</button>
       </div>
     </div>
-    <!-- /.modal-content -->
   </div>
-  <!-- /.modal-dialog -->
 </div>
+<!--9 END Delete CLose -->
 
+<!--10 Delete CLose -->
 <div class="modal fade deleteposition" id="revenue_delete">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
@@ -1522,11 +1701,205 @@
         <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="revenueNoChange()">No</button>
       </div>
     </div>
-    <!-- /.modal-content -->
   </div>
-  <!-- /.modal-dialog -->
 </div>
 
+<div class="modal fade deleteposition" id="no_revenue_delete">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+                <p>Are You Sure You Want To Delete The Records?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="del" class="btn btn-danger" ng-click="no_revenue_DelConfirm()">Yes</button>
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="no_revenue_NoChange()">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--10 END Delete CLose -->
+
+<!--11 Delete CLose -->
+<div class="modal fade deleteposition" id="custom_delete">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+                <p>Are You Sure You Want To Delete The Records?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="del" class="btn btn-danger" ng-click="customDelConfirm()">Yes</button>
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="customNoChange()">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade deleteposition" id="no_custom_delete">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+                <p>Are You Sure You Want To Delete The Records?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="del" class="btn btn-danger" ng-click="no_custom_DelConfirm()">Yes</button>
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="no_custom_NoChange()">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--11 END Delete CLose -->
+
+<!--12 Delete CLose -->
+<div class="modal fade deleteposition" id="denied_delete">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+                <p>Are You Sure You Want To Delete The Records?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="del" class="btn btn-danger" ng-click="deniedDelConfirm()">Yes</button>
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="deniedNoChange()">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade deleteposition" id="no_denied_delete">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+                <p>Are You Sure You Want To Delete The Records?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="del" class="btn btn-danger" ng-click="no_denied_DelConfirm()">Yes</button>
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="no_denied_NoChange()">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--12 END Delete CLose -->
+
+<!--13 Delete CLose -->
+<div class="modal fade deleteposition" id="asset_delete">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+                <p>Are You Sure You Want To Delete The Records?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="del" class="btn btn-danger" ng-click="assetDelConfirm()">Yes</button>
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="assetNoChange()">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade deleteposition" id="no_asset_delete">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+                <p>Are You Sure You Want To Delete The Records?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="del" class="btn btn-danger" ng-click="no_asset_DelConfirm()">Yes</button>
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="no_asset_NoChange()">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--13 END Delete CLose -->
+
+<!--14 Delete CLose -->
+<div class="modal fade deleteposition" id="industry_delete">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+                <p>Are You Sure You Want To Delete The Records?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="del" class="btn btn-danger" ng-click="industryDelConfirm()">Yes</button>
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="industryNoChange()">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade deleteposition" id="no_industry_delete">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+                <p>Are You Sure You Want To Delete The Records?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="del" class="btn btn-danger" ng-click="no_industry_DelConfirm()">Yes</button>
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="no_industry_NoChange()">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--14 END Delete CLose -->
+
+<!--15 Delete CLose -->
+<div class="modal fade deleteposition" id="department_delete">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+                <p>Are You Sure You Want To Delete The Records?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="del" class="btn btn-danger" ng-click="deptDelConfirm()">Yes</button>
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="deptNoChange()">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade deleteposition" id="no_department_delete">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+                <p>Are You Sure You Want To Delete The Records?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="del" class="btn btn-danger" ng-click="no_department_DelConfirm()">Yes</button>
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="no_department_NoChange()">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--15 END Delete CLose -->
+
+<!--16 Delete CLose -->
+<div class="modal fade deleteposition" id="method_delete">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+                <p>Are You Sure You Want To Delete The Records?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="del" class="btn btn-danger" ng-click="methodDelConfirm()">Yes</button>
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="methodNoChange()">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade deleteposition" id="no_method_delete">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+                <p>Are You Sure You Want To Delete The Records?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="del" class="btn btn-danger" ng-click="no_method_DelConfirm()">Yes</button>
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="no_method_NoChange()">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--16 END Delete CLose -->
+
+<!--17 Delete CLose -->
 <div class="modal fade deleteposition" id="level_delete">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
@@ -1538,8 +1911,21 @@
         <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="levelNoChange()">No</button>
       </div>
     </div>
-    <!-- /.modal-content -->
   </div>
-  <!-- /.modal-dialog -->
 </div>
+
+<div class="modal fade deleteposition" id="no_level_delete">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+                <p>Are You Sure You Want To Delete The Records?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="del" class="btn btn-danger" ng-click="no_level_DelConfirm()">Yes</button>
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal" ng-click="no_level_NoChange()">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--17 END Delete CLose -->
 

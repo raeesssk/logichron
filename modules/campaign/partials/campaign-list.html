@@ -78,7 +78,7 @@
                                     </tr>
                                   </thead>
                                   <tbody>
-                                    <tr ng-repeat="campaign in campaignList">
+                                    <tr ng-repeat="campaign in filteredTodos">
                                       <td>{{campaign.cm_first_dely | date}}</td>
                                       <td>{{campaign.cm_end_date | date}}</td>
                                       <td>{{campaign.cm_dely_frequency}}</td>
@@ -252,11 +252,9 @@
         <button type="button" id="del" class="btn btn-danger" ng-click="deleteConfirm()">Delete</button>
       </div>
     </div>
-    <!-- /.modal-content -->
   </div>
-  <!-- /.modal-dialog -->
 </div>
-<!-- /.modal -->
+
 <div class="modal fade" id="Qualified_list">
   <div class="modal-dialog modal-md">
     <div class="modal-content">
@@ -326,6 +324,7 @@
   </div>
   <!-- /.modal-dialog -->
 </div>
+
 <!--1  Account List (Y/N) Modal -->
 <div class="modal fade" id="account_list">
   <div class="modal-dialog modal-md">
@@ -333,7 +332,7 @@
       <div class="modal-header">
          <h4 class="modal-title">Account List</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body table-responsive" style="height: 300px">
          <table class="table table-hover">
               <thead>
                 <tr>
@@ -353,9 +352,7 @@
         <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
       </div>
     </div>
-    <!-- /.modal-content -->
   </div>
-  <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
 
@@ -367,7 +364,7 @@
       <div class="modal-header">
         <h4 class="modal-title">Supression File</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body table-responsive" style="height: 300px">
          <table class="table table-hover">
               <thead>
                 <tr>
@@ -400,7 +397,7 @@
       <div class="modal-header">
         <h4 class="modal-title">Allowed Domain</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body table-responsive" style="height: 300px">
          <table class="table table-hover">
               <thead>
                 <tr>
@@ -431,7 +428,7 @@
       <div class="modal-header">
         <h4 class="modal-title">Custom Question</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body table-responsive" style="height: 300px">
           <table class="table table-hover">
               <thead>
                 <tr>
@@ -464,7 +461,7 @@
       <div class="modal-header">
         <h4 class="modal-title">Denied Domain</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body table-responsive" style="height: 300px">
           <table class="table table-hover">
               <thead>
                 <tr>
@@ -494,7 +491,7 @@
       <div class="modal-header">
         <h4 class="modal-title">Job title's</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body table-responsive" style="height: 300px">
           <table class="table table-hover">
               <thead>
                 <tr>
@@ -524,7 +521,7 @@
       <div class="modal-header">
         <h4 class="modal-title">Industries</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body table-responsive" style="height: 300px">
           <table class="table table-hover">
               <thead>
                 <tr>
@@ -551,9 +548,9 @@
   <div class="modal-dialog modal-md">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Restrictions</h4>
+        <h4 class="modal-title">Restrictions List</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body table-responsive" style="height: 300px">
           <table class="table table-hover">
               <thead>
                 <tr>
@@ -571,9 +568,7 @@
         <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
       </div>
     </div>
-    <!-- /.modal-content -->
   </div>
-  <!-- /.modal-dialog -->
 </div>
 
 <div class="modal fade" id="domain_limit">
@@ -582,7 +577,7 @@
       <div class="modal-header">
         <h4 class="modal-title">Domain Limit</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body table-responsive" style="height: 300px">
           <table class="table table-hover">
               <thead>
                 <tr>
@@ -611,7 +606,7 @@
       <div class="modal-header">
         <h4 class="modal-title">Employee Size</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body table-responsive" style="height: 300px">
           <table class="table table-hover">
               <thead>
                 <tr>
@@ -640,7 +635,7 @@
       <div class="modal-header">
         <h4 class="modal-title">Vertical</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body table-responsive" style="height: 300px">
           <table class="table table-hover">
               <thead>
                 <tr>
@@ -669,7 +664,7 @@
       <div class="modal-header">
         <h4 class="modal-title">Geo</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body table-responsive" style="height: 300px">
           <table class="table table-hover">
               <thead>
                 <tr>
@@ -698,7 +693,7 @@
       <div class="modal-header">
         <h4 class="modal-title">Campaign Asset</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body table-responsive" style="height: 300px">
           <table class="table table-hover">
               <thead>
                 <tr>
@@ -727,7 +722,7 @@
       <div class="modal-header">
         <h4 class="modal-title">Department</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body table-responsive" style="height: 300px">
           <table class="table table-hover">
               <thead>
                 <tr>
@@ -756,7 +751,7 @@
       <div class="modal-header">
         <h4 class="modal-title">Method</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body table-responsive" style="height: 300px">
           <table class="table table-hover">
               <thead>
                 <tr>
@@ -785,7 +780,7 @@
       <div class="modal-header">
         <h4 class="modal-title">Campaign Revenue List</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body table-responsive" style="height: 300px">
           <table class="table table-hover">
               <thead>
                 <tr>
@@ -814,7 +809,7 @@
       <div class="modal-header">
         <h4 class="modal-title">Campaign Job Function/Level</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body table-responsive" style="height: 300px">
           <table class="table table-hover">
               <thead>
                 <tr>
