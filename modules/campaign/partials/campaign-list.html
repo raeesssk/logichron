@@ -97,7 +97,9 @@
                                       <td>{{campaign.cm_disqualifies}}</td>
                                       <td ng-if="campaign.cm_title == 'Yes'" ng-click="titleView($index)" style="cursor: pointer;">{{campaign.cm_title}}</td>
                                       <td ng-if="campaign.cm_title == 'No'" ng-click="titleView($index)">{{campaign.cm_title}}</td>
-                                      <td>{{campaign.cm_lead_count}} / <label style="color: green">{{campaign.targetcount}}</label></td>
+                                      <td><b>
+                                        <span style="color: green">{{campaign.targetcount}}</span> / <span style="color: red">{{campaign.cm_lead_count}}</span></b> 
+                                      </td>
                                       <td>{{campaign.cm_vertical}}</td>
                                       <td>{{campaign.cm_geo}}</td>
 
