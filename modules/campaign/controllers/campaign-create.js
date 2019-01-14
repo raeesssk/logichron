@@ -151,13 +151,25 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
     var yyyy = d.getFullYear().toString();
     var mm = (d.getMonth()).toString(); // getMonth() is zero-based
     var dd  = d.getDate().toString();
-    $scope.campaign.cm_date = yyyy +"/"+ (parseInt(mm)+parseInt(1)) +"/"+ dd;
+    $scope.campaign.cm_date = (parseInt(mm)+parseInt(1)) + "/"+ dd +"/"+ yyyy;
 
     
-    $('#cm_first_dely').datepicker({
+    $('#cm_date').datepicker({
         validateOnBlur: false,
         todayButton: false,
         timepicker: false,
+        scrollInput: false,
+        autoclose: true,
+        orientation: 'bottom',
+          onChangeDateTime: function (dp, $input) {
+              $scope.campaign.cm_date = $('#cm_date').val();
+          }
+    }).datepicker('setDate', 'today');
+
+    $('#cm_first_dely').datepicker({
+        validateOnBlur: false,
+        todayButton: false,
+        timepicker: true,
         scrollInput: false,
         format: 'yyyy-mm-dd',
         autoclose: true,
@@ -166,6 +178,7 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
               $scope.campaign.cm_first_dely = $('#cm_first_dely').val();
           }
     }).datepicker('setDate', 'today');
+
     $('#cm_end_date').datepicker({
         validateOnBlur: false,
         todayButton: false,
@@ -564,7 +577,8 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         $('#restrict_delete').modal("hide");
     };
     $scope.updaterestrictList=function(){
-       $('#restriction_list').modal("show");
+        $('#filerest').val('');
+        $('#restriction_list').modal("show");
     };
 
     $scope.no_restrictDelConfirm=function(){
@@ -723,6 +737,7 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         $('#accnt_delete').modal("hide");
     };
     $scope.updateAccntList=function(){
+        $('#fileacclist').val('');
        $('#account_list').modal("show");
     };
 
@@ -882,7 +897,8 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         $('#supression_delete').modal("hide");
     };
     $scope.updateSupression=function(){
-       $('#supression_file').modal("show");
+        $('#filesupplist').val(''); 
+        $('#supression_file').modal("show");
     };
 
     $scope.no_suppDelConfirm=function(){
@@ -1029,8 +1045,9 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
     $scope.DomainlimitNoChange=function(){
         $('#domain_limit_delete').modal("hide");
     };
-    $scope.updatedomainlimitList=function(){
-       $('#domain_limit').modal("show");
+    $scope.updatedomainlimitList=function(){  
+        $('#filedomainlimit').val(''); 
+        $('#domain_limit').modal("show");
     };
 
     $scope.no_domain_limit_DelConfirm=function(){
@@ -1177,6 +1194,7 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         $('#employee_size_delete').modal("hide");
     };
     $scope.updateempsizeList=function(){
+        $('#fileempsize').val(''); 
        $('#employee_size').modal("show");
     };
 
@@ -1323,6 +1341,7 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         $('#title_delete').modal("hide");
     };
     $scope.updateTitleList=function(){
+        $('#filejobtitle').val(''); 
        $('#title_list').modal("show");
     };
 
@@ -1470,6 +1489,7 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         $('#vertical_delete').modal("hide");
     };
     $scope.updateVerticalList=function(){
+        $('#fileverticallist').val(''); 
        $('#vertical').modal("show");
     };
 
@@ -1617,6 +1637,7 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         $('#geo_delete').modal("hide");
     };
     $scope.updateGeoList=function(){
+        $('#filegeo').val(''); 
        $('#geo').modal("show");
     };
 
@@ -1764,6 +1785,7 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         $('#allowed_delete').modal("hide");
     };
     $scope.updateAllowDomain=function(){
+        $('#fileallowdomain').val('');
        $('#allow_Domain').modal("show");
     };
 
@@ -1910,6 +1932,7 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         $('#revenue_delete').modal("hide");
     };
     $scope.updateRevenue=function(){
+        $('#filerevenue').val('');
        $('#revenue').modal("show");
     };
 
@@ -2068,6 +2091,7 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         $('#custom_delete').modal("hide");
     };
     $scope.updateCustomQuestion=function(){
+        $('#filecustomquestion').val('');
        $('#custom_question').modal("show");
     };
 
@@ -2215,6 +2239,7 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         $('#denied_delete').modal("hide");
     };
     $scope.updateDeniedDomain=function(){
+        $('#filedenieddomain').val('');
        $('#denied_domain').modal("show");
     };
 
@@ -2362,6 +2387,7 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         $('#asset_delete').modal("hide");
     };
     $scope.updateAsset=function(){
+        $('#fileasset').val('');
        $('#asset').modal("show");
     };
 
@@ -2509,6 +2535,7 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         $('#industry_delete').modal("hide");
     };
     $scope.updateIndustryList=function(){
+        $('#fileindustry').val('');
        $('#industry_list').modal("show");
     };
 
@@ -2657,6 +2684,7 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         $('#department_delete').modal("hide");
     };
     $scope.updateDepartment=function(){
+        $('#filedepartment').val('');
        $('#department').modal("show");
     };
 
@@ -2804,6 +2832,7 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         $('#method_delete').modal("hide");
     };
     $scope.updateMethod=function(){
+        $('#filemethod').val('');
        $('#method').modal("show");
     };
 
@@ -2951,6 +2980,7 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         $('#level_delete').modal("hide");
     };
     $scope.updatelevel=function(){
+        $('#filejoblevel').val('');
        $('#level').modal("show");
     };
 

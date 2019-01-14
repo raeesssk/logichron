@@ -76,7 +76,18 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
 	$scope.campaignId = $routeParams.campaignId;
     $scope.apiURL = $rootScope.baseURL+'/campaign/edit/'+$scope.campaignId;
 
-
+    
+    $('#cm_date').datepicker({
+        validateOnBlur: false,
+        todayButton: false,
+        timepicker: false,
+        scrollInput: false,
+        autoclose: true,
+        orientation: 'bottom',
+          onChangeDateTime: function (dp, $input) {
+              $scope.campaign.cm_date = $('#cm_date').val();
+          }
+    }).datepicker('setDate', 'today');
 
     $('#cm_end_date').datepicker({
           validateOnBlur: false,
@@ -404,7 +415,6 @@ angular.module('campaign').controller('campaignEditCtrl', function ($rootScope, 
             })
             .success(function(custquestionlist)
             {
-                console.log(custquestionlist);
                 custquestionlist.forEach(function (value, key) {
                       value.question = value.cmcm_question;
                       value.answer = value.cmcm_answer;
