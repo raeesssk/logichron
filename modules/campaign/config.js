@@ -44,7 +44,35 @@ angular.module('campaign', [])
                     }
                 })
 				
-			.when('/campaign/edit/:campaignId',
+			// .when('/campaign/import',
+   //              {
+   //                  templateUrl: 'modules/campaign/partials/campaign-import.html',
+   //                  controller: 'campaignImportCtrl',
+   //                  resolve: {
+   //                      lazy: ['$ocLazyLoad',"$q", "$location","$rootScope", function ($ocLazyLoad, $q, $location, $rootScope) {
+   //                          return $ocLazyLoad.load([{
+   //                              name: 'myApp',
+   //                              files: ['modules/campaign/controllers/campaign-import.js']
+   //                          }]);
+   //                      }]
+   //                  }
+   //              })
+                
+   //          .when('/campaign/import_list',
+   //              {
+   //                  templateUrl: 'modules/campaign/partials/campaign-import-list.html',
+   //                  controller: 'campaignImportListCtrl',
+   //                  resolve: {
+   //                      lazy: ['$ocLazyLoad',"$q", "$location","$rootScope", function ($ocLazyLoad, $q, $location, $rootScope) {
+   //                          return $ocLazyLoad.load([{
+   //                              name: 'myApp',
+   //                              files: ['modules/campaign/controllers/campaign-import-list.js']
+   //                          }]);
+   //                      }]
+   //                  }
+   //              })
+                
+            .when('/campaign/edit/:campaignId',
                 {
                     templateUrl: 'modules/campaign/partials/campaign-edit.html',
                     controller: 'campaignEditCtrl',

@@ -142,67 +142,67 @@ $scope.apiURL = $rootScope.baseURL+'/assign/employee/total';
     
     $scope.url = 'Tried to enter assign employee Page';
 
-    $scope.gethistory=function(){
-      $scope.history={
-        user_id : $rootScope.userid,
-        url : $scope.url
-      }
-      $http({
-            method: 'POST',
-            url: $rootScope.baseURL+'/history/add',
-            data: $scope.history,
-            headers: {'Content-Type': 'application/json',
-                    'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
-          })
-          .success(function(login)
-          {
+    // $scope.gethistory=function(){
+    //   $scope.history={
+    //     user_id : $rootScope.userid,
+    //     url : $scope.url
+    //   }
+    //   $http({
+    //         method: 'POST',
+    //         url: $rootScope.baseURL+'/history/add',
+    //         data: $scope.history,
+    //         headers: {'Content-Type': 'application/json',
+    //                 'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+    //       })
+    //       .success(function(login)
+    //       {
               
-          })
-          .error(function(data) 
-          {   
-            var dialog = bootbox.dialog({
-              message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
-                  closeButton: false
-              });
-              setTimeout(function(){
-              $('#btnsave').text("SAVE");
-              $('#btnsave').removeAttr('disabled');
-                  dialog.modal('hide'); 
-            }, 1500);            
-        });
-    };
-    $scope.gethistory();
+    //       })
+    //       .error(function(data) 
+    //       {   
+    //         var dialog = bootbox.dialog({
+    //           message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+    //               closeButton: false
+    //           });
+    //           setTimeout(function(){
+    //           $('#btnsave').text("SAVE");
+    //           $('#btnsave').removeAttr('disabled');
+    //               dialog.modal('hide'); 
+    //         }, 1500);            
+    //     });
+    // };
+    // $scope.gethistory();
 
-    var permission=JSON.parse(localStorage.getItem('permission'));
-    var value = '#/assign/employee';
-    var access = permission.includes(value);
-    $scope.getrolepermission=function(){
+    // var permission=JSON.parse(localStorage.getItem('permission'));
+    // var value = '#/assign/employee';
+    // var access = permission.includes(value);
+    // $scope.getrolepermission=function(){
       
-      // for(var i=0;i<permission.length;i++)
-      // {
-        if(access)
-        {
-          return true
-        }
-        else
-        {
-           var dialog = bootbox.dialog({
-          message: '<p class="text-center">You Are Not Authorized</p>',
-              closeButton: false
-          });
-          dialog.find('.modal-body').addClass("btn-danger");
-          setTimeout(function(){
-              dialog.modal('hide'); 
-          }, 1500);
-          $location.path('/');
-          $scope.gethistory();
-        }
-        /*
-        break;
-      }*/
+    //   // for(var i=0;i<permission.length;i++)
+    //   // {
+    //     if(access)
+    //     {
+    //       return true
+    //     }
+    //     else
+    //     {
+    //        var dialog = bootbox.dialog({
+    //       message: '<p class="text-center">You Are Not Authorized</p>',
+    //           closeButton: false
+    //       });
+    //       dialog.find('.modal-body').addClass("btn-danger");
+    //       setTimeout(function(){
+    //           dialog.modal('hide'); 
+    //       }, 1500);
+    //       $location.path('/');
+    //       $scope.gethistory();
+    //     }
+    //     /*
+    //     break;
+    //   }*/
 
-    };
-    $scope.getrolepermission();
+    // };
+    // $scope.getrolepermission();
     
     
    $scope.getAll = function () {
@@ -272,6 +272,11 @@ $scope.apiURL = $rootScope.baseURL+'/assign/employee/total';
                 if (data.length > 0) {
                  
                   data.forEach(function (value, key) {
+                      if(value.cm_id != undefined){
+
+                        $scope.employeeList.push(value);
+                        value.cem_select = true;
+                      }
                       $scope.filteredTodos.push(value);
                   });
                 }
@@ -329,45 +334,55 @@ $scope.apiURL = $rootScope.baseURL+'/assign/employee/total';
     };
     
 
-    $scope.checkAll=function(employee){
-      $scope.filteredTodos.forEach(function(value,key){
-        if($scope.assign.cem_cm_id.cm_id == value.cem_cm_id){
-          if(value.cem_select){
-              
-            $scope.employeeList.push(value);
-          }
-          else
-          {
-            $scope.remove.push(value);
-          }
-        }
-      });
-      if(employee.cem_select)
+    $scope.checkAll=function(index){
+      console.log("in checl");
+      if($scope.filteredTodos[index].cem_select)
       {
-        $scope.newempList.push(employee);
+        $scope.employeeList.push($scope.filteredTodos[index]);
+        console.log($scope.employeeList);
       }
       else
       {
-        $scope.newempList.splice(employee);
+        $scope.employeeList.splice(index,1);
       }
-      $scope.newempList.forEach(function(val,key){
+      // $scope.filteredTodos.forEach(function(value,key){
+      //   if($scope.assign.cem_cm_id.cm_id == value.cem_cm_id){
+      //     if(value.cem_select){
+              
+      //       $scope.employeeList.push(value);
+      //     }
+      //     else
+      //     {
+      //       $scope.remove.push(value);
+      //     }
+      //   }
+      // });
+      // if(employee.cem_select)
+      // {
+      //   $scope.newempList.push(employee);
+      // }
+      // else
+      // {
+      //   $scope.newempList.splice(employee);
+      // }
+      // $scope.newempList.forEach(function(val,key){
             
-            if(val.cem_cm_id != undefined || val.cem_cm_id != null){
-              val.cem_select=false;
-              if(val.cem_select==false){
-                $scope.newempList.splice(employee);
-              }
-              var dialog = bootbox.dialog({
-              message: '<p class="text-center">Employee Already Assigned To Another Campaign</p>',
-                  closeButton: false
-              });
-              dialog.find('.modal-body').addClass("btn-danger");
-              setTimeout(function(){
-                  dialog.modal('hide'); 
-                  $('#cem_cm_id').focus();
-              }, 1500);
-            }
-          });
+      //       if(val.cem_cm_id != undefined || val.cem_cm_id != null){
+      //         val.cem_select=false;
+      //         if(val.cem_select==false){
+      //           $scope.newempList.splice(employee);
+      //         }
+      //         var dialog = bootbox.dialog({
+      //         message: '<p class="text-center">Employee Already Assigned To Another Campaign</p>',
+      //             closeButton: false
+      //         });
+      //         dialog.find('.modal-body').addClass("btn-danger");
+      //         setTimeout(function(){
+      //             dialog.modal('hide'); 
+      //             $('#cem_cm_id').focus();
+      //         }, 1500);
+      //       }
+      //     });
     };
 
     $scope.updateAssign=function(){
@@ -389,10 +404,8 @@ $scope.apiURL = $rootScope.baseURL+'/assign/employee/total';
         {
           
           $scope.obj={
-            employee : $scope.employeeList,
-            newemp : $scope.newempList,
-            remove : $scope.remove
-          }
+            employee : $scope.employeeList
+          } 
           $http({
                 method: 'POST',
                 url: $rootScope.baseURL+'/assign/edit/'+$scope.assign.cem_cm_id.cm_id,

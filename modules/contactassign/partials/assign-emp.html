@@ -61,7 +61,7 @@
                     	            </thead>
                     	            <tbody>
                   	                <tr  ng-repeat="employee in filteredTodos">
-                                      <td><input type="checkbox" ng-change="checkAll(employee)" ng-model="employee.cem_select"></td>
+                                      <td><input type="checkbox" ng-change="checkAll($index)" ng-model="employee.cem_select"></td>
                                       <td>{{$index+1}}</td>
                                       <td>{{employee.emp_name}}</td>
                                       <td>{{employee.cm_campaign_name}}</td>

@@ -81,6 +81,7 @@
                                       <th>Asset</th>
                                       <th>Domain</th>
                                       <th>Status</th>
+                                      <th>Action</th>
                   	                </tr>
                     	            </thead>
                     	            <tbody>
@@ -105,6 +106,9 @@
                                       <td>{{contactdiscovery.cdm_asset}}</td>
                                       <td>{{contactdiscovery.cdm_domain}}</td>
                                       <td>{{contactdiscovery.call_status}}</td>
+                                      <td align="center">
+                                        <i ng-hide="deletehide==0" class="fa fa-trash" id="trash" data-toggle="modal" data-target="#confirm-delete" ng-click="deleteUnEntry(contactdiscovery.cdm_id)"></i>
+                                      </td>
               	                    </tr>
                     	            </tbody>
                       		      </table>
@@ -175,4 +179,24 @@
     <!-- /.modal-content -->
   </div>
   <!-- /.modal-dialog -->
+</div>
+
+<div class="modal" id="confirm-delete">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Confirm Delete</h4>
+      </div>
+      <div class="modal-body">
+        <p>You are about to delete <b><i class="title"></i></b> record, this procedure is irreversible.</p>
+                <p>Do you want to proceed?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        <button type="button" id="del" class="btn btn-danger" ng-click="deleteConfirm()">Delete</button>
+      </div>
+    </div>
+  </div>
 </div>

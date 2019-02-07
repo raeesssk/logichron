@@ -18,6 +18,7 @@ angular.module('campaign').controller('campaignListCtrl', function ($rootScope, 
     $scope.allowDomainList=[];
     $scope.customQuestionList=[];
     $scope.deniedDomainList=[];
+    // $scope.contactNameList=[];
     $scope.leadgoal=0;
     $scope.campaign={};
     $scope.apiURL = $rootScope.baseURL+'/campaign/campaign/total';
@@ -987,6 +988,37 @@ angular.module('campaign').controller('campaignListCtrl', function ($rootScope, 
               $scope.levelList.push(value);
             });
             $("#level").modal("show");
+        })
+        .error(function(data) 
+        {   
+            toastr.error('Oops, Something Went Wrong.', 'Error', {
+                closeButton: true,
+                progressBar: true,
+                positionClass: "toast-top-center",
+                timeOut: "500",
+                extendedTimeOut: "500",
+            });  
+        });
+      }
+    };
+
+
+$scope.contactNameView = function(index){
+    $scope.contactNameList=[];
+      if($scope.filteredTodos[index].cm_contact_name == 'Yes'){
+        $http({
+          method: 'GET',
+          url: $rootScope.baseURL+'/campaign/contactnameview/'+$scope.filteredTodos[index].cm_id,
+          //data: $scope.data,
+          headers: {'Content-Type': 'application/json',
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+        })
+        .success(function(obj)
+        {
+            obj.forEach(function(value, key){
+              $scope.contactNameList.push(value);
+            });
+            $("#contact_name").modal("show");
         })
         .error(function(data) 
         {   

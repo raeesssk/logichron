@@ -1,7 +1,7 @@
 // import admin
 angular.module('contactdiscovery').controller('contactimportCtrl', function ($rootScope, $http, $scope, $location, $routeParams, $route) {
 
-   $scope.selectedFile = null;  
+    $scope.selectedFile = null;  
     $scope.msg = "";  
     
     $scope.url = 'Tried to enter contact import Page';
@@ -38,8 +38,8 @@ angular.module('contactdiscovery').controller('contactimportCtrl', function ($ro
     $scope.gethistory();
 
     var permission=JSON.parse(localStorage.getItem('permission'));
-  var value = '#/contactdiscovery/import';
-  var access = permission.includes(value);
+    var value = '#/contactdiscovery/import';
+    var access = permission.includes(value);
     $scope.getrolepermission=function(){
       
       // for(var i=0;i<permission.length;i++)
@@ -64,115 +64,99 @@ angular.module('contactdiscovery').controller('contactimportCtrl', function ($ro
         /*
         break;
       }*/
-
     };
     $scope.getrolepermission();
   
-  
     $scope.loadFile = function (files) {  
-  
         $scope.$apply(function () {  
-  
             $scope.selectedFile = files[0];  
-  
         })  
-  
     }  
   
-      $scope.handleFile = function () {
-        var file = $scope.selectedFile;  
-  
-        if (file) {  
-  
-            var reader = new FileReader();  
-  
-            reader.onload = function (e) {  
-  
-                var data = e.target.result;  
-                
-                var workbook = XLSX.read(data, { type: 'binary' });  
-                
-                var first_sheet_name = workbook.SheetNames[0];  
-  
-                var dataObjects = XLSX.utils.sheet_to_json(workbook.Sheets[first_sheet_name]);  
-                
-                if (dataObjects.length > 0) {  
-  
-                      
-                    $scope.save(dataObjects);  
-  
-  
-                } else {  
-                    $scope.msg = "Error : Something Wrong !";  
-                }  
-  
-            }  
-  
-            reader.onerror = function (ex) {  
-  
-            }  
-  
-            reader.readAsBinaryString(file);  
-        }  
+    $scope.handleFile = function () {
+      if($('#fileimport').val() == "" ){
+            var dialog = bootbox.dialog({
+            message: '<p class="text-center">Please Select File.</p>',
+                closeButton: false
+            });
+            dialog.find('.modal-body').addClass("btn-danger");
+            setTimeout(function(){
+                dialog.modal('hide'); 
+            }, 1500);
+      }
+      else{
+          var file = $scope.selectedFile;  
+    
+          if (file) {  
+              var reader = new FileReader();  
+    
+              reader.onload = function (e) {  
+    
+                  var data = e.target.result;                
+                  var workbook = XLSX.read(data, { type: 'binary' });                
+                  var first_sheet_name = workbook.SheetNames[0];  
+                  var dataObjects = XLSX.utils.sheet_to_json(workbook.Sheets[first_sheet_name]);  
+                  
+                  if (dataObjects.length > 0) {  
+                        // console.log(dataObjects);
+                      $scope.save(dataObjects);  
+                  } 
+                  else {  
+                      $scope.msg = "Error : Something Wrong !";  
+                  }  
+              }  
+              reader.onerror = function (ex) {  
+              }  
+              reader.readAsBinaryString(file);  
+          }  
+      }
+        
     }  
   
-      
     $scope.save = function (data) {  
       data.forEach(function(value,key){
-       value.mobile_number = value.Mobile_Number;
-       value.no = value.mobile_number.toString();
-       value.post = value.Postal_Code;
-       value.postal_code = value.post.toString();
+         value.mobile_number = value.Mobile_Number;
+         value.no = value.mobile_number.toString();
+         value.post = value.Postal_Code;
+         value.postal_code = value.post.toString();
       });
       
-      $scope.obj={
-        userid : $rootScope.userid,
-        contact : data
-      }
+        $scope.obj={
+          userid : $rootScope.userid,
+          contact : data
+        }
         $http({  
             method: "POST",  
             url: $rootScope.baseURL+'/contact/import',  
-            data: $scope.obj,  
-            headers: {  
-                'Content-Type': 'application/json'  
-            }  
-  
-        })
-        .success(function (data) {  
-            if (data.length>0) {  
+            data: $scope.obj,
+            headers: {'Content-Type': 'application/json',
+                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+            })
+            .success(function (data) { 
                 var dialog = bootbox.dialog({
                 message: '<p class="text-center">Data Inserted!!!</p>',
                     closeButton: false
                 });
                 dialog.find('.modal-body').addClass("btn-success");
                 setTimeout(function(){
+
+                      $('#fileimport').val('');
+                      $scope.selectedFile = ''; 
+
                     dialog.modal('hide'); 
                 }, 1500); 
-            }  
-            else {  
+            })
+            .error(function(data){   
                 var dialog = bootbox.dialog({
-                message: '<p class="text-center">Something Wrong with the Data!!!</p>',
+                message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
                     closeButton: false
                 });
-                dialog.find('.modal-body').addClass("btn-danger");
                 setTimeout(function(){
                     dialog.modal('hide'); 
-                }, 1500); 
-            }  
-        })
-        .error(function(data){   
-            var dialog = bootbox.dialog({
-            message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
-                closeButton: false
+                }, 3001);             
             });
-            setTimeout(function(){
-                dialog.modal('hide'); 
-            }, 3001);             
-        });
   
     };
-  
-
-    
+     
 
 });

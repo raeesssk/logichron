@@ -5,8 +5,8 @@
 function LoginCtrl($scope, $location, $http, $routeParams, $rootScope) {
     
 	// $scope.apiURL = 'http://10.1.0.21:3001';
-	// $scope.apiURL = 'http://localhost:3111';	
-	$scope.apiURL = 'http://logichron.3commastechnologies.com:3111';
+	$scope.apiURL = 'http://localhost:3111';	
+	// $scope.apiURL = 'http://logichron.3commastechnologies.com:3111';
 	
   	$scope.role = [];
   	var flag = 0;
@@ -83,7 +83,9 @@ function LoginCtrl($scope, $location, $http, $routeParams, $rootScope) {
                 		$('#login').text("Login");
 						    	// $scope.list();
 
-                    	window.location = "/";
+                    	// window.location = "/";
+                    	window.location = "/logichron/";
+
 			        })
 			        .error(function(data) 
 			        {   

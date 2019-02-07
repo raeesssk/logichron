@@ -53,6 +53,9 @@
                                       <th>End Date</th>
                                       <th>Delivery Frequency</th>
                                       <th>Campaign Name</th>
+
+                                      <th>Contact Name</th>
+
                                       <th>Restriction</th>
 
                                       <th>Account List</th>
@@ -85,6 +88,11 @@
                                       <td>{{campaign.cm_end_date | date}}</td>
                                       <td>{{campaign.cm_dely_frequency}}</td>
                                       <td>{{campaign.cm_campaign_name}}</td>
+
+
+                                      <td ng-if="campaign.cm_contact_name == 'Yes'" ng-click="contactNameView($index)" style="cursor: pointer;">{{campaign.cm_contact_name}}</td>
+                                      <td ng-if="campaign.cm_contact_name == 'No'" ng-click="contactNameView($index)">{{campaign.cm_contact_name}}</td>
+                                      
                                       <td>{{campaign.cm_restrict}}</td>
 
                                       <td ng-if="campaign.cm_account_list == 'Yes'" ng-click="accntView($index)" style="cursor: pointer;">{{campaign.cm_account_list}}</td>
@@ -130,10 +138,14 @@
                                 <table class="table table-hover table-responsive">
                                   <thead>
                                     <tr>
+                                      <th>Lead / Target</th>
                                       <th>First Delivery Date</th>
                                       <th>End Date</th>
                                       <th>Delivery Frequency</th>
                                       <th>Campaign Name</th>
+
+                                      <th>Contact Name</th>
+
                                       <th>Restriction</th>
 
                                       <th>Account List</th>
@@ -143,7 +155,6 @@
                                       <th>Disqualifies</th>
 
                                       <th>Title</th>
-                                      <th>Lead / Target</th>
                                       <th>Verticals</th>
                                       <th>Geo</th>
                                       <th>Allowed Domain</th>
@@ -162,10 +173,15 @@
                                   </thead>
                                   <tbody>
                                     <tr ng-repeat="campaign in filteredTodos">
+                                      <td ng-click="QualifyContact($index)">{{campaign.cm_lead_count}} / <label style="color: green;cursor: pointer;">{{campaign.targetcount}}</label></td>
                                       <td>{{campaign.cm_first_dely | date}}</td>
                                       <td>{{campaign.cm_end_date | date}}</td>
                                       <td>{{campaign.cm_dely_frequency}}</td>
                                       <td>{{campaign.cm_campaign_name}}</td>
+
+                                      <td ng-if="campaign.cm_contact_name == 'Yes'" ng-click="contactNameView($index)" style="cursor: pointer;">{{campaign.cm_contact_name}}</td>
+                                      <td ng-if="campaign.cm_contact_name == 'No'" ng-click="contactNameView($index)">{{campaign.cm_contact_name}}</td>
+
                                       <td ng-if="campaign.cm_restrict == 'Yes'" ng-click="restView($index)" style="cursor: pointer;">{{campaign.cm_restrict}}</td>
                                       <td ng-if="campaign.cm_restrict == 'No'" ng-click="restView($index)">{{campaign.cm_restrict}}</td>
 
@@ -183,7 +199,6 @@
                                       <td>{{campaign.cm_disqualifies}}</td>
                                       <td ng-if="campaign.cm_title == 'Yes'" ng-click="titleView($index)" style="cursor: pointer;">{{campaign.cm_title}}</td>
                                       <td ng-if="campaign.cm_title == 'No'" ng-click="titleView($index)">{{campaign.cm_title}}</td>
-                                      <td ng-click="QualifyContact($index)">{{campaign.cm_lead_count}} / <label style="color: green;cursor: pointer;">{{campaign.targetcount}}</label></td>
                                       <td ng-if="campaign.cm_vertical == 'Yes'" ng-click="verticalView($index)" style="cursor: pointer;">{{campaign.cm_vertical}}</td>
                                       <td ng-if="campaign.cm_vertical == 'No'" ng-click="verticalView($index)">{{campaign.cm_vertical}}</td>
                                       <td ng-if="campaign.cm_geo == 'Yes'" ng-click="geoView($index)" style="cursor: pointer;">{{campaign.cm_geo}}</td>
@@ -373,13 +388,13 @@
               <thead>
                 <tr>
                   <th>Company</th>
-                  <th>Website</th>
+                  <!-- <th>Website</th> -->
                 </tr>
               </thead>
               <tbody>
                 <tr ng-repeat="list in supressionList track by $index">
                     <td>{{list.scm_company}}</td>
-                    <td>{{list.scm_website}}</td>
+                    <!-- <td>{{list.scm_website}}</td> -->
                 </tr>
               </tbody>
             </table>
@@ -823,6 +838,38 @@
               <tbody>
                 <tr ng-repeat="list in levelList track by $index">
                     <td>{{list.cjlm_job_level}}</td>
+                </tr>
+              </tbody>
+            </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+
+<div class="modal fade" id="contact_name">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Contact Name</h4>
+      </div>
+      <div class="modal-body table-responsive" style="height: 300px">
+          <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="list in contactNameList track by $index">
+                    <td>{{list.ccnm_first_name}}</td>
+                    <td>{{list.ccnm_last_name}}</td>
                 </tr>
               </tbody>
             </table>
