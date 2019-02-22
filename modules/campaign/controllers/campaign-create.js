@@ -415,7 +415,7 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
                     var data_restriction = XLSX.utils.sheet_to_json(workbook.Sheets['restriction']);
                     var data_account_list = XLSX.utils.sheet_to_json(workbook.Sheets['account_list']);  
                     var data_supression_file = XLSX.utils.sheet_to_json(workbook.Sheets['supression_file']); 
-                    var data_domain_limit = XLSX.utils.sheet_to_json(workbook.Sheets['domain_limit']);
+                    // var data_domain_limit = XLSX.utils.sheet_to_json(workbook.Sheets['domain_limit']);
                     var data_employee_size = XLSX.utils.sheet_to_json(workbook.Sheets['employee_size']);
                     var data_job_title = XLSX.utils.sheet_to_json(workbook.Sheets['job_title']);
                     var data_vertical = XLSX.utils.sheet_to_json(workbook.Sheets['vertical']);
@@ -500,15 +500,15 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
                             }
 
 
-                            if (data_domain_limit.length > 0) {
-                                $scope.campaign.cm_domain_limit = "Yes";
-                                data_domain_limit.forEach(function(value,key){
-                                    $scope.olddomainList.push(value);
-                                });
-                            }
-                            else{
-                                $scope.campaign.cm_domain_limit = "No";
-                            }
+                            // if (data_domain_limit.length > 0) {
+                            //     $scope.campaign.cm_domain_limit = "Yes";
+                            //     data_domain_limit.forEach(function(value,key){
+                            //         $scope.olddomainList.push(value);
+                            //     });
+                            // }
+                            // else{
+                            //     $scope.campaign.cm_domain_limit = "No";
+                            // }
 
 
                             if (data_employee_size.length > 0) {
@@ -689,7 +689,8 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
         
     };  
   
-    $scope.save = function () {        
+    $scope.save = function () {  
+           
         $scope.campaign.cm_date = $('#cm_date').val();
         $scope.campaign.cm_first_dely = $('#cm_first_dely').val();
         $scope.campaign.cm_end_date = $('#cm_end_date').val();
