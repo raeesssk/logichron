@@ -6,6 +6,16 @@
     overflow-y: auto;
     -ms-overflow-style: -ms-autohiding-scrollbar;
 }
+ #tabelcustomQ tbody tr td {
+
+    /* css-3 */
+    white-space: -o-pre-wrap; 
+    word-wrap: break-word;
+    white-space: pre-wrap; 
+    white-space: -moz-pre-wrap; 
+    white-space: -pre-wrap; 
+
+}
 </style>
 <div class="pcoded-content">
     <div class="pcoded-inner-content">
@@ -111,19 +121,19 @@
                                 </div>
                                 <div class="col-sm-3">
                                         <label>Job Level</label>
-                                        <select id='cdm_job_level' ng-if="contactdiscovery.cdm_cm_id.cm_job == 'Yes'" class="form-control" name="right" ng-model="contactdiscovery.levels" ng-init="contactdiscovery.levels = levelList[0]" ng-options="level as level.cjlm_job_level for level in levelList">
+                                        <select id='cdm_job_level' ng-if="contactdiscovery.cdm_cm_id.cm_job == 'Yes'" class="form-control" name="right" ng-model="contactdiscovery.levels" ng-init="contactdiscovery.levels = levelList[0]" ng-options="level as level.cjlm_job_level for level in levelList"  ng-change="changeJoblvlDept()">
                                             <option value="" disabled selected> - - Select - - </option>
                                         </select>
-                                        <input type="text" id="cdm_job_level" ng-if="contactdiscovery.cdm_cm_id.cm_job == 'No'" class="form-control" ng-model="contactdiscovery.levels.cjlm_job_level" />
+                                        <input type="text" id="cdm_job_level" ng-if="contactdiscovery.cdm_cm_id.cm_job == 'No'" class="form-control" ng-model="contactdiscovery.levels" ng-change="changeJoblvlDept()"/>
                                         
                                 </div>
 
                                 <div class="col-sm-3">
                                         <label>Department</label>
-                                        <select id='cdm_dept' ng-if="contactdiscovery.cdm_cm_id.cm_dept == 'Yes'" class="form-control" name="right" ng-model="contactdiscovery.departments" ng-init="contactdiscovery.departments = deptList[0]" ng-options="dept as dept.cdm_department for dept in deptList">
+                                        <select id='cdm_dept' ng-if="contactdiscovery.cdm_cm_id.cm_dept == 'Yes'" class="form-control" name="right" ng-model="contactdiscovery.departments" ng-init="contactdiscovery.departments = deptList[0]" ng-options="dept as dept.cdm_department for dept in deptList" ng-change="changeJoblvlDept()">
                                             <option value="" disabled selected> - - Select - - </option>
                                         </select>
-                                        <input type="text" id="cdm_dept" ng-if="contactdiscovery.cdm_cm_id.cm_dept == 'No'" class="form-control" ng-model="contactdiscovery.departments.cdm_department" />
+                                        <input type="text" id="cdm_dept" ng-if="contactdiscovery.cdm_cm_id.cm_dept == 'No'" class="form-control" ng-model="contactdiscovery.departments" ng-change="changeJoblvlDept()"/>
                                        <br> 
                                 </div>
                                 <div class="col-sm-3">
@@ -136,7 +146,7 @@
                                 </div>
                                 <div class="col-lg-3">
                                         <label>Country</label>
-                                        <select id='cdm_country' ng-if="contactdiscovery.cdm_cm_id.cm_location == 'Yes'" class="form-control" name="right" ng-model="contactdiscovery.country" ng-init="contactdiscovery.country = locationList[0]" ng-options="country as country.country_name for country in locationList"ng-change="changeCountry()">
+                                        <select id='cdm_country' ng-if="contactdiscovery.cdm_cm_id.cm_location == 'Yes'" class="form-control" name="right" ng-model="contactdiscovery.country" ng-init="contactdiscovery.country = locationList[0]" ng-options="country as country.c_search for country in locationList"ng-change="changeCountry()">
                                             <option value="" disabled selected> - - Select - - </option>
                                         </select>
 
@@ -147,7 +157,8 @@
                                                     typeahead="obj as obj.c_search for obj in getSearchCountry($viewValue)"
                                                     typeahead-loading="loadingCountryList"
                                                     typeahead-no-results="noCountryListResults"
-                                                    class="form-control">
+                                                    class="form-control"
+                                                    ng-keypress="keypressCountry()">
                                                 <i ng-show="loadingCountryList" class="glyphicon glyphicon-refresh"></i>
                                                 <div ng-show="noCountryListResults">
                                                     <i class="glyphicon glyphicon-remove"></i> No Results Found
@@ -166,7 +177,8 @@
                                                 typeahead="obj as obj.state_name for obj in getSearchState($viewValue)"
                                                 typeahead-loading="loadingStateList"
                                                 typeahead-no-results="noStateListResults"
-                                                class="form-control">
+                                                class="form-control"
+                                                ng-keypress="keypressState()">
                                             <i ng-show="loadingStateList" class="glyphicon glyphicon-refresh"></i>
                                             <div ng-show="noStateListResults">
                                                 <i class="glyphicon glyphicon-remove"></i> No Results Found
@@ -248,9 +260,12 @@
                                 </div> -->
                                 <div class="col-sm-3">
                                         <label>Domain</label>
-                                        <input type="text" id="cdm_domain" ng-if="contactdiscovery.cdm_cm_id.cm_allow_domain == 'Yes'" class="form-control" ng-model="contactdiscovery.cdm_domain" ng-blur="blurDomain()"/>
-
-                                        <input type="text" id="cdm_domain" ng-if="contactdiscovery.cdm_cm_id.cm_allow_domain == 'No'" class="form-control" ng-model="contactdiscovery.cdm_domain" ng-blur="blurDomain()"/>
+                                        <input type="text" id="cdm_domain" class="form-control" readonly ng-model="contactdiscovery.adomain"/>
+                                <br>
+                                </div>
+                                <div class="col-sm-3">
+                                        <label>Ip Address</label>
+                                        <input type="text" id="cdm_ip_address" class="form-control" ng-model="contactdiscovery.cdm_ip_address"/>
                                 <br>
                                 </div>
                                <!--  <div class="col-sm-3">
@@ -268,7 +283,7 @@
                                     <table class="table" id="tabeldiv">
                                         <tr>
                                             <td>
-                                                <table class="table table-hover">
+                                                <table class="table table-hover" id="tabelcustomQ">
                                                   <thead>
                                                     <tr>
                                                         <th  colspan="2" style="border: 1px solid #ccc; text-align: center; background-color: #DFE0E3;">Custom Question List</th>
@@ -297,46 +312,12 @@
                                                   <tbody>
                                                     <tr>
                                                         <td>
-                                                            <textarea class="form-control" style="height: 200px;">{{contactdiscovery.cdm_cm_id.cm_comment}}</textarea>
+                                                            <textarea class="form-control" style="height:220px; background-color:white;" readonly>{{contactdiscovery.cdm_cm_id.cm_comment}}</textarea>
                                                         </td>
                                                     </tr>
                                                   </tbody>
                                                 </table>
                                             </td>
-                                           <!--  <td>
-                                                <table class="table table-hover">
-                                                  <thead>
-                                                    <tr>
-                                                        <th style="border: 1px solid #ccc; text-align: center; background-color: #DFE0E3;">Supression List</th>
-                                                    </tr>
-                                                    <tr>
-                                                      <th class="" style="border: 1px solid #ccc; text-align: center;">Company</th>
-                                                    </tr>
-                                                  </thead>
-                                                  <tbody>
-                                                    <tr ng-repeat="supp in suppList track by $index">
-                                                        <td>{{supp.scm_company}}</td>
-                                                    </tr>
-                                                  </tbody>
-                                                </table>
-                                            </td> -->
-                                            <!-- <td>
-                                                <table class="table table-hover">
-                                                  <thead>
-                                                    <tr>
-                                                        <th style="border: 1px solid #ccc; text-align: center; background-color: #DFE0E3;">Denied Domain List</th>
-                                                    </tr>
-                                                    <tr>
-                                                      <th class="" style="border: 1px solid #ccc; text-align: center;">Domain Websites</th>
-                                                    </tr>
-                                                  </thead>
-                                                  <tbody>
-                                                    <tr ng-repeat="deny in denydomain track by $index">
-                                                        <td align="center">{{deny.ddcm_website}}</td>
-                                                    </tr>
-                                                  </tbody>
-                                                </table>
-                                            </td> -->
                                         </tr>
                                     </table>
                                 </div>

@@ -6,66 +6,66 @@ angular.module('contactdiscovery').controller('contactimportCtrl', function ($ro
     
     $scope.url = 'Tried to enter contact import Page';
 
-    $scope.gethistory=function(){
-      $scope.history={
-        user_id : $rootScope.userid,
-        url : $scope.url
-      }
-      $http({
-            method: 'POST',
-            url: $rootScope.baseURL+'/history/add',
-            data: $scope.history,
-            headers: {'Content-Type': 'application/json',
-                    'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
-          })
-          .success(function(login)
-          {
+    // $scope.gethistory=function(){
+    //   $scope.history={
+    //     user_id : $rootScope.userid,
+    //     url : $scope.url
+    //   }
+    //   $http({
+    //         method: 'POST',
+    //         url: $rootScope.baseURL+'/history/add',
+    //         data: $scope.history,
+    //         headers: {'Content-Type': 'application/json',
+    //                 'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+    //       })
+    //       .success(function(login)
+    //       {
               
-          })
-          .error(function(data) 
-          {   
-            var dialog = bootbox.dialog({
-              message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
-                  closeButton: false
-              });
-              setTimeout(function(){
-              $('#btnsave').text("SAVE");
-              $('#btnsave').removeAttr('disabled');
-                  dialog.modal('hide'); 
-            }, 1500);            
-        });
-    };
-    $scope.gethistory();
+    //       })
+    //       .error(function(data) 
+    //       {   
+    //         var dialog = bootbox.dialog({
+    //           message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+    //               closeButton: false
+    //           });
+    //           setTimeout(function(){
+    //           $('#btnsave').text("SAVE");
+    //           $('#btnsave').removeAttr('disabled');
+    //               dialog.modal('hide'); 
+    //         }, 1500);            
+    //     });
+    // };
+    // $scope.gethistory();
 
-    var permission=JSON.parse(localStorage.getItem('permission'));
-    var value = '#/contactdiscovery/import';
-    var access = permission.includes(value);
-    $scope.getrolepermission=function(){
+    // var permission=JSON.parse(localStorage.getItem('permission'));
+    // var value = '#/contactdiscovery/import';
+    // var access = permission.includes(value);
+    // $scope.getrolepermission=function(){
       
-      // for(var i=0;i<permission.length;i++)
-      // {
-        if(access)
-        {
-          return true
-        }
-        else
-        {
-           var dialog = bootbox.dialog({
-          message: '<p class="text-center">You Are Not Authorized</p>',
-              closeButton: false
-          });
-          dialog.find('.modal-body').addClass("btn-danger");
-          setTimeout(function(){
-              dialog.modal('hide'); 
-          }, 1500);
-          $location.path('/');
-          $scope.gethistory();
-        }
-        /*
-        break;
-      }*/
-    };
-    $scope.getrolepermission();
+    //   // for(var i=0;i<permission.length;i++)
+    //   // {
+    //     if(access)
+    //     {
+    //       return true
+    //     }
+    //     else
+    //     {
+    //        var dialog = bootbox.dialog({
+    //       message: '<p class="text-center">You Are Not Authorized</p>',
+    //           closeButton: false
+    //       });
+    //       dialog.find('.modal-body').addClass("btn-danger");
+    //       setTimeout(function(){
+    //           dialog.modal('hide'); 
+    //       }, 1500);
+    //       $location.path('/');
+    //       $scope.gethistory();
+    //     }
+    //     /*
+    //     break;
+    //   }*/
+    // };
+    // $scope.getrolepermission();
   
     $scope.loadFile = function (files) {  
         $scope.$apply(function () {  
@@ -96,9 +96,8 @@ angular.module('contactdiscovery').controller('contactimportCtrl', function ($ro
                   var workbook = XLSX.read(data, { type: 'binary' });                
                   var first_sheet_name = workbook.SheetNames[0];  
                   var dataObjects = XLSX.utils.sheet_to_json(workbook.Sheets[first_sheet_name]);  
-                  
+                
                   if (dataObjects.length > 0) {  
-                        // console.log(dataObjects);
                       $scope.save(dataObjects);  
                   } 
                   else {  

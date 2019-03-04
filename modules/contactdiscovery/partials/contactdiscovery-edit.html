@@ -1,3 +1,22 @@
+<style type="text/css">
+
+.table-wrapper-scroll-y {
+    display: block;
+    max-height: 350px;
+    overflow-y: auto;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+ #tabelcustomQ tbody tr td {
+
+    /* css-3 */
+    white-space: -o-pre-wrap; 
+    word-wrap: break-word;
+    white-space: pre-wrap; 
+    white-space: -moz-pre-wrap; 
+    white-space: -pre-wrap; 
+
+}
+</style>
 <div class="pcoded-content" ng-init="getEntry()">
     <div class="pcoded-inner-content">
         <div class="main-body">
@@ -20,216 +39,255 @@
                             <hr>
                         </div>
                         <div class="card-block">
+                            
                             <div class="form-group row">
-                                <div class="col-sm-4">
+                                <div class="col-lg-3">
+                                    <div class="form-group">
                                         <label>Campaign Name</label>
-                                        <input type="text" id="cdm_campaign" class="form-control" ng-model="contactdiscovery.cm_campaign_name" readonly />
-                                        <br>
+                                        <input type="text" id="cdm_campaign_name" ng-model="contactdiscovery.cdm_campaign_name" class="form-control" readonly>
+                                    </div>
                                 </div>
-                                <!-- <div class="col-sm-4">
-                                        <label>Project Name</label>
-                                        <input type="text" id="cdm_project_name" class="form-control" ng-model="contactdiscovery.cdm_project_name" />
-                                        <br>
-                                </div> -->
-                                <div class="col-sm-4">
+                            </div>   
+                            <div class="form-group row">
+                                <div class="col-sm-3">
                                         <label>First Name</label>
-                                        <input type="text" id="cdm_first_name" class="form-control" ng-model="contactdiscovery.cdm_first_name" />
+                                        <input type="text" id="cdm_first_name" class="form-control" ng-model="contactdiscovery.cdm_first_name" ng-blur="blurFirstLastName()"/> 
                                         <br>
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-3">
                                         <label>Last Name</label>
-                                        <input type="text" id="cdm_last_name" class="form-control" ng-model="contactdiscovery.cdm_last_name" />
+                                        <input type="text" id="cdm_last_name" class="form-control" ng-model="contactdiscovery.cdm_last_name" ng-blur="blurFirstLastName()"/>
+                                        <br>
+                                </div>
+                                <div class="col-sm-3">
+                                        <label>Email-Id</label>
+                                        <input type="email" id="cdm_email" class="form-control" ng-model="contactdiscovery.cdm_email" ng-blur="blurEmail()"/>
+                                        <br>
+                                </div>
+                                <div class="col-sm-3">
+                                        <label>Direct Number / Landline Number</label>
+                                        <input type="text" id="cdm_contact_number" class="form-control" ng-model="contactdiscovery.cdm_contact_number" ng-blur="blurContactNo()"/>
+                                        <br>
+                                </div>
+                                <div class="col-sm-3">
+                                        <label>Company Name</label>
+                                        <input type="text" id="cdm_company_name" ng-if="contactdiscovery.cm_account_list == 'Yes'" class="form-control" ng-model="contactdiscovery.cdm_company_name" ng-blur="blurCompanyName()"/>
+
+                                        <input type="text" id="cdm_company_name" ng-if="contactdiscovery.cm_account_list == 'No'" class="form-control" ng-model="contactdiscovery.cdm_company_name" ng-blur="blurCompanyName()"/>
+                
+                                </div>
+                                <div class="col-sm-3">
+                                        <label>Job Level</label>
+                                        <select id='cdm_job_level' ng-if="contactdiscovery.cm_job == 'Yes'" class="form-control" ng-model="contactdiscovery.cjlm_job_level" ng-change="changeJoblvlDept()" >
+                                            <option value="" disabled selected> - - Select - - </option>
+                                            <option ng-repeat="c in levelList">{{c.cjlm_job_level}}</option>
+                                        </select>
+                                        
+                                        <input type="text" id="cdm_job_level" ng-if="contactdiscovery.cm_job == 'No'" class="form-control" ng-model="contactdiscovery.cjlm_job_level" ng-change="changeJoblvlDept()" />
                                         
                                 </div>
 
-                                <div class="col-sm-4">
-                                        <label>Job Title</label>
-                                        <select id='cdm_job_title' ng-if="contactdiscovery.cm_title == 'Yes'" class="form-control" ng-model="contactdiscovery.titles.ctm_title">
-                                            <option value="">select</option>
-                                            <option ng-repeat="listview in titleList" value="{{listview.ctm_title}}">{{listview.ctm_title}}</option>
-                                        </select>
-                                        <input type="text" id="cdm_job_title" ng-if="contactdiscovery.cm_title == 'No'" class="form-control" ng-model="contactdiscovery.titles.ctm_title" />
-                                        <br>
-                                </div>
-                                <div class="col-sm-4">
-                                        <label>Job Level</label>
-                                        <select id='cdm_job_level' ng-if="contactdiscovery.cm_job == 'Yes'" class="form-control" ng-model="contactdiscovery.levels.cjlm_job_level">
-                                            <option value="">select</option>
-                                            <option ng-repeat="listview in levelList" value="{{listview.cjlm_job_level}}">{{listview.cjlm_job_level}}</option>
-                                        </select>
-                                        <input type="text" id="cdm_job_level" ng-if="contactdiscovery.cm_job == 'No'" class="form-control" ng-model="contactdiscovery.levels.cjlm_job_level"/>
-                                </div>
-
-                                <div class="col-sm-4">
+                                <div class="col-sm-3">
                                         <label>Department</label>
-                                        <select id='cdm_dept' ng-if="contactdiscovery.cm_dept == 'Yes'" class="form-control" ng-model="contactdiscovery.departments.cdm_department">
-                                            <option value="">select</option>
-                                            <option ng-repeat="listview in deptList" value="{{listview.cdm_department}}">{{listview.cdm_department}}</option>
+                                        <select id='cdm_dept' ng-if="contactdiscovery.cm_dept == 'Yes'" class="form-control" ng-model="contactdiscovery.cdm_department" ng-change="changeJoblvlDept()">
+                                            <option value="" disabled selected> - - Select - - </option>
+                                            <option ng-repeat="c in deptList">{{c.cdm_department}}</option>
                                         </select>
-                                        <input type="text" id="cdm_dept" ng-if="contactdiscovery.cm_dept == 'No'" class="form-control" ng-model="contactdiscovery.departments.cdm_department" />
+                                        <input type="text" id="cdm_dept" ng-if="contactdiscovery.cm_dept == 'No'" class="form-control" ng-model="contactdiscovery.cdm_department" ng-change="changeJoblvlDept()" />
                                        <br> 
                                 </div>
-                                <div class="col-sm-4">
-                                        <label>Email-Id</label>
-                                        <input type="email" id="cdm_email_id" class="form-control" ng-model="contactdiscovery.cdm_email_id" />
-                                        
-                                </div>
-                                
-                                <div class="col-sm-4">
-                                        <label>Direct Number / Landline Number</label>
-                                        <input type="text" id="cdm_mobile" class="form-control" ng-model="contactdiscovery.cdm_mobile" />
+
+                                <div class="col-sm-3">
+                                        <label>Job Title</label>
+                                        <input type="text" id="cdm_job_title" class="form-control" ng-model="contactdiscovery.cdm_job_title" ng-blur="blurJobTitle()"/>
                                         <br>
                                 </div>
-                                <div class="col-sm-4">
-                                        <label>Company Name</label>
-                                        <select id='cdm_company_name' ng-if="contactdiscovery.cm_account_list == 'Yes'" class="form-control" ng-model="contactdiscovery.companies.amcm_company">
-                                            <option value="">select</option>
-                                            <option ng-repeat="listview in companyList" value="{{listview.amcm_company}}">{{listview.amcm_company}}</option>
-                                        </select>
-
-                                        <input type="text" id="cdm_company_name" ng-if="contactdiscovery.cm_account_list == 'No'" class="form-control" ng-model="contactdiscovery.companies.amcm_company" ng-blur="blurCompanyName()"/>
-                                
+                                <div class="col-lg-3">
+                                        <label>Country</label>
+                                        <input type="text" ng-model="contactdiscovery.cdm_country" class="form-control" readonly id="cdm_country">
+                                    <br>
+                                </div>
+                                <div class="col-lg-3">
+                                        <label>State</label>
+                                        <input type="text" ng-model="contactdiscovery.cdm_state" class="form-control" readonly id="cdm_state">
+                                    <br>
                                 </div>
 
-                                <div class="col-sm-4">
+                                <div class="col-sm-3">
+                                        <label>City</label>
+                                        <input type="text" ng-model="contactdiscovery.cdm_city" readonly class="form-control" id="city">
+                                    <br>                                
+                                </div>
+
+
+                               <!--  <div class="col-lg-3">
+                                        <label>Country</label>
+
+                                        <select id='cdm_country' ng-if="contactdiscovery.cm_location == 'Yes'" class="form-control" ng-model="contactdiscovery.country">
+                                            <option value="" disabled selected> - - Select - - </option>
+                                            <option ng-repeat="c in locationList">{{c.c_search}}</option>
+                                        </select>
+
+                                        <input type="text"
+                                                 ng-if="contactdiscovery.cm_location == 'No'"
+                                                    id="cdm_country"
+                                                    ng-model="contactdiscovery.country"
+                                                    typeahead="obj as obj.c_search for obj in getSearchCountry($viewValue)"
+                                                    typeahead-loading="loadingCountryList"
+                                                    typeahead-no-results="noCountryListResults"
+                                                    class="form-control"
+                                                    ng-keypress="keypressCountry()">
+                                                <i ng-show="loadingCountryList" class="glyphicon glyphicon-refresh"></i>
+                                                <div ng-show="noCountryListResults">
+                                                    <i class="glyphicon glyphicon-remove"></i> No Results Found
+                                                </div>
+                                    <br>
+                                </div>
+                                <div class="col-lg-3">
+                                        <label>State</label>
+                                        <select id='cdm_state_select' class="form-control" name="right" ng-model="contactdiscovery.state" ng-init="contactdiscovery.state = stateList[0]" ng-options="state as state.state_name for state in stateList" ng-change="changeState()">
+                                            <option value="" disabled selected> - - Select - - </option>
+                                        </select>
+
+                                        <input type="text" 
+                                                id="cdm_state_input"
+                                                ng-model="contactdiscovery.state"
+                                                typeahead="obj as obj.state_name for obj in getSearchState($viewValue)"
+                                                typeahead-loading="loadingStateList"
+                                                typeahead-no-results="noStateListResults"
+                                                class="form-control"
+                                                ng-keypress="keypressState()">
+                                            <i ng-show="loadingStateList" class="glyphicon glyphicon-refresh"></i>
+                                            <div ng-show="noStateListResults">
+                                                <i class="glyphicon glyphicon-remove"></i> No Results Found
+                                            </div>
+                                    <br>
+                                </div>
+
+                                <div class="col-sm-3">
+                                        <label>City</label>
+                                        <select id='cdm_city_select' class="form-control" name="right" ng-model="contactdiscovery.city" ng-init="contactdiscovery.city = cityList[0]" ng-options="city as city.city_name for city in cityList">
+                                            <option value="" disabled selected> - - Select - - </option>
+                                        </select>
+
+                                        <input type="text" 
+                                                id="cdm_city_input"
+                                                ng-model="contactdiscovery.city"
+                                                typeahead="obj as obj.city_name for obj in getSearchCity($viewValue)"
+                                                typeahead-loading="loadingCityList"
+                                                typeahead-no-results="noCityListResults"
+                                                class="form-control">
+                                            <i ng-show="loadingCityList" class="glyphicon glyphicon-refresh"></i>
+                                            <div ng-show="noCityListResults">
+                                                <i class="glyphicon glyphicon-remove"></i> No Results Found
+                                            </div>
+                                    <br>                                
+                                </div> -->
+                                <div class="col-sm-3">
                                         <label>Address</label>
                                         <textarea id="cdm_address" class="form-control" ng-model="contactdiscovery.cdm_address" rows="1"></textarea>
                                         <br>
                                 </div>
-                                <div class="col-sm-4">
-                                        <label>City</label>
-                                        <input type="text" id="cdm_city" class="form-control" ng-model="contactdiscovery.cdm_city">
-                                
-                                </div>
 
-                                <div class="col-lg-4">
-                                        <label>State</label>
-                                        <input type="text" id="cdm_state" class="form-control" ng-model="contactdiscovery.cdm_state">
-                                    <br>
-                                </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-3">
                                         <label>Postal Code</label>
                                         <input type="text" id="cdm_postal_code" class="form-control" ng-model="contactdiscovery.cdm_postal_code" />
                                 
                                 </div>
-                                <!-- <div class="col-sm-4">
-                                        <label>Country</label>
-                                        <input type="text" id="cdm_country" class="form-control" ng-model="contactdiscovery.cdm_country" />
-                                    <br>    
-                                </div> -->
-                                <div class="col-sm-4">
-                                        <label>Country</label>
-                                         <select id='cdm_country' ng-if="contactdiscovery.cm_geo == 'Yes'" class="form-control" ng-model="contactdiscovery.country.cgm_geo">
-                                            <option value="">select</option>
-                                            <option ng-repeat="listview in countryList" value="{{listview.cgm_geo}}">{{listview.cgm_geo}}</option>
-                                        </select>
-
-                                        <input type="text" id="cdm_country"  ng-if="contactdiscovery.cm_geo == 'No'" class="form-control" ng-model="contactdiscovery.country.cgm_geo" />
-                                    <br>    
-                                </div>
-                                 <div class="col-sm-4">
+                                <div class="col-sm-3">
                                         <label>Industry</label>
-                                        <select id='cdm_industry' ng-if="contactdiscovery.cm_industry == 'Yes'" class="form-control" ng-model="contactdiscovery.industries.cim_industries">
-                                            <option value="">select</option>
-                                            <option ng-repeat="listview in industryList" value="{{listview.cim_industries}}">{{listview.cim_industries}}</option>
+                                        <select id='cdm_industry' ng-if="contactdiscovery.cm_industry == 'Yes'" class="form-control" ng-model="contactdiscovery.cim_industries">
+                                            <option value="" disabled selected> - - Select - - </option>
+                                            <option ng-repeat="c in industryList">{{c.cim_industries}}</option>
                                         </select>
 
-                                        <input type="text" id="cdm_industry" ng-if="contactdiscovery.cm_industry == 'No'" class="form-control" ng-model="contactdiscovery.industries.cim_industries">
+                                        <input type="text" id="cdm_industry" ng-if="contactdiscovery.cm_industry == 'No'" class="form-control" ng-model="contactdiscovery.cim_industries">
                                 
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-3">
                                         <label>Company Size</label>
-                                        <select id='cdm_company_size' ng-if="contactdiscovery.cm_emp_size == 'Yes'" class="form-control" ng-model="contactdiscovery.sizes.cesm_employee_size">
-                                            <option value="">select</option>
-                                            <option ng-repeat="listview in sizeList" value="{{listview.cesm_employee_size}}">{{listview.cesm_employee_size}}</option>
+                                        <select id='cdm_company_size' ng-if="contactdiscovery.cm_emp_size == 'Yes'" class="form-control" ng-model="contactdiscovery.cesm_employee_size">
+                                            <option value="" disabled selected> - - Select - - </option>
+                                            <option ng-repeat="c in sizeList">{{c.cesm_employee_size}}</option>
                                         </select>
-                                        <input type="text" id="cdm_company_size" ng-if="contactdiscovery.cm_emp_size == 'No'" class="form-control" ng-model="contactdiscovery.sizes.cesm_employee_size">
+
+                                        <input type="text" id="cdm_company_size" ng-if="contactdiscovery.cm_emp_size == 'No'" class="form-control" ng-model="contactdiscovery.cesm_employee_size">
 
                                     <br>    
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-3">
                                         <label>Revenue</label>
-                                        <select id='cdm_revenue' ng-if="contactdiscovery.cm_revenue == 'Yes'" class="form-control" ng-model="contactdiscovery.revenues.crem_revenue">
-                                            <option value="">select</option>
-                                            <option ng-repeat="listview in revenueList" value="{{listview.crem_revenue}}">{{listview.crem_revenue}}</option>
+                                        <select id='cdm_revenue' ng-if="contactdiscovery.cm_revenue == 'Yes'" class="form-control" ng-model="contactdiscovery.crem_revenue">
+                                            <option value="" disabled selected> - - Select - - </option>
+                                            <option ng-repeat="c in revenueList">{{c.crem_revenue}}</option>
                                         </select>
-                                        <input type="text" id="cdm_revenue" ng-if="contactdiscovery.cm_revenue == 'No'" class="form-control" ng-model="contactdiscovery.revenues.crem_revenue" />
+                                        <input type="text" id="cdm_revenue" ng-if="contactdiscovery.cm_revenue == 'No'" class="form-control" ng-model="contactdiscovery.crem_revenue" />
                                 
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-3">
                                         <label>Asset</label>
-
-                                        <select id='cdm_asset' ng-if="contactdiscovery.cm_campaign_asset == 'Yes'" class="form-control" ng-model="contactdiscovery.assets.cam_campaign_asset">
-                                            <option value="">select</option>
-                                            <option ng-repeat="listview in assetList" value="{{listview.cam_campaign_asset}}">{{listview.cam_campaign_asset}}</option>
+                                        <select id='cdm_asset' ng-if="contactdiscovery.cm_campaign_asset == 'Yes'" class="form-control" ng-model="contactdiscovery.cam_campaign_asset">
+                                            <option value="" disabled selected> - - Select - - </option>
+                                            <option ng-repeat="c in assetList">{{c.cam_campaign_asset}}</option>
                                         </select>
-                                        <input type="text" id="cdm_asset" ng-if="contactdiscovery.cm_campaign_asset == 'No'" class="form-control" ng-model="contactdiscovery.assets.cam_campaign_asset" />
+                                        <input type="text" id="cdm_asset" ng-if="contactdiscovery.cm_campaign_asset == 'No'" class="form-control" ng-model="contactdiscovery.cam_campaign_asset" />
                                     <br>    
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-3">
                                         <label>Domain</label>
-
-                                        <select id='cdm_domain' ng-if="contactdiscovery.cm_allow_domain == 'Yes'" class="form-control" ng-model="contactdiscovery.domains.adcm_website">
-                                            <option value="">select</option>
-                                            <option ng-repeat="listview in aldomainList" value="{{listview.adcm_website}}">{{listview.adcm_website}}</option>
-                                        </select>
-
-                                        <input type="text" id="cdm_domain" ng-if="contactdiscovery.cm_allow_domain == 'No'" class="form-control" ng-model="contactdiscovery.domains.adcm_website"  ng-blur="blurDomain()"/>
+                                        <input type="text" id="cdm_domain" class="form-control" ng-model="contactdiscovery.cdm_domain" readonly/>
+                                <br>
+                                </div>
+                                <div class="col-sm-3">
+                                        <label>Ip Address</label>
+                                        <input type="text" id="cdm_ip_address" class="form-control" ng-model="contactdiscovery.cdm_ip_address"/>
                                 <br>
                                 </div>
                             </div>
+
+                            
+
                             <div class="row">
-                                <div class="col-lg-5 table-reponsive">
-                                    <table class="table table-hover">
-                                      <thead>
+                                <div class="col-lg-12 table-reponsive table-wrapper-scroll-y">
+                                    <table class="table" id="tabeldiv">
                                         <tr>
-                                            <th  colspan="2" style="border: 1px solid #ccc; text-align: center; background-color: #DFE0E3;">Custom Question List</th>
+                                            <td>
+                                                <table class="table table-hover" id="tabelcustomQ">
+                                                  <thead>
+                                                    <tr>
+                                                        <th  colspan="2" style="border: 1px solid #ccc; text-align: center; background-color: #DFE0E3;">Custom Question List</th>
+                                                    </tr>
+                                                    <tr>
+                                                      <th class="" style="border: 1px solid #ccc; text-align: center;">Question</th>
+                                                      <th class="" style="border: 1px solid #ccc; text-align: center;">Answers</th>
+                                                    </tr>
+                                                  </thead>
+                                                  <tbody>
+                                                    <tr ng-repeat="question in questionans track by $index">
+                                                        <td >{{question.cmcm_question}}</td>
+                                                        <td >{{question.cmcm_answer}}</td>
+                                                    </tr>
+                                                  </tbody>
+                                                </table>
+                                            </td>
+
+                                            <td>
+                                                <table class="table table-hover">
+                                                  <thead>
+                                                    <tr>
+                                                        <th style="border: 1px solid #ccc; text-align: center; background-color: #DFE0E3; word-wrap: break-word;">Comments</th>
+                                                    </tr>
+                                                  </thead>
+                                                  <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <textarea class="form-control" style="height:220px; background-color:white;" readonly>{{contactdiscovery.cm_comment}}</textarea>
+                                                        </td>
+                                                    </tr>
+                                                  </tbody>
+                                                </table>
+                                            </td>
                                         </tr>
-                                        <tr>
-                                          <th class="" style="border: 1px solid #ccc; text-align: center;">Question</th>
-                                          <th class="" style="border: 1px solid #ccc; text-align: center;">Answers</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                        <tr ng-repeat="question in questionans track by $index">
-                                            <td>{{question.cmcm_question}}</td>
-                                            <td>{{question.cmcm_answer}}</td>
-                                        </tr>
-                                      </tbody>
-                                    </table>
-                                </div>
-                                <div class="col-lg-4 table-reponsive">
-                                    <table class="table table-hover">
-                                      <thead>
-                                        <tr>
-                                            <th  colspan="2" style="border: 1px solid #ccc; text-align: center; background-color: #DFE0E3;">Supression List</th>
-                                        </tr>
-                                        <tr>
-                                          <th class="" style="border: 1px solid #ccc; text-align: center;">Supression List of Company</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                        <tr ng-repeat="supp in suppList track by $index">
-                                            <td>{{supp.scm_company}}</td>
-                                        </tr>
-                                      </tbody>
-                                    </table>
-                                </div>
-                                <div class="col-lg-3 table-reponsive">
-                                    <table class="table table-hover">
-                                      <thead>
-                                        <tr>
-                                            <th style="border: 1px solid #ccc; text-align: center; background-color: #DFE0E3;">Denied Domain List</th>
-                                        </tr>
-                                        <tr>
-                                          <th class="" style="border: 1px solid #ccc; text-align: center;">Denied Domain Website</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                        <tr ng-repeat="deny in denydomain track by $index">
-                                            <td>{{deny.ddcm_website}}</td>
-                                        </tr>
-                                      </tbody>
                                     </table>
                                 </div>
                             </div>

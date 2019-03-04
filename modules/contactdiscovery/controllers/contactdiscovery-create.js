@@ -114,7 +114,6 @@ angular.module('contactdiscovery').controller('contactdiscoveryAddCtrl', functio
     };
 
     $scope.getCampaignDetails=function(){
-console.log($scope.contactdiscovery.cdm_cm_id.cm_comment);
       $('#hidediv').show();
       $('#tabeldiv').show();
 
@@ -236,9 +235,12 @@ console.log($scope.contactdiscovery.cdm_cm_id.cm_comment);
               })
               .success(function(obj)
               {  
+                console.log(obj);
                 obj.forEach(function(val,key){
                   $scope.locationList.push(val);
+                // $scope.contactdiscovery.country.c_search = val.country_name;
                 });
+
 
           $('#cdm_state_select').show();
           // $('#cdm_city_select').show();
@@ -571,55 +573,55 @@ console.log($scope.contactdiscovery.cdm_cm_id.cm_comment);
               });
         }
 
-        if($scope.contactdiscovery.cdm_cm_id.cm_keyword_allow == "Yes"){
-              $http({
-                method: 'GET',
-                url: $rootScope.baseURL+'/campaign/keyword_allow/'+$scope.contactdiscovery.cdm_cm_id.cm_id,
-                headers: {'Content-Type': 'application/json',
-                        'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
-              })
-              .success(function(obj)
-              {  
-                obj.forEach(function(val,key){
-                  $scope.keywordAllowList.push(val);
-                });
-              })
-              .error(function(data) 
-              {   
-                  var dialog = bootbox.dialog({
-                    message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
-                        closeButton: false
-                    });
-                    setTimeout(function(){
-                        dialog.modal('hide'); 
-                    }, 1500);            
-              });
-        }
+        // if($scope.contactdiscovery.cdm_cm_id.cm_keyword_allow == "Yes"){
+        //       $http({
+        //         method: 'GET',
+        //         url: $rootScope.baseURL+'/campaign/keyword_allow/'+$scope.contactdiscovery.cdm_cm_id.cm_id,
+        //         headers: {'Content-Type': 'application/json',
+        //                 'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+        //       })
+        //       .success(function(obj)
+        //       {  
+        //         obj.forEach(function(val,key){
+        //           $scope.keywordAllowList.push(val);
+        //         });
+        //       })
+        //       .error(function(data) 
+        //       {   
+        //           var dialog = bootbox.dialog({
+        //             message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+        //                 closeButton: false
+        //             });
+        //             setTimeout(function(){
+        //                 dialog.modal('hide'); 
+        //             }, 1500);            
+        //       });
+        // }
 
-        if($scope.contactdiscovery.cdm_cm_id.cm_keyword_disallow == "Yes"){
-              $http({
-                method: 'GET',
-                url: $rootScope.baseURL+'/campaign/keyword_disallow/'+$scope.contactdiscovery.cdm_cm_id.cm_id,
-                headers: {'Content-Type': 'application/json',
-                        'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
-              })
-              .success(function(obj)
-              {  
-                obj.forEach(function(val,key){
-                  $scope.keywordDisallowList.push(val);
-                });
-              })
-              .error(function(data) 
-              {   
-                  var dialog = bootbox.dialog({
-                    message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
-                        closeButton: false
-                    });
-                    setTimeout(function(){
-                        dialog.modal('hide'); 
-                    }, 1500);            
-              });
-        }
+        // if($scope.contactdiscovery.cdm_cm_id.cm_keyword_disallow == "Yes"){
+        //       $http({
+        //         method: 'GET',
+        //         url: $rootScope.baseURL+'/campaign/keyword_disallow/'+$scope.contactdiscovery.cdm_cm_id.cm_id,
+        //         headers: {'Content-Type': 'application/json',
+        //                 'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+        //       })
+        //       .success(function(obj)
+        //       {  
+        //         obj.forEach(function(val,key){
+        //           $scope.keywordDisallowList.push(val);
+        //         });
+        //       })
+        //       .error(function(data) 
+        //       {   
+        //           var dialog = bootbox.dialog({
+        //             message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+        //                 closeButton: false
+        //             });
+        //             setTimeout(function(){
+        //                 dialog.modal('hide'); 
+        //             }, 1500);            
+        //       });
+        // }
   };
 
   // $scope.blurFirstLastName = function () {
@@ -686,14 +688,20 @@ console.log($scope.contactdiscovery.cdm_cm_id.cm_comment);
         }
       }
   };
- 
+
 
   $('#cdm_email').keyup(function(){
       this.value = this.value.toLowerCase();
-  });
+  });         
   $scope.blurEmail = function () {
     var emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    
+ 
+    var email = $('#cdm_email').val();
+    var name   = email.substring(0, email.lastIndexOf("@"));
+    var domain = email.substring(email.lastIndexOf("@") +1);
+    $scope.contactdiscovery.cdm_domain = domain;
+    $scope.contactdiscovery.adomain = domain;
+
       if(!emailRegex.test($scope.contactdiscovery.cdm_email)){
           var dialog = bootbox.dialog({
               message: '<p class="text-center">Please Enter Correct Email.</p>',
@@ -707,10 +715,6 @@ console.log($scope.contactdiscovery.cdm_cm_id.cm_comment);
               }, 1500);
       }
       else if($scope.contactdiscovery.cdm_cm_id.cm_email == "Yes"){
-            // angular.forEach($scope.emailList, function(value,key){
-            //     if($('#cdm_email').val().toLowerCase() == value.cem_email.toLowerCase())
-            //       $scope.tempEmailList.push(value);
-            // });
 
             $http({
                     method: 'POST',
@@ -721,6 +725,7 @@ console.log($scope.contactdiscovery.cdm_cm_id.cm_comment);
                   })
                   .success(function(obj)
                   {    
+                    console.log(obj);
                        if(obj.length > 0)
                         {
                             $scope.contactdiscovery.cdm_email = "";
@@ -744,6 +749,7 @@ console.log($scope.contactdiscovery.cdm_cm_id.cm_comment);
                                     })
                                     .success(function(obj)
                                     {    
+                                      console.log(obj);
                                         if(obj.length != 1){
                                              $scope.contactdiscovery.cdm_email = "";
                                             var dialog = bootbox.dialog({
@@ -755,6 +761,99 @@ console.log($scope.contactdiscovery.cdm_cm_id.cm_comment);
                                                   dialog.modal('hide'); 
                                                   // $('#cdm_first_name').focus();
                                               }, 1500);
+                                        }
+                                        else{
+                                              if($scope.contactdiscovery.cdm_cm_id.cm_allow_domain == "Yes"){
+                                                    $http({
+                                                          method: 'POST',
+                                                          url: $rootScope.baseURL+'/contact/allow_domain_limit/typeahead/search',
+                                                          data: $scope.contactdiscovery,
+                                                          headers: {'Content-Type': 'application/json',
+                                                                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+                                                        })
+                                                        .success(function(obj)
+                                                        {    
+                                                          console.log(obj);
+                                                           if(obj.length == 1){
+                                                            if(obj[0].adcm_domain_limit == null)
+                                                            {
+                                                                if(obj[0].domain >= parseInt(parseInt($scope.contactdiscovery.cdm_cm_id.cm_domain_limit) * 3))
+                                                                {
+                                                          // console.log(obj[0].domain <= parseInt(parseInt($scope.contactdiscovery.cdm_cm_id.cm_domain_limit));
+                                                                   var dialog = bootbox.dialog({
+                                                                        message: '<p class="text-center">Domain Limit Exceeded!</p>',
+                                                                            closeButton: false
+                                                                        });
+                                                                        dialog.find('.modal-body').addClass("btn-warning");
+                                                                        setTimeout(function(){
+                                                                            dialog.modal('hide'); 
+                                                                            $scope.contactdiscovery.cdm_email = "";
+                                                                        }, 1500);
+                                                                }
+                                                            }
+                                                            else{
+                                                                if(obj[0].domain >= parseInt(parseInt(obj[0].adcm_domain_limit) * 3))
+                                                                {
+                                                                   var dialog = bootbox.dialog({
+                                                                        message: '<p class="text-center">Domain Limit Exceeded!</p>',
+                                                                            closeButton: false
+                                                                        });
+                                                                        dialog.find('.modal-body').addClass("btn-warning");
+                                                                        setTimeout(function(){
+                                                                            dialog.modal('hide'); 
+                                                                            $scope.contactdiscovery.cdm_email = "";
+                                                                        }, 1500);
+                                                                }
+                                                            }
+                                                            
+                                                          }
+                                                          
+                                                        })
+                                                        .error(function(data) 
+                                                        {   
+                                                            var dialog = bootbox.dialog({
+                                                              message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                                                                  closeButton: false
+                                                              });
+                                                              setTimeout(function(){
+                                                                  dialog.modal('hide'); 
+                                                              }, 1500);            
+                                                        });
+                                                }
+                                                else{
+                                                  $http({
+                                                          method: 'POST',
+                                                          url: $rootScope.baseURL+'/contact/domain_limit/typeahead/search',
+                                                          data: $scope.contactdiscovery,
+                                                          headers: {'Content-Type': 'application/json',
+                                                                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+                                                        })
+                                                        .success(function(obj)
+                                                        {    
+                                                          if(obj.length == 1 && (obj[0].domain >= parseInt(parseInt(obj[0].cm_domain_limit) * 3)))
+                                                          {
+                                                             var dialog = bootbox.dialog({
+                                                                  message: '<p class="text-center">Domain Limit Exceeded!</p>',
+                                                                      closeButton: false
+                                                                  });
+                                                                  dialog.find('.modal-body').addClass("btn-warning");
+                                                                  setTimeout(function(){
+                                                                      dialog.modal('hide'); 
+                                                                            $scope.contactdiscovery.cdm_email = "";
+                                                                  }, 1500);
+                                                          } 
+                                                        })
+                                                        .error(function(data) 
+                                                        {   
+                                                            var dialog = bootbox.dialog({
+                                                              message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                                                                  closeButton: false
+                                                              });
+                                                              setTimeout(function(){
+                                                                  dialog.modal('hide'); 
+                                                              }, 1500);            
+                                                        });
+                                                }
                                         }
 
                                     })
@@ -793,6 +892,40 @@ console.log($scope.contactdiscovery.cdm_cm_id.cm_comment);
                                                         // $('#cdm_first_name').focus();
                                                     }, 1500);
                                               }
+                                              else{
+                                                  $http({
+                                                          method: 'POST',
+                                                          url: $rootScope.baseURL+'/contact/domain_limit/typeahead/search',
+                                                          data: $scope.contactdiscovery,
+                                                          headers: {'Content-Type': 'application/json',
+                                                                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+                                                        })
+                                                        .success(function(obj)
+                                                        {    
+                                                          if(obj.length == 1 && (obj[0].domain >= parseInt(parseInt(obj[0].cm_domain_limit) * 3)))
+                                                          {
+                                                             var dialog = bootbox.dialog({
+                                                                  message: '<p class="text-center">Domain Limit Exceeded!</p>',
+                                                                      closeButton: false
+                                                                  });
+                                                                  dialog.find('.modal-body').addClass("btn-warning");
+                                                                  setTimeout(function(){
+                                                                      dialog.modal('hide'); 
+                                                                            $scope.contactdiscovery.cdm_email = "";
+                                                                  }, 1500);
+                                                          } 
+                                                        })
+                                                        .error(function(data) 
+                                                        {   
+                                                            var dialog = bootbox.dialog({
+                                                              message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                                                                  closeButton: false
+                                                              });
+                                                              setTimeout(function(){
+                                                                  dialog.modal('hide'); 
+                                                              }, 1500);            
+                                                        });
+                                              }
 
                                           })
                                           .error(function(data) 
@@ -821,32 +954,8 @@ console.log($scope.contactdiscovery.cdm_cm_id.cm_comment);
            
       }
       else{
-
+console.log('SuppressionEMail');
             if($scope.contactdiscovery.cdm_cm_id.cm_allow_domain == "Yes"){
-
-                    // $scope.tempAllowList = [];
-                    // var email = $('#cdm_email').val();
-                    // var name   = email.substring(0, email.lastIndexOf("@"));
-                    // var domain = email.substring(email.lastIndexOf("@") +1);
-
-                    //   angular.forEach($scope.aldomainList, function(value,key){
-                    //       if(domain == value.adcm_website)
-                    //         $scope.tempAllowList.push(value);
-                    //   });
-
-                    //   if(!$scope.tempAllowList.length > 0)
-                    //   {
-                    //       $scope.contactdiscovery.cdm_email = "";
-                    //       var dialog = bootbox.dialog({
-                    //         message: '<p class="text-center">Domain Not Matched!</p>',
-                    //             closeButton: false
-                    //         });
-                    //         dialog.find('.modal-body').addClass("btn-warning");
-                    //         setTimeout(function(){
-                    //             dialog.modal('hide'); 
-                    //             // $('#cdm_email').focus();
-                    //         }, 1500);
-                    //   }
                     $http({
                           method: 'POST',
                           url: $rootScope.baseURL+'/campaign/allow_domain/typeahead/search',
@@ -865,8 +974,100 @@ console.log($scope.contactdiscovery.cdm_cm_id.cm_comment);
                                   dialog.find('.modal-body').addClass("btn-warning");
                                   setTimeout(function(){
                                       dialog.modal('hide'); 
-                                      // $('#cdm_first_name').focus();
                                   }, 1500);
+                            }
+                            else{
+                                  if($scope.contactdiscovery.cdm_cm_id.cm_allow_domain == "Yes"){
+                                    $http({
+                                          method: 'POST',
+                                          url: $rootScope.baseURL+'/contact/allow_domain_limit/typeahead/search',
+                                          data: $scope.contactdiscovery,
+                                          headers: {'Content-Type': 'application/json',
+                                                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+                                        })
+                                        .success(function(obj)
+                                        {    
+                                          console.log(obj.length);
+                                           if(obj.length == 1){
+                                            if(obj[0].adcm_domain_limit == null)
+                                            {
+                                                if(obj[0].domain >= parseInt(parseInt($scope.contactdiscovery.cdm_cm_id.cm_domain_limit) * 3))
+                                                {
+                                          // console.log(obj[0].domain <= parseInt(parseInt($scope.contactdiscovery.cdm_cm_id.cm_domain_limit));
+                                                   var dialog = bootbox.dialog({
+                                                        message: '<p class="text-center">Domain Limit Exceeded!</p>',
+                                                            closeButton: false
+                                                        });
+                                                        dialog.find('.modal-body').addClass("btn-warning");
+                                                        setTimeout(function(){
+                                                            dialog.modal('hide'); 
+                                                            $scope.contactdiscovery.cdm_email = "";
+                                                        }, 1500);
+                                                }
+                                            }
+                                            else{
+                                                if(obj[0].domain >= parseInt(parseInt(obj[0].adcm_domain_limit) * 3))
+                                                {
+                                                   var dialog = bootbox.dialog({
+                                                        message: '<p class="text-center">Domain Limit Exceeded!</p>',
+                                                            closeButton: false
+                                                        });
+                                                        dialog.find('.modal-body').addClass("btn-warning");
+                                                        setTimeout(function(){
+                                                            dialog.modal('hide'); 
+                                                            $scope.contactdiscovery.cdm_email = "";
+                                                        }, 1500);
+                                                }
+                                            }
+                                            
+                                          }
+                                          
+                                        })
+                                        .error(function(data) 
+                                        {   
+                                            var dialog = bootbox.dialog({
+                                              message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                                                  closeButton: false
+                                              });
+                                              setTimeout(function(){
+                                                  dialog.modal('hide'); 
+                                              }, 1500);            
+                                        });
+                                }
+                                else{
+                                  $http({
+                                          method: 'POST',
+                                          url: $rootScope.baseURL+'/contact/domain_limit/typeahead/search',
+                                          data: $scope.contactdiscovery,
+                                          headers: {'Content-Type': 'application/json',
+                                                  'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+                                        })
+                                        .success(function(obj)
+                                        {    
+                                          if(obj.length == 1 && (obj[0].domain >= parseInt(parseInt(obj[0].cm_domain_limit) * 3)))
+                                          {
+                                             var dialog = bootbox.dialog({
+                                                  message: '<p class="text-center">Domain Limit Exceeded!</p>',
+                                                      closeButton: false
+                                                  });
+                                                  dialog.find('.modal-body').addClass("btn-warning");
+                                                  setTimeout(function(){
+                                                      dialog.modal('hide'); 
+                                                            $scope.contactdiscovery.cdm_email = "";
+                                                  }, 1500);
+                                          } 
+                                        })
+                                        .error(function(data) 
+                                        {   
+                                            var dialog = bootbox.dialog({
+                                              message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                                                  closeButton: false
+                                              });
+                                              setTimeout(function(){
+                                                  dialog.modal('hide'); 
+                                              }, 1500);            
+                                        });
+                                }
                             }
 
                         })
@@ -882,39 +1083,6 @@ console.log($scope.contactdiscovery.cdm_cm_id.cm_comment);
                         });
             }
             else if($scope.contactdiscovery.cdm_cm_id.cm_denied_domain == "Yes"){
-
-                  // $scope.tempDenyList = [];
-                  // var email = $('#cdm_email').val();
-                  // var name   = email.substring(0, email.lastIndexOf("@"));
-                  // var domain = email.substring(email.lastIndexOf("@") +1);
-
-                  // var index = 0;
-                  //   // angular.forEach($scope.denydomain, function(value,key){
-                  //   //     if(domain == value.ddcm_website)
-                  //   //       $scope.tempDenyList.push(value);
-                  //   // });
-                  //   angular.forEach($scope.denydomain, function(value,key){
-                  //     // var index1 = 0;
-                  //       if(domain == value.ddcm_website.toLowerCase()){
-                  //         $scope.tempDenyList.push(value);
-                  //         return false; 
-                  //       }
-                  //         console.log(index++);
-                  //   });
-
-                  //   if($scope.tempDenyList.length > 0)
-                  //   {
-                  //       $scope.contactdiscovery.cdm_email = "";
-                  //       var dialog = bootbox.dialog({
-                  //         message: '<p class="text-center">Domain Is Denied!</p>',
-                  //             closeButton: false
-                  //         });
-                  //         dialog.find('.modal-body').addClass("btn-warning");
-                  //         setTimeout(function(){
-                  //             dialog.modal('hide'); 
-                  //             // $('#cdm_email').focus();
-                  //         }, 1500);
-                  //   }
                   $http({
                           method: 'POST',
                           url: $rootScope.baseURL+'/campaign/denied_domain/typeahead/search',
@@ -933,8 +1101,41 @@ console.log($scope.contactdiscovery.cdm_cm_id.cm_comment);
                                   dialog.find('.modal-body').addClass("btn-warning");
                                   setTimeout(function(){
                                       dialog.modal('hide'); 
-                                      // $('#cdm_first_name').focus();
                                   }, 1500);
+                            }
+                            else{
+                                $http({
+                                      method: 'POST',
+                                      url: $rootScope.baseURL+'/contact/domain_limit/typeahead/search',
+                                      data: $scope.contactdiscovery,
+                                      headers: {'Content-Type': 'application/json',
+                                              'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+                                    })
+                                    .success(function(obj)
+                                    {    
+                                      if(obj.length == 1 && (obj[0].domain >= parseInt(parseInt(obj[0].cm_domain_limit) * 3)))
+                                      {
+                                         var dialog = bootbox.dialog({
+                                              message: '<p class="text-center">Domain Limit Exceeded!</p>',
+                                                  closeButton: false
+                                              });
+                                              dialog.find('.modal-body').addClass("btn-warning");
+                                              setTimeout(function(){
+                                                  dialog.modal('hide'); 
+                                                        $scope.contactdiscovery.cdm_email = "";
+                                              }, 1500);
+                                      } 
+                                    })
+                                    .error(function(data) 
+                                    {   
+                                        var dialog = bootbox.dialog({
+                                          message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+                                              closeButton: false
+                                          });
+                                          setTimeout(function(){
+                                              dialog.modal('hide'); 
+                                          }, 1500);            
+                                    });
                             }
 
                         })
@@ -1041,8 +1242,9 @@ console.log($scope.contactdiscovery.cdm_cm_id.cm_comment);
               })
               .success(function(obj)
               {    
+                console.log(obj);
                   if(obj.length != 1){
-                      $scope.contactdiscovery.companies.amcm_company = "";
+                      $scope.contactdiscovery.cdm_company_name = "";
                       var dialog = bootbox.dialog({
                         message: '<p class="text-center">Company Name Not Present in List</p>',
                             closeButton: false
@@ -1128,7 +1330,7 @@ console.log($scope.contactdiscovery.cdm_cm_id.cm_comment);
   $scope.blurJobTitle = function () {
     if($('#cdm_job_level').val() == undefined || $('#cdm_job_level').val() == ""){
           var dialog = bootbox.dialog({
-          message: '<p class="text-center">Please Enter Job Level.</p>',
+          message: '<p class="text-center">Please Enter Or Select  Job Level.</p>',
               closeButton: false
           });
           dialog.find('.modal-body').addClass("btn-danger");
@@ -1140,7 +1342,7 @@ console.log($scope.contactdiscovery.cdm_cm_id.cm_comment);
       }
       else if($('#cdm_dept').val() == undefined || $('#cdm_dept').val() == ""){
           var dialog = bootbox.dialog({
-          message: '<p class="text-center">Please Enter Department.</p>',
+          message: '<p class="text-center">Please Enter Or Select  Department.</p>',
               closeButton: false
           });
           dialog.find('.modal-body').addClass("btn-danger");
@@ -1166,12 +1368,20 @@ console.log($scope.contactdiscovery.cdm_cm_id.cm_comment);
                 setTimeout(function(){
                     dialog.modal('hide'); 
                     // $('#cdm_job_title').focus();
+                   $scope.contactdiscovery.cdm_job_title = "";
                 }, 2000);
           }
       }
    
   };
-
+  $scope.changeJoblvlDept = function(){
+      $scope.contactdiscovery.cdm_job_title = "";
+  };
+  // $(document).ready(function(){
+  //   $("#cdm_job_level").change(function(){
+  //     console.log('hi');
+  //   });
+  // });
   // $scope.blurDomain = function () {
   //   console.log('dkd');
   //     if($scope.contactdiscovery.cdm_cm_id.cm_denied_domain == "Yes"){
@@ -1194,78 +1404,78 @@ console.log($scope.contactdiscovery.cdm_cm_id.cm_comment);
   //     }
   // };
 
-  $scope.blurDomain = function () {
-      if($scope.contactdiscovery.cdm_cm_id.cm_allow_domain == "Yes"){
-              $http({
-                  method: 'POST',
-                  url: $rootScope.baseURL+'/campaign/allowed_domain_name/typeahead/search',
-                  data: $scope.contactdiscovery,
-                  headers: {'Content-Type': 'application/json',
-                          'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
-                })
-                .success(function(obj)
-                {    
-                    if(obj.length != 1){
-                        $scope.contactdiscovery.cdm_domain = "";
-                        var dialog = bootbox.dialog({
-                          message: '<p class="text-center">Domain Not Allowed</p>',
-                              closeButton: false
-                          });
-                          dialog.find('.modal-body').addClass("btn-warning");
-                          setTimeout(function(){
-                              dialog.modal('hide'); 
-                          }, 1500);
-                    }
+  // $scope.blurDomain = function () {
+  //     if($scope.contactdiscovery.cdm_cm_id.cm_allow_domain == "Yes"){
+  //             $http({
+  //                 method: 'POST',
+  //                 url: $rootScope.baseURL+'/campaign/allowed_domain_name/typeahead/search',
+  //                 data: $scope.contactdiscovery,
+  //                 headers: {'Content-Type': 'application/json',
+  //                         'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+  //               })
+  //               .success(function(obj)
+  //               {    
+  //                   if(obj.length != 1){
+  //                       $scope.contactdiscovery.cdm_domain = "";
+  //                       var dialog = bootbox.dialog({
+  //                         message: '<p class="text-center">Domain Not Allowed</p>',
+  //                             closeButton: false
+  //                         });
+  //                         dialog.find('.modal-body').addClass("btn-warning");
+  //                         setTimeout(function(){
+  //                             dialog.modal('hide'); 
+  //                         }, 1500);
+  //                   }
 
-                })
-                .error(function(data) 
-                {   
-                    var dialog = bootbox.dialog({
-                      message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
-                          closeButton: false
-                      });
-                      setTimeout(function(){
-                          dialog.modal('hide'); 
-                      }, 1500);            
-                });
+  //               })
+  //               .error(function(data) 
+  //               {   
+  //                   var dialog = bootbox.dialog({
+  //                     message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+  //                         closeButton: false
+  //                     });
+  //                     setTimeout(function(){
+  //                         dialog.modal('hide'); 
+  //                     }, 1500);            
+  //               });
 
-      }
-      else if($scope.contactdiscovery.cdm_cm_id.cm_denied_domain == "Yes"){
-              $http({
-                  method: 'POST',
-                  url: $rootScope.baseURL+'/campaign/denied_domain_name/typeahead/search',
-                  data: $scope.contactdiscovery,
-                  headers: {'Content-Type': 'application/json',
-                          'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
-                })
-                .success(function(obj)
-                {    
-                    if(obj.length > 0){
-                        $scope.contactdiscovery.cdm_domain = "";
-                        var dialog = bootbox.dialog({
-                          message: '<p class="text-center">Domain Present in Suppression List</p>',
-                              closeButton: false
-                          });
-                          dialog.find('.modal-body').addClass("btn-warning");
-                          setTimeout(function(){
-                              dialog.modal('hide'); 
-                          }, 1500);
-                    }
+  //     }
+  //     else if($scope.contactdiscovery.cdm_cm_id.cm_denied_domain == "Yes"){
+  //             $http({
+  //                 method: 'POST',
+  //                 url: $rootScope.baseURL+'/campaign/denied_domain_name/typeahead/search',
+  //                 data: $scope.contactdiscovery,
+  //                 headers: {'Content-Type': 'application/json',
+  //                         'Authorization' :'Bearer '+localStorage.getItem("logichron_admin_access_token")}
+  //               })
+  //               .success(function(obj)
+  //               {    
+  //                   if(obj.length > 0){
+  //                       $scope.contactdiscovery.cdm_domain = "";
+  //                       var dialog = bootbox.dialog({
+  //                         message: '<p class="text-center">Domain Present in Suppression List</p>',
+  //                             closeButton: false
+  //                         });
+  //                         dialog.find('.modal-body').addClass("btn-warning");
+  //                         setTimeout(function(){
+  //                             dialog.modal('hide'); 
+  //                         }, 1500);
+  //                   }
 
-                })
-                .error(function(data) 
-                {   
-                    var dialog = bootbox.dialog({
-                      message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
-                          closeButton: false
-                      });
-                      setTimeout(function(){
-                          dialog.modal('hide'); 
-                      }, 1500);            
-                });
+  //               })
+  //               .error(function(data) 
+  //               {   
+  //                   var dialog = bootbox.dialog({
+  //                     message: '<p class="text-center">Oops, Something Went Wrong! Please Refresh the Page.</p>',
+  //                         closeButton: false
+  //                     });
+  //                     setTimeout(function(){
+  //                         dialog.modal('hide'); 
+  //                     }, 1500);            
+  //               });
 
-      }
-  };
+  //     }
+  // };
 
   // $scope.blurKeyword = function () {
   //     if($scope.contactdiscovery.cdm_cm_id.cm_keyword_disallow == "Yes"){
@@ -1356,6 +1566,16 @@ console.log($scope.contactdiscovery.cdm_cm_id.cm_comment);
     };
 
     $scope.changeCountry = function(){
+
+      $('#cdm_city_input').hide(); 
+      $('#cdm_city_select').hide(); 
+
+      $('#cdm_state_input').val('');
+      $('#cdm_city_input').val('');
+
+      $('#cdm_state_select').prop('selectedIndex',0);
+      $('#cdm_city_select').prop('selectedIndex',0);
+
       $scope.stateList = [];
       $scope.limit={};
       $scope.limit.c_id = $scope.contactdiscovery.country.country_id;
@@ -1370,7 +1590,6 @@ console.log($scope.contactdiscovery.cdm_cm_id.cm_comment);
         })
         .success(function(obj)
         {  
-          console.log(obj.lenght);
           obj.forEach(function(val,key){
             $scope.stateList.push(val);
           });
@@ -1387,8 +1606,10 @@ console.log($scope.contactdiscovery.cdm_cm_id.cm_comment);
           }
 
           if($("#cdm_state_input").is("input")) {
+            $('#cdm_city_select').hide();
               $('#cdm_city_input').show();
           }
+
         })
         .error(function(data) 
         {   
@@ -1402,10 +1623,21 @@ console.log($scope.contactdiscovery.cdm_cm_id.cm_comment);
         });
     };
 
-    $('#cdm_state_input').keydown(function(){
+    // $('#cdm_state_input').keydown(function(){
+    // });
+    $scope.keypressCountry = function(){
+      $scope.contactdiscovery.state = "";
       $scope.contactdiscovery.city = "";
-    });
+    };
+    $scope.keypressState = function(){
+      $scope.contactdiscovery.city = "";
+    };
     $scope.changeState = function(){
+
+      $scope.contactdiscovery.city = "";
+
+      $('#cdm_city_select').prop('selectedIndex',0);
+
       $scope.cityList = [];
       $scope.limit={};
       $scope.limit.s_id = $scope.contactdiscovery.state.state_id;
@@ -1450,7 +1682,7 @@ console.log($scope.contactdiscovery.cdm_cm_id.cm_comment);
 
     $('#cdm_campaign_name').focus();
     $scope.addEntry = function () {
-      console.log($rootScope.userid);
+        console.log('$scope.contactdiscovery.country.country_name');
       var nameRegex = /^\d+$/;
       var emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       var numRegex = /^\d+(\.\d{1,2})?$/;
@@ -1642,7 +1874,25 @@ console.log($scope.contactdiscovery.cdm_cm_id.cm_comment);
               $('#cdm_domain').focus(); 
           }, 1500);
       }
+      else if($('#cdm_ip_address').val() == undefined || $('#cdm_ip_address').val() == ""){
+          var dialog = bootbox.dialog({
+              message: '<p class="text-center">Please Enter Ip Address.</p>',
+                closeButton: false
+              });
+              dialog.find('.modal-body').addClass("btn-danger");
+              setTimeout(function(){
+                dialog.modal('hide');
+                $('#cdm_ip_address').focus(); 
+              }, 1500);
+      }
       else{
+            // if ($scope.contactdiscovery.cdm_cm_id.cm_location == 'Yes') {
+            //     $scope.contactdiscovery.country.c_search = $scope.contactdiscovery.country.country_name;
+            // }
+            // else{
+            //     $scope.contactdiscovery.country.c_search = $scope.contactdiscovery.country.name;
+            // }
+
                 $scope.objs={
                     contact:$scope.contactdiscovery,
                     userid : $rootScope.userid
@@ -1659,7 +1909,6 @@ console.log($scope.contactdiscovery.cdm_cm_id.cm_comment);
                     })
                 .success(function(login)
                   {
-                    console.log(login);
                     var dialog = bootbox.dialog({
                     message: '<p class="text-center">List Created!</p>',
                         closeButton: false

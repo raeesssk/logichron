@@ -435,7 +435,7 @@ angular.module('campaign').controller('campaignAddCtrl', function ($rootScope, $
                     var data_email = XLSX.utils.sheet_to_json(workbook.Sheets['email']);
                     var data_contact_number = XLSX.utils.sheet_to_json(workbook.Sheets['contact_number']);
 
-                    var data_keyword_allow = XLSX.utils.sheet_to_json(workbook.Sheets['keyword_allow']);
+                    // var data_keyword_allow = XLSX.utils.sheet_to_json(workbook.Sheets['keyword_allow']);
                     // var data_keyword_disallow = XLSX.utils.sheet_to_json(workbook.Sheets['keyword_disallow']);
 
 
