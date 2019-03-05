@@ -1519,7 +1519,7 @@ console.log('SuppressionEMail');
                 setTimeout(function(){
                     dialog.modal('hide'); 
                     $('#cm_country').focus();
-                    // $scope.location.state = '';
+                    $("#cdm_state_input").val('');
                 }, 1500);
         }
         else{
@@ -1546,7 +1546,7 @@ console.log('SuppressionEMail');
                 setTimeout(function(){
                     dialog.modal('hide'); 
                 $('#cm_state').focus();                
-                // $scope.contactdiscovery.city = '';
+                $("#cdm_city_input").val('');
                 }, 1500);
         }
         else{
