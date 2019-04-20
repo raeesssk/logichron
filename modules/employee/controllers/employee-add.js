@@ -7,7 +7,7 @@ angular.module('employee').controller('employeeAddCtrl', function ($rootScope, $
     $scope.employee = {};
     $('#emp_name').focus();
     $scope.employee.userid=localStorage.getItem('logichron_userid');
-	$scope.apiURL = $rootScope.baseURL+'/employee/add';
+	 $scope.apiURL = $rootScope.baseURL+'/employee/add';
 
     $scope.url = 'Tried to enter employee add Page';
 
